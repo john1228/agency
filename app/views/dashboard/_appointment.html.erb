@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-lg-12 top10 tdzty">
+    <%= form_for(@dynamic) do |f| %>
+        <h3 class="poloklh4">发布动态</h3>
+
+        <div class="top15 clearfix row">
+          <div class="col-lg-12 col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <%= f.fields_for :dynamic_film do |film| %>
+                    <div class="form-section top15">
+                      <label class="input-label">标题</label>
+                      <input class="input-text">
+                      <%= film.text_field :title %>
+                    </div>
+                <% end %>
+                <div class="form-section top15">
+                  <label class="input-label">动态内容</label>
+                  <%= f.text_area(:content, class: 'input-text  pciilk', rows: 3) %>
+                </div>
+                <div class="top10 clearfix cot-til">
+                  <div class="icon2 pull-left">
+                    <div class="panel-body"><i class="iconfont2 lxcop">&#xe618;</i>
+
+                      <p class="text-center cot-til">上传图片</p>
+
+                      <p class="text-center cot-til">（最多支持6张）</p>
+                      <input id="input-4" type="file" multiple="true" class="file-loading">
+                    </div>
+                  </div>
+                  <div class="pull-left tacative ">或</div>
+                  <div class="icon2 pull-left">
+                    <div class="panel-body"><i class="iconfont2 lxcop">&#xe60f;</i>
+
+                      <p class="text-center">上传视频</p>
+                      <input multiple="true" type="file" class="file-loading">
+                    </div>
+                  </div>
+                </div>
+                <div class="fygroup">
+                  <button type="button" class="btntn-lg ">确认</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

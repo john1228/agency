@@ -1,0 +1,157 @@
+<div class="row top10">
+  <div class="col-lg-3 col-md-6">
+    <div class="panel panel-primary rcixc">
+      <div class="panel-heading p-heading texer-a">
+        <div class="row">
+          <div class="col-xs-3"></div>
+          <div class="col-xs-9 text-right text-ht">
+            <div class="huge">财务管理</div>
+            <div class="hudg-txt top5">在这里可以进行提现与转账</div>
+          </div>
+        </div>
+      </div>
+      <a href="Transferfunds.html">
+        <div class="panel-footer texet-a"><span class="pull-left tcodlt">查看</span>
+          <span class="pull-right"><i class="pcorz"></i></span>
+
+          <div class="clearfix"></div>
+        </div>
+      </a></div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="panel panel-primary rcixc">
+      <div class="panel-heading p-heading texer-b">
+        <div class="row">
+          <div class="col-xs-3"></div>
+          <div class="col-xs-9 text-right text-ht">
+            <div class="huge">动态管理</div>
+            <div class="hudg-txt top5">在这里可以发布及查看动态</div>
+          </div>
+        </div>
+      </div>
+      <a href="Release.html">
+        <div class="panel-footer texet-b"><span class="pull-left tcodlt">查看</span>
+          <span class="pull-right"><i class="pcorz"></i></span>
+
+          <div class="clearfix"></div>
+        </div>
+      </a></div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="panel panel-primary rcixc">
+      <div class="panel-heading p-heading texer-c">
+        <div class="row">
+          <div class="col-xs-3"></div>
+          <div class="col-xs-9 text-right text-ht">
+            <div class="huge">消息管理</div>
+            <div class="hudg-txt top5">在这里可以给学员发送消息</div>
+          </div>
+        </div>
+      </div>
+      <a href="Massmessage.html">
+        <div class="panel-footer texet-c"><span class="pull-left tcodlt">查看</span>
+          <span class="pull-right"><i class="pcorz"></i></span>
+
+          <div class="clearfix"></div>
+        </div>
+      </a></div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <div class="panel panel-primary rcixc">
+      <div class="panel-heading p-heading texer-d">
+        <div class="row">
+          <div class="col-xs-3"></div>
+          <div class="col-xs-9 text-right text-ht">
+            <div class="huge">授课管理</div>
+            <div class="hudg-txt top5">在这里可以发布店铺课程</div>
+          </div>
+        </div>
+      </div>
+      <a href="#">
+        <div class="panel-footer texet-d"><span class="pull-left tcodlt">查看</span>
+          <span class="pull-right"><i class="pcorz"></i></span>
+
+          <div class="clearfix"></div>
+        </div>
+      </a></div>
+  </div>
+  <div class="col-md-6 col-lg-6">
+    <div class="panel panel-primary rcixc">
+      <div class="panel-heading p-heading texer-e">
+        <div class="row">
+          <div class="col-xs-3"></div>
+          <div class="col-xs-9 text-right text-hr">
+            <div class="huget"><%= @service.coaches.count %></div>
+            <div class="huget-txt top5">私教管理</div>
+          </div>
+        </div>
+      </div>
+      <a href="Newlyadded.html">
+        <div class="panel-footer texet-e"><span class="pull-left tcodlt">在这里可以新增私教</span>
+          <span class="pull-right"><i class="pcorz"></i></span>
+
+          <div class="clearfix"></div>
+        </div>
+      </a></div>
+  </div>
+  <div class="col-lg-6 col-md-6">
+    <div class="panel panel-primary rcixc">
+      <div class="panel-heading p-heading texer-r">
+        <div class="row">
+          <div class="col-xs-3"></div>
+          <div class="col-xs-9 text-right text-hr">
+            <div class="huget"><%= rand(100) %></div>
+            <div class="huget-txt">学员管理</div>
+          </div>
+        </div>
+      </div>
+      <a href="Privateeducation2.html">
+        <div class="panel-footer texet-r"><span class="pull-left tcodlt">在这里可以管理学员与分组</span>
+          <span class="pull-right"><i class="pcorz"></i></span>
+
+          <div class="clearfix"></div>
+        </div>
+      </a></div>
+  </div>
+</div>
+<div class="row top15">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">订单统计</h3>
+      </div>
+      <div class="panel-body">
+        <script type="text/javascript">
+            $(function () {
+                $('#container').highcharts({
+                    chart: {type: 'areaspline'},
+                    title: {text: '订单统计'},
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        verticalAlign: 'top',
+                        x: 150,
+                        y: 100,
+                        floating: true,
+                        borderWidth: 1,
+                        backgroundColor: '#FFFFFF'
+                    },
+                    xAxis: {
+                        categories: <%=@days%>
+                    },
+                    yAxis: {title: {text: '单数'}},
+                    tooltip: {shared: true, valueSuffix: '单'},
+                    credits: {enabled: false},
+                    plotOptions: {areaspline: {fillOpacity: 0.5}},
+                    series: [
+                        {name: '总订单', data: <%=@all%>},
+                        {name: '私教订单', data: <%=@coach%>}
+                    ]
+                });
+            });
+        </script>
+        <div id="container"></div>
+      </div>
+    </div>
+  </div>
+</div>

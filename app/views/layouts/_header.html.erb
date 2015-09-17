@@ -1,0 +1,23 @@
+<div class="col-lg-12 tpxcir clearfix">
+  <div class="navbar-header pull-left">
+    <button type="button" class="fa fa-tasks fa-2x fa5y" data-toggle="collapse" data-target=".navbar-collapse"></button>
+  </div>
+  <div class="tdrer pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <div class="pull-left tpxcir-top"><%= image_tag(@service.profile.avatar.thumb.url) %></div>
+    <div class="pull-right">
+      <h4 class="page-header"> <%= @service.profile.name %></h4>
+      <small>美型号: <%= @service.profile.mxid %></small>
+    </div>
+  </a>
+
+    <div class="dropdown-menu">
+      <ul>
+        <li><a href="Basicdata.html"><i class="iconfont icon">&#xe601;</i>场地资料</a></li>
+        <li><a href="Changepassword.html"><i class="iconfont icon">&#xe617;</i>修改密码</a></li>
+        <li class="divider"></li>
+        <li><a href="#"><i class="iconfont icon">&#xe612;</i>登出</a></li>
+      </ul>
+    </div>
+    <p class="clear"></p>
+  </div>
+</div>

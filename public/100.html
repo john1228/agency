@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title>编辑Service | 美型</title>
+    <link rel="stylesheet" media="screen" href="/assets/jquery.fancybox.css?body=1"/>
+    <link rel="stylesheet" media="screen" href="/assets/jquery.fancybox-buttons.css?body=1"/>
+    <link rel="stylesheet" media="screen" href="/assets/jquery.fancybox-thumbs.css?body=1"/>
+    <link rel="stylesheet" media="screen" href="/assets/active_admin.css?body=1"/>
+    <link rel="stylesheet" media="print" href="/assets/active_admin/print.css?body=1"/>
+    <script src="/assets/jquery.js?body=1"></script>
+    <script src="/assets/jquery-ui/core.js?body=1"></script>
+    <script src="/assets/jquery-ui/datepicker.js?body=1"></script>
+    <script src="/assets/jquery-ui/widget.js?body=1"></script>
+    <script src="/assets/jquery-ui/button.js?body=1"></script>
+    <script src="/assets/jquery-ui/mouse.js?body=1"></script>
+    <script src="/assets/jquery-ui/draggable.js?body=1"></script>
+    <script src="/assets/jquery-ui/position.js?body=1"></script>
+    <script src="/assets/jquery-ui/resizable.js?body=1"></script>
+    <script src="/assets/jquery-ui/dialog.js?body=1"></script>
+    <script src="/assets/jquery-ui/sortable.js?body=1"></script>
+    <script src="/assets/jquery-ui/tabs.js?body=1"></script>
+    <script src="/assets/jquery_ujs.js?body=1"></script>
+    <script src="/assets/active_admin/base.js?body=1"></script>
+    <script src="/assets/active_admin/lib/batch_actions.js?body=1"></script>
+    <script src="/assets/active_admin/lib/checkbox-toggler.js?body=1"></script>
+    <script src="/assets/active_admin/lib/dropdown-menu.js?body=1"></script>
+    <script src="/assets/active_admin/lib/flash.js?body=1"></script>
+    <script src="/assets/active_admin/lib/has_many.js?body=1"></script>
+    <script src="/assets/active_admin/lib/modal_dialog.js?body=1"></script>
+    <script src="/assets/active_admin/lib/per_page.js?body=1"></script>
+    <script src="/assets/active_admin/lib/popover.js?body=1"></script>
+    <script src="/assets/active_admin/lib/table-checkbox-toggler.js?body=1"></script>
+    <script src="/assets/active_admin/ext/jquery-ui.js?body=1"></script>
+    <script src="/assets/active_admin/ext/jquery.js?body=1"></script>
+    <script src="/assets/active_admin/application.js?body=1"></script>
+    <script src="/assets/jquery-ui/accordion.js?body=1"></script>
+    <script src="/assets/jquery-ui/menu.js?body=1"></script>
+    <script src="/assets/jquery-ui/autocomplete.js?body=1"></script>
+    <script src="/assets/jquery-ui/droppable.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-blind.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-bounce.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-clip.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-drop.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-explode.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-fade.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-fold.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-highlight.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-size.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-scale.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-puff.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-pulsate.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-shake.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-slide.js?body=1"></script>
+    <script src="/assets/jquery-ui/effect-transfer.js?body=1"></script>
+    <script src="/assets/jquery-ui/progressbar.js?body=1"></script>
+    <script src="/assets/jquery-ui/selectable.js?body=1"></script>
+    <script src="/assets/jquery-ui/selectmenu.js?body=1"></script>
+    <script src="/assets/jquery-ui/slider.js?body=1"></script>
+    <script src="/assets/jquery-ui/spinner.js?body=1"></script>
+    <script src="/assets/jquery-ui/tooltip.js?body=1"></script>
+    <script src="/assets/jquery-ui.js?body=1"></script>
+    <script src="/assets/active_admin.js?body=1"></script>
+    <script src="/assets/ckeditor/init.js?body=1"></script>
+    <script src="/assets/ckeditor/ckeditor.js?body=1"></script>
+    <meta name="csrf-param" content="authenticity_token"/>
+    <meta name="csrf-token"
+          content="cD2DVgx0XVwbCktQ1lhrIaxpEVKaXl2BM3b1DsY7a25R4siJdzMPQAp4YFnlxCmBwqvg4C4ExBOLTsR/ktjIIA=="/>
+</head>
+<body class="edit admin_services active_admin logged_in admin_namespace">
+<div id="wrapper">
+    <div class="header" id="header">
+        <h1 class="site_title" id="site_title">美型</h1>
+        <ul class="header-item tabs" id="tabs">
+            <li id="dashboard"><a href="/admin/dashboard">首页</a></li>
+            <li class="current" id="services"><a href="/admin/services">服务号</a></li>
+            <li id="groups"><a href="/admin/groups">群组</a></li>
+            <li id="enthusiasts"><a href="/admin/enthusiasts">用户</a></li>
+            <li id="admin_users"><a href="/admin/admin_users">管理员</a></li>
+            <li class="has_nested" id="配置">
+                <a href="#">配置</a>
+                <ul>
+                    <li id="banners"><a href="/admin/banners">广告</a></li>
+                    <li id="news"><a href="/admin/news">新闻</a></li>
+                    <li id="activities"><a href="/admin/activities">活动</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="header-item tabs" id="utility_nav">
+            <li id="current_user"><a href="/admin/admin_users/1">admin@example.com</a></li>
+            <li id="logout"><a data-method="get" href="/admin/logout">退出</a></li>
+        </ul>
+    </div>
+    <div class="title_bar" id="title_bar">
+        <div id="titlebar_left">
+          <span class="breadcrumb">
+<a href="/admin">Admin</a>            <span class="breadcrumb_sep">/</span>
+<a href="/admin/services">Services</a>            <span class="breadcrumb_sep">/</span>
+<a href="/admin/services/89">89</a>            <span class="breadcrumb_sep">/</span>
+          </span>
+
+            <h2 id="page_title">编辑Service</h2>
+        </div>
+        <div id="titlebar_right"></div>
+    </div>
+    <div class="flashes"></div>
+    <div id="active_admin_content" class="without_sidebar">
+        <div id="main_content_wrapper">
+            <div id="main_content">﻿
+                <form novalidate="novalidate" class="formtastic service" id="edit_service_89"
+                      enctype="multipart/form-data" action="/admin/services/89" accept-charset="UTF-8" method="post">
+                    <input name="utf8" type="hidden" value="&#x2713;"/><input type="hidden" name="_method"
+                                                                              value="patch"/><input type="hidden"
+                                                                                                    name="authenticity_token"
+                                                                                                    value="PWHV3I3cJjHM3uyk1fUeQ6U3rQIXyfypnzHfnIEHcZccvp4D9pt0Ld2sx63maVzjy/VcsKOTZTsnCe7t1eTS2Q=="/>
+                    <fieldset class="inputs">
+                        <legend><span>服务号信息</span></legend>
+                        <ol>
+                            <li class="hidden input required" id="service_username_input"><input id="service_username"
+                                                                                                 value="3f3ff7e3-0a10-4986-ac30-a0ca87f26450"
+                                                                                                 type="hidden"
+                                                                                                 name="service[username]"/>
+
+                            </li>
+                            <li class="string input optional stringish" id="service_name_input"><label
+                                    for="service_name" class="label">昵称</label><input id="service_name" value="新服务号"
+                                                                                      type="text" name="service[name]"/>
+
+                            </li>
+                            <li class="file input optional" id="service_avatar_input"><label for="service_avatar"
+                                                                                             class="label">头像</label><input
+                                    id="service_avatar" type="file" name="service[avatar]"/>
+
+                            </li>
+                            <li class="string input optional stringish" id="service_signature_input"><label
+                                    for="service_signature" class="label">简介</label><input id="service_signature"
+                                                                                           value="这家伙很懒,什么也没留下"
+                                                                                           type="text"
+                                                                                           name="service[signature]"/>
+
+                            </li>
+                            <li class="string input optional stringish" id="service_address_input"><label
+                                    for="service_address" class="label">地址</label><input id="service_address" value=""
+                                                                                         type="text"
+                                                                                         name="service[address]"/>
+
+                            </li>
+
+                            <li class="check_boxes input optional" id="service_interests_input">
+                                <fieldset class="choices">
+                                    <legend class="label"><label>健身服务</label></legend>
+                                    <input type="hidden" name="service[interests][]" id="service_interests_none"
+                                           value=""/>
+                                    <ol class="choices-group">
+                                        <li class="choice"><label for="service_interests_1"><input type="checkbox"
+                                                                                                   name="service[interests][]"
+                                                                                                   id="service_interests_1"
+                                                                                                   value="1"/>足球</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_2"><input type="checkbox"
+                                                                                                   name="service[interests][]"
+                                                                                                   id="service_interests_2"
+                                                                                                   value="2"/>体操</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_3"><input type="checkbox"
+                                                                                                   name="service[interests][]"
+                                                                                                   id="service_interests_3"
+                                                                                                   value="3"/>力量</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_4"><input type="checkbox"
+                                                                                                   name="service[interests][]"
+                                                                                                   id="service_interests_4"
+                                                                                                   value="4"/>登山</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_5"><input type="checkbox"
+                                                                                                   name="service[interests][]"
+                                                                                                   id="service_interests_5"
+                                                                                                   value="5"/>综合训练</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_6"><input type="checkbox"
+                                                                                                   name="service[interests][]"
+                                                                                                   id="service_interests_6"
+                                                                                                   value="6"/>跳绳</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_7"><input type="checkbox"
+                                                                                                   name="service[interests][]"
+                                                                                                   id="service_interests_7"
+                                                                                                   value="7"/>滑冰</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_8"><input type="checkbox"
+                                                                                                   name="service[interests][]"
+                                                                                                   id="service_interests_8"
+                                                                                                   value="8"/>保龄球</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_9"><input type="checkbox"
+                                                                                                   name="service[interests][]"
+                                                                                                   id="service_interests_9"
+                                                                                                   value="9"/>羽毛球</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_10"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_10"
+                                                                                                    value="10"/>跆拳道</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_11"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_11"
+                                                                                                    value="11"/>拳击</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_12"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_12"
+                                                                                                    value="12"/>滑板</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_13"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_13"
+                                                                                                    value="13"/>瑜伽</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_14"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_14"
+                                                                                                    value="14"/>举重</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_15"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_15"
+                                                                                                    value="15"/>有氧操</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_16"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_16"
+                                                                                                    value="16"/>卧举</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_17"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_17"
+                                                                                                    value="17"/>骑行</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_18"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_18"
+                                                                                                    value="18"/>高尔夫</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_19"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_19"
+                                                                                                    value="19"/>杠铃</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_20"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_20"
+                                                                                                    value="20"/>平板支撑</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_21"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_21"
+                                                                                                    value="21"/>游泳</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_22"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_22"
+                                                                                                    value="22"/>乒乓球</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_23"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_23"
+                                                                                                    value="23"/>单杠</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_24"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_24"
+                                                                                                    value="24"/>仰卧起坐</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_25"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_25"
+                                                                                                    value="25"/>台球</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_26"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_26"
+                                                                                                    value="26"/>跑步</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_27"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_27"
+                                                                                                    value="27"/>篮球</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_28"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_28"
+                                                                                                    value="28"/>剑术</label>
+                                        </li>
+                                        <li class="choice"><label for="service_interests_29"><input type="checkbox"
+                                                                                                    name="service[interests][]"
+                                                                                                    id="service_interests_29"
+                                                                                                    value="29"/>钓鱼</label>
+                                        </li>
+                                    </ol>
+                                </fieldset>
+
+                            </li>
+                            <li class="hidden input optional" id="service_identity_input"><input id="service_identity"
+                                                                                                 value="2" type="hidden"
+                                                                                                 name="service[identity]"/>
+
+                            </li>
+                        </ol>
+                    </fieldset>
+                    <input type="submit" name="commit" value="提交"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footer" id="footer">
+        <p>Powered by <a href="http://www.activeadmin.info">Active Admin</a> 1.0.0.pre1</p>
+    </div>
+</div>
+</body>
+</html>

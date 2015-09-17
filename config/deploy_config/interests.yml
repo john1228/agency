@@ -1,0 +1,122 @@
+ver: 1.1
+items:
+  - id: 1
+    name: '足球'
+    hight: 00C1EB
+    light: C7EEF6
+  - id: 2
+    name: '体操'
+    hight: 00C1EB
+    light: C7EEF6
+  - id: 3
+    name: '力量'
+    hight: 00C1EB
+    light: C7EEF6
+  - id: 4
+    name: '登山'
+    hight: 00C1EB
+    light: C7EEF6
+  - id: 5
+    name: '综合训练'
+    hight: F47A30
+    light: FFEADD
+  - id: 6
+    name: '跳绳'
+    hight: F47A30
+    light: FFEADD
+  - id: 7
+    name: '滑冰'
+    hight: F47A30
+    light: FFEADD
+  - id: 8
+    name: '保龄球'
+    hight: F47A30
+    light: FFEADD
+  - id: 9
+    name: '羽毛球'
+    hight: 8E80F5
+    light: E2DFF9
+  - id: 10
+    name: '跆拳道'
+    hight: 8E80F5
+    light: E2DFF9
+  - id: 11
+    name: '拳击'
+    hight: 8E80F5
+    light: E2DFF9
+  - id: 12
+    name: '滑板'
+    hight: 8E80F5
+    light: E2DFF9
+  - id: 13
+    name: '瑜伽'
+    hight: CB77DF
+    light: F4E3F8
+  - id: 14
+    name: '举重'
+    hight: CB77DF
+    light: F4E3F8
+  - id: 15
+    name: '有氧操'
+    hight: 46BC61
+    light: E0F6D8
+  - id: 16
+    name: '卧举'
+    hight: 46BC61
+    light: E0F6D8
+  - id: 17
+    name: '骑行'
+    hight: 46BC61
+    light: E0F6D8
+  - id: 18
+    name: '高尔夫'
+    hight: 46BC61
+    light: E0F6D8
+  - id: 19
+    name: '杠铃'
+    hight: 46BC61
+    light: E0F6D8
+  - id: 20
+    name: '平板支撑'
+    hight: 46BC61
+    light: E0F6D8
+  - id: 21
+    name: '游泳'
+    hight: FEBB1B
+    light: FFF4D9
+  - id: 22
+    name: '乒乓球'
+    hight: FEBB1B
+    light: FFF4D9
+  - id: 23
+    name: '单杠'
+    hight: FEBB1B
+    light: FFF4D9
+  - id: 24
+    name: '仰卧起坐'
+    hight: EC5B9F
+    light: FAE5EF
+  - id: 25
+    name: '台球'
+    hight: EC5B9F
+    light: FAE5EF
+  - id: 26
+    name: '跑步'
+    hight: EC5B9F
+    light: FAE5EF
+  - id: 27
+    name: '篮球'
+    hight: EC5B9F
+    light: FAE5EF
+  - id: 28
+    name: '剑道'
+    hight: EC5B9F
+    light: FAE5EF
+  - id: 29
+    name: '钓鱼'
+    hight: EC5B9F
+    light: FAE5EF
+  - id: 30
+    name: '其它'
+    hight: 00C1EB
+    light: C7EEF6

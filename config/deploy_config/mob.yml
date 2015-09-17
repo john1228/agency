@@ -1,0 +1,8 @@
+stage:
+  host: 'https://a1.easemob.com/jsnetwork/mxing'
+  client_id: 'YXA6HPZzIHIkEeSy6P9lvafoPA'
+  client_secret: 'YXA6GQOgkrCoDL61TY9IPzRcto4mJn4'
+official:
+  host: 'https://a1.easemob.com/jsnetwork/mxingsijiao'
+  client_id: 'YXA6NQmy0PIkEeSQO18Yeq100Q'
+  client_secret: 'YXA6t1SdtNrJAAHq6m3Bu3Yx1Ryr8jI'

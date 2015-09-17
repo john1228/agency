@@ -1,0 +1,26 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: postgis
+  encoding: utf8
+  username: mxing_v2
+  password: mxing~1228
+  pool: 10
+  timeout: 5000
+  host: localhost
+  port: 5432
+  postgis_extension: postgis
+  schema_search_path: public, postgis
+  su_username: postgres     # a superuser for the database
+  su_password:   # the superuser's password
+
+development:
+  <<: *default
+  database: mxing_dev_v2
+production:
+  <<: *default
+  database: mxing_pro_v2

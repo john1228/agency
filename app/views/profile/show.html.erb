@@ -1,0 +1,120 @@
+<div class="row wtilt">
+  <div class="top15 clearfix row col-lg-12">
+    <div class="col-lg-5 col-md-5 ptl-wli">
+      <div class="panel panel-default clearfix">
+        <div class="row">
+          <div class="col-xs-12 col-md-12">
+            <div class="panel-headint tdzty clearfix bottom50">
+              <a href="Servicenumber.html" class="pull-right">
+                <i class="iconfont">&#xe611;</i>编辑</a>
+            </div>
+            <a href="#" class="thumbnait">
+              <img src="img/1.jpg" class="img-circle">
+            </a>
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="col-xs-12 col-md-12 ">
+            <div class="text-center fygroup ">
+              <p class="color20"><%= @service.profile.name %></p>
+
+              <p class="color5c top8">美型号 <%= @service.profile.mxid %></p>
+
+              <p class="color5c top5"><%= truncate(@service.profile.interests_string.gsub(',', '/')) %></p>
+            </div>
+          </div>
+        </div>
+        <div class="tpxooc">
+          <div>
+            <div class="media-left">
+              <i class="iconfont5 ">&#xe613;</i>
+            </div>
+            <div class="media-body p-txt">
+              <%= @service.profile.mobile %>
+            </div>
+          </div>
+          <div>
+            <div class="media-left">
+              <i class="iconfont5 ">&#xe61a;</i>
+            </div>
+            <div class="media-body p-txt">
+              www.e-mxing/23210
+            </div>
+          </div>
+          <div>
+            <div class="media-left">
+              <i class="iconfont5 ">&#xe614;</i>
+            </div>
+            <div class="media-body p-txt">
+              <%= @service.profile.address %>
+            </div>
+          </div>
+
+        </div>
+        <div class="panel-body polkt top50 p-txt">
+          <%= @service.profile.signature %>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-7 col-md-7 ptl-wlp ">
+
+      <div class="panel panel-default ptl-wlt pult-left ">
+        <div class="panel-headint tdzty clearfix">
+          <h3 class=" pull-left panel-title">视频秀</h3>
+          <a href="#" class="pull-right txt-tofi">
+            <i class="iconfont">&#xe611;</i>替换</a>
+        </div>
+        <div class="panel-body ">
+          <div class="row ">
+            <div class="col-xs-12 col-md-12" id="HLSPlayer">
+              <div class="video" id="HLSPlayer">
+                <SCRIPT LANGUAGE=JavaScript>
+                    var vWidth = "100%";                //播放器宽度设置
+                    var vHeight = 400;                   //播放器宽度设置
+                    var vPlayer = "<%=asset_path('HLSPlayer.swf')%>?v=1.5"; //播放器文件
+                    var vHLSset = "<%=asset_path('HLS.swf')%>";             //HLS配置
+                    var vPic = "<%=(@service.showtime.dynamic_film.cover.url rescue 'http://localhost/assets/default_dynamic.png')%>";    //视频缩略图
+                    var vHLSurl = "<%=(@service.showtime.dynamic_film.film.hls rescue 'http://b.cuplayer.net:8011/hls2-vod/test.mp4.m3u8')%>";
+                    //-->
+                </SCRIPT>
+                <%= javascript_include_tag 'js/hls.min' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default ptl-wlt pult-left  top15">
+        <div class="panel-headint tdzty clearfix">
+          <h3 class=" pull-left panel-title">照片墙</h3>
+          <a href="#" class="pull-right txt-tofi">
+            <i class="iconfont">&#xe611;</i>编辑</a>
+        </div>
+        <div class="panel-body  pciilk">
+          <div id="tFocus">
+            <div class="prev" id="prev"></div>
+            <div class="next" id="next"></div>
+            <%
+               @service.photos.each do |photo|
+                 if photo.eql?(@service.photos.first)
+            %>
+                    <li class="active">
+                      <%= link_to(image_tag(photo.photo.url), '#') %>
+                    </li>
+                <% else %>
+                    <li>
+                      <%= link_to(image_tag(photo.photo.url), '#') %>
+                    </li>
+                <% end %>
+            <% end %>
+            </ul>
+          </div>
+          <a href="javascript:void(0);" id="tFocus-rightbtn">下一张</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

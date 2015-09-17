@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-lg-12 top10 tdzty">
+    <h3 class="poloklh4">历史动态</h3>
+
+    <div class="top15 clearfix row">
+      <div class="col-lg-12 col-md-12">
+        <% if @dynamics.present? %>
+            <% @dynamics.each do |dynamic| %>
+                <div class="pull-left ailois ">
+                  <p class="screenshot">
+                    <a href="description.html"><%= image_tag((dynamic.dynamic_images.first.image.thumb.url rescue 'default_dynamic.png')) %></a>
+                  </p>
+                  <dl class="polokl">
+                    <a href="description.html">
+                      <dd class="destion"><%= dynamic.created_at.localtime.strftime('%Y-%m-%d %H:%M') %></dd>
+                      <dd class="destion"><%= dynamic.content %></dd>
+                    </a>
+                  </dl>
+                  <div class="clearfix polokl ">
+                    <a href="#" class="pull-left pritbt">
+                      <i class="iconfont icon">&#xe60e;</i><%= dynamic.comments.count %>
+                    </a>
+                    <a href="#" class="pull-right pritbt"><i class="iconfont">&#xe60d;</i></a></div>
+                </div>
+            <% end %>
+        <% else %>
+            <div class="pull-left ailois ">
+              <p class="screenshot">
+                <a href="#"><%= image_tag('default_dynamic.png') %></a>
+              </p>
+              <dl class="polokl">
+                <a href="description.html">
+                  <dd class="destion"><%= Time.now.strftime('%Y-%m-%d %H:%M') %></dd>
+                  <dd class="destion">这是一个默认动态</dd>
+                </a>
+              </dl>
+              <div class="clearfix polokl ">
+                <a href="description.html" class="pull-left pritbt">
+                  <i class="iconfont icon">&#xe60e;</i><%= rand(100) %>
+                </a>
+                <a href="#" class="pull-right pritbt"><i class="iconfont">&#xe60d;</i></a></div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

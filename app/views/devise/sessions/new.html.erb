@@ -1,0 +1,19 @@
+<div class="login_padding">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <label>
+        <%= f.email_field :email, autofocus: true, class: 'txt_input txt_input2' %>
+      </label>
+      <label>
+        <%= f.password_field :password, autocomplete: 'off', class: 'txt_input txt_input2' %>
+      </label>
+
+      <p class="forgot"><a href="javascript:void(0);">忘记密码?</a></p>
+
+      <div class="rem_sub">
+        <label>
+          <%= f.submit '登录', class: 'sub_button', style: 'opacity: 0.7;' %>
+        </label>
+      </div>
+  <% end %>
+</div>
+

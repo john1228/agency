@@ -1,0 +1,128 @@
+<div class="row">
+  <div class="col-lg-12 top10 tdzty">
+    <h3 class="poloklh4">转账给私教</h3>
+
+    <div class="panel panel-default top15 clearfix">
+      <ul id="myTab" class="nav nav-tabs nav-bj clearfix">
+        <li class="active"><a href="#home" data-toggle="tab">向一人付款</a></li>
+        <li><a href="#ios" data-toggle="tab">向多人付款</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content  clearfix ">
+        <div class="tab-pane fade in active clearfix" id="home">
+          <div class="panel-body">
+            <%= form_tag(submit_transfer_path) do %>
+                <% if @error.present? %>
+                    <div class="alert alert-danger" role="alert">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only">Error:</span>
+                      转账失败
+                    </div>
+                <% end %>
+                <% if @success.present? %>
+                    <div class="alert alert-success" role="alert">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only">Success:</span>
+                      转账成功
+                    </div>
+                <% end %>
+                <div class="colmd400 clearfix">
+                  <div class="form-section fygroup colmd3">
+                    <%= select_tag(:coach, options_for_select(@service.coaches.map { |coach| [coach.profile.name, coach.id] }),class: 'input-textl') %>
+                  </div>
+
+                  <div class="input-group fygroup colmd3">
+                    <div class="form-section">
+                      <label class="input-label">转账金额</label>
+                      <%= text_field_tag(:amount, '', class: 'input-text') %>
+                    </div>
+                    <span class="input-group-addon">元</span></div>
+                  <div class="fygroup ">
+                    <%= submit_tag('确认', class: 'btntn-lg') %>
+                  </div>
+                </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="tab-pane fade clearfix" id="ios">
+          <div class="panel-body">
+            <div class="colmd400 fygroup clearfix">
+              <div class="colmd3 pull-left">
+                <div class="form-section">
+
+                  <select class="input-textl">
+                    <option>选择私教</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="colmd3 pull-left m-left10">
+                <div class="input-group">
+                  <div class="form-section">
+                    <label class="input-label">转账金额</label>
+                    <input class="input-text" type="text">
+                  </div>
+                  <span class="input-group-addon">元</span></div>
+              </div>
+              <div class="top8 pull-left m-left10">
+                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="colmd400 fygroup clearfix">
+              <div class="colmd3 pull-left">
+                <div class="form-section">
+                  <select class="input-textl">
+                    <option>选择私教</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="colmd3 pull-left m-left10">
+                <div class="input-group">
+                  <div class="form-section">
+                    <input class="input-textl" type="text">
+                  </div>
+                  <span class="input-group-addon">元</span></div>
+              </div>
+              <div class="top8 pull-left m-left10">
+                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <a href="#" class="tlki"><i class="icon-tj icon1">&#xe61e;</i>增加收款人</a>
+
+            <div class="fygroup">
+
+              <button type="button" class="btntn-lg ">确认</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+          $(function () {
+              $('#myTab li:eq(1) a').tab('show');
+          });
+      </script>
+    </div>
+    <h3 class="poloklh4 top30">私教销售额</h3>
+
+    <div class="top15">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">订单统计</h3>
+        </div>
+        <div class="panel-body"></div>
+      </div>
+    </div>
+  </div>
+</div>
