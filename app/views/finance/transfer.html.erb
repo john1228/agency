@@ -25,9 +25,21 @@
                       转账成功
                     </div>
                 <% end %>
+                <div class="row top15">
+                  <div class="col-xs-6 col-md-5">
+                    <div class="form-group input-group">
+                      <div class='input-group date' id='datetimepicker2'>
+                              <span class="input-group-addon">
+                                账户余额
+                              </span>
+                        <input type="text" class="input-text" value="<%= @service.wallet.balance.to_f %>" readonly>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="colmd400 clearfix">
                   <div class="form-section fygroup colmd3">
-                    <%= select_tag(:coach, options_for_select(@service.coaches.map { |coach| [coach.profile.name, coach.id] }),class: 'input-textl') %>
+                    <%= select_tag(:coach, options_for_select(@service.coaches.map { |coach| [coach.profile.name, coach.id] }), class: 'input-textl') %>
                   </div>
 
                   <div class="input-group fygroup colmd3">
@@ -45,6 +57,19 @@
         </div>
         <div class="tab-pane fade clearfix" id="ios">
           <div class="panel-body">
+            <div class="row top15">
+              <div class="col-xs-6 col-md-5">
+                <div class="form-group input-group">
+                  <div class='input-group date' id='datetimepicker2'>
+                              <span class="input-group-addon">
+                                账户余额
+                              </span>
+                    <input type="text" class="input-text" value="<%= @service.wallet.balance.to_f %>" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="colmd400 fygroup clearfix">
               <div class="colmd3 pull-left">
                 <div class="form-section">
@@ -118,10 +143,58 @@
 
     <div class="top15">
       <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">订单统计</h3>
+        <div class="panel-heading" style="text-align: right">
         </div>
-        <div class="panel-body"></div>
+        <div class="panel-body" id="container">
+          <script>
+              $(function () {
+                  $('#container').highcharts({
+                      chart: {
+                          type: 'column',
+                          margin: [50, 50, 100, 80]
+                      },
+                      title: {
+                          text: '私教销售额'
+                      },
+                      xAxis: {
+                          categories: <%=raw @coaches%>,
+                          labels: {
+                              rotation: -45,
+                              align: 'right',
+                              style: {
+                                  fontSize: '13px',
+                                  fontFamily: 'Verdana, sans-serif'
+                              }
+                          }
+                      },
+                      yAxis: {
+                          min: 0,
+                          title: {
+                              text: '销售额 (元)'
+                          }
+                      },
+                      legend: {
+                          enabled: false
+                      },
+                      tooltip: {
+                          pointFormat: '销售额: <b>{point.y:.1f} 元</b>'
+                      },
+                      series: [{
+                          name: '销售额',
+                          data: <%=@data%>,
+                          dataLabels: {
+                              enabled: true,
+                              align: 'top',
+                              style: {
+                                  fontSize: '13px',
+                                  fontFamily: 'Verdana, sans-serif',
+                              }
+                          }
+                      }]
+                  });
+              });
+          </script>
+        </div>
       </div>
     </div>
   </div>

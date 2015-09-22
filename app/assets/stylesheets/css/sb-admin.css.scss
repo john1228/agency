@@ -285,13 +285,6 @@ th {
   padding-bottom: 150px;
 }
 
-.icon2 {
-  width: 200px;
-  height: 200px;
-  margin: 5px;
-  border-radius: 5px;
-}
-
 .lvkft {
   line-height: 22px;
   height: 22px;
@@ -402,13 +395,34 @@ th {
   border: 1px dashed #d1d1d1;
 }
 
+.upload_area {
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+  position: relative;
+  border: 1px dashed #d1d1d1;
+}
+
 .lxcop {
   margin-left: 55px;
   margin-top: 20px;
   display: inline-block
 }
 
-.file-loading {
+.image_uploader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  text-align: right;
+  opacity: 0;
+  background: 0 0;
+  cursor: inherit;
+  display: block;
+}
+
+.film_uploader {
   position: absolute;
   top: 0;
   right: 0;
@@ -943,7 +957,7 @@ ul.alert-dropdown {
   }
   #tFocus-btn li.active, #tFocus-leftbtn, #tFocus-rightbtn {
     display: block;
-    background: url(../img/spr.png) no-repeat;
+    background: asset_data_url('spr.png') no-repeat;
   }
   #tFocus {
     width: 420px;
@@ -1053,7 +1067,7 @@ ul.alert-dropdown {
   }
   #tFocus-btn li.active, #tFocus-leftbtn, #tFocus-rightbtn {
     display: block;
-    background: url(../img/spr.png) no-repeat;
+    background: asset_data_url('spr.png') no-repeat;
   }
   #tFocus {
     width: 565px;

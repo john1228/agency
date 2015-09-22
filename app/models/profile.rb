@@ -1,17 +1,11 @@
 class Profile < ActiveRecord::Base
-  include ProfileAble
-  scope :enthusiasts, -> { where(identity: 0) }
-  scope :gyms, -> { where(identity: 1) }
-  scope :service, -> { where(identity: 2) }
-
-  belongs_to :user
-  has_one :place, through: :user
-  alias_attribute :often, :often_stadium
-
-  TAGS = %w(会员 认证 私教)
-  BASE_NO = 10000
+  after_create :regist_to_easemob
+  after_destroy :delete_from_easemob
   mount_uploader :avatar, ProfileUploader
+  belongs_to :user
+  TAGS = %w(会员 认证 私教)
 
+  BASE_NO = 10000
   class << self
     def find_by_mxid(mxid)
       find_by(id: mxid.to_i - BASE_NO)
@@ -41,40 +35,25 @@ class Profile < ActiveRecord::Base
     BASE_NO + id
   end
 
-  def summary_json
-    {
-        mxid: mxid,
-        name: HarmoniousDictionary.clean(name||''),
-        avatar: avatar.thumb.url,
-        gender: gender||1,
-        age: age.eql?(0) ? 16 : age,
-        true_age: age,
-        signature: HarmoniousDictionary.clean(signature),
-        tags: tags,
-        identity: identity
-    }
+  private
+  def regist_to_easemob
+    # easemob_token = Rails.cache.fetch('mob')
+    # Faraday.post do |req|
+    #   req.url "#{MOB['host']}/users"
+    #   req.headers['Content-Type'] = 'application/json'
+    #   req.headers['Authorization'] = "Bearer #{easemob_token}"
+    #   req.body = "{\"username\": \"#{mxid}\", \"password\": \"123456\", \"nickname\": \"#{name}\"}"
+    # end
+    # MessageJob.set(wait: 1.minute).perform_later(id, MESSAGE['欢迎语'])
   end
 
-
-  def as_json
-    {
-        mxid: mxid,
-        name: name||'',
-        avatar: avatar.thumb.url,
-        signature: HarmoniousDictionary.clean(signature),
-        gender: gender||1,
-        identity: identity,
-        age: age.eql?(0) ? 16 : age,
-        true_age: age,
-        birthday: birthday||Date.today.prev_year(16),
-        address: address,
-
-        target: HarmoniousDictionary.clean(target),
-        skill: skill,
-        often: HarmoniousDictionary.clean(often_stadium),
-        interests: interests,
-
-        tags: tags
-    }
+  def delete_from_easemob
+    easemob_token = Rails.cache.fetch('mob')
+    Faraday.delete do |req|
+      req.url "#{MOB['host']}/users/#{mxid}"
+      req.headers['Content-Type'] = 'application/json'
+      req.headers['Authorization'] = "Bearer #{easemob_token}"
+      req.body = ''
+    end
   end
 end

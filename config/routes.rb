@@ -5,6 +5,13 @@ Rails.application.routes.draw do
   resources :coaches
   resources :dynamics
   resources :profile
+  resources :message
+  resources :students
+
+  get 'report' => 'report#index'
+  get 'report/order' => 'report#order'
+  get 'report/appointment' => 'report#appointment'
+  get 'report/coach' => 'report#coach'
 
   get 'password' => 'profile#password'
   post 'password' => 'profile#change_password', as: :change_password

@@ -3,18 +3,17 @@
     <h3 class="poloklh4">私教信息</h3>
 
     <div class="top15 clearfix row">
-
-      <%= form_for(@coach, class: 'dropzone') do |f| %>
+      <%= semantic_form_for(@coach) do |f| %>
           <div class="col-lg-9 col-md-9">
             <div class="panel panel-default">
               <div class="panel-body">
                 <div>
-
-                  <%= f.fields_for :profile do |p| %>
+                  <%= f.semantic_fields_for :profile do |p| %>
+                      <%= p.hidden_field :identity, value: 1 %>
                       <h4 class="polk top10">基本资料</h4>
 
                       <div class="form-section top15 ">
-                        <%= image_tag((p.avatar.thumb.url rescue 'ink_06.png'), width: 120, height: 120, id: 'image_preview', style: 'border-radius: 50%') %>
+                        <%= image_tag('ink_06.png', width: 120, height: 120, id: 'image_preview', style: 'border-radius: 50%') %>
                         <%= p.file_field :avatar %>
                       </div>
 
@@ -96,7 +95,7 @@
                 </div>
                 <div class="form-section top15">
                   <label class="input-label">密码</label>
-                  <%= f.password_field :password, class: 'input-text' %>
+                  <%= f.password_field :mobile, class: 'input-text' %>
                 </div>
               </div>
             </div>
@@ -125,7 +124,7 @@
 
 <script>
     $(function () {
-                $("#coach_profile_birthday").datepicker({
+                $("#coach_profile_attributes_birthday").datepicker({
                     language: 'zh-CN',
                     format: 'yyyy-mm-dd'
                 });
@@ -142,13 +141,13 @@
                 choose_interests_text.push(interests[i].getAttribute('text'));
             }
         }
-        $('#coach_profile_interests').val(choose_interests_value.join(','));
+        $('#coach_profile_attributes_interests').val(choose_interests_value.join(','));
         $('#display_interests').val(choose_interests_text.join(','));
         $('#myModal').modal('hide');
     }
 
 
-    $("#coach_profile_avatar").change(function () {
+    $("#coach_profile_attributes_avatar").change(function () {
         var objUrl = getObjectURL(this.files[0]);
         console.log("objUrl = " + objUrl);
         if (objUrl) {

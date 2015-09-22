@@ -22,13 +22,15 @@
               <td class="text-center tyeq"><%= coach.profile.gender.eql?(1) ? '女' : '男' %></td>
               <td class="text-center tyeq"><%= coach.profile.birthday.strftime('%Y-%m-%d') rescue '' %></td>
               <td><%= truncate(coach.profile.signature) %></td>
-              <td class="text-center"><a href="#"><i class="iconfont pritbt">&#xe60d;</i></a></td>
+              <td class="text-center">
+                <a confirm="您确定要删除吗?" rel="nofollow" data-method="delete" href="/coaches/<%= coach.id %>"><i class="iconfont pritbt ">&#xe60d;</i></a>
+              </td>
             </tr>
         <% } %>
         </tbody>
       </table>
     </div>
-    <div class="padding5">
+    <div class=" padding5">
       <%= will_paginate @coaches %>
     </div>
   </div>

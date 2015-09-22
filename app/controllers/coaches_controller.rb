@@ -7,18 +7,17 @@ class CoachesController < ApplicationController
 
   def new
     @coach = Coach.new
-  end
-
-  def show
+    @coach.build_profile
   end
 
   def create
     @coach = Coach.new(coach_params)
-    # if @coach.save
-    #   @success = true
-    # else
-    #   @failure = true
-    # end
+    if @coach.save
+      ServiceMember.create(service: @service, coach: @coach)
+      @success = true
+    else
+      @failure = true
+    end
     render action: :show
   end
 
@@ -27,11 +26,12 @@ class CoachesController < ApplicationController
   end
 
   def destroy
-
+    render action: :index
   end
 
   private
   def coach_params
-    params.require(:coach).permit(:mobile, :password).merge(profile_attributes: params.require(:coach).require(:profile).permit(:avatar, :name, :gender, :birthday, :signature, :address, :target, :skill, :often_stadium, :interests))
+    params.require(:coach).permit(:mobile, :password, profile_attributes:
+                                             [:avatar, :name, :gender, :birthday, :signature, :address, :target, :skill, :often_stadium, :interests, :identity])
   end
 end

@@ -10,15 +10,25 @@ class DynamicsController < ApplicationController
   end
 
   def create
-    dynamic = @service.dynamics.new(params[:dynamic])
-    if dynamic.save
+    @dynamic = @service.dynamics.new(dynamic_params)
+    if @dynamic.save
+      @success = '发布动态成功'
     else
+      @error = '发布动态失败'
     end
+    render action: :new
   end
 
   def destroy
     @result = false
     dynamic = @service.dynamics.find_by(id: params[:id])
     @result = true if dynamic.destroy
+  end
+
+  private
+  def dynamic_params
+    images = params[:image][0, 6].map { |image| {image: image} }
+    params[:dynamic][:images_attributes] = images
+    params.require(:dynamic).permit(:content, images_attributes: [:image])
   end
 end

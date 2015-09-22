@@ -2,6 +2,8 @@ class FinanceController < ApplicationController
   layout 'login'
 
   def transfer_new
+    @coaches = @service.coaches.order(id: :desc).collect { |coach| coach.profile.name }
+    @data = @service.coaches.order(id: :desc).map { |coach| rand(10000) }
     render 'transfer'
   end
 

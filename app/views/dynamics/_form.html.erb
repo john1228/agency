@@ -1,45 +1,56 @@
 <div class="row">
   <div class="col-lg-12 top10 tdzty">
-    <%= form_for(@dynamic) do |f| %>
+    <%= form_for(@dynamic, html: {multipart: true}) do |f| %>
         <h3 class="poloklh4">发布动态</h3>
 
         <div class="top15 clearfix row">
           <div class="col-lg-12 col-md-12">
             <div class="panel panel-default">
               <div class="panel-body">
-                <%= f.fields_for :dynamic_film do |film| %>
-                    <div class="form-section top15">
-                      <label class="input-label">标题</label>
-                      <input class="input-text">
-                      <%= film.text_field :title %>
+                <% if @error.present? %>
+                    <div class="alert alert-danger" role="alert">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only">Error:</span>
+                      <%= @error %>
+                    </div>
+                <% end %>
+                <% if @success.present? %>
+                    <div class="alert alert-success" role="alert">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only">Success:</span>
+                      <%= @success %>
                     </div>
                 <% end %>
                 <div class="form-section top15">
                   <label class="input-label">动态内容</label>
                   <%= f.text_area(:content, class: 'input-text  pciilk', rows: 3) %>
                 </div>
-                <div class="top10 clearfix cot-til">
-                  <div class="icon2 pull-left">
+                <div class="top10 clearfix cot-til" id="image_container">
+                  <div class="upload_area pull-left" id="image_div">
                     <div class="panel-body">
-                      <i class="iconfont2 lxcop">&#xe618;</i>
+                      <div id="default_div">
+                        <i class="iconfont2 lxcop">&#xe618;</i>
 
-                      <p class="text-center cot-til">上传图片</p>
+                        <p class="text-center cot-til">上传图片</p>
 
-                      <p class="text-center cot-til">（最多支持6张）</p>
-                      <input id="input-4" type="file" multiple="true" class="file-loading">
+                        <p class="text-center cot-til">（可以上传6张）</p>
+                      </div>
+                      <input type="file" multiple="true" class="image_uploader" id="my_image" name="image[]" onchange="preview(this)">
                     </div>
                   </div>
-                  <div class="pull-left tacative ">或</div>
-                  <div class="icon2 pull-left">
+
+                  <div class="pull-left tacative " id="text_div">或</div>
+                  <div class="upload_area pull-left" id="film_div">
                     <div class="panel-body"><i class="iconfont2 lxcop">&#xe60f;</i>
 
                       <p class="text-center">上传视频</p>
-                      <input multiple="true" type="file" class="file-loading">
+                      <input multiple="true" type="file" class="film_uploader">
                     </div>
                   </div>
                 </div>
+
                 <div class="fygroup">
-                  <button type="button" class="btntn-lg ">确认</button>
+                  <%= f.submit('确认', class: 'btntn-lg') %>
                 </div>
               </div>
             </div>
@@ -48,3 +59,52 @@
     <% end %>
   </div>
 </div>
+
+<script>
+    function preview(obj) {
+        $('#text_div').remove();
+        $('#film_div').remove();
+        var file_count = 0;
+        var uploaders = document.getElementsByClassName('image_uploader');
+        for (var i = 0; i < uploaders.length; i++) {
+            file_count = file_count + uploaders[i].files.length;
+        }
+//        还可以上传图片数
+        var available = (6 - file_count);
+//        已上传图片数
+        var uploaded = file_count - obj.files.length;
+
+        for (var i = 0; i < (6 - uploaded); i++) {
+            var objUrl = getObjectURL(obj.files[i]);
+            $('#image_div').before(
+                    "<div class='icon2 pull-left' style='background-image: url(" + objUrl + ");background-size: cover;'>" +
+                    "<a href='#'> <i class='iconfont pritbt'>&#xe60d;</i></a>" +
+                    "</div>"
+            );
+        }
+        $('.upload_area.pull-left').hide();
+        var image_div = "<div class='upload_area pull-left'>" +
+                "<div class='panel-body'>" +
+                " <i class='iconfont2 lxcop'>&#xe618;</i>" +
+                "<p class='text-center cot-til'>上传图片</p>" +
+                "<p class='text-center cot-til'>（还可以上传" +
+                available +
+                "张）</p>" +
+                "<input type='file' multiple='true' class='image_uploader' name='image[]' onchange='preview(this)'/>" +
+                "</div>";
+        if (available > 0)
+            $("#image_container").append(image_div);
+
+    }
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+</script>

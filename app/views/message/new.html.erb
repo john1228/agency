@@ -1,0 +1,290 @@
+<!-- /.row -->
+<div class="padding15">
+  <div class="row">
+    <div class="col-lg-12 top10 tdzty">
+      <h3 class="poloklh4">群发消息</h3>
+
+      <div class="panel panel-default top15">
+        <div class="panel-body">
+          <%= form_tag('') do %>
+              <div class="clearfix">
+                <dl class="dl-horizontal">
+                  <dt class="ttcwl">群组：</dt>
+                  <dd class="tpcpf">
+                    <% @groups.each { |group| %>
+                        <label class="checkbox-inline color5c">
+                          <input type="checkbox" id="inlineCheckbox1" value="option1">
+                          <%= group.name %>
+                        </label>
+                    <% } %>
+                    <a href="#myModal" role="button" data-toggle="modal" class="tlki checkbox-inline"><i class="iconfont icon">&#xe61e;</i>编辑群组
+                    </a></dd>
+                </dl>
+              </div>
+              <div class="form-section top15">
+                <label class="input-label">动态内容</label>
+                <textarea class="input-text  pciilk" rows="3"></textarea>
+              </div>
+              <div class="fygroup">
+                <button type="button" class="btntn-lg ">确认</button>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="myModal" class="modal hide fade tpxcir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="panel-headint tdzty">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="paneitle">编辑群组</h3>
+  </div>
+  <div class="panel-heapil">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="搜索联系人">
+      <span class="input-group-addon"><i class="iconfont">&#xe61f;</i></span></div>
+  </div>
+  <div class="row panaultpla">
+    <div class="clearfix">
+      <div class="col-lg-6 col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-prito">
+            <a href="#myModal2" role="button" data-toggle="modal" class="pull-right txt-tofi">新建</a>我的群
+          </div>
+          <div>
+            <div class="pre-scrollable tscrollable">
+              <ul>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+                <li class="clearfix">
+                  <p class="pull-left"> 我们的大包 </p>
+                  <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-prito">联系人</div>
+          <div>
+            <div class="pre-scrollable tscrable">
+              <ul class="clearfix txt-zt">
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+                <li class="clearfix">
+                  <p class="pull-left">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">
+                      Lucy </label>
+                    <a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4 class="top-nav ties">已选成员
+      <small class="ties">（5/100）</small>
+    </h4>
+    <div class="top-nav top10">
+      <table class="table tatle-bil tatle-zt">
+        <thead>
+        <tr>
+          <th>姓名</th>
+          <th>性别</th>
+          <th class="text-right">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="active">
+          <td>Sambin_吴承斌</td>
+          <td>男</td>
+          <td><a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></td>
+        </tr>
+        <tr>
+          <td>Sambin_吴承斌</td>
+          <td>男</td>
+          <td><a href="#" class="pull-right"> <i class="iconfont pritbt"></i> </a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tatle-bil top15 top-nav ">
+      <button type="button" class="btntn-lg">确认</button>
+    </div>
+  </div>
+</div>
+<div id="myModal2" class="modal hide fade toic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header kilit">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>请输入新的群名称</h3>
+  </div>
+  <div class="modal-body">
+    <input type="text" class="form-control" placeholder="新的群名称">
+  </div>
+  <div class="modal-footer"><a href="#" class="btn btn-primary">保存</a></div>
+</div>

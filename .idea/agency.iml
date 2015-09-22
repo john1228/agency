@@ -31,6 +31,7 @@
     <orderEntry type="library" scope="PROVIDED" name="execjs (v2.4.0, RVM: ruby-2.1.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="fancybox2-rails (v0.2.8, RVM: ruby-2.1.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="faraday (v0.9.1, RVM: ruby-2.1.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="formtastic (v3.2.0.pre@2cbc2b, RVM: ruby-2.1.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="geokit (v1.9.0, RVM: ruby-2.1.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="geokit-rails (v2.1.0, RVM: ruby-2.1.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.3.3, RVM: ruby-2.1.4) [gem]" level="application" />
