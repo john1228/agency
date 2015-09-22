@@ -25,19 +25,15 @@
                       转账成功
                     </div>
                 <% end %>
-                <div class="row top15">
-                  <div class="col-xs-6 col-md-5">
-                    <div class="form-group input-group">
-                      <div class='input-group date' id='datetimepicker2'>
+                <div class="colmd400 clearfix">
+                  <div class="form-section fygroup colmd3">
+                    <div class='input-group date'>
                               <span class="input-group-addon">
                                 账户余额
                               </span>
-                        <input type="text" class="input-text" value="<%= @service.wallet.balance.to_f %>" readonly>
-                      </div>
+                      <input type="text" class="input-text" value="<%= @service.wallet.balance.to_f %>" readonly>
                     </div>
                   </div>
-                </div>
-                <div class="colmd400 clearfix">
                   <div class="form-section fygroup colmd3">
                     <%= select_tag(:coach, options_for_select(@service.coaches.map { |coach| [coach.profile.name, coach.id] }), class: 'input-textl') %>
                   </div>
@@ -57,30 +53,19 @@
         </div>
         <div class="tab-pane fade clearfix" id="ios">
           <div class="panel-body">
-            <div class="row top15">
-              <div class="col-xs-6 col-md-5">
-                <div class="form-group input-group">
-                  <div class='input-group date' id='datetimepicker2'>
+            <div class="colmd400 fygroup clearfix">
+              <div class="form-section fygroup colmd3">
+                <div class='input-group date'>
                               <span class="input-group-addon">
                                 账户余额
                               </span>
-                    <input type="text" class="input-text" value="<%= @service.wallet.balance.to_f %>" readonly>
-                  </div>
+                  <input type="text" class="input-text" value="<%= @service.wallet.balance.to_f %>" readonly>
                 </div>
               </div>
-            </div>
 
-            <div class="colmd400 fygroup clearfix">
               <div class="colmd3 pull-left">
                 <div class="form-section">
-
-                  <select class="input-textl">
-                    <option>选择私教</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
+                  <%= select_tag(:coach, options_for_select(@service.coaches.map { |coach| [coach.profile.name, coach.id] }), class: 'input-textl') %>
                 </div>
 
               </div>
@@ -101,26 +86,23 @@
             <div class="colmd400 fygroup clearfix">
               <div class="colmd3 pull-left">
                 <div class="form-section">
-                  <select class="input-textl">
-                    <option>选择私教</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
+                  <%= select_tag(:coach, options_for_select(@service.coaches.map { |coach| [coach.profile.name, coach.id] }), class: 'input-textl') %>
                 </div>
 
               </div>
-              <div class="colmd3 pull-left m-left10">
-                <div class="input-group">
-                  <div class="form-section">
-                    <input class="input-textl" type="text">
-                  </div>
-                  <span class="input-group-addon">元</span></div>
-              </div>
-              <div class="top8 pull-left m-left10">
-                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
+              <div>
+                <div class="colmd3 pull-left m-left10">
+                  <div class="input-group">
+                    <div class="form-section">
+                      <input class="input-textl" type="text">
+                    </div>
+                    <span class="input-group-addon">元</span></div>
+                </div>
+                <div class="top8 pull-left m-left10">
+                  <button type="button" class="close" aria-label="Close" onclick="">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
               </div>
             </div>
             <a href="#" class="tlki"><i class="icon-tj icon1">&#xe61e;</i>增加收款人</a>
@@ -133,11 +115,6 @@
           </div>
         </div>
       </div>
-      <script>
-          $(function () {
-              $('#myTab li:eq(1) a').tab('show');
-          });
-      </script>
     </div>
     <h3 class="poloklh4 top30">私教销售额</h3>
 

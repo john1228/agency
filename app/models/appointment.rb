@@ -19,6 +19,10 @@ class Appointment < ActiveRecord::Base
     }
   end
 
+  def course
+    Sku.find_by(sku: sku)
+  end
+
   private
 
   def backend

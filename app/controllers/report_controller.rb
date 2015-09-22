@@ -16,8 +16,7 @@ class ReportController < ApplicationController
     }
 
     @orders = Order.where(service_id: @service.id, status: Order::STATUS[:online]).paginate(page: params[:page]||1, per_page: 1)
-    @appointments = Appointment.where()
-    @coaches = @service.coaches
+    @appointments = Appointment.where(coach: @service.coaches).paginate(page: params[:page]||1, per_page: 1)
   end
 
   def coach
@@ -33,10 +32,6 @@ class ReportController < ApplicationController
     }
   end
 
-
-  def coach_list
-    
-  end
 
   def order
     @date = Date.today
