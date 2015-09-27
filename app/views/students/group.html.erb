@@ -1,0 +1,183 @@
+<div class="row" xmlns="http://www.w3.org/1999/html">
+  <div class="col-lg-12 top10 tdzty">
+    <h3 class="poloklh4">学员分组</h3>
+
+    <div class=" top15  row  panault">
+      <div class="padding5">
+        <div class="clearfix">
+          <div class="col-lg-6 col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-prito">
+                <a href="#myModal" role="button" data-toggle="modal" class="pull-right txt-tofi">新建</a>我的群
+              </div>
+              <div class="panelriody">
+                <div class="pre-scrollable tscrollable">
+                  <ul id="groups">
+                    <% @groups.each do |group| %>
+                        <li class="clearfix" id="List-1" data-group-id="<%= group.id %>">
+                          <p class="pull-left  "> <%= group.name %> </p>
+                          <a class="pull-right cursor"> <i class="iconfont pritbt"></i>
+                          </a>
+                        </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-prito">联系人</div>
+              <div class="panelriody">
+                <div class="pre-scrollable tscrable">
+                  <form id="studentsForm">
+                    <input type="hidden" id="choose_group"/>
+                    <ul class="clearfix txt-zt" id="contacts">
+                      <% @users.each do |user| %>
+                          <li class="clearfix bacolorf3">
+                            <p class="pull-left">
+                              <label class="checkbox-inline">
+                                <input name="student[]" class="student" type="checkbox" id="chk_<%= user.id %>" value="<%= user.id %>" data-uid="<%= user.id %>" data-name="<%= user.profile.name %>" data-gender="<%= user.profile.gender.eql?(1) ? '女' : '男' %>"/>
+                                <%= user.profile.name %>(<%= @orders.include?(user[0]) ? '购买' : '关注' %>)
+                              </label>
+                            </p>
+                          </li>
+                      <% end %>
+                    </ul>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h4 class="top-nav ties">已选成员（<span id="student_count">0</span>/100）</h4>
+
+        <div class="top-nav  top10">
+          <table class="table tatle-bil tatle-zt" id="students">
+            <thead>
+            <tr>
+              <th>姓名</th>
+              <th>性别</th>
+              <th class="text-right">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <div class="tatle-bil top15 top-nav">
+          <button type="submit" class="btntn-lg" onclick="updateGroup()">确认</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /#wrapper -->
+<div id="myModal" class="modal hide fade toic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header kilit">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4>请输入群名称</h4>
+  </div>
+  <div class="modal-body">
+    <input type="text" name="name" id="name">
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btntn-lg" onclick="addGroup()">确认</button>
+  </div>
+</div>
+<script>
+    $(document).on('click', '.student', function () {
+        if ($(this).is(':checked')) {
+            var _id = $(this).attr('data-uid');
+            var _name = $(this).attr('data-name');
+            var _gender = $(this).attr('data-gender');
+            var _source = $(this).attr('data-source');
+            $('#students').append(
+                    '<tr id="student_' + _id + '">' +
+                    '<input type="hidden" name="mass_message_group[user_id][]" value="' + _id +
+                    '"/>' +
+                    '<td>' + _name + '</td>' +
+                    '<td>' + _gender + '</td>' +
+                    '<<td><a href="#" class="delete_icon" data-uid= "' + _id +
+                    '" data-gender="' + _gender +
+                    '" data-name="' + _name +
+                    '" data-source="' + _source + '"><i class="iconfont pritbt"></i> </a></td></tr>'
+            )
+            $('#student_count').text($("#students tr").length - 1);
+        } else {
+            var div = document.getElementById('student_' + $(this).val());
+            div.parentNode.removeChild(div);
+            $('#student_count').text($("#students tr").length - 1);
+        }
+    });
+
+    $(document).on('click', '.delete_icon', function () {
+        var _id = $(this).attr('data-uid');
+        $('#chk_' + _id).attr('checked', false);
+        var div = document.getElementById('student_' + _id);
+        div.parentNode.removeChild(div);
+        $('#student_count').text($("#students tr").length - 1);
+
+    });
+
+    $(document).on('click', '#groups li', function () {
+        $('#groups li').removeClass('ndj');
+        $(this).addClass('ndj');
+        var group_id = $(this).attr('data-group-id');
+        $('#choose_group').attr('value', group_id);
+        $.getJSON('/groups/' + group_id + '/students', function (data) {
+            $('#students tbody').html('');
+            $.each(data.group, function (k, v) {
+                var _id = v.id;
+                var _name = v.name;
+                var _gender = v.gender;
+                var _source = v.source;
+                $('#chk_' + _id).attr('checked', true);
+
+                $('#students').append(
+                        '<tr id="student_' + _id + '">' +
+                        '<input type="hidden" name="mass_message_group[user_id][]" value="' + _id +
+                        '"/>' +
+                        '<td>' + _name + '</td>' +
+                        '<td>' + _gender + '</td>' +
+                        '<<td><a href="#" class="delete_icon" data-uid= "' + _id +
+                        '" data-gender="' + _gender +
+                        '" data-name="' + _name +
+                        '" data-source="' + _source + '"><i class="iconfont pritbt"></i> </a></td></tr>'
+                );
+                $('#student_count').text($("#students tr").length - 1);
+            });
+        });
+    });
+
+    function addGroup() {
+        $('#myModal').modal('hide');
+        $.post('/groups/', {'name': $('#name').val()}, function (data) {
+            if (data.code == 1) {
+                $('#groups li').removeClass('ndj');
+                var group_id = data.group.id;
+                var group_name = data.group.name;
+                $('#groups').append(
+                        '<li class="clearfix" id="List-1" class="ndj" data-group-id="' + group_id + '">' +
+                        '<p class="pull-left">' + group_name + '</p>' +
+                        '<a class="pull-right cursor"> <i class="iconfont pritbt"></i></a></li>'
+                );
+            } else {
+                alert('创建失败');
+            }
+        })
+    }
+    function updateGroup() {
+        var choose = [];
+        $("input:checked").each(function () {
+            choose.push(this.value);
+        });
+        $.post('/groups/' + $('#choose_group').attr('value') + '/students', {'user_id[]': choose}, function (data) {
+            if (data.code == 1) {
+                alert('更新成功');
+            } else {
+                alert('更新失败');
+            }
+        })
+    }
+</script>

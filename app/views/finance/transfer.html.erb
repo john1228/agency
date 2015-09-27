@@ -52,67 +52,46 @@
           </div>
         </div>
         <div class="tab-pane fade clearfix" id="ios">
-          <div class="panel-body">
-            <div class="colmd400 fygroup clearfix">
-              <div class="form-section fygroup colmd3">
-                <div class='input-group date'>
-                              <span class="input-group-addon">
-                                账户余额
-                              </span>
-                  <input type="text" class="input-text" value="<%= @service.wallet.balance.to_f %>" readonly>
-                </div>
-              </div>
-
-              <div class="colmd3 pull-left">
-                <div class="form-section">
-                  <%= select_tag(:coach, options_for_select(@service.coaches.map { |coach| [coach.profile.name, coach.id] }), class: 'input-textl') %>
-                </div>
-
-              </div>
-              <div class="colmd3 pull-left m-left10">
-                <div class="input-group">
-                  <div class="form-section">
-                    <label class="input-label">转账金额</label>
-                    <input class="input-text" type="text">
-                  </div>
-                  <span class="input-group-addon">元</span></div>
-              </div>
-              <div class="top8 pull-left m-left10">
-                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-            </div>
-
-            <div class="colmd400 fygroup clearfix">
-              <div class="colmd3 pull-left">
-                <div class="form-section">
-                  <%= select_tag(:coach, options_for_select(@service.coaches.map { |coach| [coach.profile.name, coach.id] }), class: 'input-textl') %>
-                </div>
-
-              </div>
-              <div>
-                <div class="colmd3 pull-left m-left10">
-                  <div class="input-group">
-                    <div class="form-section">
-                      <input class="input-textl" type="text">
+          <%= form_tag(batch_transfer_path) do %>
+              <div class="panel-body">
+                <% if @error.present? %>
+                    <div class="alert alert-danger" role="alert">
+                      转账失败
                     </div>
-                    <span class="input-group-addon">元</span></div>
+                <% end %>
+                <% if @success.present? %>
+                    <div class="alert alert-success" role="alert">
+                      转账成功
+                    </div>
+                <% end %>
+                <div class="colmd400 fygroup clearfix" id="payee">
+                  <div class="colmd3 pull-left">
+                    <div class="form-section">
+                      <%= select_tag('account[]', options_for_select(@service.coaches.map { |coach| [coach.profile.name, coach.id] }), class: 'input-textl') %>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="colmd3 pull-left m-left10">
+                      <div class="input-group">
+                        <div class="form-section">
+                          <input class="input-textl" type="text" name="amount[]">
+                        </div>
+                        <span class="input-group-addon">元</span></div>
+                    </div>
+                    <div class="top8 pull-left m-left10">
+                      <button type="button" class="close" aria-label="Close" onclick="removePayee()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div class="top8 pull-left m-left10">
-                  <button type="button" class="close" aria-label="Close" onclick="">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                <a href="#" class="tlki" onclick="addPayee()"><i class="icon-tj icon1">&#xe61e;</i>增加收款人</a>
+
+                <div class="fygroup">
+                  <button type="submit" class="btntn-lg ">确认</button>
                 </div>
               </div>
-            </div>
-            <a href="#" class="tlki"><i class="icon-tj icon1">&#xe61e;</i>增加收款人</a>
-
-            <div class="fygroup">
-
-              <button type="button" class="btntn-lg ">确认</button>
-
-            </div>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -124,6 +103,18 @@
         </div>
         <div class="panel-body" id="container">
           <script>
+              function addPayee() {
+                  $('#payee').before($('#payee').clone());
+              }
+              function removePayee() {
+
+              }
+              $(document).ready(function () {
+                  $('.close').on('onclick', function () {
+                      alert('11');
+                  })
+              });
+
               $(function () {
                   $('#container').highcharts({
                       chart: {

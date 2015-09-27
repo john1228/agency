@@ -1,7 +1,8 @@
 class DashboardController < ApplicationController
-  layout 'login'
+  layout 'admin'
 
   def index
+    @service = Service.first
     @date = Date.today
     @days = []
     @all = []

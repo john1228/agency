@@ -7,16 +7,37 @@
           <div class="col-lg-9 col-md-9">
             <div class="panel panel-default">
               <div class="panel-body">
+                <% if @error.present? %>
+                    <div class="alert alert-danger" role="alert">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only">Error:</span>
+                      <%= @error %>
+                    </div>
+                <% end %>
+                <% if @success.present? %>
+                    <div class="alert alert-success" role="alert">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only">Success:</span>
+                      <%= @success %>
+                    </div>
+                <% end %>
                 <div>
                   <%= f.semantic_fields_for :profile do |p| %>
                       <%= p.hidden_field :identity, value: 1 %>
                       <h4 class="polk top10">基本资料</h4>
 
-                      <div class="form-section top15 ">
-                        <%= image_tag('ink_06.png', width: 120, height: 120, id: 'image_preview', style: 'border-radius: 50%') %>
-                        <%= p.file_field :avatar %>
-                      </div>
+                      <div class="top10 clearfix cot-til">
+                        <div class="upload_area pull-left" id="avatar_preview">
+                          <div class="panel-body">
+                            <div id="default_div">
+                              <i class="iconfont2 lxcop">&#xe618;</i>
 
+                              <p class="text-center cot-til">上传头像</p>
+                            </div>
+                            <%= p.file_field :avatar, class: 'image_uploader' %>
+                          </div>
+                        </div>
+                      </div>
                       <div class="form-section top15 ">
                         <label class="input-label">教练昵称</label>
                         <%= p.text_field :name, class: 'input-text' %>
@@ -46,10 +67,25 @@
                         <label class="input-label">教练签名</label>
                         <%= p.text_field :signature, class: 'input-text' %>
                       </div>
-
-                      <div class="form-section top15 ">
-                        <label class="input-label">教练地址</label>
-                        <%= p.text_field :address, class: 'input-text' %>
+                      <div class="row top15">
+                        <div class="col-md-4">
+                          <div class="form-section">
+                            <select class="input-textl" name="province">
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-section">
+                            <select class="input-textl" name="city">
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-section">
+                            <select class="input-textl" name="area">
+                            </select>
+                          </div>
+                        </div>
                       </div>
 
                       <h4 class="polk top15">健身资料</h4>
@@ -123,6 +159,7 @@
 </div>
 
 <script>
+    new PCAS("province", "city", "area");
     $(function () {
                 $("#coach_profile_attributes_birthday").datepicker({
                     language: 'zh-CN',
@@ -149,9 +186,10 @@
 
     $("#coach_profile_attributes_avatar").change(function () {
         var objUrl = getObjectURL(this.files[0]);
-        console.log("objUrl = " + objUrl);
         if (objUrl) {
-            $("#image_preview").attr("src", objUrl);
+            $('#default_div').remove();
+            $('#avatar_preview').css('background-image', 'url("' + objUrl + '")');
+            $('#avatar_preview').css('background-size', 'cover');
         }
     });
 

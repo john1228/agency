@@ -1,8 +1,8 @@
 class CoachesController < ApplicationController
-  layout 'login'
+  layout 'admin'
 
   def index
-    @coaches = @service.coaches.paginate(page: params[:page]||1, per_page: 1)
+    @coaches = @service.coaches.paginate(page: params[:page]||1, per_page: 10)
   end
 
   def new
@@ -31,6 +31,7 @@ class CoachesController < ApplicationController
 
   private
   def coach_params
+    params[:coach][:profile_attributes][:address] = (params[:province] + params[:city] + params[:area]).gsub('市辖区', '').gsub('市辖县', '')
     params.require(:coach).permit(:mobile, :password, profile_attributes:
                                              [:avatar, :name, :gender, :birthday, :signature, :address, :target, :skill, :often_stadium, :interests, :identity])
   end

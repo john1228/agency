@@ -1,8 +1,8 @@
 class DynamicsController < ApplicationController
-  layout 'login'
+  layout 'admin'
 
   def index
-    @dynamics = @service.dynamics.paginate(page: params[:page]||1, per_page: 1)
+    @dynamics = @service.dynamics.paginate(page: params[:page]||1, per_page: 3)
   end
 
   def new
@@ -19,10 +19,19 @@ class DynamicsController < ApplicationController
     render action: :new
   end
 
+  def edit
+  end
+
+  def update
+
+  end
+
+
   def destroy
     @result = false
     dynamic = @service.dynamics.find_by(id: params[:id])
     @result = true if dynamic.destroy
+    redirect_to action: :index
   end
 
   private

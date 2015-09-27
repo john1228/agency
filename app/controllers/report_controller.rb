@@ -1,5 +1,5 @@
 class ReportController < ApplicationController
-  layout 'login'
+  layout 'admin'
 
   def index
     @date = Date.today
@@ -44,7 +44,7 @@ class ReportController < ApplicationController
       @all << count #服务号总订单数量
       @coach << rand(count) #服务号私教订单数量
     }
-    render layout: false
+    render json: {day: @days, all: @all, coach: @coach}
   end
 
   def appointment

@@ -5,24 +5,27 @@
     <div class="top15 clearfix row">
       <div class="col-lg-12 col-md-12">
         <% if @dynamics.present? %>
-            <% @dynamics.each do |dynamic| %>
-                <div class="pull-left ailois ">
-                  <p class="screenshot">
-                    <a href="description.html"><%= image_tag((dynamic.dynamic_images.first.image.thumb.url rescue 'default_dynamic.png')) %></a>
-                  </p>
-                  <dl class="polokl">
-                    <a href="description.html">
-                      <dd class="destion"><%= dynamic.created_at.localtime.strftime('%Y-%m-%d %H:%M') %></dd>
-                      <dd class="destion"><%= dynamic.content %></dd>
-                    </a>
-                  </dl>
-                  <div class="clearfix polokl ">
-                    <a href="#" class="pull-left pritbt">
-                      <i class="iconfont icon">&#xe60e;</i><%= dynamic.comments.count %>
-                    </a>
-                    <a href="#" class="pull-right pritbt"><i class="iconfont">&#xe60d;</i></a></div>
-                </div>
-            <% end %>
+            <div class="clearfix">
+              <% @dynamics.each do |dynamic| %>
+                  <div class="pull-left ailois ">
+                    <p class="screenshot">
+                      <a href="description.html"><%= image_tag((dynamic.images.first.image.thumb.url rescue 'default_dynamic.png')) %></a>
+                    </p>
+                    <dl class="polokl">
+                      <a href="description.html">
+                        <dd class="destion"><%= dynamic.created_at.localtime.strftime('%Y-%m-%d %H:%M') %></dd>
+                        <dd class="destion"><%= dynamic.content %></dd>
+                      </a>
+                    </dl>
+                    <div class="clearfix polokl ">
+                      <a href="#" class="pull-left pritbt">
+                        <i class="iconfont icon">&#xe60e;</i><%= dynamic.comments.count %>
+                      </a>
+                      <a href="#" class="pull-right pritbt"><i class="iconfont">&#xe60d;</i></a></div>
+                  </div>
+              <% end %>
+            </div>
+            <%= will_paginate @dynamics, renderer: BootstrapPagination::Rails %>
         <% else %>
             <div class="pull-left ailois ">
               <p class="screenshot">

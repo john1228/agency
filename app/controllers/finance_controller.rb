@@ -1,5 +1,5 @@
 class FinanceController < ApplicationController
-  layout 'login'
+  layout 'admin'
 
   def transfer_new
     @coaches = @service.coaches.order(id: :desc).collect { |coach| coach.profile.name }
@@ -28,11 +28,49 @@ class FinanceController < ApplicationController
     render 'transfer'
   end
 
+
+  def batch_transfer
+    service_wallet = @service.wallet
+    params[:account].each_index { |index|
+      coach_wallet = Wallet.find_or_create_by(user_id: params[:account][index])
+      begin
+        coach_wallet.with_lock do
+          coach_wallet.balance = coach_wallet.balance + BigDecimal(params[:amount][index])
+          coach_wallet.action = WalletLog::ACTIONS['转账']
+          coach_wallet.save
+        end
+        service_wallet.with_lock do
+          service_wallet.balance = service_wallet.balance - BigDecimal(params[:amount][index])
+          service_wallet.action = WalletLog::ACTIONS['转账']
+          service_wallet.save
+        end
+      rescue Exception => exp
+        error_index = index
+      end
+    }
+    @success = true
+    render 'transfer'
+  end
+
   def withdraw_new
+    @alipay = Rails.cache.fetch(@service.id)
     render 'withdraw'
   end
 
   def withdraw_create
+    @alipay = Rails.cache.fetch(@service.id)
+    if @alipay.blank?
+      Rails.cache.write(@service.id, {account: params[:account], name: params[:name]})
+      withdraw_params = {coach_id: @service.id, account: params[:account], name: params[:name], account: params[:account]}
+    else
+      withdraw_params = {coach_id: @service.id, account: @alipay[:account], name: @alipay[:name], account: params[:account]}
+    end
+    withdraw = Withdraw.new(withdraw_params)
+    if withdraw.save
+      @success = true
+    else
+      @error = true
+    end
     render 'withdraw'
   end
 end
