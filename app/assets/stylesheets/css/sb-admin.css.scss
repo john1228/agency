@@ -80,7 +80,6 @@ th {
 }
 
 .tdrer {
-  width: 180px;
   margin-right: 10px;
 }
 
@@ -116,7 +115,7 @@ th {
 }
 
 .pcorz {
-  background: asset-url('Circlearrow.png');
+  background: asset_data_url('Circlearrow.png');
   width: 16px;
   height: 16px;
   display: inline-block;
