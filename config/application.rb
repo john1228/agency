@@ -18,6 +18,7 @@ module Mxing
     config.active_record.raise_in_transactional_callbacks = true
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
 
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.time_zone = 'Beijing'
