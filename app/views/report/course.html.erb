@@ -17,7 +17,7 @@
             var sku = $('#sku').val();
             var year = $('#year').val();
             var month = $('#month').val();
-            $.getJSON('/orders.json', {year: year, month: month}, function (data) {
+            $.getJSON('/report.json', {sku: sku, year: year, month: month}, function (data) {
                 var _day = data.day;
                 var _all = data.all;
                 var _coach = data.coach;
