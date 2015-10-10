@@ -216,7 +216,7 @@
         </table>
       </div>
       <div class="padding5">
-        <%= will_paginate @orders %>
+        <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
       </div>
     </div>
   </div>
@@ -265,7 +265,7 @@
       </table>
     </div>
     <div class=" padding5">
-      <%= will_paginate @appointments %>
+      <%= will_paginate @appointments, renderer: BootstrapPagination::Rails %>
     </div>
   </div>
   <div class="tab-pane fade" id="coach">

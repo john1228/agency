@@ -23,13 +23,12 @@ class ReportController < ApplicationController
 
     }
     if params[:sku].blank?
-      @orders = Order.where(service_id: @service.id, status: Order::STATUS[:online]).paginate(page: params[:page]||1, per_page: 1)
+      @orders = Order.where(service_id: @service.id, status: Order::STATUS[:pay]).paginate(page: params[:page]||1, per_page: 1)
       @appointments = Appointment.where(coach: @service.coaches).order(id: :desc).paginate(page: params[:page]||1, per_page: 1)
     else
-      @orders = Order.joins(:order_item).where(order_items: {sku: params[:sku]}, status: Order::STATUS[:online]).paginate(page: params[:page]||1, per_page: 1)
+      @orders = Order.joins(:order_item).where(order_items: {sku: params[:sku]}, status: Order::STATUS[:pay]).paginate(page: params[:page]||1, per_page: 1)
       @appointments = Appointment.where(sku: params[:sku]).order(id: :desc).paginate(page: params[:page]||1, per_page: 1)
     end
-    @orders = Order.paginate(page: params[:page]||1, per_page: 1)
     respond_to do |format|
       format.html
       format.json { render json: {day: @days, all: @all, coach: @coach} }
