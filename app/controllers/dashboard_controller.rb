@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
 
   def index
     @service = Service.first
-    @date = Date.today
+    @date = Date.new((params[:year]||Date.today.year).to_i, (params[:month]||Date.today.month).to_i)
     @days = []
     @all = []
     @coach = []
