@@ -188,32 +188,7 @@
         </div>
       </div>
       <div class="panel panel-default top15">
-        <table class="table table-hover txt-zt">
-          <thead>
-          <tr class="prito">
-            <th class="text-center">订单编号</th>
-            <th class="text-center">买家</th>
-            <th class="text-center">买家</th>
-            <th class="text-center">联系电话</th>
-            <th class="text-center">金额(元)</th>
-            <th class="text-center">支付方式</th>
-            <th class="text-center">时间</th>
-          </tr>
-          </thead>
-          <tbody class="pritbl">
-          <% @orders.each { |order| %>
-              <tr>
-                <td class="text-center tyeq"><%= order.no %></td>
-                <th class="text-center tyeq"><%= order.user.profile.name %></th>
-                <td class="text-center tyeq"><%= order.contact_name %></td>
-                <td class="text-center tyeq"><%= order.contact_phone %></td>
-                <td class="text-center tyeq"><%= order.total %></td>
-                <td class="text-center tyeq"><%= order.pay_type %></td>
-                <td class="text-center tyeq"><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-              </tr>
-          <% } %>
-          </tbody>
-        </table>
+        <%= render 'order' %>
       </div>
       <div class="padding5">
         <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
@@ -233,36 +208,7 @@
       </div>
     </div>
     <div class="panel panel-default top15">
-      <table class="table table-hover txt-zt">
-        <thead>
-        <tr class="prito">
-          <th class="text-center">订单编号</th>
-          <th class="text-center">消课私教</th>
-          <th class="text-center">消课学员美型号</th>
-          <th class="text-center">消课学员</th>
-          <th class="text-center">学员联系方式</th>
-          <th class="text-center">课程名</th>
-          <th class="text-center">课单价</th>
-          <th class="text-center">消课码</th>
-          <th class="text-center">消课时间</th>
-        </tr>
-        </thead>
-        <tbody class="pritbl">
-        <% @appointments.each { |appointment| %>
-            <tr>
-              <td class="text-center tyeq"><%= appointment.lesson.order.no %></td>
-              <th class="text-center tyeq"><%= appointment.coach.profile.name %></th>
-              <td class="text-center tyeq"><%= appointment.user.profile.mxid %></td>
-              <td class="text-center tyeq"><%= appointment.lesson.order.contact_name %></td>
-              <td class="text-center tyeq"><%= appointment.lesson.order.contact_phone %></td>
-              <td class="text-center tyeq"><%= appointment.course.course_name %></td>
-              <td class="text-center tyeq"><%= appointment.course.selling_price %></td>
-              <td class="text-center tyeq"><%= appointment.code %></td>
-              <td class="text-center tyeq"><%= appointment.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-            </tr>
-        <% } %>
-        </tbody>
-      </table>
+      <%= render 'appointment' %>
     </div>
     <div class=" padding5">
       <%= will_paginate @appointments, renderer: BootstrapPagination::Rails %>
@@ -281,32 +227,7 @@
       </div>
     </div>
     <div class="panel panel-default top15">
-      <table class="table table-hover txt-zt">
-        <thead>
-        <tr class="prito">
-          <th class="text-center">订单编号</th>
-          <th class="text-center">买家</th>
-          <th class="text-center">买家</th>
-          <th class="text-center">联系电话</th>
-          <th class="text-center">金额(元)</th>
-          <th class="text-center">支付方式</th>
-          <th class="text-center">时间</th>
-        </tr>
-        </thead>
-        <tbody class="pritbl">
-        <% @orders.each { |order| %>
-            <tr>
-              <td class="text-center tyeq"><%= order.no %></td>
-              <th class="text-center tyeq"><%= order.user.profile.name %></th>
-              <td class="text-center tyeq"><%= order.contact_name %></td>
-              <td class="text-center tyeq"><%= order.contact_phone %></td>
-              <td class="text-center tyeq"><%= order.total %></td>
-              <td class="text-center tyeq"><%= order.pay_type %></td>
-              <td class="text-center tyeq"><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-            </tr>
-        <% } %>
-        </tbody>
-      </table>
+      <%= render 'sale' %>
     </div>
   </div>
 </div>
