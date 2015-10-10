@@ -17,8 +17,8 @@ class ReportController < ApplicationController
     @c_order = []
     (date.at_beginning_of_month..date.at_end_of_month).each { |everyday|
       @day << everyday.day
-      @s_order << Order.joins(:order_item).where(order_items: {sku: sku}, service_id: @service.id, status: Order::STATUS[:pay], updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).count
-      @c_order << Order.joins(:order_item).where(order_items: {sku: sku}, coach_id: @service.coaches.pluck(:id), status: Order::STATUS[:pay], updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).count
+      @s_order << Order.joins(:order_item).where(order_items: {sku: sku}, service_id: @service.id, updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).count
+      @c_order << Order.joins(:order_item).where(order_items: {sku: sku}, coach_id: @service.coaches.pluck(:id), updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).count
     }
     @orders = Order.paginate(page: params[:page]||1, per_page: 1) #.joins(:order_item).where(order_items: {sku: sku},
     #                                          service_id: @service.id,
@@ -48,12 +48,11 @@ class ReportController < ApplicationController
     @c_sale = []
     (date.at_beginning_of_month..date.at_end_of_month).each { |everyday|
       @day << everyday.day
-      @s_sale << (Order.joins(:order_item).where(order_items: {sku: sku}, service_id: @service.id, status: Order::STATUS[:pay], updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).sum(:total)).to_i
-      @c_sale << (Order.joins(:order_item).where(order_items: {sku: sku}, coach_id: @service.coaches.pluck(:id), status: Order::STATUS[:pay], updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).sum(:total)).to_i
+      @s_sale << (Order.joins(:order_item).where(order_items: {sku: sku}, service_id: @service.id, updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).sum(:total)).to_i
+      @c_sale << (Order.joins(:order_item).where(order_items: {sku: sku}, coach_id: @service.coaches.pluck(:id), updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).sum(:total)).to_i
     }
     @orders = Order.joins(:order_item).where(order_items: {sku: sku},
                                              service_id: @service.id,
-                                             status: Order::STATUS[:pay],
                                              updated_at: date.at_beginning_of_day..date.at_end_of_day).paginate(page: params[:page]||1, per_page: 1)
     render layout: false
   end
