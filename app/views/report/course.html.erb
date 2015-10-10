@@ -27,7 +27,7 @@
         $('#sku,#year,#month').on('change', function () {
 
         });
-        $('#order').load('report/order', {sku: <%=@sku%>, year: <%=@year%>, month: <%=@month%>});
+        $('#order').load('report/order', {sku: <%=raw @sku%>, year: <%=@year%>, month: <%=@month%>});
     });
 </script>
 
