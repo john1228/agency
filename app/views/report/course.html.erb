@@ -12,222 +12,67 @@
             lineColor: '#ED561B'
         }
     });
+
+    function showPage(tabId, url) {
+        $('#myTab a[href="#' + tabId + '"]').tab('show'); // 显示点击的tab页面
+        $('#' + tabId).html(' 页面加载中，请稍后...'); // 设置页面加载时的loading图片
+        var coach = $('#coach').val();
+        var year = $('#year').val();
+        var month = $('#month').val();
+        $('#' + tabId).load(url, {coach: coach, year: year, month: month});
+    }
+    ;
+
     $(function () {
         $('#sku,#year,#month').on('change', function () {
-            var sku = $('#sku').val();
-            var year = $('#year').val();
-            var month = $('#month').val();
-            $.getJSON('/report.json', {sku: sku, year: year, month: month}, function (data) {
-                var _day = data.day;
-                var _all = data.all;
-                var _coach = data.coach;
-                var orders = $('#orders').highcharts({
-                    chart: {
-                        type: 'areaspline'
-                    },
-                    title: {text: '订单统计'},
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'top',
-                        floating: true,
-                        borderWidth: 1,
-                        backgroundColor: '#FFFFFF'
-                    },
-                    xAxis: {
-                        categories: _day
-                    },
-                    yAxis: {title: {text: '单数'}},
-                    tooltip: {shared: true, valueSuffix: '单'},
-                    credits: {enabled: false},
-                    plotOptions: {areaspline: {fillOpacity: 0.5}},
-                    series: [
-                        {name: '总订单', data: _all},
-                        {name: '私教订单', data: _coach}
-                    ]
-                });
-            });
+
         });
-        var orders = $('#orders').highcharts({
-            chart: {
-                type: 'areaspline'
-            },
-            title: {text: '订单统计'},
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: '#FFFFFF'
-            },
-            xAxis: {
-                categories: <%=@days%>
-            },
-            yAxis: {title: {text: '单数'}},
-            tooltip: {shared: true, valueSuffix: '单'},
-            credits: {enabled: false},
-            plotOptions: {areaspline: {fillOpacity: 0.5}},
-            series: [
-                {name: '总订单', data: <%=@all%>},
-                {name: '私教订单', data: <%=@coach%>}
-            ]
-        });
-        var appointments = $('#appointments').highcharts({
-            chart: {
-                type: 'areaspline'
-            },
-            title: {text: '消课统计'},
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: '#FFFFFF'
-            },
-            xAxis: {
-                categories: <%=@days%>
-            },
-            yAxis: {title: {text: '单数'}},
-            tooltip: {shared: true, valueSuffix: '节'},
-            credits: {enabled: false},
-            plotOptions: {areaspline: {fillOpacity: 0.5}},
-            series: [
-                {name: '消课数量', data: <%=@appointment%>}
-            ]
-        });
-        var coaches = $('#coaches').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {text: '销售额统计'},
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: '#FFFFFF'
-            },
-            xAxis: {
-                categories: <%=@days%>
-            },
-            yAxis: {
-                title: {text: '元'},
-                stackLabels: {
-                    enabled: true,
-                    style: {fontWeight: 'bold', color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'}
-                }
-            },
-            tooltip: {shared: true, valueSuffix: '元'},
-            credits: {enabled: false},
-            plotOptions: {
-                column: {
-                    stacking: 'normal'
-                }
-            },
-            series: [
-                {name: '总订单', data: <%=@all%>},
-                {name: '私教订单', data: <%=@coach%>}
-            ]
-        });
-    })
+        $('#order').load('report/order', {sku: <%=@sku%>, year: <%=@year%>, month: <%=@month%>});
+    });
 </script>
 
-<ul id="myTab" class="nav nav-tabs">
-  <li class="active">
-    <a href="#order" data-toggle="tab">订单统计</a>
-  </li>
-  <li>
-    <a href="#appointment" data-toggle="tab">预约统计</a>
-  </li>
-  <li>
-    <a href="#coach" data-toggle="tab">销售额统计</a>
-  </li>
-</ul>
-<div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade in active" id="order">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="panel panel-default">
-          <div class="panel-heading clearfix">
-            <h3 class="panel-title  pull-left"></h3>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="clearfix">
+      <ul id="myTab" class="nav nav-tabs pull-left">
+        <li class="active"><a href="#order" onclick='showPage("order","report/order")'>订单统计</a></li>
+        <li><a href="#appointment" onclick='showPage("appointment","report/appointment")'>预约统计</a></li>
+        <li><a href="#sale" onclick='showPage("sale","report/sale")'>销售额统计</a></li>
+      </ul>
+      <div class="pull-right">
+        <select class="form-control tpcleq pull-left" id="sku">
+          <% @skus.each { |sku| %>
+              <option value="<%= sku[0] %>"><%= sku[1] %></option>
+          <% } %>
+        </select>
+        <select class="form-control tpcleq pull-left" id="year">
+          <%
+             (0..5).each { |index|
+               year = Date.today.years_ago(index).year
+          %>
+              <option value="<%= year %>"><%= year %></option>
+          <% } %>
+        </select>
+        <select class="form-control tpcleq pull-left" id="month">
+          <%
+             (1..12).each { |index|
+               if index.eql?(Date.today.month)
 
-            <div class="pull-right pcoox">
-              <select id="sku" name="sku">
-                <% @skus.each { |sku| %>
-                    <option value="<%= sku[0] %>"><%= sku[1] %></option>
-                <% } %>
-              </select>
-              <select id="year" name="year">
-                <%
-                   (0..5).each { |index|
-                     year = Date.today.years_ago(index).year
-                %>
-                    <option value="<%= year %>"><%= year %>年</option>
-                <% } %>
-              </select>
-              <select id="month" name="month">
-                <%
-                   (1..12).each { |index|
-                     if index.eql?(Date.today.month)
-
-                %>
-                        <option value="<%= index %>" selected="selected"><%= index %>月</option>
-                    <% else %>
-                        <option value="<%= index %>"><%= index %>月</option>
-                    <% end
-                       } %>
-              </select>
-            </div>
-          </div>
-          <div class="panel-body">
-            <div id="orders"></div>
-          </div>
-        </div>
-      </div>
-      <div class="panel panel-default top15">
-        <%= render 'order' %>
-      </div>
-      <div class="padding5">
-        <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+          %>
+                  <option value="<%= index %>" selected="selected"><%= index %>月</option>
+              <% else %>
+                  <option value="<%= index %>"><%= index %>月</option>
+              <% end
+                 } %>
+        </select>
       </div>
     </div>
-  </div>
-  <div class="tab-pane fade" id="appointment">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title"></h3>
-
-            <div id="appointments"></div>
-          </div>
-        </div>
+    <div class="panel-body">
+      <div class="tab-content">
+        <div class="tab-pane active" id="order"></div>
+        <div class="tab-pane" id="appointment"></div>
+        <div class="tab-pane" id="sale"></div>
       </div>
-    </div>
-    <div class="panel panel-default top15">
-      <%= render 'appointment' %>
-    </div>
-    <div class=" padding5">
-      <%= will_paginate @appointments, renderer: BootstrapPagination::Rails %>
-    </div>
-  </div>
-  <div class="tab-pane fade" id="coach">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title"></h3>
-
-            <div id="coaches"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default top15">
-      <%= render 'sale' %>
     </div>
   </div>
 </div>
