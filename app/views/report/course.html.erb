@@ -16,16 +16,19 @@
     function showPage(tabId, url) {
         $('#myTab a[href="#' + tabId + '"]').tab('show'); // 显示点击的tab页面
         $('#' + tabId).html(' 页面加载中，请稍后...'); // 设置页面加载时的loading图片
-        var coach = $('#coach').val();
+        var sku = $('#sku').val();
         var year = $('#year').val();
         var month = $('#month').val();
-        $('#' + tabId).load(url, {coach: coach, year: year, month: month});
+        $('#' + tabId).load(url, {sku: sku, year: year, month: month});
     }
     ;
 
     $(function () {
         $('#sku,#year,#month').on('change', function () {
-
+            var sku = $('#sku').val();
+            var year = $('#year').val();
+            var month = $('#month').val();
+            $('#order').load('report/order', {sku: sku, year: year, month: month});
         });
         $('#order').load('report/order', {sku: '<%=@sku%>', year: <%=@year%>, month: <%=@month%>});
     });

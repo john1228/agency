@@ -34,7 +34,7 @@ class ReportController < ApplicationController
     @appointment = []
     (date.at_beginning_of_month..date.at_end_of_month).each { |everyday|
       @day << everyday.day
-      @appointment << Appointment.where(coach_id: @service.coaches.pluck(:id), sku: sku).count
+      @appointment << Appointment.where(coach_id: @service.coaches.pluck(:id), sku: sku, created_at: everyday.at_beginning_of_day..everyday.at_end_of_day).count
     }
     @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), sku: sku).order(id: :desc).paginate(page: params[:page]||1, per_page: 1)
     render layout: false
