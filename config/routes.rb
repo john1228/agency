@@ -25,12 +25,8 @@ Rails.application.routes.draw do
   post 'groups/:id/students' => 'mass_message_groups#update'
   post 'groups' => 'mass_message_groups#create'
 
-  get 'report' => 'report#index'
-  get 'report/order' => 'report#order'
-  get 'report/appointment' => 'report#appointment'
+  get 'report' => 'report#course'
   get 'report/coach' => 'report#coach'
-
-  get 'orders.json' => 'report#order'
 
   get 'finance/transfer' => 'finance#transfer_new'
   post 'finance/transfer' => 'finance#transfer_create', as: :submit_transfer

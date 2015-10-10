@@ -12,115 +12,14 @@
         </tr>
         </thead>
         <tbody class="pritbl">
-        <tr>
-          <td width="45%">Lucy、Sambin_吴承斌、爱笑的眼睛
-            娜娜、健身牛腩、很棒的小姑娘
-          </td>
-          <td width="45%">老客户生日双倍抵用券活动 早预订有优惠7天多人预订人建行
-            途牛联名卡（仅限江苏地区申请。国地区均可申请五星会员双
-            倍优惠。
-          </td>
-          <td class="text-center"><a href="#"><i class="iconfont pritbt">&#xe60d;</i></a></td>
-        </tr>
-        <tr class="info">
-          <td width="45%">Lucy、Sambin_吴承斌、爱笑的眼睛
-            娜娜、健身牛腩、很棒的小姑娘
-          </td>
-          <td width="45%">老客户生日双倍抵用券活动 早预订有优惠7天多人预订人建行
-            途牛联名卡（仅限江苏地区申请。国地区均可申请五星会员双
-            倍优惠。
-          </td>
-          <td class="text-center"><a href="#"><i class="iconfont pritbt">&#xe60d;</i></a></td>
-        </tr>
-        <tr>
-          <td width="45%">Lucy、Sambin_吴承斌、爱笑的眼睛
-            娜娜、健身牛腩、很棒的小姑娘
-          </td>
-          <td width="45%">老客户生日双倍抵用券活动 早预订有优惠7天多人预订人建行
-            途牛联名卡（仅限江苏地区申请。国地区均可申请五星会员双
-            倍优惠。
-          </td>
-          <td class="text-center"><a href="#"><i class="iconfont pritbt">&#xe60d;</i></a></td>
-        </tr>
-        <tr class="info">
-          <td width="45%">Lucy、Sambin_吴承斌、爱笑的眼睛
-            娜娜、健身牛腩、很棒的小姑娘
-          </td>
-          <td width="45%">老客户生日双倍抵用券活动 早预订有优惠7天多人预订人建行
-            途牛联名卡（仅限江苏地区申请。国地区均可申请五星会员双
-            倍优惠。
-          </td>
-          <td class="text-center"><a href="#"><i class="iconfont pritbt">&#xe60d;</i></a></td>
-        </tr>
-        <tr>
-          <td width="45%">Lucy、Sambin_吴承斌、爱笑的眼睛
-            娜娜、健身牛腩、很棒的小姑娘
-          </td>
-          <td width="45%">老客户生日双倍抵用券活动 早预订有优惠7天多人预订人建行
-            途牛联名卡（仅限江苏地区申请。国地区均可申请五星会员双
-            倍优惠。
-          </td>
-          <td class="text-center"><a href="#"><i class="iconfont pritbt">&#xe60d;</i></a></td>
-        </tr>
-        <tr class="info">
-          <td width="45%">Lucy、Sambin_吴承斌、爱笑的眼睛
-            娜娜、健身牛腩、很棒的小姑娘
-          </td>
-          <td width="45%">老客户生日双倍抵用券活动 早预订有优惠7天多人预订人建行
-            途牛联名卡（仅限江苏地区申请。国地区均可申请五星会员双
-            倍优惠。
-          </td>
-          <td class="text-center"><a href="#"><i class="iconfont pritbt">&#xe60d;</i></a></td>
-        </tr>
-        <tr>
-          <td width="45%">
-            Lucy、Sambin_吴承斌、爱笑的眼睛 娜娜、健身牛腩、很棒的小姑娘
-          </td>
-          <td width="45%">老客户生日双倍抵用券活动 早预订有优惠7天多人预订人建行
-            途牛联名卡（仅限江苏地区申请。国地区均可申请五星会员双
-            倍优惠。
-          </td>
-          <td class="text-center">
-            <a href="#">
-              <i class="iconfont pritbt">&#xe60d;</i>
-            </a>
-          </td>
-        <tr class="info">
-          <td width="45%">Lucy、Sambin_吴承斌、爱笑的眼睛
-            娜娜、健身牛腩、很棒的小姑娘
-          </td>
-          <td width="45%">老客户生日双倍抵用券活动 早预订有优惠7天多人预订人建行
-            途牛联名卡（仅限江苏地区申请。国地区均可申请五星会员双
-            倍优惠。
-          </td>
-          <td class="text-center"><a href="#"><i class="iconfont pritbt">&#xe60d;</i></a></td>
-        </tr>
-        </tr>
+        <% @mass_messages.each { |coach| %>
+            <tr>
+              <td class="text-center tyeq"><%= image_tag(coach.profile.avatar.thumb.url, class: 'img-circle  img-w') %></td>
+              <td><%= truncate(coach.profile.signature) %></td>
+            </tr>
+        <% } %>
         </tbody>
       </table>
-    </div>
-    <div class="padding15 clearfix">
-      <div class="pull-left ">
-        <nav>
-          <ul class="pagination ">
-
-            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-
-          </ul>
-        </nav>
-      </div>
-      <div class="pull-right">
-        <nav>
-          <ul class="pager">
-            <li class="previous disabled"><a href="#"><i class="iconfont">&#xe616;</i></a></li>
-            <li class="next"><a href="#"><i class="iconfont">&#xe615;</i></a></li>
-          </ul>
-        </nav>
-      </div>
     </div>
   </div>
 </div>

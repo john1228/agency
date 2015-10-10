@@ -1,25 +1,61 @@
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"></h3>
-
-        <div id="coaches"></div>
-      </div>
-    </div>
-  </div>
-</div>
 <script type="text/javascript">
+    Highcharts.setOptions({
+        colors: [
+            '#b5edff', '#ffbab7', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+        xAxis: {
+            labels: {
+                style: {
+                    color: '#ED561B',
+                    font: "Microsoft Yahei"
+                }
+            },
+            lineColor: '#ED561B'
+        }
+    });
     $(function () {
-        var coaches = $('#coaches').highcharts({
-            chart: {type: 'areaspline'},
+        $('#year,#month').on('change', function () {
+            var year = $('#year').val();
+            var month = $('#year').val();
+            $.get('/orders.json', {year: year, month: month}, function (data) {
+                var _day = data.day;
+                var _all = data.all;
+                var _coach = data.coach;
+                var orders = $('#orders').highcharts({
+                    chart: {
+                        type: 'areaspline'
+                    },
+                    title: {text: '订单统计'},
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'top',
+                        floating: true,
+                        borderWidth: 1,
+                        backgroundColor: '#FFFFFF'
+                    },
+                    xAxis: {
+                        categories: _day
+                    },
+                    yAxis: {title: {text: '单数'}},
+                    tooltip: {shared: true, valueSuffix: '单'},
+                    credits: {enabled: false},
+                    plotOptions: {areaspline: {fillOpacity: 0.5}},
+                    series: [
+                        {name: '总订单', data: _all},
+                        {name: '私教订单', data: _coach}
+                    ]
+                });
+            });
+        });
+        var orders = $('#orders').highcharts({
+            chart: {
+                type: 'areaspline'
+            },
             title: {text: '订单统计'},
             legend: {
                 layout: 'vertical',
-                align: 'left',
+                align: 'right',
                 verticalAlign: 'top',
-                x: 150,
-                y: 100,
                 floating: true,
                 borderWidth: 1,
                 backgroundColor: '#FFFFFF'
@@ -32,25 +68,306 @@
             credits: {enabled: false},
             plotOptions: {areaspline: {fillOpacity: 0.5}},
             series: [
-                {name: '总订单', data: <%=@all%>},
+                {name: '订单', data: <%=@coach%>}
+            ]
+        });
+        var appointments = $('#appointments').highcharts({
+            chart: {
+                type: 'areaspline'
+            },
+            title: {text: '消课统计'},
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF'
+            },
+            xAxis: {
+                categories: <%=@days%>
+            },
+            yAxis: {title: {text: '单数'}},
+            tooltip: {shared: true, valueSuffix: '节'},
+            credits: {enabled: false},
+            plotOptions: {areaspline: {fillOpacity: 0.5}},
+            series: [
+                {name: '消课数量', data: <%=@appointment%>}
+            ]
+        });
+        var sales = $('#sales').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {text: '销售额统计'},
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF'
+            },
+            xAxis: {
+                categories: <%=@days%>
+            },
+            yAxis: {
+                title: {text: '元'},
+                stackLabels: {
+                    enabled: true,
+                    style: {fontWeight: 'bold', color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'}
+                }
+            },
+            tooltip: {shared: true, valueSuffix: '元'},
+            credits: {enabled: false},
+            plotOptions: {
+                column: {
+                    stacking: 'normal'
+                }
+            },
+            series: [
                 {name: '私教订单', data: <%=@coach%>}
             ]
         });
-    });
+    })
 </script>
-<div class="panel panel-default top15">
-  <table class="table table-hover txt-zt">
-    <thead>
-    <tr class="prito">
-      <th class="text-center">头像</th>
-      <th class="text-center">昵称</th>
-      <th class="text-center">性别</th>
-      <th class="text-center">注册日期</th>
-      <th>签名</th>
-      <th class="text-center">操作</th>
-    </tr>
-    </thead>
-    <tbody class="pritbl">
-    </tbody>
-  </table>
+
+<ul id="myTab" class="nav nav-tabs">
+  <li class="active">
+    <a href="#order" data-toggle="tab">订单统计</a>
+  </li>
+  <li>
+    <a href="#appointment" data-toggle="tab">预约统计</a>
+  </li>
+  <li>
+    <a href="#sale" data-toggle="tab">销售额统计</a>
+  </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade in active" id="order">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title  pull-left"></h3>
+
+            <div class="pull-right pcoox">
+              <select id="coach">
+                <% @coaches.each { |coach| %>
+                    <option value="<%= coach[0] %>"><%= coach[1] %></option>
+                <% } %>
+              </select>
+              <select id="year">
+                <%
+                   (0..5).each { |index|
+                     year = Date.today.years_ago(index).year
+                %>
+                    <option value="<%= year %>"><%= year %></option>
+                <% } %>
+              </select>
+              <select id="month">
+                <option>12月</option>
+                <option>11月</option>
+                <option>10月</option>
+                <option>9月</option>
+                <option>8月</option>
+                <option>7月</option>
+                <option>6月</option>
+                <option>5月</option>
+                <option>4月</option>
+                <option>3月</option>
+                <option>2月</option>
+                <option>1月</option>
+              </select>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div id="orders"></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default top15">
+        <table class="table table-hover txt-zt">
+          <thead>
+          <tr class="prito">
+            <th class="text-center">订单编号</th>
+            <th class="text-center">买家</th>
+            <th class="text-center">买家</th>
+            <th class="text-center">联系电话</th>
+            <th class="text-center">金额(元)</th>
+            <th class="text-center">支付方式</th>
+            <th class="text-center">时间</th>
+          </tr>
+          </thead>
+          <tbody class="pritbl">
+          <% @orders.each { |order| %>
+              <tr>
+                <td class="text-center tyeq"><%= order.no %></td>
+                <th class="text-center tyeq"><%= order.user.profile.name %></th>
+                <td class="text-center tyeq"><%= order.contact_name %></td>
+                <td class="text-center tyeq"><%= order.contact_phone %></td>
+                <td class="text-center tyeq"><%= order.total %></td>
+                <td class="text-center tyeq"><%= order.pay_type %></td>
+                <td class="text-center tyeq"><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+              </tr>
+          <% } %>
+          </tbody>
+        </table>
+      </div>
+      <div class=" padding5">
+        <%= will_paginate @orders %>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="appointment">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title  pull-left"></h3>
+
+            <div class="pull-right pcoox">
+              <select id="coach">
+                <% @coaches.each { |coach| %>
+                    <option value="<%= coach[0] %>"><%= coach[1] %></option>
+                <% } %>
+              </select>
+              <select id="year">
+                <%
+                   (0..5).each { |index|
+                     year = Date.today.years_ago(index).year
+                %>
+                    <option value="<%= year %>"><%= year %></option>
+                <% } %>
+              </select>
+              <select id="month">
+                <option>12月</option>
+                <option>11月</option>
+                <option>10月</option>
+                <option>9月</option>
+                <option>8月</option>
+                <option>7月</option>
+                <option>6月</option>
+                <option>5月</option>
+                <option>4月</option>
+                <option>3月</option>
+                <option>2月</option>
+                <option>1月</option>
+              </select>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div id="appointments"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default top15">
+      <table class="table table-hover txt-zt">
+        <thead>
+        <tr class="prito">
+          <th class="text-center">订单编号</th>
+          <th class="text-center">消课私教</th>
+          <th class="text-center">消课学员美型号</th>
+          <th class="text-center">消课学员</th>
+          <th class="text-center">学员联系方式</th>
+          <th class="text-center">课程名</th>
+          <th class="text-center">课单价</th>
+          <th class="text-center">消课码</th>
+          <th class="text-center">消课时间</th>
+        </tr>
+        </thead>
+        <tbody class="pritbl">
+        <% @appointments.each { |appointment| %>
+            <tr>
+              <td class="text-center tyeq"><%= appointment.lesson.order.no %></td>
+              <th class="text-center tyeq"><%= appointment.coach.profile.name %></th>
+              <td class="text-center tyeq"><%= appointment.user.profile.mxid %></td>
+              <td class="text-center tyeq"><%= appointment.lesson.order.contact_name %></td>
+              <td class="text-center tyeq"><%= appointment.lesson.order.contact_phone %></td>
+              <td class="text-center tyeq"><%= appointment.course.course_name %></td>
+              <td class="text-center tyeq"><%= appointment.course.selling_price %></td>
+              <td class="text-center tyeq"><%= appointment.code %></td>
+              <td class="text-center tyeq"><%= appointment.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            </tr>
+        <% } %>
+        </tbody>
+      </table>
+    </div>
+    <div class=" padding5">
+      <%= will_paginate @appointments %>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="sale">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title  pull-left"></h3>
+
+            <div class="pull-right pcoox">
+              <select id="coach">
+                <% @coaches.each { |coach| %>
+                    <option value="<%= coach[0] %>"><%= coach[1] %></option>
+                <% } %>
+              </select>
+              <select id="year">
+                <%
+                   (0..5).each { |index|
+                     year = Date.today.years_ago(index).year
+                %>
+                    <option value="<%= year %>"><%= year %></option>
+                <% } %>
+              </select>
+              <select id="month">
+                <option>12月</option>
+                <option>11月</option>
+                <option>10月</option>
+                <option>9月</option>
+                <option>8月</option>
+                <option>7月</option>
+                <option>6月</option>
+                <option>5月</option>
+                <option>4月</option>
+                <option>3月</option>
+                <option>2月</option>
+                <option>1月</option>
+              </select>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div id="sales"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default top15">
+      <table class="table table-hover txt-zt">
+        <thead>
+        <tr class="prito">
+          <th class="text-center">订单编号</th>
+          <th class="text-center">买家</th>
+          <th class="text-center">买家</th>
+          <th class="text-center">联系电话</th>
+          <th class="text-center">金额(元)</th>
+          <th class="text-center">支付方式</th>
+          <th class="text-center">时间</th>
+        </tr>
+        </thead>
+        <tbody class="pritbl">
+        <% @orders.each { |order| %>
+            <tr>
+              <td class="text-center tyeq"><%= order.no %></td>
+              <th class="text-center tyeq"><%= order.user.profile.name %></th>
+              <td class="text-center tyeq"><%= order.contact_name %></td>
+              <td class="text-center tyeq"><%= order.contact_phone %></td>
+              <td class="text-center tyeq"><%= order.total %></td>
+              <td class="text-center tyeq"><%= order.pay_type %></td>
+              <td class="text-center tyeq"><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            </tr>
+        <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

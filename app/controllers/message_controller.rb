@@ -2,6 +2,7 @@ class MessageController < ApplicationController
   layout 'admin'
 
   def index
+    @mass_messages = MassMessage.where(service_id: @service.id).order(id: :desc).paginate(page: params[:page]||1, per_page: 10)
   end
 
   def new
