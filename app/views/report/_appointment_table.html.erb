@@ -1,0 +1,51 @@
+<script>
+    $(function () {
+        $('.appointmentPagination a').on('click', function (event) {
+            var sku = $('#sku').val();
+            var year = $('#year').val();
+            var month = $('#month').val();
+            $.get(this.href, {sku: sku, year: year, month: month}, null, "script");
+            return false;
+        })
+    });
+</script>
+<div class="panel panel-default">
+  <table class="table table-hover txt-zt" id="tOrder">
+    <thead>
+    <tr class="prito">
+      <th class="text-center">订单编号</th>
+      <th class="text-center">消课私教</th>
+      <th class="text-center">消课学员美型号</th>
+      <th class="text-center">消课学员</th>
+      <th class="text-center">学员联系方式</th>
+      <th class="text-center">课程名</th>
+      <th class="text-center">课单价</th>
+      <th class="text-center">消课码</th>
+      <th class="text-center">消课时间</th>
+    </tr>
+    </thead>
+    <tbody class="pritbl">
+    <% @appointments.each { |appointment| %>
+        <tr>
+          <td class="text-center tyeq"><%= appointment.lesson.order.no %></td>
+          <th class="text-center tyeq"><%= appointment.coach.profile.name %></th>
+          <td class="text-center tyeq"><%= appointment.user.profile.mxid %></td>
+          <td class="text-center tyeq"><%= appointment.lesson.order.contact_name %></td>
+          <td class="text-center tyeq"><%= appointment.lesson.order.contact_phone %></td>
+          <td class="text-center tyeq"><%= appointment.course.course_name %></td>
+          <td class="text-center tyeq"><%= appointment.course.selling_price %></td>
+          <td class="text-center tyeq"><%= appointment.code %></td>
+          <td class="text-center tyeq"><%= appointment.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        </tr>
+    <% } %>
+    </tbody>
+  </table>
+</div>
+<div class="row">
+  <div class="col-md-5 col-sm-12"></div>
+  <div class="col-md-7 col-sm-12">
+    <div class="dataTables_paginate">
+      <%= will_paginate @appointments, renderer: BootstrapPagination::Rails, class: 'appointmentPagination', inner_window: 2 %>
+    </div>
+  </div>
+</div>

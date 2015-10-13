@@ -1,6 +1,6 @@
 <script>
     $(function () {
-        $('.orderPagination a').on('click', function (event) {
+        $('.salePagination a').on('click', function (event) {
             var sku = $('#sku').val();
             var year = $('#year').val();
             var month = $('#month').val();
@@ -41,7 +41,7 @@
   <div class="col-md-5 col-sm-12"></div>
   <div class="col-md-7 col-sm-12">
     <div class="dataTables_paginate">
-      <%= will_paginate @orders, renderer: BootstrapPagination::Rails, class: 'orderPagination', inner_window: 2 %>
+      <%= will_paginate @orders, renderer: BootstrapPagination::Rails, class: 'salePagination', inner_window: 2 %>
     </div>
   </div>
 </div>
