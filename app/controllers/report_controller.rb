@@ -3,22 +3,24 @@ class ReportController < ApplicationController
 
   def course
     @skus = Sku.where(seller_id: @service.coaches.pluck(:id) << @service.id).pluck(:sku, :course_name)
-    @sku = @skus.first[0] rescue '0'
+    @coaches = @service.coaches.pluck(:id, 'profiles.name')
     @year = Date.today.year
     @month = Date.today.month
   end
 
 
   def order
-    sku = params[:sku]||(Sku.where(seller_id: @service.coaches.pluck(:id) << @service.id).first.sku rescue '')
+    filter = {}
+    filter[:order_item] = {sku: params[:sku]} if params[:sku].present?
+    filter[:coach_id] = params[:coach] if params[:coach].present?
     date = Date.new(params[:year].to_i, params[:month].to_i)
     @day = []
     @s_order = []
     @c_order = []
     (date.at_beginning_of_month..date.at_end_of_month).each { |everyday|
       @day << everyday.day
-      @s_order << Order.joins(:order_item).where(order_items: {sku: sku}, service_id: @service.id, updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).count
-      @c_order << Order.joins(:order_item).where(order_items: {sku: sku}, coach_id: @service.coaches.pluck(:id), updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).count
+      @s_order << Order.joins(:order_item).where(service_id: @service.id, updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).count
+      @c_order << Order.joins(:order_item).where(coach_id: @service.coaches.pluck(:id), updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).count
     }
     @orders = Order.paginate(page: params[:page]||1, per_page: 1)
     #@orders = Order.joins(:order_item).where(updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
@@ -26,8 +28,10 @@ class ReportController < ApplicationController
   end
 
   def order_table
-    sku = params[:sku]
-    date = Date.new(params[:year].to_i, params[:month].to_i) rescue Date.today
+    filter = {}
+    filter[:order_item] = {sku: params[:sku]} if params[:sku].present?
+    filter[:coach_id] = params[:coach] if params[:coach].present?
+    date = Date.new(params[:year].to_i, params[:month].to_i)
     @orders = Order.paginate(page: params[:page]||1, per_page: 1)
     # @orders = Order.joins(:order_item).where(order_items: {sku: sku},
     #                                          service_id: @service.id,
@@ -40,22 +44,26 @@ class ReportController < ApplicationController
 
 
   def appointment
-    sku = params[:sku]||(Sku.where(seller_id: @service.coaches.pluck(:id) << @service.id).first.sku rescue '')
+    filter = {}
+    filter[:sku] = params[:sku] if params[:sku].present?
+    filter[:coach_id] = params[:coach] if params[:coach].present?
     date = Date.new(params[:year].to_i, params[:month].to_i)
     @day = []
     @appointment = []
     (date.at_beginning_of_month..date.at_end_of_month).each { |everyday|
       @day << everyday.day
-      @appointment << Appointment.where(coach_id: @service.coaches.pluck(:id), sku: sku, created_at: everyday.at_beginning_of_day..everyday.at_end_of_day).count
+      @appointment << Appointment.where(coach_id: @service.coaches.pluck(:id), created_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).count
     }
-    @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), sku: sku, created_at: date.at_beginning_of_day..date.at_end_of_day).order(id: :desc).paginate(page: params[:page]||1, per_page: 1)
+    @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), created_at: date.at_beginning_of_day..date.at_end_of_day).where(filter).order(id: :desc).paginate(page: params[:page]||1, per_page: 1)
     render layout: false
   end
 
   def appointment_table
-    sku = params[:sku]
-    date = Date.new(params[:year].to_i, params[:month].to_i) rescue Date.today
-    @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), sku: sku, created_at: date.at_beginning_of_month..date.at_end_of_month).order(id: :desc).paginate(page: params[:page]||1, per_page: 1)
+    filter = {}
+    filter[:order_item] = {sku: sku} if params[:sku].present?
+    filter[:coach_id] = {sku: sku} if params[:coach].present?
+    date = Date.new(params[:year].to_i, params[:month].to_i)
+    @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), sku: sku, created_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).order(id: :desc).paginate(page: params[:page]||1, per_page: 1)
     respond_to do |format|
       format.html
       format.js
@@ -63,28 +71,32 @@ class ReportController < ApplicationController
   end
 
   def sale
-    sku = params[:sku]||(Sku.where(seller_id: @service.coaches.pluck(:id) << @service.id).first.sku rescue '')
+    filter = {}
+    filter[:order_item] = {sku: sku} if params[:sku].present?
+    filter[:coach_id] = {sku: sku} if params[:coach].present?
     date = Date.new(params[:year].to_i, params[:month].to_i)
     @day = []
     @s_sale = []
     @c_sale = []
     (date.at_beginning_of_month..date.at_end_of_month).each { |everyday|
       @day << everyday.day
-      @s_sale << (Order.joins(:order_item).where(order_items: {sku: sku}, service_id: @service.id, updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).sum(:total)).to_i
-      @c_sale << (Order.joins(:order_item).where(order_items: {sku: sku}, coach_id: @service.coaches.pluck(:id), updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).sum(:total)).to_i
+      @s_sale << (Order.joins(:order_item).where(order_items: {sku: sku}, service_id: @service.id, updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).sum(:total)).to_i
+      @c_sale << (Order.joins(:order_item).where(order_items: {sku: sku}, coach_id: @service.coaches.pluck(:id), updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).sum(:total)).to_i
     }
     @orders = Order.joins(:order_item).where(order_items: {sku: sku},
                                              service_id: @service.id,
-                                             updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
+                                             updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 1)
     render layout: false
   end
 
   def sale_table
-    sku = params[:sku]
-    date = Date.new(params[:year].to_i, params[:month].to_i) rescue Date.today
+    filter = {}
+    filter[:order_item] = {sku: sku} if params[:sku].present?
+    filter[:coach_id] = {sku: sku} if params[:coach].present?
+    date = Date.new(params[:year].to_i, params[:month].to_i)
     @orders = Order.joins(:order_item).where(order_items: {sku: sku},
                                              service_id: @service.id,
-                                             updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
+                                             updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 1)
     respond_to do |format|
       format.html
       format.js

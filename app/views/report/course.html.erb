@@ -24,13 +24,20 @@
     ;
 
     $(function () {
-        $('#sku,#year,#month').on('change', function () {
+        var coach = $('#coach').val();
+        var sku = $('#sku').val();
+        var year = $('#year').val();
+        var month = $('#month').val();
+        $('#order').load('report/order', {coach: coach, sku: sku, year: year, month: month});
+
+        $('#coach,#sku,#year,#month').on('change', function () {
+            var coach = $('#coach').val();
             var sku = $('#sku').val();
             var year = $('#year').val();
             var month = $('#month').val();
-            $('#order').load('report/order', {sku: sku, year: year, month: month});
+            $('#order').load('report/order', {coach: coach, sku: sku, year: year, month: month});
         });
-        $('#order').load('report/order', {sku: '<%=@sku%>', year: <%=@year%>, month: <%=@month%>});
+
     });
 </script>
 
@@ -44,8 +51,15 @@
       </ul>
       <div class="pull-right">
         <select class="form-control tpcleq pull-left" id="sku">
+          <option value="">全部</option>
           <% @skus.each { |sku| %>
               <option value="<%= sku[0] %>"><%= sku[1] %></option>
+          <% } %>
+        </select>
+        <select class="form-control tpcleq pull-left" id="coach">
+          <option value="">全部</option>
+          <% @coaches.each { |coach| %>
+              <option value="<%= coach[0] %>"><%= coach[1] %></option>
           <% } %>
         </select>
         <select class="form-control tpcleq pull-left" id="year">
@@ -56,6 +70,8 @@
               <option value="<%= year %>"><%= year %></option>
           <% } %>
         </select>
+
+
         <select class="form-control tpcleq pull-left" id="month">
           <%
              (1..12).each { |index|
