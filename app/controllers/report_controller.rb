@@ -20,16 +20,18 @@ class ReportController < ApplicationController
       @s_order << Order.joins(:order_item).where(order_items: {sku: sku}, service_id: @service.id, updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).count
       @c_order << Order.joins(:order_item).where(order_items: {sku: sku}, coach_id: @service.coaches.pluck(:id), updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).count
     }
-    @orders = Order.joins(:order_item).where(updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
+    @orders = User.paginate(page: params[:page]||1, per_page: 1)
+    #@orders = Order.joins(:order_item).where(updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
     render layout: false
   end
 
   def order_table
     sku = params[:sku]
     date = Date.new(params[:year].to_i, params[:month].to_i) rescue Date.today
-    @orders = Order.joins(:order_item).where(order_items: {sku: sku},
-                                             service_id: @service.id,
-                                             updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
+    @orders = User.paginate(page: params[:page]||1, per_page: 1)
+    # @orders = Order.joins(:order_item).where(order_items: {sku: sku},
+    #                                          service_id: @service.id,
+    #                                          updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
     respond_to do |format|
       format.html
       format.js
