@@ -22,8 +22,7 @@ class Profile < ActiveRecord::Base
   end
 
   def interests_string
-    interests_ary = interests.split(',')
-    choose_interests = INTERESTS['items'].select { |item| interests_ary.include?(item['id'].to_s) }
+    choose_interests = INTERESTS['items'].select { |item| hobby.include?(item['id']) }
     choose_interests.collect { |choose| choose['name'] }.join(',')
   end
 

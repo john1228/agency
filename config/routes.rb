@@ -26,11 +26,15 @@ Rails.application.routes.draw do
   post 'groups' => 'mass_message_groups#create'
 
   get 'report' => 'report#course'
-  get 'report/coach' => 'report#coach'
 
   post 'report/order' => 'report#order'
   post 'report/appointment' => 'report#appointment'
   post 'report/sale' => 'report#sale'
+
+  get 'report/order' => 'report#order_table'
+  get 'report/appointment' => 'report#appointment_table'
+  get 'report/sale' => 'report#sale_table'
+
 
   get 'finance/transfer' => 'finance#transfer_new'
   post 'finance/transfer' => 'finance#transfer_create', as: :submit_transfer

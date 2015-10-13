@@ -1,0 +1,46 @@
+<script>
+    $(function () {
+        $('.orderPagination a').on('click', function (event) {
+            $.get(this.href, null, null, "script");
+            return false;
+        })
+    });
+</script>
+<div class="panel panel-default">
+  <table class="table table-hover txt-zt" id="tOrder">
+    <thead>
+    <tr class="prito">
+      <th class="text-center">订单编号</th>
+      <th class="text-center">买家昵称</th>
+      <th class="text-center">买家</th>
+      <th class="text-center">联系电话</th>
+      <th class="text-center">金额(元)</th>
+      <th class="text-center">支付方式</th>
+      <th class="text-center">时间</th>
+    </tr>
+    </thead>
+    <tbody class="pritbl">
+    <% @orders.each { |order| %>
+        <tr>
+        <tr>
+          <td class="text-center tyeq"><%= order.no %></td>
+          <th class="text-center tyeq"><%= order.user.profile.name %></th>
+          <td class="text-center tyeq"><%= order.contact_name %></td>
+          <td class="text-center tyeq"><%= order.contact_phone %></td>
+          <td class="text-center tyeq"><%= order.total %></td>
+          <td class="text-center tyeq"><%= order.pay_type %></td>
+          <td class="text-center tyeq"><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        </tr>
+        </tr>
+    <% } %>
+    </tbody>
+  </table>
+</div>
+<div class="row">
+  <div class="col-md-5 col-sm-12"></div>
+  <div class="col-md-7 col-sm-12">
+    <div class="dataTables_paginate">
+      <%= will_paginate @orders, renderer: BootstrapPagination::Rails, class: 'orderPagination' %>
+    </div>
+  </div>
+</div>

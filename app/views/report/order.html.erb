@@ -35,43 +35,12 @@
                   {name: '私教订单', data: c_order}
               ]
           });
-          $('.pagination a').attr('data-remote', 'true');
       });
   </script>
   <div class="panel-body">
     <div id="orders"></div>
   </div>
-  <div class="panel panel-default">
-    <table class="table table-hover txt-zt">
-      <thead>
-      <tr class="prito">
-        <th class="text-center">订单编号</th>
-        <th class="text-center">私教</th>
-        <th class="text-center">买家昵称</th>
-        <th class="text-center">买家</th>
-        <th class="text-center">联系电话</th>
-        <th class="text-center">金额(元)</th>
-        <th class="text-center">支付方式</th>
-        <th class="text-center">时间</th>
-      </tr>
-      </thead>
-      <tbody class="pritbl">
-      <% @orders.each { |order| %>
-          <tr>
-            <td class="text-center tyeq"><%= order.no %></td>
-            <th class="text-center tyeq"><%= Coach.find_by(id: order.coach_id).profile.name rescue '' %></th>
-            <th class="text-center tyeq"><%= order.user.profile.name %></th>
-            <td class="text-center tyeq"><%= order.contact_name %></td>
-            <td class="text-center tyeq"><%= order.contact_phone %></td>
-            <td class="text-center tyeq"><%= order.total %></td>
-            <td class="text-center tyeq"><%= order.pay_type_name %></td>
-            <td class="text-center tyeq"><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-          </tr>
-      <% } %>
-      </tbody>
-    </table>
-  </div>
-  <div class="padding5">
-    <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+  <div id="dOrder">
+    <%= render :partial => 'order_table' %>
   </div>
 </div>
