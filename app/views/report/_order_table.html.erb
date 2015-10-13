@@ -1,7 +1,10 @@
 <script>
     $(function () {
         $('.orderPagination a').on('click', function (event) {
-            $.get(this.href, null, null, "script");
+            var sku = $('#sku').val();
+            var year = $('#year').val();
+            var month = $('#month').val();
+            $.get(this.href, {sku: sku, year: year, month: month}, null, "script");
             return false;
         })
     });
@@ -40,7 +43,7 @@
   <div class="col-md-5 col-sm-12"></div>
   <div class="col-md-7 col-sm-12">
     <div class="dataTables_paginate">
-      <%= will_paginate @orders, renderer: BootstrapPagination::Rails, class: 'orderPagination' %>
+      <%= will_paginate @orders, renderer: BootstrapPagination::Rails, class: 'orderPagination', inner_window: 2 %>
     </div>
   </div>
 </div>
