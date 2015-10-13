@@ -25,7 +25,6 @@
     <tbody class="pritbl">
     <% @orders.each { |order| %>
         <tr>
-        <tr>
           <td class="text-center tyeq"><%= order.no %></td>
           <th class="text-center tyeq"><%= order.user.profile.name %></th>
           <td class="text-center tyeq"><%= order.contact_name %></td>
@@ -33,7 +32,6 @@
           <td class="text-center tyeq"><%= order.total %></td>
           <td class="text-center tyeq"><%= order.pay_type %></td>
           <td class="text-center tyeq"><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-        </tr>
         </tr>
     <% } %>
     </tbody>
