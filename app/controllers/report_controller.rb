@@ -11,7 +11,7 @@ class ReportController < ApplicationController
 
   def order
     filter = {}
-    filter[:order_item] = {sku: params[:sku]} if params[:sku].present?
+    filter[:order_items] = {sku: params[:sku]} if params[:sku].present?
     filter[:coach_id] = params[:coach] if params[:coach].present?
     date = Date.new(params[:year].to_i, params[:month].to_i)
     @day = []
@@ -29,7 +29,7 @@ class ReportController < ApplicationController
 
   def order_table
     filter = {}
-    filter[:order_item] = {sku: params[:sku]} if params[:sku].present?
+    filter[:order_items] = {sku: params[:sku]} if params[:sku].present?
     filter[:coach_id] = params[:coach] if params[:coach].present?
     date = Date.new(params[:year].to_i, params[:month].to_i)
     @orders = Order.paginate(page: params[:page]||1, per_page: 1)
@@ -94,8 +94,7 @@ class ReportController < ApplicationController
     filter[:order_item] = {sku: sku} if params[:sku].present?
     filter[:coach_id] = {sku: sku} if params[:coach].present?
     date = Date.new(params[:year].to_i, params[:month].to_i)
-    @orders = Order.joins(:order_item).where(order_items: {sku: sku},
-                                             service_id: @service.id,
+    @orders = Order.joins(:order_item).where(service_id: @service.id,
                                              updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 1)
     respond_to do |format|
       format.html
