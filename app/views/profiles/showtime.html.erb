@@ -1,92 +1,64 @@
 <div class="row">
   <div class="col-lg-12 top10 tdzty">
-    <h3 class="poloklh4">修改场地资料</h3>
-
     <div class="top15 clearfix row">
-      <div class="col-lg-9 col-md-9">
+      <div class="col-lg-12 col-md-12">
         <div class="panel panel-default">
-          <div class="panel-body">
-            <%= semantic_form_for(@profile) do |f| %>
-                <div class="top15">
-                  <div class="form-section top15">
-                    <div class="top10 clearfix cot-til">
-                      <div class="upload_area pull-left" id="avatar_preview" style="background-image: url(<%=@profile.avatar.thumb.url%>);background-size: cover">
-                        <div class="panel-body">
-                          <%= f.file_field :avatar, class: 'image_uploader' %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          <%= form_tag(update_showtime_path, multipart: true) do %>
+              <div class="panel-body">
+                <div class="panel-headint tdzty clearfix">
+                  <h3 class=" pull-left panel-title">视频秀</h3>
+                </div>
+                <div class="form-section top15">
+                  <label class="input-label">标题</label>
+                  <input class="input-text" name="title">
+                </div>
+                <div class="form-section top15">
+                  <label class="input-label">视频介绍</label>
+                  <textarea class="input-text  pciilk" rows="3" name="content"></textarea>
+                </div>
+                <div id="multi" class=" top10 clearfix cot-til">
+                  <div id="image">
+                    <div class="upload_area pull-left">
+                      <div class="panel-body">
+                        <i class="iconfont2 lxcop">&#xe618;</i>
 
-                  <div class="form-section top15">
-                    <%= f.text_field(:name, class: 'input-text', placeholder: '服务号名称') %>
-                  </div>
-                  <div class="form-section top15">
-                    <%= f.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true}) %>
-                  </div>
-                  <div class="form-section top15">
-                    <%= f.select(:service, [['停车', 1], ['WIFI', 2], ['淋浴', 3], ['餐饮', 4]], {include_hidden: false}, {multiple: true}) %>
-                  </div>
-                  <div class="row top15">
-                    <div class="col-md-4">
-                      <div class="form-section">
-                        <%= f.select(:province, [], {}, {class: 'input-textl'}) %>
+                        <p class="text-center cot-til">上传视频封面</p>
                       </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-section">
-                        <%= f.select(:city, [], {}, {class: 'input-textl'}) %>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-section">
-                        <%= f.text_field(:address, class: 'input-text', placeholder: '详细地址') %>
-                      </div>
+                      <input type="file" class="image_uploader" name="cover">
                     </div>
                   </div>
-                  <div class="form-section top15">
-                    <label class="input-label">联系电话</label>
-                    <%= f.telephone_field(:mobile, class: 'input-text') %>
-                  </div>
+                  <div id="image">
+                    <div class="upload_area pull-left">
+                      <div class="panel-body">
+                        <i class="iconfont2 lxcop">&#xe60f;</i>
 
-                  <div class="form-section top15">
-                    <label class="input-label">简介</label>
-                    <%= f.text_area(:signature, class: 'input-text form-controth top5') %>
-                  </div>
-                  <div class="fygroup">
-                    <button type="submit" class="btntn-lg ">确认</button>
+                        <p class="text-center cot-til">上传视频文件</p>
+                      </div>
+                      <input type="file" class="film_uploader" name="film">
+                    </div>
                   </div>
                 </div>
-            <% end %>
-          </div>
+                <div class="fygroup">
+                  <input type="submit" value="确定" class="btntn-lg">
+                </div>
+              </div>
+          <% end %>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-<script>
-    new PCAS("profile[province]", "profile[city]", '<%=@profile.province%>', '<%=@profile.city%>');
-    $('#profile_hobby').multiselect({
-        numberDisplayed: 8,
-        nonSelectedText: '请选择提供的健身服务',
-        maxHeight: 200,
-        dropup: true
-    });
-    $('#profile_service').multiselect({
-        numberDisplayed: 8,
-        nonSelectedText: '请选择提供的健身服务',
-        maxHeight: 200,
-        dropup: true
-    });
-    $("#profile_avatar").change(function () {
-        var objUrl = getObjectURL(this.files[0]);
-        if (objUrl) {
-            $('#default_div').remove();
-            $('#avatar_preview').css('background-image', 'url("' + objUrl + '")');
-            $('#avatar_preview').css('background-size', 'cover');
-        }
-    });
 
+<script>
+    $(function () {
+        $('#multi').on('change', '.image_uploader', function () {
+            var objUrl = getObjectURL(this.files[0]);
+            $(this).parent().children('div').remove();
+            $(this).parent().css('background-image', "url(" + objUrl + ")");
+            $(this).parent().css('background-size', "cover");
+        });
+    })
     function getObjectURL(file) {
         var url = null;
         if (window.createObjectURL != undefined) { // basic
@@ -98,4 +70,5 @@
         }
         return url;
     }
+
 </script>

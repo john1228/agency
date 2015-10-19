@@ -11,5 +11,6 @@ class MessageController < ApplicationController
   end
 
   def create
+    Integer()
   end
 end

@@ -14,21 +14,17 @@ namespace :sns do
 
   task :apns do
     require 'houston'
-    apn = Houston::Client.production
-    apn.certificate = File.read("#{Rails.root}/config/certs/apns_production.pem")
+    apn = Houston::Client.development
+    apn.certificate = File.read("#{Rails.root}/config/certs/develop.pem")
 
-    token = ['8a36f1f4 9cdf620b d1c21e4f a7557b88 643684a3 7543c104 d49d9ac3 a89e6146', 'c6d6e4b8 967f3182 7be9e4e4 f6c8b1d5 d544110e fc798c2c 342a3f09 e28612f4']
-    token.each { |device|
-      notification = Houston::Notification.new(device: device)
-      notification.alert = '这是外部消息'
-      notification.badge = 57
-      notification.sound = 'sosumi.aiff'
-      notification.category = 'INVITE_CATEGORY'
-      notification.content_available = true
-      notification.custom_data = {action: 1, page: {message: '这是一个测试消息'}}
-      apn.push(notification)
-      puts notification.error
-    }
-    puts apn.devices
+    token = '95eb3467 2ef2b014 b79ca116 672f8d61 3d3add06 b0f72704 ca5a74c8 53a73949'
+    notification = Houston::Notification.new(device: token)
+    notification.alert = '这是外部消息'
+    notification.badge = 57
+    notification.category = 'INVITE_CATEGORY'
+    notification.content_available = true
+    notification.custom_data = {action: 1, page: {message: '这是一个测试消息'}}
+    apn.push(notification)
+    puts notification.error
   end
 end

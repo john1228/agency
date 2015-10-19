@@ -1,57 +1,50 @@
 <div class="row">
   <div class="col-lg-12 top10 tdzty">
-    <%= form_for(@dynamic, html: {multipart: true}) do |f| %>
-        <div class="top15 clearfix row">
-          <div class="col-lg-12 col-md-12">
-            <div class="panel panel-default">
+    <div class="top15 clearfix row">
+      <div class="col-lg-12 col-md-12">
+        <div class="panel panel-default">
+          <%= form_tag(update_photowall_path, multipart: true) do %>
               <div class="panel-body">
                 <div class="panel-headint tdzty clearfix">
-                  <h3 class=" pull-left panel-title">发布动态</h3>
-                </div>
-                <% if @error.present? %>
-                    <div class="alert alert-danger" role="alert">
-                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                      <span class="sr-only">Error:</span>
-                      <%= @error %>
-                    </div>
-                <% end %>
-                <% if @success.present? %>
-                    <div class="alert alert-success" role="alert">
-                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                      <span class="sr-only">Success:</span>
-                      <%= @success %>
-                    </div>
-                <% end %>
-                <div class="form-section top15">
-                  <label class="input-label">动态内容</label>
-                  <%= f.text_area(:content, class: 'input-text  pciilk', rows: 3) %>
+                  <h3 class=" pull-left panel-title">照片墙</h3>
                 </div>
                 <div id="multi" class=" top10 clearfix cot-til">
-                  <div id="image">
-                    <div class="upload_area pull-left">
-                      <div class="panel-body">
-                        <i class="iconfont2 lxcop">&#xe618;</i>
+                  <% (0...8).each { |index| %>
+                      <div id="image">
+                        <div class="upload_area pull-left" style="background-image: url('<%=@photowall[index].photo.thumb.url rescue ''%>');background-size: cover">
+                          <% if @photowall[index].blank? %>
+                              <div class="panel-body">
+                                <i class="iconfont2 lxcop">&#xe618;</i>
 
-                        <p class="text-center cot-til">上传图片</p>
-
-                        <p class="text-center cot-til">（可以上传6张）</p>
+                                <p class="text-center cot-til">上传图片</p>
+                              </div>
+                          <% end %>
+                          <input type="file" class="image_uploader" name="photo_<%= @photowall[index].id rescue 0 %>">
+                        </div>
                       </div>
-                      <input type="file" class="image_uploader" name="image[]">
-                    </div>
-                  </div>
+                  <% } %>
                 </div>
                 <div class="fygroup">
-                  <%= f.submit('确认', class: 'btntn-lg') %>
+                  <input type="submit" value="确定" class="btntn-lg">
                 </div>
               </div>
-            </div>
-          </div>
+          <% end %>
+          </form>
         </div>
-    <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
+    $(function () {
+        $('#multi').on('change', '.image_uploader', function () {
+            var objUrl = getObjectURL(this.files[0]);
+            $(this).parent().children('div').remove();
+            $(this).parent().css('background-image', "url(" + objUrl + ")");
+            $(this).parent().css('background-size', "cover");
+        });
+    })
     function getObjectURL(file) {
         var url = null;
         if (window.createObjectURL != undefined) { // basic
@@ -63,50 +56,5 @@
         }
         return url;
     }
-    $(function () {
-        var file_count = 0;
-        $('#multi').on('change', '.image_uploader', function () {
-            $('#text').remove();
-            $('#film').remove();
-            var remain = 6 - file_count;
-            for (var i = 0; i < (remain > this.files.length ? this.files.length : remain); i++) {
-                var objUrl = getObjectURL(this.files[i]);
-                $(this).parent().children('div').remove();
-                $(this).parent().css('background-image', "url(" + objUrl + ")");
-                $(this).parent().css('background-size', "cover");
-            }
-            file_count = file_count + this.files.length;
-            if (file_count < 6) {
-                var image_div = "<div class='upload_area pull-left'>" +
-                        "<div class='panel-body'>" +
-                        "<i class='iconfont2 lxcop'>&#xe618;</i>" +
-                        "<p class='text-center cot-til'>上传图片</p>" +
-                        "<p class='text-center cot-til'>（还可以上传" + (6 - file_count) + "张）</p>"
-                        + "</div>" +
-                        "<input type='file'     class='image_uploader' name='image[]'/>" +
-                        "</div>";
-                $(this).parent().parent().append(image_div);
-            }
-        })
-        $('#multi').on('change', '.film_uploader', function () {
-            $('#image').remove();
-            $('#text').remove();
-            $('#cover').remove();
-            var image_div = "<div class='upload_area pull-left' id='cover'>" +
-                    "<div class='panel-body'>" +
-                    "<i class='iconfont2 lxcop'>&#xe618;</i>" +
-                    "<p class='text-center cot-til'>请上传视频的封面</p>" + "</div>" +
-                    "<input type='file' name='cover' class='cover_uploader'/>" +
-                    "</div>";
-            $(this).parent().parent().append(image_div);
-        });
-
-        $('#multi').on('change', '.cover_uploader', function () {
-            var objUrl = getObjectURL(this.files[0]);
-            $(this).parent().children('div').remove();
-            $(this).parent().css('background-image', "url(" + objUrl + ")");
-            $(this).parent().css('background-size', "cover");
-        })
-    })
 
 </script>

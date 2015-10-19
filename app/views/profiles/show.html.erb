@@ -46,7 +46,7 @@
               <i class="iconfont5 ">&#xe614;</i>
             </div>
             <div class="media-body p-txt">
-              <%= @profile.province.to_s + @profile.city.to_s + @profile.address.to_s %>
+              <%= @profile.province + @profile.city + @profile.address %>
             </div>
           </div>
 
@@ -62,7 +62,7 @@
       <div class="panel panel-default ptl-wlt pult-left ">
         <div class="panel-headint tdzty clearfix">
           <h3 class=" pull-left panel-title">视频秀</h3>
-          <a href="#" class="pull-right txt-tofi">
+          <a href="/profile/showtime" class="pull-right txt-tofi">
             <i class="iconfont">&#xe611;</i>替换</a>
         </div>
         <div class="panel-body ">
@@ -87,7 +87,7 @@
       <div class="panel panel-default ptl-wlt pult-left  top15">
         <div class="panel-headint tdzty clearfix">
           <h3 class=" pull-left panel-title">照片墙</h3>
-          <a href="#" class="pull-right txt-tofi">
+          <a href="/profile/photowall" class="pull-right txt-tofi">
             <i class="iconfont">&#xe611;</i>编辑</a>
         </div>
         <div class="panel-body  pciilk">

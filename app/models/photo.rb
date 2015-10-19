@@ -1,5 +1,5 @@
 class Photo < ActiveRecord::Base
-  default_scope -> { limit(6) }
+  default_scope -> { limit(8) }
   belongs_to :user
   mount_uploader :photo, PhotosUploader
 

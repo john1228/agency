@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   post 'password' => 'profiles#change_password', as: :change_password
 
   get 'profile/photowall' => 'profiles#photowall'
-  post 'profile/photowall' => 'profiles#photowall'
-  get 'profile/showtime' => 'profiles#photowall'
-  post 'profile/showtime' => 'profiles#photowall'
+  post 'profile/photowall' => 'profiles#update_photowall', as: :update_photowall
+  get 'profile/showtime' => 'profiles#showtime'
+  post 'profile/showtime' => 'profiles#update_showtime', as: :update_showtime
 
   get 'students' => 'students#index'
   get 'students/group' => 'students#group'
