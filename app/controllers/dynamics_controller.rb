@@ -10,11 +10,11 @@ class DynamicsController < ApplicationController
   end
 
   def create
-    dynamic = @service.dynamics.new(dynamic_params)
-    if dynamic.save
+    @dynamic = @service.dynamics.new(dynamic_params)
+    if @dynamic.save
       redirect_to action: :new
     else
-      @errors = dynamic.errors
+      @errors = @dynamic.errors
       render action: :new
     end
   end
