@@ -16,7 +16,7 @@ class CoachesController < ApplicationController
       ServiceMember.create(service: @service, coach: @coach)
       @success = true
     else
-      @failure = true
+      @failure = @coach.errors
     end
     render action: :show
   end
