@@ -16,7 +16,7 @@ class DynamicsController < ApplicationController
     else
       @error = '发布动态失败'
     end
-    render action: :new
+    redirect_to action: :new
   end
 
   def show

@@ -57,8 +57,6 @@
 (function (jQuery) {
 
     jQuery.fn.awShowcase = function (options) {
-
-        // Default configuration properties
         var defaults =
         {
             content_width: 700,

@@ -1,3 +1,40 @@
+<script>
+    $(function () {
+        $("#showcase").awShowcase(
+                {
+                    content_width: 560,
+                    content_height: 450,
+                    fit_to_parent: false,
+                    auto: false,
+                    interval: 3000,
+                    continuous: false,
+                    loading: true,
+                    tooltip_width: 100,
+                    tooltip_icon_width: 32,
+                    tooltip_icon_height: 32,
+                    tooltip_offsetx: 18,
+                    tooltip_offsety: 0,
+                    arrows: true,
+                    buttons: false,
+                    btn_numbers: false,
+                    keybord_keys: true,
+                    mousetrace: false, /* Trace x and y coordinates for the mouse */
+                    pauseonover: true,
+                    stoponclick: true,
+                    transition: 'hslide', /* hslide/vslide/fade */
+                    transition_delay: 300,
+                    transition_speed: 500,
+                    show_caption: 'onhover', /* onload/onhover/show */
+                    thumbnails: true,
+                    thumbnails_position: 'outside-last', /* outside-last/outside-first/inside-last/inside-first */
+                    thumbnails_direction: 'horizontal', /* vertical/horizontal */
+                    thumbnails_slidex: 0, /* 0 = auto / 1 = slide one thumbnail / 2 = slide two thumbnails / etc. */
+                    dynamic_height: false, /* For dynamic height to work in webkit you need to set the width and height of images in the source. Usually works to only set the dimension of the first slide in the showcase. */
+                    speed_change: false, /* Set to true to prevent users from swithing more then one slide at once. */
+                    viewline: false /* If set to true content_width, thumbnails, transition and dynamic_height will be disabled. As for dynamic height you need to set the width and height of images in the source. */
+                });
+    })
+</script>
 <div class="row wtilt">
   <div class="top15 clearfix row col-lg-12">
     <div class="col-lg-5 col-md-5 ptl-wli">
@@ -91,30 +128,20 @@
             <i class="iconfont">&#xe611;</i>编辑</a>
         </div>
         <div class="panel-body  pciilk">
-          <div id="tFocus">
-            <div class="prev" id="prev"></div>
-            <div class="next" id="next"></div>
-            <%
-               @service.photos.each do |photo|
-                 if photo.eql?(@service.photos.first)
-            %>
-                    <li class="active">
-                      <%= link_to(image_tag(photo.photo.url), '#') %>
-                    </li>
-                <% else %>
-                    <li>
-                      <%= link_to(image_tag(photo.photo.url), '#') %>
-                    </li>
-                <% end %>
+          <div id="showcase" class="showcase">
+            <% @service.photos.each do |photo| %>
+                <div class="showcase-slide">
+                  <div class="showcase-content">
+                    <%= image_tag(photo.photo.url) %>
+                  </div>
+                  <div class="showcase-thumbnail">
+                    <%= image_tag(photo.photo.url, width: '140px') %>
+                  </div>
+                </div>
             <% end %>
-            </ul>
           </div>
-          <a href="javascript:void(0);" id="tFocus-rightbtn">下一张</a>
         </div>
-
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>
