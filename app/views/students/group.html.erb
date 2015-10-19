@@ -127,6 +127,7 @@
         $('#choose_group').attr('value', group_id);
         $.getJSON('/groups/' + group_id + '/students', function (data) {
             $("input[type='radio']").removeAttr('checked');
+            $('#students tbody').empty();
             $('.student').removeAttr('checked');
             $.each(data.group, function (k, v) {
                 var _id = v.id;
