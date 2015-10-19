@@ -8,11 +8,13 @@
             <div class="clearfix">
               <% @dynamics.each do |dynamic| %>
                   <div class="pull-left ailois ">
-                    <p class="screenshot">
-                      <a href="description.html"><%= image_tag((dynamic.images.first.image.thumb.url rescue 'default_dynamic.png')) %></a>
-                    </p>
+                    <a href="/dynamics/<%= dynamic.id %>">
+                      <div class="screenshot" style="background-image: url('<%=dynamic.images.first.image.thumb.url%>');background-size: cover">
+                      </div>
+                    </a>
+
                     <dl class="polokl">
-                      <a href="description.html">
+                      <a href="/dynamics/<%= dynamic.id %>">
                         <dd class="destion"><%= dynamic.created_at.localtime.strftime('%Y-%m-%d %H:%M') %></dd>
                         <dd class="destion"><%= dynamic.content %></dd>
                       </a>

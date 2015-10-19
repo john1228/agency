@@ -2,7 +2,7 @@ class DynamicsController < ApplicationController
   layout 'admin'
 
   def index
-    @dynamics = @service.dynamics.paginate(page: params[:page]||1, per_page: 10)
+    @dynamics = @service.dynamics.order(id: :desc).paginate(page: params[:page]||1, per_page: 24)
   end
 
   def new
@@ -20,7 +20,7 @@ class DynamicsController < ApplicationController
   end
 
   def show
-
+    @dynamic = @service.dynamics.find_by(id: params[:id])
   end
 
   def destroy
