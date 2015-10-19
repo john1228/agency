@@ -8,18 +8,12 @@
                 <div class="panel-headint tdzty clearfix">
                   <h3 class=" pull-left panel-title">发布动态</h3>
                 </div>
-                <% if @error.present? %>
+                <% if @errors.present? %>
                     <div class="alert alert-danger" role="alert">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                      <span class="sr-only">Error:</span>
-                      <%= @error %>
-                    </div>
-                <% end %>
-                <% if @success.present? %>
-                    <div class="alert alert-success" role="alert">
-                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                      <span class="sr-only">Success:</span>
-                      <%= @success %>
+                      <% @errors.messages.values.each { |v| %>
+                          <%= v %><br/>
+                      <% } %>
                     </div>
                 <% end %>
                 <div class="form-section top15">

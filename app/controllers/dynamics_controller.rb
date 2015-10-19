@@ -10,13 +10,13 @@ class DynamicsController < ApplicationController
   end
 
   def create
-    @dynamic = @service.dynamics.new(dynamic_params)
-    if @dynamic.save
-      @success = '发布动态成功'
+    dynamic = @service.dynamics.new(dynamic_params)
+    if dynamic.save
+      redirect_to action: :new
     else
-      @error = '发布动态失败'
+      @errors = dynamic.errors
+      render action: :new
     end
-    redirect_to action: :new
   end
 
   def show
