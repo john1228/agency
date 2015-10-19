@@ -134,12 +134,12 @@
                 function removePayee() {
 
                 }
-                function init(coaches, data) {
+                function init(coach, data) {
                     $('#container').highcharts({
                         chart: {type: 'column', margin: [50, 50, 100, 80]},
                         title: {text: '私教销售额'},
                         xAxis: {
-                            categories: coaches,
+                            categories: coach,
                             labels: {
                                 rotation: -45, align: 'right',
                                 style: {
@@ -174,17 +174,17 @@
                     var year = $('#year').val();
                     var month = $('#month').val();
                     $.get('/finance/sale.json', {year: year, month: month}, function (data) {
-                        var _coaches = data.coaches;
-                        var _data = data.data;
-                        init(_coaches, _data);
+                        var coach = data.coach;
+                        var sale = data.sale;
+                        init(coach, sale);
                     });
                     $('#year,#month').on('change', function () {
                         var _year = $('#year').val();
                         var _month = $('#month').val();
                         $.get('/finance/sale.json', {year: _year, month: _month}, function (data) {
-                            var _coaches = data.coaches;
-                            var _data = data.data;
-                            init(_coaches, _data);
+                            var _coach = data.coach;
+                            var _sale = data.sale;
+                            init(_coach, _sale);
                         });
                     });
                 });

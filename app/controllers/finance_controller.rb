@@ -7,9 +7,13 @@ class FinanceController < ApplicationController
 
   def sale
     date = Date.new(params[:year].to_i, params[:month].to_i)
-    coaches = @service.coaches.order(id: :desc).collect { |coach| coach.profile.name }
-    data = @service.coaches.pluck(:id).map { |coach| Order.where(coach_id: coach).where(updated_at: date.at_beginning_of_month..date.next_month.at_beginning_of_month).sum(:total) }
-    render json: {coaches: coaches, data: data}
+    coach = []
+    sale = []
+    Order.where(coach_id: @service.coaches.pluck(:id)).top_30(date).map { |item|
+      sale << item.sale
+      coach << Coach.find_by(id: item.coach_id).profile.name
+    }
+    render json: {coach: coach, sale: sale}
   end
 
   def transfer_create
