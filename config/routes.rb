@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   post 'finance/batch_transfer' => 'finance#batch_transfer', as: :batch_transfer
   get 'finance/withdraw' => 'finance#withdraw_new'
   post 'finance/withdraw' => 'finance#withdraw_create', as: :submit_withdraw
+  get 'finance/sale' => 'finance#sale'
 
 
   get 'dashboard' => 'dashboard#index'

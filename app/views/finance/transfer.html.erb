@@ -95,73 +95,102 @@
         </div>
       </div>
     </div>
-    <h3 class="poloklh4 top30">私教销售额</h3>
 
-    <div class="top15">
-      <div class="panel panel-default">
-        <div class="panel-heading" style="text-align: right">
-        </div>
-        <div class="panel-body" id="container">
-          <script>
-              function addPayee() {
-                  $('#payee').before($('#payee').clone());
-              }
-              function removePayee() {
 
-              }
-              $(document).ready(function () {
-                  $('.close').on('onclick', function () {
-                      alert('11');
-                  })
-              });
+    <div class="row top15">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title  pull-left">私教销售额</h3>
 
-              $(function () {
-                  $('#container').highcharts({
-                      chart: {
-                          type: 'column',
-                          margin: [50, 50, 100, 80]
-                      },
-                      title: {
-                          text: '私教销售额'
-                      },
-                      xAxis: {
-                          categories: <%=raw @coaches%>,
-                          labels: {
-                              rotation: -45,
-                              align: 'right',
-                              style: {
-                                  fontSize: '13px',
-                                  fontFamily: 'Verdana, sans-serif'
-                              }
-                          }
-                      },
-                      yAxis: {
-                          min: 0,
-                          title: {
-                              text: '销售额 (元)'
-                          }
-                      },
-                      legend: {
-                          enabled: false
-                      },
-                      tooltip: {
-                          pointFormat: '销售额: <b>{point.y:.1f} 元</b>'
-                      },
-                      series: [{
-                          name: '销售额',
-                          data: <%=@data%>,
-                          dataLabels: {
-                              enabled: true,
-                              align: 'top',
-                              style: {
-                                  fontSize: '13px',
-                                  fontFamily: 'Verdana, sans-serif',
-                              }
-                          }
-                      }]
-                  });
-              });
-          </script>
+            <div class="pull-right pcoox">
+              <select id="year">
+                <%
+                   (0..5).each { |index|
+                     year = Date.today.years_ago(index).year
+                %>
+                    <option value="<%= year %>"><%= year %></option>
+                <% } %>
+              </select>
+              <select id="month">
+                <%
+                   (1..12).each { |index|
+                     if index.eql?(Date.today.month)
+
+                %>
+                        <option value="<%= index %>" selected="selected"><%= index %>月</option>
+                    <% else %>
+                        <option value="<%= index %>"><%= index %>月</option>
+                    <% end
+                       } %>
+              </select>
+            </div>
+          </div>
+          <div class="panel-body">
+            <script type="text/javascript">
+                function addPayee() {
+                    $('#payee').before($('#payee').clone());
+                }
+                function removePayee() {
+
+                }
+                function init(coaches, data) {
+                    $('#container').highcharts({
+                        chart: {type: 'column', margin: [50, 50, 100, 80]},
+                        title: {text: '私教销售额'},
+                        xAxis: {
+                            categories: coaches,
+                            labels: {
+                                rotation: -45, align: 'right',
+                                style: {
+                                    fontSize: '13px',
+                                    fontFamily: 'Verdana, sans-serif'
+                                }
+                            }
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: '销售额 (元)'
+                            }
+                        },
+                        legend: {enabled: false},
+                        tooltip: {pointFormat: '销售额: <b>{point.y:.1f} 元</b>'},
+                        series: [{
+                            name: '销售额', data: data,
+                            dataLabels: {
+                                enabled: true,
+                                align: 'top',
+                                style: {
+                                    fontSize: '13px',
+                                    fontFamily: 'Verdana, sans-serif',
+                                }
+                            }
+                        }]
+                    });
+                }
+
+                $(function () {
+                    var year = $('#year').val();
+                    var month = $('#month').val();
+                    $.get('/finance/sale.json', {year: year, month: month}, function (data) {
+                        var _coaches = data.coaches;
+                        var _data = data.data;
+                        init(_coaches, _data);
+                    });
+                    $('#year,#month').on('change', function () {
+                        var _year = $('#year').val();
+                        var _month = $('#month').val();
+                        $.get('/finance/sale.json', {year: _year, month: _month}, function (data) {
+                            var _coaches = data.coaches;
+                            var _data = data.data;
+                            init(_coaches, _data);
+                        });
+                    });
+                });
+            </script>
+            <div id="container"></div>
+          </div>
         </div>
       </div>
     </div>

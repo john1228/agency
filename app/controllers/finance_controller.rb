@@ -2,9 +2,14 @@ class FinanceController < ApplicationController
   layout 'admin'
 
   def transfer_new
-    @coaches = @service.coaches.order(id: :desc).collect { |coach| coach.profile.name }
-    @data = @service.coaches.order(id: :desc).map { |coach| rand(10000) }
     render 'transfer'
+  end
+
+  def sale
+    date = Date.new(params[:year].to_i, params[:month].to_i)
+    coaches = @service.coaches.order(id: :desc).collect { |coach| coach.profile.name }
+    data = @service.coaches.pluck(:id).map { |coach| Order.where(coach_id: coach).where(updated_at: date.at_beginning_of_month..date.next_month.at_beginning_of_month).sum(:total) }
+    render json: {coaches: coaches, data: data}
   end
 
   def transfer_create
