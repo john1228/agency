@@ -9,7 +9,7 @@
               <% @dynamics.each do |dynamic| %>
                   <div class="pull-left ailois ">
                     <a href="/dynamics/<%= dynamic.id %>">
-                      <div class="screenshot" style="background-image: url('<%=dynamic.images.first.image.thumb.url%>');background-size: cover">
+                      <div class="screenshot" style="background-image: url('<%=dynamic.images.first.image.thumb.url rescue ''%>');background-size: cover">
                       </div>
                     </a>
 
