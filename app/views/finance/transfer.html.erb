@@ -79,7 +79,7 @@
                         <span class="input-group-addon">元</span></div>
                     </div>
                     <div class="top8 pull-left m-left10">
-                      <button type="button" class="close" aria-label="Close" onclick="removePayee()">
+                      <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
@@ -131,9 +131,6 @@
                 function addPayee() {
                     $('#payee').before($('#payee').clone());
                 }
-                function removePayee() {
-
-                }
                 function init(coach, data) {
                     $('#container').highcharts({
                         chart: {type: 'column', margin: [50, 50, 100, 80]},
@@ -171,6 +168,10 @@
                 }
 
                 $(function () {
+                    $('#ios').on('click', '.close', function () {
+                        $(this).parent().parent().parent().remove();
+                    })
+
                     var year = $('#year').val();
                     var month = $('#month').val();
                     $.get('/finance/sale.json', {year: year, month: month}, function (data) {
