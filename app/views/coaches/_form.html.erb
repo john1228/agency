@@ -91,7 +91,7 @@
                       <div class="row">
                         <div class="col-lg-6 col-md-6">
                           <div class="form-section top15">
-                            <%= f.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true}) %>
+                            <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true}) %>
                           </div>
                         </div>
                       </div>
