@@ -10,10 +10,10 @@
                 <div class="panel-headint tdzty clearfix">
                   <h3 class=" pull-left panel-title">基本信息</h3>
                 </div>
-                <% if @error.present? %>
+                <% if @failure.present? %>
                     <div class="alert alert-danger alert-dismissable">
                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <% p.object.errors.each { |k, v| %>
+                      <% @failure.messages.values.each { |v| %>
                           <%= v %><br/>
                       <% } %>
                     </div>
@@ -111,14 +111,13 @@
                 <div class="panel-headint tdzty clearfix">
                   <h3 class=" pull-left panel-title">登录信息</h3>
                 </div>
-
                 <div class="form-section  top15">
                   <label class="input-label">手机号码</label>
                   <%= f.text_field :mobile, class: 'input-text' %>
                 </div>
                 <div class="form-section top15">
                   <label class="input-label">密码</label>
-                  <%= f.password_field :mobile, class: 'input-text' %>
+                  <%= f.password_field :password, class: 'input-text' %>
                 </div>
               </div>
             </div>

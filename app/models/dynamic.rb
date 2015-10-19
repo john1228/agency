@@ -8,4 +8,6 @@ class Dynamic < ActiveRecord::Base
   accepts_nested_attributes_for :images
   accepts_nested_attributes_for :film
   TOP = 1
+
+  validates_presence_of :images, if: Proc.new { |dynmamic| dynmamic.film.blank? }, message: '图片或者视频二者不能同时为空'
 end
