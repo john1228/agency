@@ -61,9 +61,9 @@ class FinanceController < ApplicationController
     @alipay = Rails.cache.fetch(@service.id)
     if @alipay.blank?
       Rails.cache.write(@service.id, {account: params[:account], name: params[:name]})
-      withdraw_params = {coach_id: @service.id, account: params[:account], name: params[:name], account: params[:account]}
+      withdraw_params = {coach_id: @service.id, account: params[:account], name: params[:name], amount: params[:amount]}
     else
-      withdraw_params = {coach_id: @service.id, account: @alipay[:account], name: @alipay[:name], account: params[:account]}
+      withdraw_params = {coach_id: @service.id, account: @alipay[:account], name: @alipay[:name], amount: params[:amount]}
     end
     withdraw = Withdraw.new(withdraw_params)
     if withdraw.save

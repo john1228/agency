@@ -2,7 +2,7 @@ class DynamicsController < ApplicationController
   layout 'admin'
 
   def index
-    @dynamics = @service.dynamics.paginate(page: params[:page]||1, per_page: 3)
+    @dynamics = @service.dynamics.paginate(page: params[:page]||1, per_page: 10)
   end
 
   def new
@@ -20,7 +20,7 @@ class DynamicsController < ApplicationController
   end
 
   def show
-    
+
   end
 
   def destroy
@@ -33,7 +33,7 @@ class DynamicsController < ApplicationController
   private
   def dynamic_params
     if params[:image].present?
-      params[:dynamic][:images_attributes] = params[:image]
+      params[:dynamic][:images_attributes] = params[:image].map { |image| {image: image} }
     elsif params[:film].present?
       params[:dynamic][:images_attributes][:film] = params[:film]
       params[:dynamic][:images_attributes][:cover] = params[:cover]
