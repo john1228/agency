@@ -33,6 +33,6 @@ class CoachesController < ApplicationController
   def coach_params
     params[:coach][:profile_attributes][:address] = (params[:province] + params[:city] + params[:area]).gsub('市辖区', '').gsub('市辖县', '')
     params.require(:coach).permit(:mobile, :password, profile_attributes:
-                                             [:avatar, :name, :gender, :birthday, :signature, :address, :target, :skill, :often_stadium, :interests, :identity])
+                                             [:avatar, :name, :gender, :birthday, :signature, :province, :city, :hobby, :identity])
   end
 end

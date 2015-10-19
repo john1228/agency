@@ -19,7 +19,6 @@ class ProfilesController < ApplicationController
   end
 
   def password
-
   end
 
   def change_password

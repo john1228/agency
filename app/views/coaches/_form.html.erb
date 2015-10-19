@@ -81,12 +81,6 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-md-4">
-                          <div class="form-section">
-                            <select class="input-textl" name="area">
-                            </select>
-                          </div>
-                        </div>
                       </div>
 
                       <div class="row">
@@ -127,7 +121,7 @@
   </div>
 </div>
 <script>
-    new PCAS("province", "city", "area");
+    new PCAS("province", "city", '<%=@coach.profile.province%>', '<%=@coach.profile.city%>');
     $(function () {
                 $("#coach_profile_attributes_birthday").datepicker({
                     language: 'zh-CN',

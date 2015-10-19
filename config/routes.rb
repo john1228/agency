@@ -11,8 +11,13 @@ Rails.application.routes.draw do
   resources :mass_message_groups
   resource :profile
 
-  get 'password' => 'profile#password'
-  post 'password' => 'profile#change_password', as: :change_password
+  get 'password' => 'profiles#password'
+  post 'password' => 'profiles#change_password', as: :change_password
+
+  get 'profile/photowall' => 'profiles#photowall'
+  post 'profile/photowall' => 'profiles#photowall'
+  get 'profile/showtime' => 'profiles#photowall'
+  post 'profile/showtime' => 'profiles#photowall'
 
   get 'students' => 'students#index'
   get 'students/group' => 'students#group'
