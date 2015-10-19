@@ -129,28 +129,28 @@
 </div>
 <script>
     new PCAS("province", "city", "area");
-    $("#coach_profile_attributes_avatar").change(function () {
-        var objUrl = getObjectURL(this.files[0]);
-        if (objUrl) {
-            $('#default_div').remove();
-            $('#avatar_preview').css('background-image', 'url("' + objUrl + '")');
-            $('#avatar_preview').css('background-size', 'cover');
-        }
-    });
     $(function () {
                 $("#coach_profile_attributes_birthday").datepicker({
                     language: 'zh-CN',
                     format: 'yyyy-mm-dd'
                 });
+                $('#coach_profile_attributes_hobby').multiselect({
+                    inheritClass: true,
+                    numberDisplayed: 8,
+                    nonSelectedText: '请选择提供的健身服务',
+                    maxHeight: 100,
+                    dropUp: true
+                });
+                $("#coach_profile_attributes_avatar").change(function () {
+                    var objUrl = getObjectURL(this.files[0]);
+                    if (objUrl) {
+                        $('#default_div').remove();
+                        $('#avatar_preview').css('background-image', 'url("' + objUrl + '")');
+                        $('#avatar_preview').css('background-size', 'cover');
+                    }
+                });
             }
     );
-    $('#coach_profile_attributes_hobby').multiselect({
-        inheritClass: true,
-        numberDisplayed: 8,
-        nonSelectedText: '请选择提供的健身服务',
-        maxHeight: 100,
-        dropUp: true
-    });
     /**
      * 建立一個可存取到該file的url
      * PS: 瀏覽器必須支援HTML5 File API
