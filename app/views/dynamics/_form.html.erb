@@ -1,12 +1,13 @@
 <div class="row">
   <div class="col-lg-12 top10 tdzty">
     <%= form_for(@dynamic, html: {multipart: true}) do |f| %>
-        <h3 class="poloklh4">发布动态</h3>
-
         <div class="top15 clearfix row">
           <div class="col-lg-12 col-md-12">
             <div class="panel panel-default">
               <div class="panel-body">
+                <div class="panel-headint tdzty clearfix">
+                  <h3 class=" pull-left panel-title">发布动态</h3>
+                </div>
                 <% if @error.present? %>
                     <div class="alert alert-danger" role="alert">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
