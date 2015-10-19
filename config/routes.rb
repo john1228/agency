@@ -9,10 +9,7 @@ Rails.application.routes.draw do
   resources :dynamics
   resources :message
   resources :mass_message_groups
-
-  get 'profile' => 'profile#show'
-  get 'profile/edit' => 'profile#edit'
-  post 'profile' => 'profile#update', as: :update_profile
+  resource :profile
 
   get 'password' => 'profile#password'
   post 'password' => 'profile#change_password', as: :change_password

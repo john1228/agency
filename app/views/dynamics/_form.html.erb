@@ -25,30 +25,30 @@
                   <label class="input-label">动态内容</label>
                   <%= f.text_area(:content, class: 'input-text  pciilk', rows: 3) %>
                 </div>
-                <div class="top10 clearfix cot-til" id="image_container">
-                  <div class="upload_area pull-left" id="image_div">
-                    <div class="panel-body">
-                      <div id="default_div">
+                <div id="multi" class=" top10 clearfix cot-til">
+                  <div id="image">
+                    <div class="upload_area pull-left">
+                      <div class="panel-body">
                         <i class="iconfont2 lxcop">&#xe618;</i>
 
                         <p class="text-center cot-til">上传图片</p>
 
                         <p class="text-center cot-til">（可以上传6张）</p>
                       </div>
-                      <input type="file" multiple="true" class="image_uploader" id="my_image" name="image[]" onchange="preview(this)">
+                      <input type="file" class="image_uploader" name="image[]">
                     </div>
                   </div>
+                  <div class="pull-left tacative " id="text">或</div>
+                  <div id="film">
+                    <div class="upload_area pull-left">
+                      <div class="panel-body"><i class="iconfont2 lxcop">&#xe60f;</i>
 
-                  <div class="pull-left tacative " id="text_div">或</div>
-                  <div class="upload_area pull-left" id="film_div">
-                    <div class="panel-body"><i class="iconfont2 lxcop">&#xe60f;</i>
-
-                      <p class="text-center">上传视频</p>
-                      <input multiple="true" type="file" class="film_uploader">
+                        <p class="text-center">上传视频</p>
+                      </div>
+                      <input type="file" class="film_uploader" name="film">
                     </div>
                   </div>
                 </div>
-
                 <div class="fygroup">
                   <%= f.submit('确认', class: 'btntn-lg') %>
                 </div>
@@ -61,41 +61,6 @@
 </div>
 
 <script>
-    function preview(obj) {
-        $('#text_div').remove();
-        $('#film_div').remove();
-        var file_count = 0;
-        var uploaders = document.getElementsByClassName('image_uploader');
-        for (var i = 0; i < uploaders.length; i++) {
-            file_count = file_count + uploaders[i].files.length;
-        }
-//        还可以上传图片数
-        var available = (6 - file_count);
-//        已上传图片数
-        var uploaded = file_count - obj.files.length;
-
-        for (var i = 0; i < (6 - uploaded); i++) {
-            var objUrl = getObjectURL(obj.files[i]);
-            $('#image_div').before(
-                    "<div class='icon2 pull-left' style='background-image: url(" + objUrl + ");background-size: cover;'>" +
-                    "<a href='#'> <i class='iconfont pritbt'>&#xe60d;</i></a>" +
-                    "</div>"
-            );
-        }
-        $('.upload_area.pull-left').hide();
-        var image_div = "<div class='upload_area pull-left'>" +
-                "<div class='panel-body'>" +
-                " <i class='iconfont2 lxcop'>&#xe618;</i>" +
-                "<p class='text-center cot-til'>上传图片</p>" +
-                "<p class='text-center cot-til'>（还可以上传" +
-                available +
-                "张）</p>" +
-                "<input type='file' multiple='true' class='image_uploader' name='image[]' onchange='preview(this)'/>" +
-                "</div>";
-        if (available > 0)
-            $("#image_container").append(image_div);
-
-    }
     function getObjectURL(file) {
         var url = null;
         if (window.createObjectURL != undefined) { // basic
@@ -107,4 +72,50 @@
         }
         return url;
     }
+    $(function () {
+        var file_count = 0;
+        $('#multi').on('change', '.image_uploader', function () {
+            $('#text').remove();
+            $('#film').remove();
+            var remain = 6 - file_count;
+            for (var i = 0; i < (remain > this.files.length ? this.files.length : remain); i++) {
+                var objUrl = getObjectURL(this.files[i]);
+                $(this).parent().children('div').remove();
+                $(this).parent().css('background-image', "url(" + objUrl + ")");
+                $(this).parent().css('background-size', "cover");
+            }
+            file_count = file_count + this.files.length;
+            if (file_count < 6) {
+                var image_div = "<div class='upload_area pull-left'>" +
+                        "<div class='panel-body'>" +
+                        "<i class='iconfont2 lxcop'>&#xe618;</i>" +
+                        "<p class='text-center cot-til'>上传图片</p>" +
+                        "<p class='text-center cot-til'>（还可以上传" + (6 - file_count) + "张）</p>"
+                        + "</div>" +
+                        "<input type='file'     class='image_uploader' name='image[]'/>" +
+                        "</div>";
+                $(this).parent().parent().append(image_div);
+            }
+        })
+        $('#multi').on('change', '.film_uploader', function () {
+            $('#image').remove();
+            $('#text').remove();
+            $('#cover').remove();
+            var image_div = "<div class='upload_area pull-left' id='cover'>" +
+                    "<div class='panel-body'>" +
+                    "<i class='iconfont2 lxcop'>&#xe618;</i>" +
+                    "<p class='text-center cot-til'>请上传视频的封面</p>" + "</div>" +
+                    "<input type='file' name='cover' class='cover_uploader'/>" +
+                    "</div>";
+            $(this).parent().parent().append(image_div);
+        });
+
+        $('#multi').on('change', '.cover_uploader', function () {
+            var objUrl = getObjectURL(this.files[0]);
+            $(this).parent().children('div').remove();
+            $(this).parent().css('background-image', "url(" + objUrl + ")");
+            $(this).parent().css('background-size', "cover");
+        })
+    })
+
 </script>

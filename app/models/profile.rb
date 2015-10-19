@@ -21,9 +21,9 @@ class Profile < ActiveRecord::Base
     end
   end
 
-  def interests_string
+  def hobby_string
     choose_interests = INTERESTS['items'].select { |item| hobby.include?(item['id']) }
-    choose_interests.collect { |choose| choose['name'] }.join(',')
+    (choose_interests.map { |choose| choose['name'] }).join('/')
   end
 
   def tags

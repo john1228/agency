@@ -434,6 +434,19 @@ th {
   display: block;
 }
 
+.cover_uploader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  text-align: right;
+  opacity: 0;
+  background: 0 0;
+  cursor: inherit;
+  display: block;
+}
+
 .tacative {
   line-height: 200px;
   margin: 0 10px;

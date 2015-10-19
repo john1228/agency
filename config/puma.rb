@@ -31,15 +31,15 @@ stdout_redirect "#{application_path}/log/puma.stdout.log", "#{application_path}/
 # bind 'tcp://0.0.0.0:9292'
 # bind 'unix:///var/run/puma.sock'
 # bind 'unix:///var/run/puma.sock?umask=0777'
-# bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'
+# bind 'ssl://127.0.0.1:9292?key=path_to_key&certs=path_to_cert'
 #
 ## Comment the next line if you use apache.
 bind "unix://#{application_path}/tmp/sockets/mxing.socket"
 
-# Instead of “bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'” you
+# Instead of “bind 'ssl://127.0.0.1:9292?key=path_to_key&certs=path_to_cert'” you
 # can also use the “ssl_bind” option.
 #
-# ssl_bind '127.0.0.1', '9292', { key: path_to_key, cert: path_to_cert }
+# ssl_bind '127.0.0.1', '9292', { key: path_to_key, certs: path_to_cert }
 
 # Code to run before doing a restart. This code should
 # close log files, database connections, etc.

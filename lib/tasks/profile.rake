@@ -1,4 +1,4 @@
-namespace :profile do
+namespace :profiles do
   desc '我的资料'
   task :show do
     host = 'http://localhost'

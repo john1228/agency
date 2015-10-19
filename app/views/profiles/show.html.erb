@@ -9,18 +9,18 @@
                 <i class="iconfont">&#xe611;</i>编辑</a>
             </div>
             <a href="#" class="thumbnait">
-              <img src="img/1.jpg" class="img-circle">
+              <%= image_tag(@profile.avatar.thumb.url, class: 'img-circle') %>
             </a>
           </div>
         </div>
         <div class="clearfix">
           <div class="col-xs-12 col-md-12 ">
             <div class="text-center fygroup ">
-              <p class="color20"><%= @service.profile.name %></p>
+              <p class="color20"><%= @profile.name %></p>
 
-              <p class="color5c top8">美型号 <%= @service.profile.mxid %></p>
+              <p class="color5c top8">美型号 <%= @profile.mxid %></p>
 
-              <p class="color5c top5"><%= truncate(@service.profile.interests_string.gsub(',', '/')) %></p>
+              <p class="color5c top5"><%= @profile.hobby_string %></p>
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@
               <i class="iconfont5 ">&#xe613;</i>
             </div>
             <div class="media-body p-txt">
-              <%= @service.profile.mobile %>
+              <%= @profile.mobile %>
             </div>
           </div>
           <div>
@@ -46,13 +46,13 @@
               <i class="iconfont5 ">&#xe614;</i>
             </div>
             <div class="media-body p-txt">
-              <%= @service.profile.address %>
+              <%= @profile.province + @profile.city + @profile.address %>
             </div>
           </div>
 
         </div>
         <div class="panel-body polkt top50 p-txt">
-          <%= @service.profile.signature %>
+          <%= @profile.signature %>
         </div>
       </div>
 

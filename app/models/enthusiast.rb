@@ -1,5 +1,5 @@
 class Enthusiast<User
-  default_scope { joins(:profile).where('profiles.identity' => 0) }
+  default_scope { joins(:profiles).where('profiles.identity' => 0) }
 
   def detail
     detail = {
