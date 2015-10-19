@@ -22,8 +22,7 @@ class ReportController < ApplicationController
       @s_order << Order.joins(:order_item).where(service_id: @service.id, updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).count
       @c_order << Order.joins(:order_item).where(coach_id: @service.coaches.pluck(:id), updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).count
     }
-    @orders = Order.paginate(page: params[:page]||1, per_page: 1)
-    #@orders = Order.joins(:order_item).where(updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
+    @orders = Order.joins(:order_item).where(updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
     render layout: false
   end
 
@@ -32,10 +31,9 @@ class ReportController < ApplicationController
     filter[:order_items] = {sku: params[:sku]} if params[:sku].present?
     filter[:coach_id] = params[:coach] if params[:coach].present?
     date = Date.new(params[:year].to_i, params[:month].to_i)
-    @orders = Order.paginate(page: params[:page]||1, per_page: 1)
-    # @orders = Order.joins(:order_item).where(order_items: {sku: sku},
-    #                                          service_id: @service.id,
-    #                                          updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
+    @orders = Order.joins(:order_item).where(order_items: {sku: sku},
+                                             service_id: @service.id,
+                                             updated_at: date.at_beginning_of_month..date.at_end_of_month).paginate(page: params[:page]||1, per_page: 1)
     respond_to do |format|
       format.html
       format.js
@@ -100,13 +98,5 @@ class ReportController < ApplicationController
       format.html
       format.js
     end
-  end
-
-
-  def coach
-    @coaches = @service.coaches.pluck(:id, 'profiles.name')
-    @coach = @service.coaches.first.id rescue 0
-    @year = Date.today.year
-    @month = Date.today.month
   end
 end
