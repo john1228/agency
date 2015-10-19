@@ -10,7 +10,7 @@ class FinanceController < ApplicationController
     coach = []
     sale = []
     Order.where(coach_id: @service.coaches.pluck(:id)).top_30(date).map { |item|
-      sale << item.sale
+      sale << item.sale.to_i
       coach << Coach.find_by(id: item.coach_id).profile.name
     }
     render json: {coach: coach, sale: sale}
