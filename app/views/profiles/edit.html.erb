@@ -66,8 +66,19 @@
 </div>
 <script>
     new PCAS("profile[province]", "profile[city]", '<%=@profile.province%>', '<%=@profile.city%>');
-    $('#profile_hobby').multiselect({numberDisplayed: 8, nonSelectedText: '请选择提供的健身服务'});
-    $('#profile_service').multiselect({numberDisplayed: 8, nonSelectedText: '请选择提供的基础服务'});
+    $('#profile_hobby').multiselect({
+        enableFiltering: true,
+        numberDisplayed: 8,
+        nonSelectedText: '请选择提供的健身服务',
+        maxHeight: 200,
+        dropup: true
+    });
+    $('#profile_service').multiselect({
+        numberDisplayed: 8,
+        nonSelectedText: '请选择提供的健身服务',
+        maxHeight: 200,
+        dropup: true
+    });
     $("#profile_avatar").change(function () {
         var objUrl = getObjectURL(this.files[0]);
         if (objUrl) {

@@ -15,7 +15,7 @@ namespace :sns do
   task :apns do
     require 'houston'
     apn = Houston::Client.production
-    apn.certificate = File.read("#{Rails.root}/config/certs/production.pem")
+    apn.certificate = File.read("#{Rails.root}/config/certs/developer.pem")
 
     token = "c7c06762 5ca700f9 dd37f1ef 7e226418 7674c924 5d0689c9 a5500b10 fa4cf9c7"
 
@@ -26,7 +26,7 @@ namespace :sns do
     notification.sound = "sosumi.aiff"
     notification.category = "INVITE_CATEGORY"
     notification.content_available = true
-    notification.custom_data = {action: 1, page: {message: '这是内部消息'}}
+    notification.custom_data = {action: 1, page: {message: '这是一个测试消息'}}
     apn.push(notification)
     puts notification.error
   end
