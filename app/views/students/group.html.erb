@@ -126,14 +126,13 @@
         var group_id = $(this).attr('data-group-id');
         $('#choose_group').attr('value', group_id);
         $.getJSON('/groups/' + group_id + '/students', function (data) {
-            $('#students tbody').html('');
+            $('#students tbody').empty();
             $.each(data.group, function (k, v) {
                 var _id = v.id;
                 var _name = v.name;
                 var _gender = v.gender;
                 var _source = v.source;
                 $('#chk_' + _id).attr('checked', true);
-
                 $('#students').append(
                         '<tr id="student_' + _id + '">' +
                         '<input type="hidden" name="mass_message_group[user_id][]" value="' + _id +
@@ -153,6 +152,8 @@
     function addGroup() {
         $('#myModal').modal('hide');
         $.post('/groups/', {'name': $('#name').val()}, function (data) {
+            $("#students tbody").empty();
+
             if (data.code == 1) {
                 $('#groups li').removeClass('ndj');
                 var group_id = data.group.id;
