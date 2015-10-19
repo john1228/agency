@@ -2,7 +2,6 @@ class DashboardController < ApplicationController
   layout 'admin'
 
   def index
-    @service = Service.first
     @date = Date.new((params[:year]||Date.today.year).to_i, (params[:month]||Date.today.month).to_i)
     @days = []
     @all = []

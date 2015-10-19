@@ -46,7 +46,7 @@
               <i class="iconfont5 ">&#xe614;</i>
             </div>
             <div class="media-body p-txt">
-              <%= @profile.province + @profile.city + @profile.address %>
+              <%= @profile.province.to_s + @profile.city.to_s + @profile.address.to_s %>
             </div>
           </div>
 

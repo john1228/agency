@@ -19,13 +19,9 @@ class DynamicsController < ApplicationController
     render action: :new
   end
 
-  def edit
+  def show
+    
   end
-
-  def update
-
-  end
-
 
   def destroy
     @result = false
