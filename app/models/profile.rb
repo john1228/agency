@@ -5,6 +5,13 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   TAGS = %w(会员 认证 私教)
 
+  validates_presence_of :name, if: Proc.new { |profile| profile.identity.eql?(1) }, message: '名字不能为空'
+  validates_presence_of :avatar, if: Proc.new { |profile| profile.identity.eql?(1) }, message: '头像不能为空'
+  validates_presence_of :birthday, if: Proc.new { |profile| profile.identity.eql?(1) }, message: '生日不能为空'
+  validates_presence_of :gender, if: Proc.new { |profile| profile.identity.eql?(1) }, message: '性别不能为空'
+  validates_presence_of :hobby, if: Proc.new { |profile| profile.identity.eql?(1) }, message: '健身服务不能为空'
+
+
   BASE_NO = 10000
   class << self
     def find_by_mxid(mxid)
