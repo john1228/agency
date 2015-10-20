@@ -22,7 +22,7 @@ class ReportController < ApplicationController
       @s_order << Order.joins(:order_item).where(service_id: @service.id, updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).count
       @c_order << Order.joins(:order_item).where(coach_id: @service.coaches.pluck(:id), updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).count
     }
-    @orders = Order.joins(:order_item).where(updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 1)
+    @orders = Order.joins(:order_item).where(updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 10)
     render layout: false
   end
 
@@ -31,7 +31,7 @@ class ReportController < ApplicationController
     filter[:order_items] = {sku: params[:sku]} if params[:sku].present?
     filter[:coach_id] = params[:coach] if params[:coach].present?
     date = Date.new(params[:year].to_i, params[:month].to_i)
-    @orders = Order.joins(:order_item).where(updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 1)
+    @orders = Order.joins(:order_item).where(updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 10)
     respond_to do |format|
       format.html
       format.js
@@ -50,7 +50,7 @@ class ReportController < ApplicationController
       @day << everyday.day
       @appointment << Appointment.where(coach_id: @service.coaches.pluck(:id), created_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).count
     }
-    @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), created_at: date.at_beginning_of_day..date.at_end_of_day).where(filter).order(id: :desc).paginate(page: params[:page]||1, per_page: 1)
+    @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), created_at: date.at_beginning_of_day..date.at_end_of_day).where(filter).order(id: :desc).paginate(page: params[:page]||1, per_page: 10)
     render layout: false
   end
 
@@ -59,7 +59,7 @@ class ReportController < ApplicationController
     filter[:sku] = params[:sku] if params[:sku].present?
     filter[:coach_id] = params[:coach] if params[:coach].present?
     date = Date.new(params[:year].to_i, params[:month].to_i)
-    @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), created_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).order(id: :desc).paginate(page: params[:page]||1, per_page: 1)
+    @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), created_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).order(id: :desc).paginate(page: params[:page]||1, per_page: 10)
     respond_to do |format|
       format.html
       format.js
@@ -80,7 +80,7 @@ class ReportController < ApplicationController
       @c_sale << (Order.joins(:order_item).where(coach_id: @service.coaches.pluck(:id), updated_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).sum(:total)).to_i
     }
     @orders = Order.joins(:order_item).where(service_id: @service.id,
-                                             updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 1)
+                                             updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 10)
     render layout: false
   end
 
@@ -90,7 +90,7 @@ class ReportController < ApplicationController
     filter[:coach_id] = {sku: sku} if params[:coach].present?
     date = Date.new(params[:year].to_i, params[:month].to_i)
     @orders = Order.joins(:order_item).where(service_id: @service.id,
-                                             updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 1)
+                                             updated_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).paginate(page: params[:page]||1, per_page: 10)
     respond_to do |format|
       format.html
       format.js
