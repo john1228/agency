@@ -45,8 +45,7 @@
               <a href="/profile/edit" class="pull-right">
                 <i class="iconfont">&#xe611;</i>编辑</a>
             </div>
-            <a href="#" class="thumbnait">
-              <%= image_tag(@profile.avatar.thumb.url, class: 'img-circle') %>
+            <a href="#" class="thumbnait" style="background: url('<%=@profile.avatar.thumb.url%>') center center no-repeat ; background-size: cover;">
             </a>
           </div>
         </div>

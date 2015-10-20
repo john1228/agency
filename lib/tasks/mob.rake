@@ -11,7 +11,6 @@ namespace :mob do
       }.to_json.to_s
     end
     body = JSON.parse(response.body)
-    puts body
     Rails.cache.write('mob', body['access_token'])
   end
 end

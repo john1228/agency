@@ -658,20 +658,18 @@ th {
 .thumbnait {
   display: block;
   padding: 4px;
-  margin: 10px 0;
+  margin: 10px auto;
   line-height: 1.42857143;
-  border-radius: 4px;
+  border-radius: 50%;
   -webkit-transition: border .2s ease-in-out;
   -o-transition: border .2s ease-in-out;
   transition: border .2s ease-in-out;
+  height: 200px;
+  width: 200px;
 }
 
-.thumbnait > img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin-right: auto;
-  margin-left: auto;
+.thumbnait img {
+  border-radius: 50%;
 }
 
 .color20 {
