@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = @service.profile # Profile.find_by(user_id: @service.id)
+    @profile = @service.profile
   end
 
   def update
@@ -26,7 +26,7 @@ class ProfilesController < ApplicationController
       if current_admin_user.reset_password!(params[:new_password], params[:confirm_password])
         @success = '修改成功'
       else
-        @error = '您输入新密码不一致'
+        @error = '您输入新密码不正确'
       end
     else
       @error = '您输入的原密码不正确'
