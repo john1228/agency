@@ -18,7 +18,7 @@ class CoachesController < ApplicationController
     else
       @failure = @coach.errors
     end
-    render action: :show
+    redirect_to action: :new
   end
 
   def update
@@ -31,7 +31,8 @@ class CoachesController < ApplicationController
 
   private
   def coach_params
-    params[:coach][:profile_attributes][:address] = (params[:province] + params[:city] + params[:area]).gsub('市辖区', '').gsub('市辖县', '')
+    params[:coach][:profile_attributes][:province] = params[:province]
+    params[:coach][:profile_attributes][:city] = params[:city]
     params.require(:coach).permit(:mobile, :password, profile_attributes:
                                              [:avatar, :name, :gender, :birthday, :signature, :province, :city, :hobby, :identity])
   end

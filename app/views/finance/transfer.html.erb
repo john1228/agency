@@ -64,7 +64,16 @@
                       转账成功
                     </div>
                 <% end %>
+
                 <div class="colmd400 fygroup clearfix" id="payee">
+                  <div class="form-section fygroup colmd3">
+                    <div class='input-group date'>
+                              <span class="input-group-addon">
+                                账户余额
+                              </span>
+                      <input type="text" class="input-text" value="<%= @service.wallet.balance.to_f %>" readonly>
+                    </div>
+                  </div>
                   <div class="colmd3 pull-left">
                     <div class="form-section">
                       <%= select_tag('account[]', options_for_select(@service.coaches.map { |coach| [coach.profile.name, coach.id] }), class: 'input-textl') %>
