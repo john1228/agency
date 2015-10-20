@@ -23,7 +23,7 @@
               <td class="text-center tyeq"><%= coach.profile.created_at.strftime('%Y-%m-%d') rescue '' %></td>
               <td><%= truncate(coach.profile.signature) %></td>
               <td class="text-center">
-                <a confirm="您确定要删除吗?" rel="nofollow" data-method="delete" href="/coaches/<%= coach.id %>"><i class="iconfont pritbt ">&#xe60d;</i></a>
+                <a class="delete_icon" href="/coaches/<%= coach.id %>"><i class="iconfont pritbt ">&#xe60d;</i></a>
               </td>
             </tr>
         <% } %>
@@ -35,3 +35,12 @@
     </div>
   </div>
 </div>
+<script>
+    $(function () {
+        $('.delete_icon').click(function (e) {
+            
+            e.preventDefault();
+            location.reload();
+        });
+    })
+</script>
