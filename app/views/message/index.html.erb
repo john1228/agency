@@ -14,7 +14,7 @@
         <tbody class="pritbl">
         <% @mass_messages.each { |message| %>
             <tr>
-              <td><%= (MassMessageGroup.where(id: message.user_id).map { |group| group.name }).join('|') %></td>
+              <td style="text-align: left"><%= (MassMessageGroup.where(id: message.user_id).map { |group| group.name }).join('|') %></td>
               <td><%= truncate(message.content) %></td>
               <td></td>
             </tr>

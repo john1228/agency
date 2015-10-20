@@ -7,7 +7,7 @@ class CoachesController < ApplicationController
 
   def new
     @coach = Coach.new
-    @coach.build_profile
+    @coach.build_profile(birthday: Date.today.prev_year(30))
     @success = params[:success]
     @failure = params[:failure]
   end
