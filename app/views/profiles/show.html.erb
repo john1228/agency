@@ -131,10 +131,10 @@
             <% @service.photos.each do |photo| %>
                 <div class="showcase-slide">
                   <div class="showcase-content">
-                    <%= image_tag(photo.photo.url) %>
+                    <%= image_tag(photo.photo.url, width: 560) %>
                   </div>
                   <div class="showcase-thumbnail">
-                    <%= image_tag(photo.photo.url, width: '140px') %>
+                    <%= image_tag(photo.photo.url, width: 140) %>
                   </div>
                 </div>
             <% end %>
