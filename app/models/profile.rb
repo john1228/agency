@@ -50,7 +50,6 @@ class Profile < ActiveRecord::Base
       req.headers['Authorization'] = "Bearer #{easemob_token}"
       req.body = "{\"username\": \"#{mxid}\", \"password\": \"123456\", \"nickname\": \"#{name}\"}"
     end
-    MessageJob.set(wait: 1.minute).perform_later(id, MESSAGE['欢迎语'])
   end
 
   def delete_from_easemob
