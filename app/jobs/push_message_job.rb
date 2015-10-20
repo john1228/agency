@@ -5,8 +5,6 @@ class PushMessageJob < ActiveJob::Base
     access_token = Rails.cache.fetch('mob')
     from_user = User.find_by_mxid(from)
     groups = MassMessageGroup.where(id: groups)
-
-    user = []
     groups.map { |group|
       users = User.where(id: group.user_id).map { |user| "#{user.profile.mxid}" }
       (0..(users.size/20)).each { |index|
@@ -20,5 +18,6 @@ class PushMessageJob < ActiveJob::Base
         sleep(0.05)
       }
     }
+    MassMessage.create(service_id: form_user.id,user_id: groups)
   end
 end
