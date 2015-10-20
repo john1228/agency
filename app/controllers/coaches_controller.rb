@@ -18,6 +18,7 @@ class CoachesController < ApplicationController
       ServiceMember.create(service: @service, coach: coach)
       @success = true
       @coach = Coach.new
+      @coach.build_profile
     else
       @failure = coach.errors
       @coach = coach

@@ -13,6 +13,7 @@ class MessageController < ApplicationController
 
   def create
     PushMessageJob.perform_later(@service.profile.mxid, params[:group], params[:content])
+    MassMessage.create(service_id: @service.id,user_id: params[:group])
     redirect_to action: :new, success: true
   end
 end

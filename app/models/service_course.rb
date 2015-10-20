@@ -32,7 +32,7 @@ class ServiceCourse < ActiveRecord::Base
           selling_price: selling_price,
           store: store,
           limit: limit,
-          address: agency.profile.address||'',
+          address: agency.profile.province||'' + agency.profile.city||'' +agency.profile.address||'',
           coordinate: (agency.place.lonlat rescue 'POINT(0 0)')
       )
     }

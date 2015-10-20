@@ -18,6 +18,5 @@ class PushMessageJob < ActiveJob::Base
         sleep(0.05)
       }
     }
-    MassMessage.create(service_id: form_user.id,user_id: groups)
   end
 end
