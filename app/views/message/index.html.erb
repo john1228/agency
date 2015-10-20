@@ -6,16 +6,17 @@
       <table class="table table-hover txt-zt">
         <thead>
         <tr class="prito">
-          <th width="45%">收件人</th>
+          <th width="45%">收件组</th>
           <th width="45%">内容</th>
           <th class="text-center">操作</th>
         </tr>
         </thead>
         <tbody class="pritbl">
-        <% @mass_messages.each { |coach| %>
+        <% @mass_messages.each { |message| %>
             <tr>
-              <td class="text-center tyeq"><%= image_tag(coach.profile.avatar.thumb.url, class: 'img-circle  img-w') %></td>
+              <td class="text-center tyeq"><%= (MassMesssageGroup.where(id: message.user_id).map { |group| group.name }).join(',') %></td>
               <td><%= truncate(coach.profile.signature) %></td>
+              <td></td>
             </tr>
         <% } %>
         </tbody>

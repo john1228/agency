@@ -8,17 +8,21 @@ class CoachesController < ApplicationController
   def new
     @coach = Coach.new
     @coach.build_profile
+    @success = params[:success]
+    @failure = params[:failure]
   end
 
   def create
-    @coach = Coach.new(coach_params)
-    if @coach.save
-      ServiceMember.create(service: @service, coach: @coach)
+    coach = Coach.new(coach_params)
+    if coach.save
+      ServiceMember.create(service: @service, coach: coach)
       @success = true
+      @coach = Coach.new
     else
-      @failure = @coach.errors
+      @failure = coach.errors
+      @coach = coach
     end
-    redirect_to action: :new
+    render action: :new
   end
 
   def update
@@ -34,6 +38,6 @@ class CoachesController < ApplicationController
     params[:coach][:profile_attributes][:province] = params[:province]
     params[:coach][:profile_attributes][:city] = params[:city]
     params.require(:coach).permit(:mobile, :password, profile_attributes:
-                                             [:avatar, :name, :gender, :birthday, :signature, :province, :city, :hobby, :identity])
+                                             [:avatar, :name, :gender, :birthday, :signature, :province, :city, :identity, hobby: []])
   end
 end
