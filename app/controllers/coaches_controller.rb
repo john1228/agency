@@ -31,7 +31,9 @@ class CoachesController < ApplicationController
   end
 
   def destroy
-    render action: :index
+    # @coach
+
+    render json: {result: true}
   end
 
   private

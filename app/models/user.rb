@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  default_scope { where(status: 1) }
   has_one :profile, dependent: :destroy
   has_many :photos, dependent: :destroy
   has_many :dynamics, dependent: :destroy

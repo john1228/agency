@@ -23,7 +23,7 @@
               <td class="text-center tyeq"><%= coach.profile.created_at.strftime('%Y-%m-%d') rescue '' %></td>
               <td><%= truncate(coach.profile.signature) %></td>
               <td class="text-center">
-                <a class="delete_icon" href="/coaches/<%= coach.id %>"><i class="iconfont pritbt ">&#xe60d;</i></a>
+                <!--<a class="delete_icon" href="/coaches/<%= coach.id %>"><i class="iconfont pritbt ">&#xe60d;</i></a>-->
               </td>
             </tr>
         <% } %>
@@ -38,7 +38,7 @@
 <script>
     $(function () {
         $('.delete_icon').click(function (e) {
-            
+            $.delete(this.href);
             e.preventDefault();
             location.reload();
         });
