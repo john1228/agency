@@ -22,7 +22,16 @@ class ProfilesController < ApplicationController
   end
 
   def change_password
-    redirect_to action: :password
+    if current_admin_user.valid_password?(params[:password])
+      if current_admin_user.reset_password!(params[:new_password], params[:confirm_password])
+        @success = '修改成功'
+      else
+        @error = '您输入新密码不一致'
+      end
+    else
+      @error = '您输入的原密码不正确'
+    end
+    render action: :password
   end
 
   def photowall

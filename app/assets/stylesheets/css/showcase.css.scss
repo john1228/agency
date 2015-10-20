@@ -60,6 +60,19 @@
   text-align: center;
 }
 
+.showcase-content {
+  background-color: #000;
+  text-align: center;
+}
+
+.showcase img {
+  max-width: 100%;
+}
+
+.nav-second-level {
+  display: none;
+}
+
 .showcase-content-wrapper {
   text-align: center;
   height: 470px;
@@ -89,7 +102,7 @@
 
 /* Thumbnails */
 .showcase-thumbnail-container /* Used for backgrounds, no other styling!!! */
-	     {
+	       {
   background-color: #000;
 }
 
