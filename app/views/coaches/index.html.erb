@@ -20,7 +20,7 @@
               <td class="text-center tyeq"><%= image_tag(coach.profile.avatar.thumb.url, class: 'img-circle  img-w') %></td>
               <td class="text-center tyeq"><%= coach.profile.name %></td>
               <td class="text-center tyeq"><%= coach.profile.gender.eql?(1) ? '女' : '男' %></td>
-              <td class="text-center tyeq"><%= coach.profile.created_at.strftime('%Y-%m-%d') rescue '' %></td>
+              <td class="text-center tyeq"><%= coach.created_at.strftime('%Y-%m-%d') %></td>
               <td><%= truncate(coach.profile.signature) %></td>
               <td class="text-center">
                 <!--<a class="delete_icon" href="/coaches/<%= coach.id %>"><i class="iconfont pritbt ">&#xe60d;</i></a>-->
