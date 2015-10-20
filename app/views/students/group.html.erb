@@ -15,8 +15,9 @@
                   <ul id="groups">
                     <% @groups.each do |group| %>
                         <li class="clearfix" id="List-1" data-group-id="<%= group.id %>">
-                          <p class="pull-left  "> <%= group.name %> </p>
-                          <a class="pull-right cursor"> <i class="iconfont pritbt"></i>
+                          <p class="pull-left"> <%= group.name %> </p>
+                          <a class="pull-right cursor delete_icon" href="/students/group/<%= group.id %>">
+                            <i class="iconfont pritbt"></i>
                           </a>
                         </li>
                     <% end %>
@@ -111,7 +112,7 @@
         }
     });
 
-    $(document).on('click', '.delete_icon', function () {
+    $('#students').on('click', '.delete_icon', function () {
         var _id = $(this).attr('data-uid');
         $('#chk_' + _id).attr('checked', false);
         var div = document.getElementById('student_' + _id);
@@ -119,6 +120,13 @@
         $('#student_count').text($("#students tr").length - 1);
 
     });
+    $('#groups').on('click', '.delete_icon', function (e) {
+        $.delete(this.href, function (data) {
+            $(this).parent().empty();
+        });
+        e.preventDefault();
+    });
+
 
     $(document).on('click', '#groups li', function () {
         $('#groups li').removeClass('ndj');
@@ -163,7 +171,7 @@
                 $('#groups').append(
                         '<li class="clearfix" id="List-1" class="ndj" data-group-id="' + group_id + '">' +
                         '<p class="pull-left">' + group_name + '</p>' +
-                        '<a class="pull-right cursor"> <i class="iconfont pritbt"></i></a></li>'
+                        '<a class="pull-right cursor delete_icon"> <i class="iconfont pritbt"></i></a></li>'
                 );
             } else {
                 alert('创建失败');

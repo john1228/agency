@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'students' => 'students#index'
   get 'students/group' => 'students#group'
   post 'students/group' => 'students#create_group', as: :create_group
+  delete 'students/group/:id' => 'students#delete_group'
 
   get 'groups/:id/students' => 'mass_message_groups#students'
   post 'groups/:id/students' => 'mass_message_groups#update'

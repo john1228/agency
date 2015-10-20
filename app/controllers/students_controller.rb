@@ -19,6 +19,16 @@ class StudentsController < ApplicationController
     MassMessageGroup.create(group_params.merge(service_id: @service.id))
   end
 
+  def delete_group
+    group = MassMessageGroup.find_by(id: params[:id])
+    if group.destroy
+      result = true
+    else
+      result = false
+    end
+    render json: {result: result}
+  end
+
   def student
     @users = User.where(id: MassMessageGroup.find_by(params[:id]).user_id)
   end
