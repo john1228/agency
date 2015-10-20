@@ -388,7 +388,7 @@
                 jQuery('.showcase-thumbnail').each(function () {
                     thumbnailStretch += getElementWidth(jQuery(this));
                 });
-                thumb_wrapper.css('width', thumbnailStretch);
+                thumb_wrapper.css('width', 10008);
             }
             else {
                 jQuery('.showcase-thumbnail').each(function () {
@@ -1210,6 +1210,7 @@
 
                     displayAnchors(obj);
                     displayCaption(obj);
+
 
                     if (options.dynamic_height) {
                         obj.css('height', obj.find('.showcase-content').children().height());
