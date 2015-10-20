@@ -15,7 +15,7 @@
         <% @mass_messages.each { |message| %>
             <tr>
               <td class="text-center tyeq"><%= (MassMessageGroup.where(id: message.user_id).map { |group| group.name }).join('|') %></td>
-              <td><%= truncate(coach.profile.signature) %></td>
+              <td><%= truncate(message.content) %></td>
               <td></td>
             </tr>
         <% } %>
