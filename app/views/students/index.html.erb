@@ -24,7 +24,15 @@
               <td class="text-center tyeq"><%= user.profile.gender.eql?(1) ? '女' : '男' %></td>
               <td class="text-center tyeq"><%= user.profile.birthday.strftime('%Y-%m-%d') rescue '' %></td>
               <td class="text-center tyeq"><%= truncate(user.mobile) %></td>
-              <td class="text-center tyeq"><%= @orders.include?(user.id) ? '购买课程' : '关注' %></td>
+              <td class="text-center tyeq"><%=
+                  if @orders.include?(user.id)
+                    if @follows.include?(user.id)
+                      '购买课程|'
+                    else
+                    end
+                  else
+                  end
+              %></td>
             </tr>
         <% } %>
         </tbody>

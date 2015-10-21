@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   layout 'admin'
 
   def index
-    @follows = Follow.where(service_id: @service.id).pluck(:user_id)||User.all.pluck(:id)
+    @follows = Follow.where(service_id: @service.id).pluck(:user_id)
     @orders = Order.where(service_id: @service.id).pluck(:user_id)
     @users = User.where(id: (@follows + @orders).uniq).paginate(page: params[:page]||1, per_page: 10)
   end
