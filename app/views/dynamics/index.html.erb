@@ -12,7 +12,6 @@
                       <div class="screenshot" style="background-image: url('<%=dynamic.images.first.image.thumb.url rescue ''%>');background-size: cover">
                       </div>
                     </a>
-
                     <dl class="polokl">
                       <a href="/dynamics/<%= dynamic.id %>">
                         <dd class="destion"><%= dynamic.created_at.localtime.strftime('%Y-%m-%d %H:%M') %></dd>
@@ -23,7 +22,8 @@
                       <a href="#" class="pull-left pritbt">
                         <i class="iconfont icon">&#xe60e;</i><%= dynamic.comments.count %>
                       </a>
-                      <a href="#" class="pull-right pritbt"><i class="iconfont">&#xe60d;</i></a></div>
+                      <a href="/dynamics/<%= dynamic.id %>" class="pull-right pritbt delete_icon"><i class="iconfont">&#xe60d;</i></a>
+                    </div>
                   </div>
               <% end %>
             </div>
@@ -50,4 +50,12 @@
     </div>
   </div>
 </div>
-</div>
+<script>
+    $(function () {
+        $('.delete_icon').click(function (e) {
+            $.delete(this.href);
+            e.preventDefault();
+            location.reload();
+        });
+    })
+</script>

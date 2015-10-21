@@ -61,7 +61,7 @@
               <%= @dynamic.content %>
               <br>
             </dd>
-            <dd class="destion">2015-07-23 06:00:00</dd>
+            <dd class="destion"><%= @dynamic.created_at.localtime.strftime('%Y-%m-%d') %></dd>
           </dl>
         </div>
       </div>
@@ -78,10 +78,10 @@
                   </a>
 
                   <div class="media-body clearfix ">
-                    <div class="tcod color8d pull-right">2015年8月27日14:36:18<%= comment.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></div>
+                    <div class="tcod color8d pull-right"><%= comment.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></div>
                     <h4 class="media-heading top5 txt-tit"><%= comment.user.profile.name %></h4>
 
-                    <p class="tcod top8 ">非常受用的健身小技巧。</p>
+                    <p class="tcod top8 "><%= comment.content %></p>
                   </div>
                 </div>
 
