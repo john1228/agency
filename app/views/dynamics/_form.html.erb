@@ -11,7 +11,7 @@
                 <% if @success.present? %>
                     <div class="alert alert-success" role="alert">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                       发布成功
+                      发布成功
                     </div>
                 <% end %>
 
@@ -45,9 +45,9 @@
                     <div class="upload_area pull-left">
                       <div class="panel-body"><i class="iconfont2 lxcop">&#xe60f;</i>
 
-                        <p class="text-center">上传视频</p>
+                        <p class="text-center" id="film_title">上传视频</p>
                       </div>
-                      <input type="file" class="film_uploader" name="film">
+                      <input type="file" class="film_uploader" name="film" id="film_uploader">
                     </div>
                   </div>
                 </div>
@@ -103,6 +103,13 @@
             $('#image').remove();
             $('#text').remove();
             $('#cover').remove();
+            var filename = $('.film_uploader').val();
+            if (filename.length > 15) {
+                $("#film_title").text(filename.substr(0, 15) + '...');
+            } else {
+                $("#film_title").text(filename);
+            }
+
             var image_div = "<div class='upload_area pull-left' id='cover'>" +
                     "<div class='panel-body'>" +
                     "<i class='iconfont2 lxcop'>&#xe618;</i>" +
