@@ -31,9 +31,8 @@ class DynamicsController < ApplicationController
 
   def destroy
     result = false
-    # dynamic = @service.dynamics.find_by(id: params[:id])
-    # result = true if dynamic.destroy
-    #redirect_to action: :index
+    dynamic = @service.dynamics.find_by(id: params[:id])
+    result = true if dynamic.destroy
     render json: {result: result}
   end
 
