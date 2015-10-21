@@ -35,7 +35,16 @@
             var sku = $('#sku').val();
             var year = $('#year').val();
             var month = $('#month').val();
-            $('#order').load('report/order', {coach: coach, sku: sku, year: year, month: month});
+            var current_tab = window.location.href.split("#")[1];
+            if (current_tab == 'order') {
+                $('#order').load('report/order', {coach: coach, sku: sku, year: year, month: month});
+            } else if (current_tab == 'appointment') {
+                $('#appointment').load('report/appointment', {coach: coach, sku: sku, year: year, month: month});
+            } else if ((current_tab == 'sale')) {
+                $('#sale').load('report/sale', {coach: coach, sku: sku, year: year, month: month});
+            } else {
+                $('#order').load('report/order', {coach: coach, sku: sku, year: year, month: month});
+            }
         });
 
     });
