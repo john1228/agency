@@ -12,7 +12,7 @@ class Service<User
   private
   def location
     conn = Faraday.new(:url => 'http://api.map.baidu.com')
-    address_summary = profile.province.to_s + profile.city.to_s + profile.address.to_s.match(/(.+?)[弄号]/)
+    address_summary = ((profile.province.to_s + profile.city.to_s + profile.address.to_s).match(/(.+?)[弄号]/)).to_s
     result = conn.get '/geocoder/v2/', address: address_summary.blank? ? address : address_summary, output: 'json', ak: '61Vl2dO7CKCt0rvLKQiePGT5'
     json_string = JSON.parse(result.body)
     bd_lng = json_string['result']['location']['lng']
