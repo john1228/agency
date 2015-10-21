@@ -39,7 +39,21 @@
                             <p class="pull-left">
                               <label class="checkbox-inline">
                                 <input name="student[]" class="student" type="checkbox" id="chk_<%= user.id %>" value="<%= user.id %>" data-uid="<%= user.id %>" data-name="<%= user.profile.name %>" data-gender="<%= user.profile.gender.eql?(1) ? '女' : '男' %>"/>
-                                <%= user.profile.name %>(<%= @orders.include?(user[0]) ? '购买' : '关注' %>)
+                                <%= user.profile.name %>(<%=
+                                  if @orders.include?(user.id)
+                                    if @follows.include?(user.id)
+                                      '购买课程|关注'
+                                    else
+                                      '购买课程'
+                                    end
+                                  else
+                                    if @follows.include?(user.id)
+                                      '关注'
+                                    else
+                                      '未知'
+                                    end
+                                  end
+                              %>)
                               </label>
                             </p>
                           </li>
