@@ -22,5 +22,8 @@
         </tbody>
       </table>
     </div>
+    <div class="dataTables_paginate">
+      <%= will_paginate @mass_messages, renderer: BootstrapPagination::Rails %>
+    </div>
   </div>
 </div>

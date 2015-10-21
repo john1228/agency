@@ -24,13 +24,13 @@
               <td class="text-center tyeq"><%= user.profile.gender.eql?(1) ? '女' : '男' %></td>
               <td class="text-center tyeq"><%= user.profile.birthday.strftime('%Y-%m-%d') rescue '' %></td>
               <td class="text-center tyeq"><%= truncate(user.mobile) %></td>
-              <td class="text-center tyeq"><%= @orders.include?(user.id) ? '购买课程' : '关注'%></td>
+              <td class="text-center tyeq"><%= @orders.include?(user.id) ? '购买课程' : '关注' %></td>
             </tr>
         <% } %>
         </tbody>
       </table>
     </div>
-    <div class="padding5">
+    <div class="dataTables_paginate">
       <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
     </div>
   </div>

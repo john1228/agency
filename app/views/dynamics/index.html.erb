@@ -15,7 +15,7 @@
                     <dl class="polokl">
                       <a href="/dynamics/<%= dynamic.id %>">
                         <dd class="destion"><%= dynamic.created_at.localtime.strftime('%Y-%m-%d %H:%M') %></dd>
-                        <dd class="destion"><%= dynamic.content %></dd>
+                        <dd class="destion"><%= truncate(dynamic.content || '   ') %></dd>
                       </a>
                     </dl>
                     <div class="clearfix polokl ">
@@ -27,7 +27,9 @@
                   </div>
               <% end %>
             </div>
-            <%= will_paginate @dynamics, renderer: BootstrapPagination::Rails %>
+            <div class="dataTables_paginate">
+              <%= will_paginate @dynamics, renderer: BootstrapPagination::Rails %>
+            </div>
         <% else %>
             <div class="pull-left ailois ">
               <p class="screenshot">
