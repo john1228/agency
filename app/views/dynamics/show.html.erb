@@ -70,7 +70,7 @@
           <div class="panel-heading">
             <h3 class="panel-title">用户评论(<%= @dynamic.comments.count %>)</h3>
           </div>
-          <div class="panel-body" style="max-height: 1008px;overflow: scroll">
+          <div class="panel-body" style="max-height: 1008px;overflow: auto">
             <% @dynamic.comments.order(id: :desc).each { |comment| %>
                 <div class="media clearfix">
                   <a class="pull-left tpxco" href="#">

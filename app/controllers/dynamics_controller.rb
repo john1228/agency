@@ -2,7 +2,11 @@ class DynamicsController < ApplicationController
   layout 'admin'
 
   def index
-    @dynamics = @service.dynamics.order(id: :desc).paginate(page: params[:page]||1, per_page: 24)
+    @dynamics = @service.dynamics.order(id: :desc).paginate(page: params[:page]||1, per_page: 1)
+    respond_to do |format|
+      format.html #default : index.html.erb
+      format.js # default : index.js.erb
+    end
   end
 
   def new
@@ -13,6 +17,7 @@ class DynamicsController < ApplicationController
     dynamic = @service.dynamics.new(dynamic_params)
     if dynamic.save
       @success = true
+      @dynamic = Dynamic.new
     else
       @errors = dynamic.errors
       @dynamic = dynamic
@@ -26,8 +31,9 @@ class DynamicsController < ApplicationController
 
   def destroy
     result = false
-    dynamic = @service.dynamics.find_by(id: params[:id])
-    result = true if dynamic.destroy
+    # dynamic = @service.dynamics.find_by(id: params[:id])
+    # result = true if dynamic.destroy
+    #redirect_to action: :index
     render json: {result: result}
   end
 

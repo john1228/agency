@@ -4,60 +4,10 @@
 
     <div class="top15 clearfix row">
       <div class="col-lg-12 col-md-12">
-        <% if @dynamics.present? %>
-            <div class="clearfix">
-              <% @dynamics.each do |dynamic| %>
-                  <div class="pull-left ailois ">
-                    <a href="/dynamics/<%= dynamic.id %>">
-                      <div class="screenshot" style="background-image: url('<%=dynamic.images.first.image.thumb.url rescue ''%>');background-size: cover">
-                      </div>
-                    </a>
-                    <dl class="polokl">
-                      <a href="/dynamics/<%= dynamic.id %>">
-                        <dd class="destion"><%= dynamic.created_at.localtime.strftime('%Y-%m-%d %H:%M') %></dd>
-                        <dd class="destion"><%= truncate(dynamic.content || '   ') %></dd>
-                      </a>
-                    </dl>
-                    <div class="clearfix polokl ">
-                      <a href="#" class="pull-left pritbt">
-                        <i class="iconfont icon">&#xe60e;</i><%= dynamic.comments.count %>
-                      </a>
-                      <a href="/dynamics/<%= dynamic.id %>" class="pull-right pritbt delete_icon"><i class="iconfont">&#xe60d;</i></a>
-                    </div>
-                  </div>
-              <% end %>
-            </div>
-            <div class="dataTables_paginate">
-              <%= will_paginate @dynamics, renderer: BootstrapPagination::Rails %>
-            </div>
-        <% else %>
-            <div class="pull-left ailois ">
-              <p class="screenshot">
-                <a href="#"><%= image_tag('default_dynamic.png') %></a>
-              </p>
-              <dl class="polokl">
-                <a href="description.html">
-                  <dd class="destion"><%= Time.now.strftime('%Y-%m-%d %H:%M') %></dd>
-                  <dd class="destion">这是一个默认动态</dd>
-                </a>
-              </dl>
-              <div class="clearfix polokl ">
-                <a href="description.html" class="pull-left pritbt">
-                  <i class="iconfont icon">&#xe60e;</i><%= rand(100) %>
-                </a>
-                <a href="#" class="pull-right pritbt"><i class="iconfont">&#xe60d;</i></a></div>
-            </div>
-        <% end %>
+        <div id="dynamic">
+          <%= render partial: 'data' %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<script>
-    $(function () {
-        $('.delete_icon').click(function (e) {
-            $.delete(this.href);
-            e.preventDefault();
-            location.reload();
-        });
-    })
-</script>
