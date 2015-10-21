@@ -2,7 +2,7 @@ class DynamicsController < ApplicationController
   layout 'admin'
 
   def index
-    @dynamics = @service.dynamics.order(id: :desc).paginate(page: params[:page]||1, per_page: 24)
+    @dynamics = @service.dynamics.order(id: :desc).paginate(page: params[:page]||1, per_page: 3)
   end
 
   def new
