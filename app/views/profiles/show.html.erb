@@ -74,7 +74,8 @@
               <i class="iconfont5 ">&#xe61a;</i>
             </div>
             <div class="media-body p-txt">
-              www.e-mxing/23210
+              <a href="http://share.e-mxing.com/?tid=<%= @profile.mxid %>&type=agency">http://share.e-mxing.com/?tid=<%= @profile.mxid %>
+                &type=agency</a>
             </div>
           </div>
           <div>
@@ -94,32 +95,6 @@
 
     </div>
     <div class="col-lg-7 col-md-7 ptl-wlp ">
-
-      <div class="panel panel-default ptl-wlt pult-left ">
-        <div class="panel-headint tdzty clearfix">
-          <h3 class=" pull-left panel-title">视频秀</h3>
-          <a href="/profile/showtime" class="pull-right txt-tofi">
-            <i class="iconfont">&#xe611;</i>替换</a>
-        </div>
-        <div class="panel-body ">
-          <div class="row ">
-            <div class="col-xs-12 col-md-12" id="HLSPlayer">
-              <div class="video" id="HLSPlayer">
-                <SCRIPT LANGUAGE=JavaScript>
-                    var vWidth = "100%";                //播放器宽度设置
-                    var vHeight = 400;                   //播放器宽度设置
-                    var vPlayer = "<%=asset_path('HLSPlayer.swf')%>?v=1.5"; //播放器文件
-                    var vHLSset = "<%=asset_path('HLS.swf')%>";             //HLS配置
-                    var vPic = "<%=(@service.showtime.dynamic_film.cover.url rescue 'http://localhost/assets/default_dynamic.png')%>";    //视频缩略图
-                    var vHLSurl = "<%=(@service.showtime.dynamic_film.film.hls rescue 'http://b.cuplayer.net:8011/hls2-vod/test.mp4.m3u8')%>";
-                    //-->
-                </SCRIPT>
-                <%= javascript_include_tag 'js/hls.min' %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="panel panel-default ptl-wlt pult-left  top15">
         <div class="panel-headint tdzty clearfix">
           <h3 class=" pull-left panel-title">照片墙</h3>

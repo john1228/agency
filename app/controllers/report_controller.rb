@@ -50,7 +50,7 @@ class ReportController < ApplicationController
       @day << everyday.day
       @appointment << Appointment.where(coach_id: @service.coaches.pluck(:id), created_at: everyday.at_beginning_of_day..everyday.at_end_of_day).where(filter).count
     }
-    @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), created_at: date.at_beginning_of_day..date.at_end_of_day).where(filter).order(id: :desc).paginate(page: params[:page]||1, per_page: 10)
+    @appointments = Appointment.where(coach_id: @service.coaches.pluck(:id), created_at: date.at_beginning_of_month..date.at_end_of_month).where(filter).order(id: :desc).paginate(page: params[:page]||1, per_page: 10)
     render layout: false
   end
 
