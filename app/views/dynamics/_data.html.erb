@@ -26,11 +26,11 @@
                 <div class="video" id="HLSPlayer">
                   <SCRIPT LANGUAGE=JavaScript>
                       var vWidth = "100%";                //播放器宽度设置
-                      var vHeight = 400;                   //播放器宽度设置
+                      var vHeight = 246;                   //播放器宽度设置
                       var vPlayer = "<%=asset_path('HLSPlayer.swf')%>?v=1.5"; //播放器文件
                       var vHLSset = "<%=asset_path('HLS.swf')%>";             //HLS配置
-                      var vPic = "<%=(dynamic.cover.url rescue 'http://localhost/assets/default_dynamic.png')%>";    //视频缩略图
-                      var vHLSurl = "<%=(dynamic.film.hls rescue 'http://b.cuplayer.net:8011/hls2-vod/test.mp4.m3u8')%>";
+                      var vPic = "<%=(dynamic.film.cover.url rescue 'http://localhost/assets/default_dynamic.png')%>";    //视频缩略图
+                      var vHLSurl = "<%=(dynamic.film.film.hls rescue 'http://b.cuplayer.net:8011/hls2-vod/test.mp4.m3u8')%>";
                       //-->
                   </SCRIPT>
                   <%= javascript_include_tag 'js/hls.min' %>
