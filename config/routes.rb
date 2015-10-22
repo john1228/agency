@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   devise_for :admin_user
-  #devise_scope
+  devise_scope :admin_user do
+    get 'logout', :to => 'devise/sessions#destroy'
+  end
+
 
   mount Ckeditor::Engine => '/ckeditor'
 
