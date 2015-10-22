@@ -69,7 +69,6 @@ class FinanceController < ApplicationController
   def withdraw_create
     @alipay = Rails.cache.fetch(@service.id)
     if @alipay.blank?
-      Rails.cache.write(@service.id, {account: params[:account], name: params[:name]})
       withdraw_params = {coach_id: @service.id, account: params[:account], name: params[:name], amount: params[:amount]}
     else
       withdraw_params = {coach_id: @service.id, account: @alipay[:account], name: @alipay[:name], amount: params[:amount]}
@@ -77,8 +76,9 @@ class FinanceController < ApplicationController
     withdraw = Withdraw.new(withdraw_params)
     if withdraw.save
       @success = true
+      Rails.cache.write(@service.id, {account: params[:account], name: params[:name]})
     else
-      @error = true
+      @error = withdraw.errors
     end
     render 'withdraw'
   end

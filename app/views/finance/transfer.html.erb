@@ -12,10 +12,11 @@
           <div class="panel-body">
             <%= form_tag(submit_transfer_path) do %>
                 <% if @error.present? %>
-                    <div class="alert alert-danger" role="alert">
-                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                      <span class="sr-only">Error:</span>
-                      转账失败
+                    <div class="alert alert-danger alert-dismissable">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <% @error.messages.values.each { |v| %>
+                          <%= v %><br/>
+                      <% } %>
                     </div>
                 <% end %>
                 <% if @success.present? %>
