@@ -41,11 +41,11 @@ class DynamicsController < ApplicationController
     if params[:image].present?
       params[:dynamic][:images_attributes] = params[:image].map { |image| {image: image} }
     elsif params[:film].present?
-      params[:dynamic][:film_attributes] = {
-          film: params[:film],
-          cover: params[:cover]
-      }
-      params.require(:dynamic).permit(:content, images_attributes: [:image], film_attributes: [:film, :cover])
+      params[:dynamic][:film_attributes] = [{
+                                                film: params[:film],
+                                                cover: params[:cover]
+                                            }]
     end
+    params.require(:dynamic).permit(:content, images_attributes: [:image], film_attributes: [:film, :cover])
   end
 end

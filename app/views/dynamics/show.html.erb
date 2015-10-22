@@ -9,37 +9,54 @@
           <dl>
             <dd class="destion_line top10 ">
               <div class="panel-body  pciilk">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                  <!-- Indicators -->
-                  <ol class="carousel-indicators">
-                    <% @dynamic.images.each_index do |index| %>
-                        <li data-target="#carousel-example-generic" data-slide-to="<%= index %>"></li>
-                    <% end %>
-                  </ol>
-                  <div class="carousel-inner" role="listbox">
-                    <%
-                       @dynamic.images.each do |image|
-                         if @dynamic.images.first.eql?(image)
-                    %>
-                            <div class="item active">
-                              <%= image_tag(image.image.url) %>
-                            </div>
-                        <% else %>
-                            <div class="item">
-                              <%= image_tag(image.image.url) %>
-                            </div>
+                <% if @dynamic.film.present? %>
+                    <div class="col-xs-12 col-md-12" id="HLSPlayer">
+                      <div class="video" id="HLSPlayer">
+                        <SCRIPT LANGUAGE=JavaScript>
+                            var vWidth = "100%";                //播放器宽度设置
+                            var vHeight = 450;                   //播放器宽度设置
+                            var vPlayer = "<%=asset_path('HLSPlayer.swf')%>?v=1.5"; //播放器文件
+                            var vHLSset = "<%=asset_path('HLS.swf')%>";             //HLS配置
+                            var vPic = "<%=(dynamic.cover.url rescue 'http://localhost/assets/default_dynamic.png')%>";    //视频缩略图
+                            var vHLSurl = "<%=(dynamic.film.hls rescue 'http://b.cuplayer.net:8011/hls2-vod/test.mp4.m3u8')%>";
+                            //-->
+                        </SCRIPT>
+                        <%= javascript_include_tag 'js/hls.min' %>
+                      </div>
+                    </div>
+                <% else %>
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                      <!-- Indicators -->
+                      <ol class="carousel-indicators">
+                        <% @dynamic.images.each_index do |index| %>
+                            <li data-target="#carousel-example-generic" data-slide-to="<%= index %>"></li>
                         <% end %>
-                    <% end %>
-                  </div>
-                  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <i class="iconfont">&#xe616;</i>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <i class="iconfont">&#xe615;</i>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </div>
+                      </ol>
+                      <div class="carousel-inner" role="listbox">
+                        <%
+                           @dynamic.images.each do |image|
+                             if @dynamic.images.first.eql?(image)
+                        %>
+                                <div class="item active">
+                                  <%= image_tag(image.image.url) %>
+                                </div>
+                            <% else %>
+                                <div class="item">
+                                  <%= image_tag(image.image.url) %>
+                                </div>
+                            <% end %>
+                        <% end %>
+                      </div>
+                      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <i class="iconfont">&#xe616;</i>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <i class="iconfont">&#xe615;</i>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>
+                <% end %>
               </div>
               <%= @dynamic.content %>
               <br>

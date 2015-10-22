@@ -21,8 +21,25 @@
   <% @dynamics.each do |dynamic| %>
       <div class="pull-left ailois ">
         <a href="/dynamics/<%= dynamic.id %>">
-          <div class="screenshot" style="background-image: url('<%=dynamic.images.first.image.thumb.url rescue ''%>');background-size: cover">
-          </div>
+          <% if dynamic.film.present? %>
+              <div class="col-xs-12 col-md-12" id="HLSPlayer">
+                <div class="video" id="HLSPlayer">
+                  <SCRIPT LANGUAGE=JavaScript>
+                      var vWidth = "100%";                //播放器宽度设置
+                      var vHeight = 400;                   //播放器宽度设置
+                      var vPlayer = "<%=asset_path('HLSPlayer.swf')%>?v=1.5"; //播放器文件
+                      var vHLSset = "<%=asset_path('HLS.swf')%>";             //HLS配置
+                      var vPic = "<%=(dynamic.cover.url rescue 'http://localhost/assets/default_dynamic.png')%>";    //视频缩略图
+                      var vHLSurl = "<%=(dynamic.film.hls rescue 'http://b.cuplayer.net:8011/hls2-vod/test.mp4.m3u8')%>";
+                      //-->
+                  </SCRIPT>
+                  <%= javascript_include_tag 'js/hls.min' %>
+                </div>
+              </div>
+          <% else %>
+              <div class="screenshot" style="background-image: url('<%=dynamic.images.first.image.thumb.url rescue ''%>');background-size: cover">
+              </div>
+          <% end %>
         </a>
         <dl class="polokl">
           <dd class="destion"><%= dynamic.created_at.localtime.strftime('%Y-%m-%d %H:%M') %></dd>
