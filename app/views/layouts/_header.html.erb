@@ -16,7 +16,7 @@
         <li><a href="/password"><i class="iconfont icon">&#xe617;</i>修改密码</a></li>
         <li class="divider"></li>
         <li>
-          <%= link_to destroy_admin_user_session_path do %>
+          <%= link_to(destroy_admin_user_session_path, method: :delete, id: 'logout') do %>
               <i class="iconfont icon">&#xe612;</i>登出
           <% end %>
         </li>
@@ -25,3 +25,12 @@
     <p class="clear"></p>
   </div>
 </div>
+<script>
+    $(function () {
+        $('#logout').on('click', function () {
+            $.delete(this.href);
+//            $(location).attr("href", '/');
+            return false;
+        })
+    })
+</script>
