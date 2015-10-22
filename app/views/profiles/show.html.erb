@@ -1,40 +1,3 @@
-<script>
-    $(function () {
-        $("#showcase").awShowcase(
-                {
-                    content_width: 560,
-                    content_height: 450,
-                    fit_to_parent: false,
-                    auto: false,
-                    interval: 3000,
-                    continuous: false,
-                    loading: true,
-                    tooltip_width: 100,
-                    tooltip_icon_width: 32,
-                    tooltip_icon_height: 32,
-                    tooltip_offsetx: 18,
-                    tooltip_offsety: 0,
-                    arrows: true,
-                    buttons: false,
-                    btn_numbers: false,
-                    keybord_keys: true,
-                    mousetrace: false, /* Trace x and y coordinates for the mouse */
-                    pauseonover: true,
-                    stoponclick: true,
-                    transition: 'hslide', /* hslide/vslide/fade */
-                    transition_delay: 300,
-                    transition_speed: 500,
-                    show_caption: 'onhover', /* onload/onhover/show */
-                    thumbnails: true,
-                    thumbnails_position: 'outside-last', /* outside-last/outside-first/inside-last/inside-first */
-                    thumbnails_direction: 'horizontal', /* vertical/horizontal */
-                    thumbnails_slidex: 0, /* 0 = auto / 1 = slide one thumbnail / 2 = slide two thumbnails / etc. */
-                    dynamic_height: false, /* For dynamic height to work in webkit you need to set the width and height of images in the source. Usually works to only set the dimension of the first slide in the showcase. */
-                    speed_change: false, /* Set to true to prevent users from swithing more then one slide at once. */
-                    viewline: false /* If set to true content_width, thumbnails, transition and dynamic_height will be disabled. As for dynamic height you need to set the width and height of images in the source. */
-                });
-    })
-</script>
 <div class="row wtilt">
   <div class="top15 clearfix row col-lg-12">
     <div class="col-lg-5 col-md-5 ptl-wli">
@@ -102,17 +65,36 @@
             <i class="iconfont">&#xe611;</i>编辑</a>
         </div>
         <div class="panel-body  pciilk">
-          <div id="showcase" class="showcase">
-            <% @service.photos.each do |photo| %>
-                <div class="showcase-slide">
-                  <div class="showcase-content">
-                    <%= image_tag(photo.photo.url, width: 560) %>
-                  </div>
-                  <div class="showcase-thumbnail">
-                    <%= image_tag(photo.photo.url, width: 140) %>
-                  </div>
-                </div>
-            <% end %>
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <% @service.photos.each_index do |index| %>
+                  <li data-target="#carousel-example-generic" data-slide-to="<%= index %>"></li>
+              <% end %>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              <%
+                 @service.photos.each do |photo|
+                   if @service.photos.first.eql?(photo)
+              %>
+                      <div class="item active">
+                        <%= image_tag(photo.photo.url) %>
+                      </div>
+                  <% else %>
+                      <div class="item">
+                        <%= image_tag(photo.photo.url) %>
+                      </div>
+                  <% end %>
+              <% end %>
+            </div>
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+              <i class="iconfont">&#xe616;</i>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+              <i class="iconfont">&#xe615;</i>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
         </div>
       </div>

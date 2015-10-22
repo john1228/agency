@@ -397,8 +397,7 @@ th {
 .upload_area {
   width: 200px;
   height: 200px;
-  margin: 5px;
-  position: relative;
+
   border: 1px dashed #d1d1d1;
 }
 
@@ -1054,14 +1053,7 @@ ul.alert-dropdown {
   #tFocus-rightbtn {
     background-position: -480px -60px;
   }
-  .con-two {
-    width: 210px;
-    height: 198px;
-    float: left;
-    margin: 17px;
-    position: relative;
-    cursor: pointer;
-  }
+
   .icon3 {
     width: 210px;
     height: 178px;
@@ -1165,10 +1157,9 @@ ul.alert-dropdown {
     background-position: -480px -60px;
   }
   .con-two {
-    width: 210px;
-    height: 198px;
-    float: left;
-    margin: 11px;
+    width: 200px;
+    height:200px;
+    margin:10px;
     position: relative;
     cursor: pointer;
   }
@@ -1189,7 +1180,6 @@ ul.alert-dropdown {
   width: 210px;
   height: 176px;
 }
-
 .txt-two {
   position: absolute;
   right: 0;
@@ -1198,8 +1188,9 @@ ul.alert-dropdown {
   line-height: 45px;
   text-align: center;
   color: #fff;
+  z-index: 99;
   background: rgba(0, 0, 0, 0.6);
-  display: none;
+
 }
 
 .txt-til {

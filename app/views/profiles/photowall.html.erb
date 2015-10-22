@@ -4,22 +4,28 @@
       <div class="col-lg-12 col-md-12">
         <div class="panel panel-default">
           <%= form_tag(update_photowall_path, multipart: true) do %>
-              <div class="panel-body">
+
                 <div class="panel-headint tdzty clearfix">
                   <h3 class=" pull-left panel-title">照片墙</h3>
                 </div>
-                <div id="multi" class=" top10 clearfix cot-til">
+                <div id="multi" class="clearfix cot-til panel-body">
                   <% (0...8).each { |index| %>
-                      <div id="image">
-                        <div class="upload_area pull-left" style="background-image: url('<%=@photowall[index].photo.thumb.url rescue ''%>');background-size: cover">
+                      <div id="image" class="con-two  pull-left">
+                        <div class="upload_area" style="background-image: url('<%=@photowall[index].photo.thumb.url rescue ''%>');background-size: cover">
                           <% if @photowall[index].blank? %>
                               <div class="panel-body">
                                 <i class="iconfont2 lxcop">&#xe618;</i>
 
                                 <p class="text-center cot-til">上传图片</p>
                               </div>
+                          <% else %>
+
                           <% end %>
                           <input type="file" class="image_uploader" name="photo_<%= @photowall[index].id rescue 0 %>">
+                        </div>
+                        <div class="txt-two">
+                          <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true" class="txt-til">&times;</span></button>
                         </div>
                       </div>
                   <% } %>
@@ -27,7 +33,7 @@
                 <div class="fygroup">
                   <input type="submit" value="确定" class="btntn-lg">
                 </div>
-              </div>
+
           <% end %>
           </form>
         </div>
