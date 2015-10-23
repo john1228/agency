@@ -2,7 +2,7 @@ class VideoProcessJob < ActiveJob::Base
   queue_as :default
 
   def perform(file_path, store_path, file_extension)
-    file_name = file_path.gsub("#{Rails.root}/public/videos/", '')
+    file_name = file_path.gsub('/mnt/www/mxing/public/videos/', '')
 
     transcode_path = "#{file_path.gsub(".#{file_extension}", '')}_1.mp4"
     transcode_command = "ffmpeg -i #{file_path}  -vcodec libx264 -maxrate 500k -bufsize 1000k -vf scale=640:-2 -threads 0 -f mp4 #{transcode_path}"
