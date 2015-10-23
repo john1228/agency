@@ -23,7 +23,7 @@ class Service<User
       place.update(lonlat: gcj_02(bd_lng, bd_lat))
     end
     #更新机构课程课程的地址
-    Sku.where(service_id: id).update_all(address: profile.province.to_s + profile.city.to_s + profile.address.to_s, coordinate: gcj_02(bd_lng, bd_lat))
+    Sku.where(seller_id: coaches.pluck(:id) << id).update_all(address: profile.province.to_s + profile.city.to_s + profile.address.to_s, coordinate: gcj_02(bd_lng, bd_lat))
   end
 
   def gcj_02(bd_lng, bd_lat)
