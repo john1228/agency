@@ -15,7 +15,7 @@ class ProfileUploader < CarrierWave::Uploader::Base
 
 
   version :thumb do
-    process :resize_to_fit => [140, 140]
+    process :resize_to_fit => [180, 180]
   end
 
   def filename
