@@ -2,8 +2,8 @@
 
 class DynamicImagesUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  storage :file
-  process :store_dimensions
+  storage :qiniu
+  #process :store_dimensions
 
   def store_dir
     "images/#{model.class.to_s.underscore}"
@@ -12,7 +12,7 @@ class DynamicImagesUploader < CarrierWave::Uploader::Base
 
   version :thumb do
     process :resize_to_fit => [300, nil]
-    process :store_dimensions
+    #process :store_dimensions
   end
 
   def filename

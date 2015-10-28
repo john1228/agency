@@ -10,15 +10,23 @@ GIT
 
 GIT
   remote: git://github.com/galetahub/ckeditor.git
-  revision: f116fa1db4a116f6baeb9906ec9425bf417a69f5
+  revision: a69dcdbe0babbd49085e9dc17efffc63297ab0b4
   specs:
     ckeditor (4.1.4)
       cocaine
       orm_adapter (~> 0.5.0)
 
 GIT
+  remote: git://github.com/huobazi/carrierwave-qiniu.git
+  revision: 56a9c52bcc1160533167d8df1817049c7916b4d9
+  specs:
+    carrierwave-qiniu (0.1.8.2)
+      carrierwave
+      qiniu (~> 6.4.2)
+
+GIT
   remote: git://github.com/justinfrench/formtastic.git
-  revision: 9d937af461e150c26f071b91463b44a014648ad5
+  revision: 4a2aca9d99475319f838d2a7461ef93a3dc8c1da
   specs:
     formtastic (3.2.0.pre)
       actionpack (>= 3.2.13)
@@ -141,17 +149,23 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.6.2)
+    mime-types (2.4.3)
     mini_magick (4.3.6)
     mini_portile (0.6.2)
-    minitest (5.8.1)
+    minitest (5.8.2)
     multi_json (1.11.2)
     multipart-post (2.0.0)
+    netrc (0.10.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
     pg (0.18.1)
     puma (2.14.0)
+    qiniu (6.4.2)
+      json (~> 1.8)
+      mime-types (~> 2.4.3)
+      rest-client (~> 1.7.3)
+      ruby-hmac (~> 0.4)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -187,10 +201,14 @@ GEM
     ref (2.0.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rest-client (1.7.3)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rgeo (0.4.0)
     rgeo-activerecord (2.1.1)
       activerecord (~> 4.2)
       rgeo (~> 0.3)
+    ruby-hmac (0.4.0)
     sass (3.2.19)
     sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
@@ -248,6 +266,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   cancan
   carrierwave!
+  carrierwave-qiniu!
   ckeditor!
   coffee-rails (~> 4.0.0)
   devise
