@@ -2,7 +2,7 @@
 class CkeditorPictureUploader < CarrierWave::Uploader::Base
   include Ckeditor::Backend::CarrierWave
   include CarrierWave::MiniMagick
-  storage :file
+  storage :qiniu
   process :read_dimensions
 
   def store_dir

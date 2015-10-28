@@ -2,7 +2,7 @@
 
 class ProfileUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  storage :file
+  storage :qiniu
 
   def store_dir
     "images/#{model.class.to_s.underscore}"
