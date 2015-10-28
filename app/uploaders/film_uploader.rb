@@ -2,7 +2,7 @@
 
 class FilmUploader < CarrierWave::Uploader::Base
 
-  storage :file
+  storage :qiniu
   after :store, :slice
 
   def store_dir

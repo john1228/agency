@@ -1,7 +1,7 @@
 # encoding: utf-8
 class ImagesUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  storage :file
+  storage :qiniu
 
   after :store, :update_model
 

@@ -3,7 +3,7 @@ class CkeditorAttachmentFileUploader < CarrierWave::Uploader::Base
   include Ckeditor::Backend::CarrierWave
   include CarrierWave::MiniMagick
 
-  storage :file
+  storage :qiniu
 
   def store_dir
     "uploads/ckeditor/attachments/#{model.id}"

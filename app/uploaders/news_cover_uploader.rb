@@ -2,7 +2,7 @@
 
 class NewsCoverUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  storage :file
+  storage :qiniu
   process :store_dimensions
 
   def store_dir

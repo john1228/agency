@@ -1,7 +1,7 @@
 # encoding: utf-8
 class GalleryUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  storage :file
+  storage :qiniu
   process :resize_to_limit => [2080, 2080]
 
   def store_dir
