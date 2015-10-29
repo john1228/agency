@@ -19,6 +19,7 @@ gem "carrierwave-qiniu",github: 'huobazi/carrierwave-qiniu'
 #gem "qiniu-rs"
 gem 'devise'
 gem 'puma'
+gem 'enum_help'
 
 
 gem 'faraday'
