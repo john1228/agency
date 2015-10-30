@@ -34,6 +34,7 @@ GIT
 GEM
   remote: https://ruby.taobao.org/
   specs:
+    aasm (4.4.1)
     actionmailer (4.2.1)
       actionpack (= 4.2.1)
       actionview (= 4.2.1)
@@ -263,6 +264,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   activerecord-postgis-adapter (= 3.0.0.beta2)
   bootstrap-datepicker-rails
   cancan

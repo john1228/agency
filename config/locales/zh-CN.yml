@@ -16,5 +16,8 @@
         finance: "财务"
         store_manager: "店长"
         store_admin: "管理员"
+    client:
+        status:
+
 
 
