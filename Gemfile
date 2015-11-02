@@ -23,6 +23,11 @@ gem 'enum_help'
 gem "aasm"
 gem "cancancan"
 
+gem 'mina'
+gem 'mina-sidekiq',:require => false
+gem 'mina-puma',:require => false
+gem 'mina-nginx', :require => false
+
 
 gem 'faraday'
 gem 'mini_magick'

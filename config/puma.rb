@@ -7,12 +7,13 @@
 # note that config/gitlab.yml web path should also be changed
 # ENV['RAILS_RELATIVE_URL_ROOT'] = "/gitlab"
 
-application_path = '/usr/work/mxing'
+#application_path = '/home/rails/agency'
+application_path = '~/agency'
 directory application_path
 environment 'production'
 daemonize true
 pidfile "#{application_path}/tmp/pids/puma.pid"
-state_path "#{application_path}/tmp/pids/puma.state"
+state_path "#{application_path}/tmp/sockets/puma.state"
 stdout_redirect "#{application_path}/log/puma.stdout.log", "#{application_path}/log/puma.stderr.log"
 
 # Configure “min” to be the minimum number of threads to use to answer
@@ -34,7 +35,7 @@ stdout_redirect "#{application_path}/log/puma.stdout.log", "#{application_path}/
 # bind 'ssl://127.0.0.1:9292?key=path_to_key&certs=path_to_cert'
 #
 ## Comment the next line if you use apache.
-bind "unix://#{application_path}/tmp/sockets/mxing.socket"
+bind "unix://#{application_path}/tmp/sockets/puma.socket"
 
 # Instead of “bind 'ssl://127.0.0.1:9292?key=path_to_key&certs=path_to_cert'” you
 # can also use the “ssl_bind” option.
@@ -92,5 +93,6 @@ bind "unix://#{application_path}/tmp/sockets/mxing.socket"
 # to see what the app has available.
 #
 # activate_control_app 'unix:///var/run/pumactl.sock'
+#activate_control_app "unix://#{application_path}/tmp/sockets/pumactl.sock"
 # activate_control_app 'unix:///var/run/pumactl.sock', { auth_token: '12345' }
 # activate_control_app 'unix:///var/run/pumactl.sock', { no_token: true }
