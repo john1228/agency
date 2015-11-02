@@ -1,0 +1,16 @@
+"zh-CN":
+  activerecord:
+    attributes:
+      admin_user:
+        aasm_state:
+          approving: "审核中aasm_state"
+          approved: "审核通过aasm_state"
+          rejected: "审核不通过aasm_state"
+        status:
+          approving: "审核中"
+          approved: "审核通过"
+          rejected: "审核不通过"
+        status_state:
+          approving: "审核中state"
+          approved: "审核通过state"
+          rejected: "审核不通过state"

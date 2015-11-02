@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925130149) do
+ActiveRecord::Schema.define(version: 20151030023335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150925130149) do
     t.datetime "updated_at"
     t.integer  "role"
     t.integer  "service_id"
+    t.string   "status"
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
@@ -132,10 +133,12 @@ ActiveRecord::Schema.define(version: 20150925130149) do
   end
 
   create_table "banners", force: :cascade do |t|
-    t.string "image"
-    t.string "url"
-    t.date   "start_date"
-    t.date   "end_date"
+    t.string  "image"
+    t.string  "url"
+    t.date    "start_date"
+    t.date    "end_date"
+    t.integer "type"
+    t.integer "link_id"
   end
 
   create_table "black_lists", force: :cascade do |t|
@@ -297,6 +300,18 @@ ActiveRecord::Schema.define(version: 20150925130149) do
     t.integer  "order_items_count", default: 0
     t.text     "special",           default: ""
     t.string   "image",             default: [],              array: true
+  end
+
+  create_table "crawl_data", force: :cascade do |t|
+    t.string   "name"
+    t.string   "avatar"
+    t.string   "address"
+    t.string   "tel"
+    t.string   "business"
+    t.string   "service",                 array: true
+    t.string   "photo",                   array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "devices", force: :cascade do |t|
@@ -464,6 +479,7 @@ ActiveRecord::Schema.define(version: 20150925130149) do
   end
 
   create_table "mass_messages", force: :cascade do |t|
+    t.integer  "service_id"
     t.integer  "user_id",    default: [],              array: true
     t.string   "content"
     t.datetime "created_at",              null: false
@@ -569,6 +585,9 @@ ActiveRecord::Schema.define(version: 20150925130149) do
     t.string  "interests",     limit: 255, default: ""
     t.string  "mobile",        limit: 255, default: ""
     t.integer "service",                   default: [],           array: true
+    t.integer "hobby",                     default: [],           array: true
+    t.string  "province"
+    t.string  "city"
   end
 
   add_index "profiles", ["address"], name: "index_profiles_on_address", using: :btree
@@ -664,10 +683,12 @@ ActiveRecord::Schema.define(version: 20150925130149) do
     t.datetime  "created_at",                                                                            null: false
     t.datetime  "updated_at",                                                                            null: false
     t.integer   "status",                                                                    default: 0
+    t.integer   "service_id"
   end
 
   add_index "skus", ["coordinate"], name: "index_skus_on_coordinate", using: :gist
   add_index "skus", ["seller_id"], name: "index_skus_on_seller_id", using: :btree
+  add_index "skus", ["service_id"], name: "index_skus_on_service_id", using: :btree
   add_index "skus", ["sku"], name: "index_skus_on_sku", unique: true, using: :btree
 
   create_table "tracks", force: :cascade do |t|
@@ -713,6 +734,7 @@ ActiveRecord::Schema.define(version: 20150925130149) do
     t.string   "sns",                    default: ""
     t.string   "device",                 default: ""
     t.integer  "views",                  default: 14000
+    t.integer  "status",                 default: 1
   end
 
   add_index "users", ["mobile", "sns"], name: "index_users_on_mobile_and_sns", unique: true, using: :btree
