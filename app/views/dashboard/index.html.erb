@@ -1,2 +1,2 @@
 <% user = AdminUser.last %>
-<% puts user.status %>
+<%= user.aasm(:status).states(:permitted => true)%>

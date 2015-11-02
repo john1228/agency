@@ -20,7 +20,7 @@ class AdminUser < ActiveRecord::Base
     end
 
     event :approve do
-      transitions :from => :approving, :to => :rejected
+      transitions :from => :approving, :to => :approved
     end
 
   end
