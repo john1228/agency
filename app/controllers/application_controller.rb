@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(admin_user)
     new_admin_user_session_path
   end
+
+  def current_user
+    current_admin_user
+  end
 end

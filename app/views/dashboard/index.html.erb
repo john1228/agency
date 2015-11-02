@@ -1,2 +1,3 @@
-<% user = AdminUser.last %>
-<%= user.aasm(:status).states(:permitted => true)%>
+<% if can? :update, nil %>
+    首页,待实现
+<% end %>

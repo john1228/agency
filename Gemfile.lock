@@ -79,6 +79,7 @@ GEM
       railties (>= 3.0)
     builder (3.2.2)
     cancan (1.6.10)
+    cancancan (1.13.1)
     celluloid (0.17.2)
       celluloid-essentials
       celluloid-extras
@@ -275,6 +276,7 @@ DEPENDENCIES
   activerecord-postgis-adapter (= 3.0.0.beta2)
   bootstrap-datepicker-rails
   cancan
+  cancancan
   carrierwave!
   carrierwave-qiniu!
   ckeditor!

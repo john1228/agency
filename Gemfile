@@ -21,6 +21,7 @@ gem 'devise'
 gem 'puma'
 gem 'enum_help'
 gem "aasm"
+gem "cancancan"
 
 
 gem 'faraday'
