@@ -14,6 +14,9 @@ class DashboardController < ApplicationController
     # follow_users = Follow.where(service_id: @service.id).pluck(:user_id)||User.all.pluck(:id)
     # order_users = Order.where(service_id: @service.id).pluck(:user_id)
     # @users = User.where(id: (follow_users + order_users).uniq).count
+
+    authorize! :read, current_user
+
     respond_to do |format|
       format.html
       #format.json { render json: {day: @days, all: @all, coach: @coach} }

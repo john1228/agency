@@ -21,6 +21,12 @@ gem 'devise'
 gem 'puma'
 gem 'enum_help'
 gem "aasm"
+gem "cancancan"
+
+gem 'mina'
+gem 'mina-sidekiq',:require => false
+gem 'mina-puma',:require => false
+gem 'mina-nginx', :require => false
 
 
 gem 'faraday'
@@ -43,3 +49,6 @@ gem 'bootstrap-datepicker-rails'
 gem 'formtastic', github: 'justinfrench/formtastic'
 
 gem 'houston'
+group :development do
+  gem "pry"
+end
