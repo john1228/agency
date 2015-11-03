@@ -11,7 +11,7 @@ default: &default
   password: mxing~1228
   pool: 10
   timeout: 5000
-  host: localhost
+  host: 127.0.0.1
   port: 5432
   postgis_extension: postgis
   schema_search_path: public, postgis
