@@ -32,7 +32,7 @@ set :puma_pid, "#{deploy_to}/tmp/pids/puma.pid"
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
-#set :forward_agent, true     # SSH forward_agent.
+set :forward_agent, true     # SSH forward_agent.
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
@@ -94,11 +94,7 @@ task :deploy => :environment do
     # #queue! "bin/cp.sh"
     # queue! echo_cmd "cp -rf #{deploy_to}/#{current_path}/app/assets/fonts #{deploy_to}/#{current_path}/public/assets/"
 
-    queue! %[cp #{deploy_to}/#{current_path}/app/assets/fonts/bootstrap/glyphicons-halflings-regular.eot #{deploy_to}/#{current_path}/public/assets/fonts/bootstrap/glyphicons-halflings-regular.eot ]
-    queue! %[cp #{deploy_to}/#{current_path}/app/assets/fonts/bootstrap/glyphicons-halflings-regular.svg #{deploy_to}/#{current_path}/public/assets/fonts/bootstrap/glyphicons-halflings-regular.svg ]
-    queue! %[cp #{deploy_to}/#{current_path}/app/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf #{deploy_to}/#{current_path}/public/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf ]
-    queue! %[cp #{deploy_to}/#{current_path}/app/assets/fonts/bootstrap/glyphicons-halflings-regular.woff #{deploy_to}/#{current_path}/public/assets/fonts/bootstrap/glyphicons-halflings-regular.woff ]
-    queue! %[cp #{deploy_to}/#{current_path}/app/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2 #{deploy_to}/#{current_path}/public/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2 ]
+    #queue! %[cp #{deploy_to}/#{current_path}/app/assets/fonts/* #{deploy_to}/#{current_path}/public/assets/fonts/]
     invoke :'deploy:cleanup'
 
     to :launch do
@@ -106,7 +102,8 @@ task :deploy => :environment do
       # queue! "cp -rf #{deploy_to}/#{current_path}/app/assets/fonts #{deploy_to}/#{current_path}/public/assets/"
       # #queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       #queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
-      invoke :'puma:restart'
+      #invoke :'puma:restart'
+      invoke :'puma:phased_restart'
     end
   end
   # queue! %[cp #{deploy_to}/#{current_path}/app/assets/fonts/bootstrap/glyphicons-halflings-regular.svg #{deploy_to}/#{current_path}/public/assets//fonts/bootstrap/glyphicons-halflings-regular.svg ]

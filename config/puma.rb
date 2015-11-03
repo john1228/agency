@@ -8,7 +8,7 @@
 # ENV['RAILS_RELATIVE_URL_ROOT'] = "/gitlab"
 
 #application_path = '/home/rails/agency'
-application_path = '~/agency'
+application_path = '/home/rails/agency'
 directory application_path
 environment 'production'
 daemonize true
