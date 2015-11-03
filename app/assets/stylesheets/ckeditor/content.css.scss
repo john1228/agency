@@ -141,7 +141,7 @@ input.entbut2 {
   float: left;
   width: 110px;
   height: 90px;
-  background: asset-data-url('web/logo.png') no-repeat center
+  background: asset-data-url('logo.png') no-repeat center
 }
 
 .header .logo a {
@@ -196,7 +196,6 @@ input.entbut2 {
 
 .banner {
   height: 700px;
-  background: asset-data-url('web/banner.jpg') no-repeat center top
 }
 
 .main_visual {
@@ -212,7 +211,6 @@ input.entbut2 {
   right: 0;
   top: 150px;
   z-index: 0;
-  background: asset-data-url("web/wap_bg.png") no-repeat center
 }
 
 .main_image {
@@ -247,18 +245,6 @@ input.entbut2 {
   display: block;
   width: 100%;
   height: 318px
-}
-
-.image_fst {
-  background: asset-data-url("web/tu1.png") no-repeat center
-}
-
-.image_mid {
-  background: asset-data-url("web/tu2.png") no-repeat center
-}
-
-.image_lst {
-  background: asset-data-url("web/tu3.png") no-repeat center
 }
 
 #btn_prev, #btn_next {
@@ -354,7 +340,6 @@ input.entbut2 {
   color: #fff;
   font-size: 20px;
   text-indent: 40px;
-  background: asset-data-url('web/down_btn.png') no-repeat
 }
 
 .banner .dow a:hover {
@@ -407,7 +392,6 @@ input.entbut2 {
   display: inline-block;
   width: 104px;
   height: 108px;
-  background: asset-data-url('web/download_icon.png') no-repeat
 }
 
 .download li i.ico1 {
@@ -461,7 +445,6 @@ input.entbut2 {
   padding: 100px 0;
   position: relative;
   margin-top: 30px;
-  background: asset-data-url('web/xian.png') repeat-y center
 }
 
 .aboutcon i {
@@ -469,7 +452,6 @@ input.entbut2 {
   width: 13px;
   height: 13px;
   position: absolute;
-  background: asset-data-url('web/quntu.png') no-repeat
 }
 
 .aboutcon i.icotop {
@@ -574,7 +556,6 @@ input.entbut2 {
   overflow: hidden;
   padding: 0px 0 20px 0;
   position: relative;
-  background: asset-data-url('web/xian.gif') repeat-y 35px;
 }
 
 .dt_list dl dt {
@@ -591,7 +572,6 @@ input.entbut2 {
   text-align: center;
   font-size: 18px;
   color: #03c2eb;
-  background: asset-data-url('web/quntu.png') no-repeat -52px -15px
 }
 
 .dt_list dl dt em {
@@ -603,7 +583,6 @@ input.entbut2 {
   margin-bottom: -35px;
   position: absolute;
   left: 32px;
-  background: asset-data-url('web/quntu.png') no-repeat -35px 0px
 }
 
 .dt_list dl dd {
@@ -697,7 +676,6 @@ input.entbut2 {
   border: #00c1eb 1px solid;
   text-align: center;
   padding-left: 30px;
-  background: asset-data-url('web/fxbut.jpg') no-repeat 60px center;
   font-size: 18px;
   line-height: 44px;
   color: #00c1eb;
