@@ -25,14 +25,14 @@ set :branch, 'master'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log','config/application.yml','tmp/pids', 'tmp/sockets']
+set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log','config/application.yml','tmp/pids', 'tmp/sockets', 'config/puma.rb']
 set :sidekiq_pid, "#{deploy_to}/tmp/pids/sidekiq.pid"
 set :puma_pid, "#{deploy_to}/tmp/pids/puma.pid"
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
-set :forward_agent, true     # SSH forward_agent.
+#set :forward_agent, true     # SSH forward_agent.
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
