@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104080354) do
+ActiveRecord::Schema.define(version: 20151104082422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -587,22 +587,24 @@ ActiveRecord::Schema.define(version: 20151104080354) do
 
   create_table "profiles", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "signature",     limit: 255, default: ""
-    t.string  "name",          limit: 255, default: ""
-    t.string  "avatar",        limit: 255, default: ""
-    t.integer "gender",                    default: 0
-    t.integer "identity",                  default: 0
-    t.date    "birthday",                  default: '1999-03-20'
-    t.string  "address",       limit: 255, default: ""
-    t.string  "target",        limit: 255, default: ""
-    t.string  "skill",         limit: 255, default: ""
-    t.string  "often_stadium", limit: 255, default: ""
-    t.string  "interests",     limit: 255, default: ""
-    t.string  "mobile",        limit: 255, default: ""
-    t.integer "service",                   default: [],           array: true
-    t.integer "hobby",                     default: [],           array: true
+    t.string  "signature",           limit: 255, default: ""
+    t.string  "name",                limit: 255, default: ""
+    t.string  "avatar",              limit: 255, default: ""
+    t.integer "gender",                          default: 0
+    t.integer "identity",                        default: 0
+    t.date    "birthday",                        default: '1999-03-20'
+    t.string  "address",             limit: 255, default: ""
+    t.string  "target",              limit: 255, default: ""
+    t.string  "skill",               limit: 255, default: ""
+    t.string  "often_stadium",       limit: 255, default: ""
+    t.string  "interests",           limit: 255, default: ""
+    t.string  "mobile",              limit: 255, default: ""
+    t.integer "service",                         default: [],           array: true
+    t.integer "hobby",                           default: [],           array: true
     t.string  "province"
     t.string  "city"
+    t.string  "business_hour_start"
+    t.string  "business_hour_end"
   end
 
   add_index "profiles", ["address"], name: "index_profiles_on_address", using: :btree

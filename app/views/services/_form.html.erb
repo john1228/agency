@@ -1,8 +1,18 @@
 <%= semantic_form_for @service do |f| %>
+
 <h3 class="Content-h3">新增门店</h3>
 <div class="panel">
   <div class="panel-body">
     <h4 class="clsize">基本资料</h4>
+    <% if @service.errors.present? %>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <% @service.errors.messages.values.each { |v| %>
+              <%= v %><br/>
+          <% } %>
+        </div>
+    <% end %>
+
     <%= f.semantic_fields_for :profile do |p| %>
     <div class="conte-text ">
       <div class="input-group conte-cteli ">
@@ -12,12 +22,12 @@
       </div>
       <div class="input-group conte-text">
         <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">营业时间</samp></span>
-        <input type="text" class="form-ctrol" placeholder="08：00"> -
-        <input type="text" class="form-titrol" placeholder="08：00">
+        <%= p.text_field :business_hour_start, class:"form-ctrol" %> -
+        <%= p.text_field :business_hour_end, class:"form-titrol"%>
       </div>
       <div class="input-group conte-cteli top20">
-        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店地方</samp></span>
-        <input type="text" class="form-control" placeholder="021-12345678">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店电话</samp></span>
+        <%= p.text_field :mobile, class: "form-control" %>
       </div>
       <div class="input-group conte-cteli top20">
         <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">管理员</samp></span>
@@ -31,29 +41,13 @@
       </div>
       <div class="input-group conte-cteli top20">
         <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">健身服务</samp></span>
-        <select class="form-control">
-          <option>请选择</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+        <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true}) %>
       </div>
       <div class="input-group conte-text">
         <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">会员地址</samp></span>
-        <select class="form-ctrol">
-          <option>上海</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select class="form-ctrol" name="province">
         </select> -
-        <select class="form-titrol">
-          <option>长宁</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select class="form-titrol" name="city">
         </select>
       </div>
       <div class="input-group conte-text">
@@ -88,3 +82,44 @@
 
 </div>
 <% end %>
+
+<script>
+    new PCAS("province", "city", '<%=@service.profile.province%>', '<%=@service.profile.city%>');
+    $(function () {
+                $("#service_profile_attributes_birthday").datepicker({
+                    language: 'zh-CN',
+                    format: 'yyyy-mm-dd'
+                });
+                $('#service_profile_attributes_hobby').multiselect({
+                    inheritClass: true,
+                    numberDisplayed: 8,
+                    nonSelectedText: '请选择提供的健身服务',
+                    maxHeight: 100,
+                    dropUp: true
+                });
+                $("#service_profile_attributes_avatar").change(function () {
+                    var objUrl = getObjectURL(this.files[0]);
+                    if (objUrl) {
+                        $('#default_div').remove();
+                        $('#avatar_preview').css('background-image', 'url("' + objUrl + '")');
+                        $('#avatar_preview').css('background-size', 'cover');
+                    }
+                });
+            }
+    );
+    /**
+     * 建立一個可存取到該file的url
+     * PS: 瀏覽器必須支援HTML5 File API
+     */
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+</script>

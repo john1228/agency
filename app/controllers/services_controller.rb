@@ -26,8 +26,11 @@ class ServicesController < InheritedResources::Base
     @service.sns = SecureRandom.hex
     if @service.save
       @success = true
+      flash.success = "成功创建门店"
+      redirect_to :index
     else
-      @failure = true
+      #flash[:error] = "xxx"
+      render :new
     end
   end
 
