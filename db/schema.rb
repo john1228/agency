@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030023335) do
+ActiveRecord::Schema.define(version: 20151104070135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,12 @@ ActiveRecord::Schema.define(version: 20151030023335) do
     t.integer  "pos",           default: 0
   end
 
+  create_table "add_client_id_to_admin_users", force: :cascade do |t|
+    t.integer  "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "address_coordinates", force: :cascade do |t|
     t.integer   "address_id"
     t.geography "lonlat",     limit: {:srid=>4326, :type=>"point", :geographic=>true}
@@ -79,6 +85,7 @@ ActiveRecord::Schema.define(version: 20151030023335) do
     t.integer  "role"
     t.integer  "service_id"
     t.string   "status"
+    t.integer  "client_id"
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
@@ -181,6 +188,14 @@ ActiveRecord::Schema.define(version: 20151030023335) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "clients", force: :cascade do |t|
+    t.string   "name"
+    t.string   "tel"
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "coach_docs", force: :cascade do |t|
     t.integer "coach_id"
