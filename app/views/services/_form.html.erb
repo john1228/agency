@@ -1,0 +1,90 @@
+<%= semantic_form_for @service do |f| %>
+<h3 class="Content-h3">新增门店</h3>
+<div class="panel">
+  <div class="panel-body">
+    <h4 class="clsize">基本资料</h4>
+    <%= f.semantic_fields_for :profile do |p| %>
+    <div class="conte-text ">
+      <div class="input-group conte-cteli ">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店名称</samp></span>
+
+        <%= p.text_field :name, :class=>"form-control"%>
+      </div>
+      <div class="input-group conte-text">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">营业时间</samp></span>
+        <input type="text" class="form-ctrol" placeholder="08：00"> -
+        <input type="text" class="form-titrol" placeholder="08：00">
+      </div>
+      <div class="input-group conte-cteli top20">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店地方</samp></span>
+        <input type="text" class="form-control" placeholder="021-12345678">
+      </div>
+      <div class="input-group conte-cteli top20">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">管理员</samp></span>
+        <select class="form-control">
+          <option>请选择</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="input-group conte-cteli top20">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">健身服务</samp></span>
+        <select class="form-control">
+          <option>请选择</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="input-group conte-text">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">会员地址</samp></span>
+        <select class="form-ctrol">
+          <option>上海</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select> -
+        <select class="form-titrol">
+          <option>长宁</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="input-group conte-text">
+        <%= p.text_field :address, class:"form-control" %>
+        </div>
+      <div class="input-group conte-text">
+        <textarea class="form-controt form-kcldv" rows="6"></textarea>
+      </div>
+    </div>
+    <%end%>
+    <h4 class="clsize top20">照片墙</h4>
+    <div class="Photo-wall top20 clearfix">
+      <div class="Photo-pil pull-left" style="background:asset-url('1.jpg') 100% 100%;background-size: cover;">
+        <button type="button" class="close closete " aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="Photo-pil pull-left">
+        <i class="Photo-font icon">&#xe619;</i>
+        <samp>添加照片</samp>
+        <input type="file" class="file-loading ">
+      </div>
+      <div class="Photo-pil pull-left">
+        <i class="Photo-font icon">&#xe619;</i>
+        <samp>添加照片</samp>
+        <input type="file" class="file-loading ">
+      </div>
+
+    </div>
+    <div class="fygroup top20">
+      <button type="submit" class="btntn-lg ">确认</button>
+    </div>
+  </div>
+
+</div>
+<% end %>

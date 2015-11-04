@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   has_many :lessons, dependent: :destroy
   has_many :concerns, class_name: Concerned, dependent: :destroy
 
+  accepts_nested_attributes_for :profile
+
   TYPE=[['健身爱好者', 0], ['私教', 1], ['商家', 2]]
   before_save :encrypted_password
   class<<self
