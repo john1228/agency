@@ -49,6 +49,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'formtastic', github: 'justinfrench/formtastic'
 
 gem 'houston'
+gem 'benchmark_methods'
 group :development do
   gem "pry"
 end

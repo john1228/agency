@@ -8,27 +8,143 @@
   <meta name="author" content="">
   <title>美型-用户后台</title>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag 'css/bootstrap.min', 'css/sb-admin', 'font/iconfont', 'font/font-awesome.min', 'css/showcase' %>
+  <%= stylesheet_link_tag 'css/bootstrap.min', 'css/sb-admin', 'font/iconfont', 'font/font-awesome.min' %>
+  <%= stylesheet_link_tag 'css/main', 'css/main-left', 'css/style' %>
   <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
   <%= javascript_include_tag 'js/html5shiv', 'js/respond.min', 'js/dropzone' %>
   <%= javascript_include_tag 'js/bootstrap.min', 'js/bootstrap-datepicker', 'js/bootstrap-datepicker.zh-CN', 'js/bootstrap-multiselect', 'js/PCASClass' %>
 </head>
 <body>
-<div id="wrapper" class="wrappert">
+<div id="wrapper" class="wrapper">
   <div class="collapse navbar-collapse navbar-ex1-collapse ">
     <%= render partial: 'layouts/sidebar' %>
   </div>
-  <div id="page-wrapper">
-    <div class="container-fluid">
-      <div class="row">
-        <%= render partial: 'layouts/header' %>
+  <div class="wrapper-right">
+    <nav class="nav-top">
+      <div class="pull-left badge-clr">
+        <a href="#">
+          <i class="nav-font icon">&#xe604;</i> 回门店信息
+        </a>
       </div>
-      <div class="padding15">
-        <%= yield %>
+      <div class="pull-right badge-right dropdown">
+        <a class="btn-tault " id="dropdownMenu1" data-toggle="dropdown" >
+          <ul>
+            <li class="media">
+              <div class="badge-left pull-left">
+
+                <%=image_tag "1.jpg", :class=>"media-object" %>
+
+              </div>
+              <div class="pull-left">
+                我是标题
+              </div>
+            </li>
+          </ul>
+        </a>
+        <ul class="dropdown-menu dropup " aria-labelledby="dropdownMenu1">
+
+          <li><a href="#"><i class="iconfont icon">&#xe605;</i>修改密码</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#"><i class="iconfont icon">&#xe624;</i>登出</a></li>
+
+        </ul>
+
       </div>
+
+
+    </nav>
+
+    <div class="wrapper-Content">
+      <h3 class="Content-h3">新增门店</h3>
+      <div class="panel">
+        <div class="panel-body">
+          <h4 class="clsize">基本资料</h4>
+          <div class="conte-text ">
+            <div class="input-group conte-cteli ">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店名称</samp></span>
+              <input type="text" class="form-control" placeholder="威尔士(徐汇店)">
+            </div>
+            <div class="input-group conte-text">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">营业时间</samp></span>
+              <input type="text" class="form-ctrol" placeholder="08：00"> -
+              <input type="text" class="form-titrol" placeholder="08：00">
+            </div>
+            <div class="input-group conte-cteli top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店地方</samp></span>
+              <input type="text" class="form-control" placeholder="021-12345678">
+            </div>
+            <div class="input-group conte-cteli top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">管理员</samp></span>
+              <select class="form-control">
+                <option>请选择</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="input-group conte-cteli top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">健身服务</samp></span>
+              <select class="form-control">
+                <option>请选择</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="input-group conte-text">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">会员地址</samp></span>
+              <select class="form-ctrol">
+                <option>上海</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select> -
+              <select class="form-titrol">
+                <option>长宁</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="input-group conte-text">
+              <input type="text" class="form-controt" placeholder="金钟路968号凌空SOHO7号楼601室">
+            </div>
+            <div class="input-group conte-text">
+              <textarea class="form-controt form-kcldv" rows="6"></textarea>
+            </div>
+          </div>
+          <h4 class="clsize top20">照片墙</h4>
+          <div class="Photo-wall top20 clearfix">
+            <div class="Photo-pil pull-left" style="background:asset-url('1.jpg') 100% 100%;background-size: cover;">
+              <button type="button" class="close closete " aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="Photo-pil pull-left">
+              <i class="Photo-font icon">&#xe619;</i>
+              <samp>添加照片</samp>
+              <input type="file" class="file-loading ">
+            </div>
+            <div class="Photo-pil pull-left">
+              <i class="Photo-font icon">&#xe619;</i>
+              <samp>添加照片</samp>
+              <input type="file" class="file-loading ">
+            </div>
+
+          </div>
+          <div class="fygroup top20">
+            <button type="button" class="btntn-lg ">确认</button>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
+
 </div>
 <%= javascript_include_tag 'js/sb-admin-2' %>
 </body>

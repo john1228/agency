@@ -1,5 +1,6 @@
 #encoding : utf-8
 class AdminUser < ActiveRecord::Base
+  include BenchmarkMethods
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :service
@@ -24,4 +25,5 @@ class AdminUser < ActiveRecord::Base
     end
 
   end
+  benchmark :to_s
 end
