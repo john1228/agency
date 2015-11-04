@@ -1,0 +1,20 @@
+"zh-CN":
+  activerecord:
+    errors:
+      models:
+        profile:
+          attributes:
+            mobile:
+              blank: "电话不能为空"
+            business_hour_start:
+                            blank: "营业开始时间不能为空"
+            business_hour_end:
+                                                        blank: "营业结束时间不能为空"
+            hobby:
+                                                        blank: "健身服务不能为空"
+            province:
+              blank: "省不能为空"
+            city:
+              blank: "市不能为空"
+            address:
+              blank: "地址不能为空"

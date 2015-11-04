@@ -22,8 +22,8 @@
       </div>
       <div class="input-group conte-text">
         <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">营业时间</samp></span>
-        <%= p.text_field :business_hour_start, class:"form-ctrol" %> -
-        <%= p.text_field :business_hour_end, class:"form-titrol"%>
+        <%= p.text_field :business_hour_start, class:"form-ctrol", placeholder: "00:00" %> -
+        <%= p.text_field :business_hour_end, class:"form-titrol", placeholder: "23:59"%>
       </div>
       <div class="input-group conte-cteli top20">
         <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店电话</samp></span>
@@ -51,10 +51,11 @@
         </select>
       </div>
       <div class="input-group conte-text">
-        <%= p.text_field :address, class:"form-control" %>
+        <%= p.text_field :address, class:"form-control", placeholder: "请填写详细地址" %>
         </div>
       <div class="input-group conte-text">
-        <textarea class="form-controt form-kcldv" rows="6"></textarea>
+        <%= p.text_area :signature, class:"form-controt form-kcldv", rows:6, placeholder:"请填写门店简介"%>
+
       </div>
     </div>
     <%end%>

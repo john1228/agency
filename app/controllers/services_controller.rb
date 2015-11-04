@@ -26,8 +26,8 @@ class ServicesController < InheritedResources::Base
     @service.sns = SecureRandom.hex
     if @service.save
       @success = true
-      flash.success = "成功创建门店"
-      redirect_to :index
+      flash[:success] = "成功创建门店"
+      redirect_to services_path
     else
       #flash[:error] = "xxx"
       render :new
@@ -40,7 +40,8 @@ class ServicesController < InheritedResources::Base
       params[:service][:profile_attributes][:province] = params[:province]
       params[:service][:profile_attributes][:city] = params[:city]
       params.require(:service).permit(:mobile, :password, profile_attributes:
-                                               [:avatar, :name, :gender, :address, :birthday, :signature, :province, :city, :identity, hobby: []])
+                                               [:avatar, :name, :gender, :address, :birthday, :signature, :province, :city, :identity,
+                                                :business_hour_start, :business_hour_end, :mobile, hobby: []])
 
     end
 
