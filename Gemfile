@@ -28,6 +28,7 @@ gem 'mina-sidekiq',:require => false
 gem 'mina-puma',:require => false
 gem 'mina-nginx', :require => false
 
+gem "inherited_resources"
 
 gem 'faraday'
 gem 'mini_magick'
