@@ -16,7 +16,7 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "carrierwave-qiniu",github: 'huobazi/carrierwave-qiniu'
-#gem "qiniu-rs"
+gem "qiniu"
 gem 'devise'
 gem 'puma'
 gem 'enum_help'

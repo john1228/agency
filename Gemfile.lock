@@ -321,6 +321,7 @@ DEPENDENCIES
   pg (= 0.18.1)
   pry
   puma
+  qiniu
   rails (= 4.2.1)
   rgeo
   sass-rails (~> 4.0.3)
