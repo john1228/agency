@@ -1,11 +1,15 @@
 class ServicesController < InheritedResources::Base
   layout "admin"
   def index
-    puts 3
+    @services = Service.where(:client_id => current_user.client_id)
+    if current_user.service.present?
+      @services = @services.where(:id=>current_user.service_id)
+    end
   end
 
   def show
     if params[:id].nil?
+      index
       render :index
       return
     else

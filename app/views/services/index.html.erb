@@ -1,1 +1,64 @@
 <%= link_to "新建门店", new_services_path %>
+
+
+  <div class="histo-top colmd clearfix">
+
+    <div class="pull-left colmd-a">
+      <a href="#" class="pull-left  histo-text"><samp class="histo-active"><div id="triangle-down"></div>门店</samp></a>
+      <a href="#" class="pull-left  histo-text ">动态</a>
+      <a href="#" class="pull-left  histo-text">消息</a>
+      <a href="#" class="pull-left  histo-text">群组</a>
+    </div>
+    <%= link_to '<i class="icon">&#xe613;</i>新增门店'.html_safe, new_services_path, class: "colmd-2 pull-right" %>
+
+
+  </div>
+  <div class="panel  top20">
+    <div class="panel-tiading">门店(<%= @services.count %>)</div>
+    <div class="panel-body">
+      <div class="clearfix">
+        <% @services.each do |service| %>
+            <div class="media media-frame">
+              <div class="media-left">
+                <a href="#" class="media-wbjectr">
+                  <img class="media-wbjectr" src="img/08.jpg" >
+                </a>
+              </div>
+              <div class="media-body">
+                <div class="pull-right rmediat-right" ><%=I18n.t("activerecord.attributes.service.state.#{service.state}")%></div>
+                <h4 class="media-teheading"><%=service.profile.name%></h4>
+                <p class="teheading-puo"><i class="icon">&#xe61f;</i><%=service.mxid%></p>
+
+                <div class="teheading-text teheading-top">电话：<%=service.profile.mobile%></div>
+                <div class="teheading-text">地址：<%= service.profile.address %></div>
+              </div>
+            </div>
+        <%end%>
+
+
+
+      </div>
+      <div class="clearfix">
+        <nav class="pull-left">
+          <ul class="pagination">
+
+            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a>....</a></li>
+            <li><a href="#">页尾</a></li>
+          </ul>
+        </nav>
+        <nav class="pull-right">
+          <ul class="pager">
+            <li><a href="#"><i class="icon">&#xe611;</i></a></li>
+            <li><a href="#"><i class="icon">&#xe612;</i></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+

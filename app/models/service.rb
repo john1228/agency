@@ -9,6 +9,22 @@ class Service<User
   has_many :coaches, through: :service_members
   alias_attribute :service_id, :id
 
+  include AASM
+  aasm :state do
+    state :approving, :initial => true
+    state :rejected
+    state :approved
+
+    event :reject do
+      transitions :from => :approving, :to => :rejected
+    end
+
+    event :approve do
+      transitions :from => :approving, :to => :approved
+    end
+
+  end
+
   private
   def location
     begin
