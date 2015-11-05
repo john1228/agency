@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
 
-  resource :services
+  resources :services
   resources :coaches
   resources :dynamics
   resources :message
