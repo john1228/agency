@@ -1,13 +1,26 @@
-<div class="row">
-  <div class="col-lg-12 top10 tdzty">
-    <h3 class="poloklh4">历史动态</h3>
 
-    <div class="top15 clearfix row">
-      <div class="col-lg-12 col-md-12">
-        <div id="dynamic">
-          <%= render partial: 'data' %>
-        </div>
+  <div class="histo-top colmd clearfix">
+
+    <div class="pull-left colmd-a">
+      <a href="#" class="pull-left  histo-text">门店</a>
+      <a href="#" class="pull-left  histo-text "><samp class="histo-active"><div id="triangle-down"></div>动态</samp></a>
+      <a href="#" class="pull-left  histo-text">消息</a>
+      <a href="#" class="pull-left  histo-text">群组</a>
+    </div>
+    <a href="#"  class="colmd-2 pull-right"><i class="icon">&#xe613;</i>新增动态</a>
+
+
+  </div>
+  <div class="panel  top20">
+    <div class="panel-tiading">历史动态(<%=@dynamics.count%>)</div>
+    <div class="panel-body">
+      <div class="clearfix">
+        <%= render 'data' %>
+      </div>
+      <div class="clearfix">
+        <%= will_paginate @dynamics, renderer: BootstrapPagination::Rails %>
       </div>
     </div>
   </div>
-</div>
+
+

@@ -2,6 +2,7 @@ class DynamicsController < ApplicationController
   layout 'admin'
 
   def index
+    @service = Service.find(params[:service_id])
     @dynamics = @service.dynamics.order(id: :desc).paginate(page: params[:page]||1, per_page: 24)
     respond_to do |format|
       format.html #default : index.html.erb
