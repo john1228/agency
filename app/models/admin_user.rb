@@ -25,5 +25,13 @@ class AdminUser < ActiveRecord::Base
     end
 
   end
+
+  def all_services
+    services = Service.where(:client_id => self.client_id)
+    if self.service.present?
+      services = @services.where(:id=>self.service_id)
+    end
+    services
+  end
   #benchmark :to_s
 end

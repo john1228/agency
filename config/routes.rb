@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :services do
-    resources :dynamics
   end
   resources :coaches
   resources :dynamics

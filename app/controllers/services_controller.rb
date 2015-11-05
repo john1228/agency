@@ -1,11 +1,7 @@
 class ServicesController < InheritedResources::Base
   layout "admin"
   def index
-    @services = Service.where(:client_id => current_user.client_id)
-    if current_user.service.present?
-      @services = @services.where(:id=>current_user.service_id)
-    end
-    @services = @services.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
+    @services = current_user.all_services.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
   end
 
   def new

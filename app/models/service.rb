@@ -25,6 +25,10 @@ class Service<User
 
   end
 
+  def name
+    profile.name
+  end
+
   private
   def location
     begin

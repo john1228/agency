@@ -1,10 +1,10 @@
 class DynamicsController < ApplicationController
   layout 'admin'
-  before_filter :load_service
+  before_filter :load_services
 
   def index
 
-    @dynamics = @service.dynamics.order(id: :desc).paginate(page: params[:page]||1, per_page: 24)
+    @dynamics = Dynamic.where(:user_id=>@services.map(&:id)).order(id: :desc).paginate(page: params[:page]||1, per_page: 24)
     respond_to do |format|
       format.html #default : index.html.erb
       format.js # default : index.js.erb
@@ -12,11 +12,11 @@ class DynamicsController < ApplicationController
   end
 
   def new
-    @dynamic = @service.dynamics.new
+    @dynamic = Dynamic.new
   end
 
   def create
-    dynamic = @service.dynamics.new(dynamic_params)
+    dynamic = Dynamic.new(dynamic_params)
     if dynamic.save
       @success = true
       @dynamic = Dynamic.new
@@ -28,7 +28,7 @@ class DynamicsController < ApplicationController
   end
 
   def show
-    @dynamic = @service.dynamics.find_by(id: params[:id])
+    @dynamic = Dynamic.where(:user_id=>@services.map(&:id)).find_by(id: params[:id])
   end
 
   def destroy
@@ -48,10 +48,10 @@ class DynamicsController < ApplicationController
           cover: params[:cover]
       }
     end
-    params.require(:dynamic).permit(:content, images_attributes: [:image], film_attributes: [:film, :cover])
+    params.require(:dynamic).permit(:user_id,:content, images_attributes: [:image], film_attributes: [:film, :cover])
   end
 
-  def load_service
-    @service = Service.find(params[:service_id])
+  def load_services
+    @services = current_user.all_services
   end
 end
