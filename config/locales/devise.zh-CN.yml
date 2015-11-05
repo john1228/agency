@@ -57,3 +57,6 @@ zh-CN:
       not_saved:
         one: "因为 1 个错误导致此 %{resource}保存失败:"
         other: "因为 %{count}个错误导致此 %{resource}保存失败:"
+  sessions:
+    admin_user:
+      signed_in: "成功登陆"
