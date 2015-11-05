@@ -1,4 +1,4 @@
-<%= semantic_form_for @service do |f| %>
+<%= semantic_form_for @service, html: {multipart: true} do |f| %>
 
 <h3 class="Content-h3">新增门店</h3>
 <div class="panel">
@@ -29,16 +29,7 @@
         <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店电话</samp></span>
         <%= p.text_field :mobile, class: "form-control" %>
       </div>
-      <div class="input-group conte-cteli top20">
-        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">管理员</samp></span>
-        <select class="form-control">
-          <option>请选择</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
+      
       <div class="input-group conte-cteli top20">
         <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">健身服务</samp></span>
         <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true}) %>
@@ -60,19 +51,19 @@
     </div>
     <%end%>
     <h4 class="clsize top20">照片墙</h4>
-    <div class="Photo-wall top20 clearfix">
-      <div class="Photo-pil pull-left" style="background:asset-url('1.jpg') 100% 100%;background-size: cover;">
-        <button type="button" class="close closete " aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="Photo-pil pull-left">
-        <i class="Photo-font icon">&#xe619;</i>
-        <samp>添加照片</samp>
-        <input type="file" class="file-loading ">
-      </div>
-      <div class="Photo-pil pull-left">
-        <i class="Photo-font icon">&#xe619;</i>
-        <samp>添加照片</samp>
-        <input type="file" class="file-loading ">
+
+    <div id="multi" class=" top10 clearfix cot-til">
+      <div id="image">
+        <div class="upload_area pull-left">
+          <div class="panel-body">
+            <i class="iconfont2 lxcop">&#xe618;</i>
+
+            <p class="text-center cot-til">上传图片</p>
+
+            <p class="text-center cot-til">（可以上传6张）</p>
+          </div>
+          <input type="file" class="image_uploader" name="image[]">
+        </div>
       </div>
 
     </div>
@@ -123,4 +114,72 @@
         }
         return url;
     }
+</script>
+
+<script>
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+    $(function () {
+        var file_count = 0;
+        $('#multi').on('change', '.image_uploader', function () {
+            $('#text').remove();
+            $('#film').remove();
+            var remain = 6 - file_count;
+            for (var i = 0; i < (remain > this.files.length ? this.files.length : remain); i++) {
+                var objUrl = getObjectURL(this.files[i]);
+                $(this).parent().children('div').remove();
+                $(this).parent().css('background-image', "url(" + objUrl + ")");
+                $(this).parent().css('background-size', "cover");
+            }
+            file_count = file_count + this.files.length;
+            if (file_count < 6) {
+                var image_div = "<div class='upload_area pull-left'>" +
+                        "<div class='panel-body'>" +
+                        "<i class='iconfont2 lxcop'>&#xe618;</i>" +
+                        "<p class='text-center cot-til'>上传图片</p>" +
+                        "<p class='text-center cot-til'>（还可以上传" + (6 - file_count) + "张）</p>"
+                        + "</div>" +
+                        "<input type='file'     class='image_uploader' name='image[]'/>" +
+                        "</div>";
+                $(this).parent().parent().append(image_div);
+            }
+        })
+
+        $('#multi').on('change', '.film_uploader', function () {
+            $('#image').remove();
+            $('#text').remove();
+            $('#cover').remove();
+            var filename = $('.film_uploader').val();
+            if (filename.length > 15) {
+                $("#film_title").text(filename.substr(0, 15) + '...');
+            } else {
+                $("#film_title").text(filename);
+            }
+
+            var image_div = "<div class='upload_area pull-left' id='cover'>" +
+                    "<div class='panel-body'>" +
+                    "<i class='iconfont2 lxcop'>&#xe618;</i>" +
+                    "<p class='text-center cot-til'>请上传视频的封面</p>" + "</div>" +
+                    "<input type='file' name='cover' class='cover_uploader'/>" +
+                    "</div>";
+            $(this).parent().parent().append(image_div);
+        });
+
+        $('#multi').on('change', '.cover_uploader', function () {
+            var objUrl = getObjectURL(this.files[0]);
+            $(this).parent().children('div').remove();
+            $(this).parent().css('background-image', "url(" + objUrl + ")");
+            $(this).parent().css('background-size', "cover");
+        })
+    })
+
 </script>

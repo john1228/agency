@@ -39,9 +39,15 @@ class ServicesController < InheritedResources::Base
       params[:service] ||= {}
       params[:service][:profile_attributes][:province] = params[:province]
       params[:service][:profile_attributes][:city] = params[:city]
+
+      if params[:image].present?
+        params[:service][:photos_attributes] = params[:image].map { |image| {photo: image} }
+      end
+
       params.require(:service).permit(:mobile, :password, profile_attributes:
                                                [:avatar, :name, :gender, :address, :birthday, :signature, :province, :city, :identity,
-                                                :business_hour_start, :business_hour_end, :mobile, hobby: []])
+                                                :business_hour_start, :business_hour_end, :mobile, hobby: []], photos_attributes:[:photo])
+
 
     end
 
