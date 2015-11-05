@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105031932) do
+ActiveRecord::Schema.define(version: 20151105052559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -754,6 +754,7 @@ ActiveRecord::Schema.define(version: 20151105031932) do
     t.integer  "status",                 default: 1
     t.integer  "client_id"
     t.string   "state"
+    t.integer  "score",                  default: 0
   end
 
   add_index "users", ["mobile", "sns"], name: "index_users_on_mobile_and_sns", unique: true, using: :btree

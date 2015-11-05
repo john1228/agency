@@ -2,60 +2,52 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <a class="heading-top-samp pull-right" href="#"><i class="icon">&#xe615;</i>编辑</a>
+      <%= link_to '<i class="icon">&#xe615;</i>编辑'.html_safe, edit_service_path(@service), class:"heading-top-samp pull-right"%>
       <h4 class="panel-title">门店详情</h4>
     </div>
     <div class="panel-body">
       <div class="row">
         <div class="col-xs-6">
           <ul class="heading-ul top10">
-            <h3 class="heading-ti">威尔士(徐汇店)</h3>
-            <li>剑道/力量/综合训练</li>
-            <li class="heading-samp"><samp class="heading-sa-a"><i class="icon">&#xe62a;</i>123</samp><samp class="heading-sa-b"><i class="icon">&#xe61f;</i>222</samp></li>
+            <h3 class="heading-ti"><%= @service.profile.name%></h3>
+            <li><%=@service.profile.hobby_string%></li>
+            <li class="heading-samp"><samp class="heading-sa-a"><i class="icon">&#xe62a;</i><%=@service.score%></samp><samp class="heading-sa-b"><i class="icon">&#xe61f;</i><%=@service.mxid%></samp></li>
             <p class="top10"></p>
-            <li class="heading-ul-li"><i class="icon">&#xe629;</i>08:00-22:00</li>
-            <li class="heading-ul-li"><i class="icon">&#xe626;</i>021-84937291</li>
-            <li class="heading-ul-li"><i class="icon">&#xe628;</i>www.e-mxing/23210</li>
-            <li class="heading-ul-li"> <i class="icon">&#xe627;</i>上海市徐汇区汾阳路20号上海音乐学院三楼篮球馆</li>
+            <li class="heading-ul-li"><i class="icon">&#xe629;</i><%=@service.profile.business_hour_start%>-<%=@service.profile.business_hour_end%></li>
+            <li class="heading-ul-li"><i class="icon">&#xe626;</i><%=@service.profile.mobile%></li>
+            <li class="heading-ul-li"><i class="icon">&#xe628;</i><%=link_to "www.e-mxing/#{@service.mxid}","http://www.e-mxing/#{@service.mxid}"%></li>
+            <li class="heading-ul-li"> <i class="icon">&#xe627;</i><%=@service.profile.address%></li>
           </ul>
         </div>
         <div class="col-xs-6">
-          <div class="heading-img pull-right"><img src="img/1.jpg" class="img-circle  img-responsive"></div>
+          <div class="heading-img pull-right"><%=image_tag "1.jpg", class:"img-circle  img-responsive"%></div>
 
         </div>
 
       </div>
-      <div class="text-muted">简介：威康健身管理咨询（上海）有限公司简称威尔士成立于1996年，注册资金1000万美元，至今在全国范围内已拥有30家直营专业健身俱乐部，会员人数超过十万。WILL'S是一个家喻户晓的健身会所品牌。10多年来的精心打造辛勤耕耘。</div>
+      <div class="text-muted"><%=@service.profile.signature%></div>
 
 
 
 
       <div class="album album-bj" id="album">
         <div class="album-image-md" id="album-image-md">
-          <p class="album-image-bd"><img src="img/01.jpg" class="album-image" id="album-image"/></p>
+          <p class="album-image-bd"><%image_src=@service.photos[0].photo.url rescue nil%><%=image_tag image_src, class:"album-image", id:"album-image" %></p>
           <ul class="album-image-nav hide" id="album-image-nav">
             <li class="album-image-nav-left-block" id="album-image-nav-left-block"><a href="#prev-image" class="album-image-btn-prev" id="album-image-btn-prev">‹</a></li>
             <li class="album-image-nav-right-block" id="album-image-nav-right-block"><a href="#next-image" class="album-image-btn-next" id="album-image-btn-next">›</a></li>
           </ul>
-          <p class="album-image-loading-overlay hide" id="album-image-loading-overlay"><img src="img/loading.gif" alt="loading..." width="100" height="100" /></p>
+          <p class="album-image-loading-overlay hide" id="album-image-loading-overlay"><%= image_tag "loading.gif", alt:"loading...", width:"100", height:"100" %></p>
         </div>
         <div class="album-carousel" id="album-carousel">
           <a href="#prev-group" class="album-carousel-btn-prev" id="album-carousel-btn-prev">‹</a>
           <div class="album-carousel-zone" id="album-carousel-zone">
             <ul class="album-carousel-list" id="album-carousel-list">
-              <li class="album-carousel-thumb album-carousel-thumb-selected"><a href="img/01.jpg"><img src="img/01.jpg"/></a></li>
-              <li class="album-carousel-thumb"><a href="img/11.jpg"><img src="img/11.jpg" /></a></li>
-              <li class="album-carousel-thumb"><a href="img/03.jpg"><img src="img/03.jpg"  /></a></li>
-              <li class="album-carousel-thumb"><a href="img/04.jpg"><img src="img/04.jpg"  /></a></li>
-              <li class="album-carousel-thumb"><a href="img/05.jpg"><img src="img/05.jpg"  /></a></li>
-              <li class="album-carousel-thumb"><a href="img/06.jpg"><img src="img/06.jpg"  /></a></li>
-              <li class="album-carousel-thumb"><a href="img/07.jpg"><img src="img/07.jpg"  /></a></li>
-              <li class="album-carousel-thumb"><a href="img/08.jpg"><img src="img/08.jpg" /></a></li>
-              <li class="album-carousel-thumb"><a href="img/09.jpg"><img src="img/09.jpg"  /></a></li>
-              <li class="album-carousel-thumb"><a href="img/03.jpg"><img src="img/03.jpg"  /></a></li>
-              <li class="album-carousel-thumb"><a href="img/04.jpg"><img src="img/04.jpg"  /></a></li>
-              <li class="album-carousel-thumb"><a href="img/05.jpg"><img src="img/05.jpg"  /></a></li>
-              <li class="album-carousel-thumb"><a href="img/06.jpg"><img src="img/06.jpg"  /></a></li>
+              <% @service.photos.each do |photo| %>
+                  <li class="album-carousel-thumb"><%= link_to  image_tag(photo.photo.url),photo.photo.url(:thumb) %></li>
+              <%end%>
+
+
 
 
             </ul>
@@ -72,3 +64,4 @@
 
     </div>
   </div>
+

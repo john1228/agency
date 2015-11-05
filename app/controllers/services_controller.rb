@@ -5,6 +5,7 @@ class ServicesController < InheritedResources::Base
     if current_user.service.present?
       @services = @services.where(:id=>current_user.service_id)
     end
+    @services = @services.paginate(page: params[:page]||1, per_page: 5)
   end
 
   def show
