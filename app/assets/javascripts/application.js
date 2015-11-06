@@ -11,4 +11,4 @@
 // about supported directives.
 //
 //= require 'js/bootstrap'
-//= require jquery
+//= require_self
