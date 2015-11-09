@@ -1,19 +1,31 @@
-<div class="login_padding">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <label>
-        <%= f.email_field :email, autofocus: true, class: 'txt_input txt_input2' %>
-      </label>
-      <label>
-        <%= f.password_field :password, autocomplete: 'off', class: 'txt_input txt_input2' %>
-      </label>
-
-      <p class="forgot"><a href="javascript:void(alert('请联系官方服务人员或拨打客服电话021-62418505'));">忘记密码?</a></p>
-
-      <div class="rem_sub">
-        <label>
-          <%= f.submit '登录', class: 'sub_button', style: 'opacity: 0.7;' %>
-        </label>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <div class="login-panel panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">请登录</h3>
       </div>
-  <% end %>
+      <div class="panel-body">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <fieldset>
+            <div class="form-group">
+              <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "请输入邮件" %>
+            </div>
+            <div class="form-group">
+              <%= f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder:"请输入密码" %>
+              </div>
+
+            <p class="forgot"><a href="javascript:void(alert('请联系官方服务人员或拨打客服电话021-62418505'));">忘记密码?</a></p>
+            <!--<div class="checkbox">-->
+              <!--<label>-->
+                <!--<input name="remember" type="checkbox" value="Remember Me">Remember Me-->
+              <!--</label>-->
+            <!--</div>-->
+            <!-- Change this to a button or input when using this as a form -->
+            <button  class="btn btn-lg btn-success btn-block">登陆</button>
+          </fieldset>
+        <%end%>
+      </div>
+    </div>
+  </div>
 </div>
 
