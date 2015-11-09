@@ -25,37 +25,18 @@
                       </div>
                     </div>
                 <% else %>
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                      <!-- Indicators -->
-                      <ol class="carousel-indicators">
-                        <% @dynamic.images.each_index do |index| %>
-                            <li data-target="#carousel-example-generic" data-slide-to="<%= index %>"></li>
-                        <% end %>
-                      </ol>
-                      <div class="carousel-inner" role="listbox">
-                        <%
-                           @dynamic.images.each do |image|
-                             if @dynamic.images.first.eql?(image)
-                        %>
-                                <div class="item active">
-                                  <%= image_tag(image.image.url) %>
-                                </div>
-                            <% else %>
-                                <div class="item">
-                                  <%= image_tag(image.image.url) %>
-                                </div>
-                            <% end %>
-                        <% end %>
-                      </div>
-                      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                        <i class="iconfont">&#xe616;</i>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                        <i class="iconfont">&#xe615;</i>
-                        <span class="sr-only">Next</span>
-                      </a>
+                    <div id="gallery">
+                      <% @dynamic.images.each do |image| %>
+
+                          <a href="<%= image.image.url %>"><img src="<%= image.image.url(:thumb)%>"  /></a>
+
+                      <% end %>
                     </div>
+                    <script type="text/javascript">
+                        $( function() {
+                            $( '#gallery' ).jGallery();
+                        } );
+                    </script>
                 <% end %>
               </div>
               <%= @dynamic.content %>
