@@ -52,6 +52,19 @@
     <%end%>
     <h4 class="clsize top20">照片墙</h4>
 
+    <div id="gallery">
+      <% @service.photos.each do |photo| %>
+
+          <a href="<%= photo.photo.url %>"><img src="<%= photo.photo.url(:thumb)%>" alt="photo" /></a>
+
+      <% end %>
+    </div>
+    <script type="text/javascript">
+        $( function() {
+            $( '#gallery' ).jGallery();
+        } );
+    </script>
+
     <div id="multi" class=" top10 clearfix cot-til">
       <div id="image">
         <div class="upload_area pull-left">
