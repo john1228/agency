@@ -122,6 +122,7 @@ GEM
       warden (~> 1.2.3)
     enum_help (0.0.14)
     erubis (2.7.0)
+    evil_icons (1.7.8)
     execjs (2.6.0)
     fancybox2-rails (0.2.8)
       railties (>= 3.1.0, < 5.0)
@@ -303,6 +304,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   enum_help
+  evil_icons
   execjs
   fancybox2-rails (~> 0.2.8)
   faraday

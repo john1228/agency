@@ -36,6 +36,7 @@ gem 'streamio-ffmpeg'
 gem 'sidekiq'
 gem 'sidekiq-status'
 gem 'geokit-rails'
+gem 'evil_icons'
 
 gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'cancan'
