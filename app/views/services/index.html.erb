@@ -18,7 +18,7 @@
         <% @services.each do |service| %>
             <div class="media media-frame">
               <div class="media-left">
-                <%= link_to (image_tag '1.jpg',class:"media-wbjectr"),service, class:"media-wbjectr"%>
+                <%= link_to (image_tag service.profile.avatar.url(:thumb),class:"media-wbjectr"),service, class:"media-wbjectr"%>
               </div>
               <div class="media-body">
                 <div class="pull-right rmediat-right" ><%=I18n.t("activerecord.attributes.service.state.#{service.state}")%></div>
