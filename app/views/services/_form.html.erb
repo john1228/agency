@@ -31,6 +31,11 @@
       </div>
 
       <div class="input-group conte-cteli top20">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">头像</samp></span>
+        <%= p.file_field :avatar%>
+      </div>
+
+      <div class="input-group conte-cteli top20">
         <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">健身服务</samp></span>
         <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true}) %>
       </div>

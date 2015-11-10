@@ -1,4 +1,6 @@
-
+<% content_for :back do  %>
+    <%= link_to '<i class="nav-font icon">&#xe604;</i> 回门店信息'.html_safe, services_path %>
+<% end %>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -10,6 +12,7 @@
         <div class="col-xs-6">
           <ul class="heading-ul top10">
             <h3 class="heading-ti"><%= @service.profile.name%></h3>
+
             <li><%=@service.profile.hobby_string%></li>
             <li class="heading-samp"><samp class="heading-sa-a"><i class="icon">&#xe62a;</i><%=@service.score%></samp><samp class="heading-sa-b"><i class="icon">&#xe61f;</i><%=@service.mxid%></samp></li>
             <p class="top10"></p>
@@ -20,7 +23,7 @@
           </ul>
         </div>
         <div class="col-xs-6">
-          <div class="heading-img pull-right"><%=image_tag "1.jpg", class:"img-circle  img-responsive"%></div>
+          <div class="heading-img pull-right"><%=image_tag  @service.profile.avatar.url(:thumb) , class:"img-circle  img-responsive"%></div>
 
         </div>
 

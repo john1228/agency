@@ -25,9 +25,7 @@
   <div class="wrapper-right">
     <nav class="nav-top">
       <div class="pull-left badge-clr">
-        <a href="#">
-          <i class="nav-font icon">&#xe604;</i> 回门店信息
-        </a>
+        <%= yield :back %>
       </div>
       <div class="pull-right badge-right dropdown">
         <a class="btn-tault " id="dropdownMenu1" data-toggle="dropdown" >
@@ -39,7 +37,7 @@
 
               </div>
               <div class="pull-left">
-                我是标题
+                <%= current_user.email %>
               </div>
             </li>
           </ul>
