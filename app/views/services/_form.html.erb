@@ -1,0 +1,208 @@
+<%= semantic_form_for @service, html: {multipart: true} do |f| %>
+
+<h3 class="Content-h3">新增门店</h3>
+<div class="panel">
+  <div class="panel-body">
+    <h4 class="clsize">基本资料</h4>
+    <% if @service.errors.present? %>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <% @service.errors.messages.values.each { |v| %>
+              <%= v %><br/>
+          <% } %>
+        </div>
+    <% end %>
+
+    <%= f.semantic_fields_for :profile do |p| %>
+    <div class="conte-text ">
+      <div class="input-group conte-cteli ">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店名称</samp></span>
+
+        <%= p.text_field :name, :class=>"form-control"%>
+      </div>
+      <div class="input-group conte-text">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">营业时间</samp></span>
+        <%= p.text_field :business_hour_start, class:"form-ctrol", placeholder: "00:00" %> -
+        <%= p.text_field :business_hour_end, class:"form-titrol", placeholder: "23:59"%>
+      </div>
+      <div class="input-group conte-cteli top20">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店电话</samp></span>
+        <%= p.text_field :mobile, class: "form-control" %>
+      </div>
+
+      <div class="input-group conte-cteli top20">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">头像</samp></span>
+        <%= p.file_field :avatar%>
+      </div>
+
+      <div class="input-group conte-cteli top20">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">健身服务</samp></span>
+        <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true}) %>
+      </div>
+      <div class="input-group conte-text">
+        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店地址</samp></span>
+        <select class="form-ctrol" name="province">
+        </select> -
+        <select class="form-titrol" name="city">
+        </select>
+      </div>
+      <div class="input-group conte-text">
+        <%= p.text_field :address, class:"form-control", placeholder: "请填写详细地址" %>
+        </div>
+      <div class="input-group conte-text">
+        <%= p.text_area :signature, class:"form-controt form-kcldv", rows:6, placeholder:"请填写门店简介"%>
+
+      </div>
+    </div>
+    <%end%>
+    <h4 class="clsize top20">照片墙</h4>
+
+    <div id="gallery">
+      <% @service.photos.each do |photo| %>
+
+          <a href="<%= photo.photo.url %>"><img src="<%= photo.photo.url(:thumb)%>"  /></a>
+
+      <% end %>
+    </div>
+    <script type="text/javascript">
+        $( function() {
+            $( '#gallery' ).jGallery();
+        } );
+    </script>
+
+    <div class="image-thumb">
+      <img src="thumb.jpg" />
+      <a href="#" class="image-fav"></a>
+    </div>
+
+    <div id="multi" class=" top10 clearfix cot-til">
+      <div id="image">
+        <div class="upload_area pull-left">
+          <div class="panel-body">
+            <i class="iconfont2 lxcop">&#xe618;</i>
+
+            <p class="text-center cot-til">上传图片</p>
+
+            <p class="text-center cot-til">（可以上传6张）</p>
+          </div>
+          <input type="file" class="image_uploader" name="image[]">
+        </div>
+      </div>
+
+    </div>
+    <div class="fygroup top20">
+      <button type="submit" class="btntn-lg ">确认</button>
+    </div>
+  </div>
+
+</div>
+<% end %>
+
+<script>
+    new PCAS("province", "city", '<%=@service.profile.province%>', '<%=@service.profile.city%>');
+    $(function () {
+                $("#service_profile_attributes_birthday").datepicker({
+                    language: 'zh-CN',
+                    format: 'yyyy-mm-dd'
+                });
+//                $('#service_profile_attributes_hobby').multiselect({
+//                    inheritClass: true,
+//                    numberDisplayed: 8,
+//                    nonSelectedText: '请选择提供的健身服务',
+//                    maxHeight: 100,
+//                    dropUp: true
+//                });
+                $("#service_profile_attributes_avatar").change(function () {
+                    var objUrl = getObjectURL(this.files[0]);
+                    if (objUrl) {
+                        $('#default_div').remove();
+                        $('#avatar_preview').css('background-image', 'url("' + objUrl + '")');
+                        $('#avatar_preview').css('background-size', 'cover');
+                    }
+                });
+            }
+    );
+    /**
+     * 建立一個可存取到該file的url
+     * PS: 瀏覽器必須支援HTML5 File API
+     */
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+</script>
+
+<script>
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+    $(function () {
+        var file_count = 0;
+        $('#multi').on('change', '.image_uploader', function () {
+            $('#text').remove();
+            $('#film').remove();
+            var remain = 6 - file_count;
+            for (var i = 0; i < (remain > this.files.length ? this.files.length : remain); i++) {
+                var objUrl = getObjectURL(this.files[i]);
+                $(this).parent().children('div').remove();
+                $(this).parent().css('background-image', "url(" + objUrl + ")");
+                $(this).parent().css('background-size', "cover");
+            }
+            file_count = file_count + this.files.length;
+            if (file_count < 6) {
+                var image_div = "<div class='upload_area pull-left'>" +
+                        "<div class='panel-body'>" +
+                        "<i class='iconfont2 lxcop'>&#xe618;</i>" +
+                        "<p class='text-center cot-til'>上传图片</p>" +
+                        "<p class='text-center cot-til'>（还可以上传" + (6 - file_count) + "张）</p>"
+                        + "</div>" +
+                        "<input type='file'     class='image_uploader' name='image[]'/>" +
+                        "</div>";
+                $(this).parent().parent().append(image_div);
+            }
+        })
+
+        $('#multi').on('change', '.film_uploader', function () {
+            $('#image').remove();
+            $('#text').remove();
+            $('#cover').remove();
+            var filename = $('.film_uploader').val();
+            if (filename.length > 15) {
+                $("#film_title").text(filename.substr(0, 15) + '...');
+            } else {
+                $("#film_title").text(filename);
+            }
+
+            var image_div = "<div class='upload_area pull-left' id='cover'>" +
+                    "<div class='panel-body'>" +
+                    "<i class='iconfont2 lxcop'>&#xe618;</i>" +
+                    "<p class='text-center cot-til'>请上传视频的封面</p>" + "</div>" +
+                    "<input type='file' name='cover' class='cover_uploader'/>" +
+                    "</div>";
+            $(this).parent().parent().append(image_div);
+        });
+
+        $('#multi').on('change', '.cover_uploader', function () {
+            var objUrl = getObjectURL(this.files[0]);
+            $(this).parent().children('div').remove();
+            $(this).parent().css('background-image', "url(" + objUrl + ")");
+            $(this).parent().css('background-size', "cover");
+        })
+    })
+
+</script>

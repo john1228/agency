@@ -14,6 +14,7 @@ class FilmUploader < CarrierWave::Uploader::Base
   end
 
 
+
   def filename
     "#{Time.now.strftime('%Y/%m/%d')}/#{secure_token}.#{file.extension}" if original_filename
   end

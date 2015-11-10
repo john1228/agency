@@ -2,7 +2,8 @@
 class AdminUser < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
-  belongs_to :service
+  belongs_to :service #we may manage one service
+  belongs_to :client
   include AASM
 
   ROLE = {super: 0, service: 1, cms: 2, market: 3, operator: 4}
@@ -24,4 +25,13 @@ class AdminUser < ActiveRecord::Base
     end
 
   end
+
+  def all_services
+    services = Service.where(:client_id => self.client_id)
+    if self.service.present?
+      services = @services.where(:id=>self.service_id)
+    end
+    services
+  end
+  #benchmark :to_s
 end

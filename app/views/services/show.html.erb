@@ -1,0 +1,58 @@
+<% content_for :back do  %>
+    <%=  %>
+    <%#= link_to '<i class="nav-font icon">&#xe604;</i> 回门店信息'.html_safe, services_path %>
+    <%= link_to (evil_icon 'ei-arrow-left', size: :s) + ' 回门店信息'.html_safe, services_path %>
+<% end %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= link_to '<i class="icon">&#xe615;</i>编辑'.html_safe, edit_service_path(@service), class:"heading-top-samp pull-right"%>
+      <h4 class="panel-title">门店详情</h4>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-6">
+          <ul class="heading-ul top10">
+            <h3 class="heading-ti"><%= @service.profile.name%></h3>
+
+            <li><%=@service.profile.hobby_string%></li>
+            <li class="heading-samp"><samp class="heading-sa-a"><i class="icon">&#xe62a;</i><%=@service.score%></samp><samp class="heading-sa-b"><i class="icon">&#xe61f;</i><%=@service.mxid%></samp></li>
+            <p class="top10"></p>
+            <li class="heading-ul-li"><i class="icon">&#xe629;</i><%=@service.profile.business_hour_start%>-<%=@service.profile.business_hour_end%></li>
+            <li class="heading-ul-li"><i class="icon">&#xe626;</i><%=@service.profile.mobile%></li>
+            <li class="heading-ul-li"><i class="icon">&#xe628;</i><%=link_to "www.e-mxing/#{@service.mxid}","http://www.e-mxing/#{@service.mxid}"%></li>
+            <li class="heading-ul-li"> <i class="icon">&#xe627;</i><%=@service.profile.address%></li>
+          </ul>
+        </div>
+        <div class="col-xs-6">
+          <div class="heading-img pull-right"><%=image_tag  @service.profile.avatar.url(:thumb) , class:"img-circle  img-responsive"%></div>
+
+        </div>
+
+      </div>
+      <div class="text-muted"><%=@service.profile.signature%></div>
+
+
+
+      <div id="gallery">
+        <% @service.photos.each do |photo| %>
+
+            <a href="<%= photo.photo.url %>"><img src="<%= photo.photo.url(:thumb)%>" alt="photo" /></a>
+
+        <% end %>
+      </div>
+
+
+
+
+
+
+
+    </div>
+  </div>
+  <script type="text/javascript">
+      $( function() {
+          $( '#gallery' ).jGallery();
+      } );
+  </script>
+

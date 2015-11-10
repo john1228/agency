@@ -75,6 +75,7 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     bcrypt (3.1.10)
+    benchmark_methods (0.7)
     bootstrap-datepicker-rails (1.4.0)
       railties (>= 3.0)
     builder (3.2.2)
@@ -121,6 +122,7 @@ GEM
       warden (~> 1.2.3)
     enum_help (0.0.14)
     erubis (2.7.0)
+    evil_icons (1.7.8)
     execjs (2.6.0)
     fancybox2-rails (0.2.8)
       railties (>= 3.1.0, < 5.0)
@@ -133,6 +135,9 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     harmonious_dictionary (0.0.1)
+    has_scope (0.6.0)
+      actionpack (>= 3.2, < 5)
+      activesupport (>= 3.2, < 5)
     highline (1.7.8)
     hike (1.2.3)
     hitimes (1.2.3)
@@ -140,6 +145,11 @@ GEM
       commander (~> 4.1)
       json
     i18n (0.7.0)
+    inherited_resources (1.6.0)
+      actionpack (>= 3.2, < 5)
+      has_scope (~> 0.6.0.rc)
+      railties (>= 3.2, < 5)
+      responders
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -284,6 +294,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   activerecord-postgis-adapter (= 3.0.0.beta2)
+  benchmark_methods
   bootstrap-datepicker-rails
   cancan
   cancancan
@@ -293,6 +304,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   enum_help
+  evil_icons
   execjs
   fancybox2-rails (~> 0.2.8)
   faraday
@@ -300,6 +312,7 @@ DEPENDENCIES
   geokit-rails
   harmonious_dictionary
   houston
+  inherited_resources
   jbuilder (~> 2.0)
   jquery-rails
   mina
@@ -310,6 +323,7 @@ DEPENDENCIES
   pg (= 0.18.1)
   pry
   puma
+  qiniu
   rails (= 4.2.1)
   rgeo
   sass-rails (~> 4.0.3)

@@ -8,13 +8,13 @@
 # ENV['RAILS_RELATIVE_URL_ROOT'] = "/gitlab"
 
 #application_path = '/home/rails/agency'
-application_path = '~/agency'
-directory application_path
+application_path = '/home/rails/agency'
+directory application_path + '/current'
 environment 'production'
 daemonize true
-pidfile "#{application_path}/tmp/pids/puma.pid"
-state_path "#{application_path}/tmp/sockets/puma.state"
-stdout_redirect "#{application_path}/log/puma.stdout.log", "#{application_path}/log/puma.stderr.log"
+pidfile "#{application_path}/shared/tmp/pids/puma.pid"
+state_path "#{application_path}/shared/tmp/sockets/puma.state"
+stdout_redirect "#{application_path}/shared/log/puma.stdout.log", "#{application_path}/shared/log/puma.stderr.log"
 
 # Configure “min” to be the minimum number of threads to use to answer
 # requests and “max” the maximum.
@@ -35,7 +35,7 @@ stdout_redirect "#{application_path}/log/puma.stdout.log", "#{application_path}/
 # bind 'ssl://127.0.0.1:9292?key=path_to_key&certs=path_to_cert'
 #
 ## Comment the next line if you use apache.
-bind "unix://#{application_path}/tmp/sockets/puma.socket"
+bind "unix://#{application_path}/shared/tmp/sockets/puma.socket"
 
 # Instead of “bind 'ssl://127.0.0.1:9292?key=path_to_key&certs=path_to_cert'” you
 # can also use the “ssl_bind” option.

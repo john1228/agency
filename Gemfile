@@ -16,7 +16,7 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "carrierwave-qiniu",github: 'huobazi/carrierwave-qiniu'
-#gem "qiniu-rs"
+gem "qiniu"
 gem 'devise'
 gem 'puma'
 gem 'enum_help'
@@ -28,6 +28,7 @@ gem 'mina-sidekiq',:require => false
 gem 'mina-puma',:require => false
 gem 'mina-nginx', :require => false
 
+gem "inherited_resources"
 
 gem 'faraday'
 gem 'mini_magick'
@@ -35,6 +36,7 @@ gem 'streamio-ffmpeg'
 gem 'sidekiq'
 gem 'sidekiq-status'
 gem 'geokit-rails'
+gem 'evil_icons'
 
 gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'cancan'
@@ -49,6 +51,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'formtastic', github: 'justinfrench/formtastic'
 
 gem 'houston'
+gem 'benchmark_methods'
 group :development do
   gem "pry"
 end

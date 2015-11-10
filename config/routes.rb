@@ -8,11 +8,14 @@ Rails.application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
 
+  resources :services do
+  end
   resources :coaches
   resources :dynamics
   resources :message
   resources :mass_message_groups
   resource :profile
+
 
   get 'password' => 'profiles#password'
   post 'password' => 'profiles#change_password', as: :change_password

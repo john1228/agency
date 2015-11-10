@@ -23,6 +23,7 @@
                       <% } %>
                     </div>
                 <% end %>
+                <%= f.collection_select :user_id, current_admin_user.all_services,:id,:name%>
                 <div class="form-section top15">
                   <%= f.text_area(:content, class: 'input-text  pciilk', rows: 3) %>
                 </div>

@@ -8,28 +8,66 @@
   <meta name="author" content="">
   <title>美型-用户后台</title>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag 'css/bootstrap.min', 'css/sb-admin', 'font/iconfont', 'font/font-awesome.min', 'css/showcase' %>
+  <%= stylesheet_link_tag 'css/bootstrap.min', 'css/sb-admin', 'css/font-awesome','css/album','css/jgallery' %>
+  <%= stylesheet_link_tag 'css/main', 'css/main-left', 'css/style' %>
+  <%= stylesheet_link_tag 'application' %>
   <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
   <%= javascript_include_tag 'js/html5shiv', 'js/respond.min', 'js/dropzone' %>
-  <%= javascript_include_tag 'js/bootstrap.min', 'js/bootstrap-datepicker', 'js/bootstrap-datepicker.zh-CN', 'js/bootstrap-multiselect', 'js/PCASClass' %>
+  <%= javascript_include_tag 'js/bootstrap.min', 'js/bootstrap-datepicker', 'js/bootstrap-datepicker.zh-CN', 'js/bootstrap-multiselect', 'js/PCASClass','application' %>
+  <%= stylesheet_link_tag 'font/iconfont' %>
+  <%= evil_icons_sprite %>
 </head>
 <body>
-<div id="wrapper" class="wrappert">
+<div id="wrapper" class="wrapper">
   <div class="collapse navbar-collapse navbar-ex1-collapse ">
     <%= render partial: 'layouts/sidebar' %>
   </div>
-  <div id="page-wrapper">
-    <div class="container-fluid">
-      <div class="row">
-        <%= render partial: 'layouts/header' %>
+  <div class="wrapper-right">
+    <nav class="nav-top">
+      <div class="pull-left badge-clr">
+        <%= yield :back %>
       </div>
-      <div class="padding15">
-        <%= yield %>
+      <div class="pull-right badge-right dropdown">
+        <a class="btn-tault " id="dropdownMenu1" data-toggle="dropdown" >
+          <ul>
+            <li class="media">
+              <div class="badge-left pull-left">
+
+                <%=image_tag "1.jpg", :class=>"media-object" %>
+
+              </div>
+              <div class="pull-left">
+                <%= current_user.email %>
+              </div>
+            </li>
+          </ul>
+        </a>
+        <ul class="dropdown-menu dropup " aria-labelledby="dropdownMenu1">
+
+          <li><a href="#"><i class="iconfont icon">&#xe605;</i>修改密码</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#"><i class="iconfont icon">&#xe624;</i>登出</a></li>
+
+        </ul>
+
       </div>
+
+
+    </nav>
+
+    <%= render partial: "/layouts/flash" %>
+
+    <div class="wrapper-Content">
+      <%= yield %>
+
     </div>
   </div>
+
 </div>
 <%= javascript_include_tag 'js/sb-admin-2' %>
+<%= javascript_include_tag 'js/navigation','js/carousel','js/album','js/jgallery','js/touchswipe.min'%>
+
+
 </body>
 </html>

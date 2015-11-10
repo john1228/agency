@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030023335) do
+ActiveRecord::Schema.define(version: 20151109093433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,12 @@ ActiveRecord::Schema.define(version: 20151030023335) do
     t.integer  "pos",           default: 0
   end
 
+  create_table "add_client_id_to_admin_users", force: :cascade do |t|
+    t.integer  "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "address_coordinates", force: :cascade do |t|
     t.integer   "address_id"
     t.geography "lonlat",     limit: {:srid=>4326, :type=>"point", :geographic=>true}
@@ -79,6 +85,7 @@ ActiveRecord::Schema.define(version: 20151030023335) do
     t.integer  "role"
     t.integer  "service_id"
     t.string   "status"
+    t.integer  "client_id"
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
@@ -181,6 +188,14 @@ ActiveRecord::Schema.define(version: 20151030023335) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "clients", force: :cascade do |t|
+    t.string   "name"
+    t.string   "tel"
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "coach_docs", force: :cascade do |t|
     t.integer "coach_id"
@@ -360,7 +375,8 @@ ActiveRecord::Schema.define(version: 20151030023335) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "top",        default: 0
+    t.integer  "top",            default: 0
+    t.integer  "comments_count", default: 0
   end
 
   create_table "expiries", force: :cascade do |t|
@@ -572,22 +588,24 @@ ActiveRecord::Schema.define(version: 20151030023335) do
 
   create_table "profiles", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "signature",     limit: 255, default: ""
-    t.string  "name",          limit: 255, default: ""
-    t.string  "avatar",        limit: 255, default: ""
-    t.integer "gender",                    default: 0
-    t.integer "identity",                  default: 0
-    t.date    "birthday",                  default: '1999-03-20'
-    t.string  "address",       limit: 255, default: ""
-    t.string  "target",        limit: 255, default: ""
-    t.string  "skill",         limit: 255, default: ""
-    t.string  "often_stadium", limit: 255, default: ""
-    t.string  "interests",     limit: 255, default: ""
-    t.string  "mobile",        limit: 255, default: ""
-    t.integer "service",                   default: [],           array: true
-    t.integer "hobby",                     default: [],           array: true
+    t.string  "signature",           limit: 255, default: ""
+    t.string  "name",                limit: 255, default: ""
+    t.string  "avatar",              limit: 255, default: ""
+    t.integer "gender",                          default: 0
+    t.integer "identity",                        default: 0
+    t.date    "birthday",                        default: '1999-03-20'
+    t.string  "address",             limit: 255, default: ""
+    t.string  "target",              limit: 255, default: ""
+    t.string  "skill",               limit: 255, default: ""
+    t.string  "often_stadium",       limit: 255, default: ""
+    t.string  "interests",           limit: 255, default: ""
+    t.string  "mobile",              limit: 255, default: ""
+    t.integer "service",                         default: [],           array: true
+    t.integer "hobby",                           default: [],           array: true
     t.string  "province"
     t.string  "city"
+    t.string  "business_hour_start"
+    t.string  "business_hour_end"
   end
 
   add_index "profiles", ["address"], name: "index_profiles_on_address", using: :btree
@@ -735,6 +753,9 @@ ActiveRecord::Schema.define(version: 20151030023335) do
     t.string   "device",                 default: ""
     t.integer  "views",                  default: 14000
     t.integer  "status",                 default: 1
+    t.integer  "client_id"
+    t.string   "state"
+    t.integer  "score",                  default: 0
   end
 
   add_index "users", ["mobile", "sns"], name: "index_users_on_mobile_and_sns", unique: true, using: :btree
