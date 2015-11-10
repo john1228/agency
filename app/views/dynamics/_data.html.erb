@@ -49,9 +49,9 @@
         </dl>
         <div class="clearfix polokl ">
           <a href="#" class="pull-left pritbt">
-            <i class="iconfont icon">&#xe60e;</i><%= dynamic.comments_count %>
+            <i class="iconfont icon">&#xe60e;</i><%= image_tag dynamic.user.profile.avatar.url(:thumb) %>
           </a>
-          <a href="/dynamics/<%= dynamic.id %>" class="pull-right pritbt delete_icon"><i class="iconfont">&#xe60d;</i></a>
+          <a href="/dynamics/<%= dynamic.id %>" class="pull-right pritbt delete_icon"><i class="iconfont">&#xe60d;</i><%= dynamic.comments_count %></a>
         </div>
       </div>
   <% end %>

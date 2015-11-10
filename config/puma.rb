@@ -9,7 +9,7 @@
 
 #application_path = '/home/rails/agency'
 application_path = '/home/rails/agency'
-directory application_path
+directory application_path + '/current'
 environment 'production'
 daemonize true
 pidfile "#{application_path}/shared/tmp/pids/puma.pid"
