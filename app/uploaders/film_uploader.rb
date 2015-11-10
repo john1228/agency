@@ -13,7 +13,7 @@ class FilmUploader < CarrierWave::Uploader::Base
     $hls_host + file.path.gsub("#{Rails.root}/public/#{store_dir}", '').gsub(file.extension, 'm3u8')
   end
 
-per
+
 
   def filename
     "#{Time.now.strftime('%Y/%m/%d')}/#{secure_token}.#{file.extension}" if original_filename
