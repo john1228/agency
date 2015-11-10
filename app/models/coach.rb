@@ -36,10 +36,7 @@ class Coach<User
     detail = {
         mxid: profile.mxid,
         name: HarmoniousDictionary.clean(profile.name),
-        avatar: {
-            thumb: profile.avatar.thumb.url,
-            origin: profile.avatar.url
-        },
+        avatar: profile.avatar.url,
         tag: profile.tags,
         gender: profile.gender||1,
         age: profile.age,
@@ -55,8 +52,8 @@ class Coach<User
         },
         skill: _skill,
         course: {
-            amount: Sku.online.where('skus.sku LIKE ?', 'CC%').where(seller_id: id).count,
-            item: Sku.online.where('skus.sku LIKE ?', 'CC%').where(seller_id: id).order(updated_at: :desc).take(2).map { |item|
+            amount: Sku.online.where(seller_id: id).count,
+            item: Sku.online.where(seller_id: id).order(updated_at: :desc).take(2).map { |item|
               {
                   sku: item.sku,
                   name: item.course_name,

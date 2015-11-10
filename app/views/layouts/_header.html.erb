@@ -1,27 +1,28 @@
-<div class="col-lg-12 tpxcir clearfix">
-  <div class="navbar-header pull-left">
-    <button type="button" class="fa fa-tasks fa-2x fa5y" data-toggle="collapse" data-target=".navbar-collapse"></button>
-  </div>
-  <div class="tdrer pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    <div class="pull-left tpxcir-top"><%#= image_tag(@service.profile.avatar.thumb.url) %></div>
-    <div class="pull-right">
-      <h4 class="page-header"> <%#= @service.profile.name %></h4>
-      <small>美型号: <%#= @service.profile.mxid %></small>
-    </div>
+<div class="pull-left badge-clr">
+  <a href="#">
+    <i class="nav-font icon">&#xe604;</i> 回门店信息
   </a>
+</div>
+<div class="pull-right badge-right dropdown">
+  <a class="btn-tault " id="dropdownMenu1" data-toggle="dropdown">
+    <ul>
+      <li class="media">
+        <div class="badge-left pull-left">
 
-    <div class="dropdown-menu">
-      <ul>
-        <li><a href="/profile"><i class="iconfont icon">&#xe601;</i>场地资料</a></li>
-        <li><a href="/password"><i class="iconfont icon">&#xe617;</i>修改密码</a></li>
-        <li class="divider"></li>
-        <li>
-          <%= link_to(logout_path, method: :delete, id: 'logout') do %>
-              <i class="iconfont icon">&#xe612;</i>登出
-          <% end %>
-        </li>
-      </ul>
-    </div>
-    <p class="clear"></p>
-  </div>
+          <img class="media-object" src="img/1.jpg">
+
+        </div>
+        <div class="pull-left">
+          我是标题
+        </div>
+      </li>
+    </ul>
+  </a>
+  <ul class="dropdown-menu dropup " aria-labelledby="dropdownMenu1">
+
+    <li><a href="#"><i class="iconfont icon">&#xe605;</i>修改密码</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#"><i class="iconfont icon">&#xe624;</i>登出</a></li>
+  </ul>
+
 </div>
