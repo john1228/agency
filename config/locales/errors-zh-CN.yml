@@ -18,3 +18,23 @@
               blank: "市不能为空"
             address:
               blank: "地址不能为空"
+        user_registration:
+          attributes:
+            name:
+              blank: "姓名不能为空"
+            mobile:
+              blank: "电话不能为空"
+            birthday:
+              blank: "生日不能为空"
+            gender:
+              blank: "性别不能为空"
+            service_id:
+              blank: "所属门店不能为空"
+            avatar:
+              blank: "头像不能为空"
+            province:
+              blank: "省不能为空"
+            city:
+              blank: "市不能为空"
+            address:
+              blank: "地址不能为空"

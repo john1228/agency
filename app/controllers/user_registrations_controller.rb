@@ -14,7 +14,7 @@ class UserRegistrationsController < InheritedResources::Base
     if @user_registration.save
       @success = true
       flash[:success] = "成功创建会员"
-      redirect_to services_path
+      redirect_to user_registrations_path
     else
       #flash[:error] = "xxx"
       render :new
@@ -28,7 +28,7 @@ class UserRegistrationsController < InheritedResources::Base
     if @user_registration.save
       @success = true
       flash[:success] = "成功修改会员"
-      redirect_to services_path
+      redirect_to user_registrations_path
     else
       #flash[:error] = "xxx"
       render :edit
@@ -38,7 +38,8 @@ class UserRegistrationsController < InheritedResources::Base
   private
 
     def user_registration_params
-      params.require(:user_registration).permit(:reg_type, :avatar, :name, :gender, :service_id, :client_id, :mobile, :source, :birthday, :address, :remark)
+      params.require(:user_registration).permit(:reg_type, :avatar, :name, :gender, :service_id, :client_id, :mobile, :source, :birthday, :address, :remark,
+      :province,:city)
     end
 end
 
