@@ -10,10 +10,18 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require evil-icons
  *= require_self
  */
 
-.wrapper-right {
-  margin-left: 20px;
-}
+
+
+.file_remove_format {position: absolute;top: 0;right: 0;width: 100%;height: 100%;text-align: right;opacity: 0;background: 0 0;cursor: inherit;display: block;}
+
+.portrait{ width:220px; height: 200px; text-align: center;  padding-top: 20px; position: relative; box-shadow: 0px 0px 8px #ecebec;}
+.portrait span{ width: 130px; height: 130px;
+  background: #d6dfeb;
+  display:block; margin: 0 auto; font-size:40px; line-height: 130px; border-radius: 100%;
+  color: #fff;
+  margin-bottom: 10px;}
+.portrait p{ color: #a1aab7;}
+

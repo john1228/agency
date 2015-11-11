@@ -1,61 +1,166 @@
-<%= form_for(@user_registration) do |f| %>
-  <% if @user_registration.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user_registration.errors.count, "error") %> prohibited this user_registration from being saved:</h2>
+<%= semantic_form_for @user_registration, html: {multipart: true} do |f| %>
 
-      <ul>
-      <% @user_registration.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <h3 class="Content-h3">新增门店</h3>
+    <div class="panel">
+      <div class="panel-body">
+        <h4 class="clsize">基本资料</h4>
+        <% if @user_registration.errors.present? %>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <% @user_registration.errors.messages.values.each { |v| %>
+                  <%= v %><br/>
+              <% } %>
+            </div>
+        <% end %>
+
+        <div class=" pull-right">
+          <div class="portrait">
+            <div class="place">
+                <span>
+                  <i class=" icon"></i>
+                </span>
+                <p>上传头像</p>
+            </div>
+            <div class="show"></div>
+            <%= f.file_field :avatar,  class:"file_remove_format file_uploader" %>
+          </div>
+        </div>
+
+            <div class="conte-text ">
+
+
+
+              <div class="input-group conte-cteli ">
+                <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店名称</samp></span>
+
+                <%= f.text_field :name, :class=>"form-control"%>
+              </div>
+
+              <div class="input-group conte-cteli top20">
+                <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店电话</samp></span>
+                <%= f.text_field :mobile, class: "form-control" %>
+              </div>
+
+              <div class="input-group conte-cteli top20">
+                <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">头像</samp></span>
+                <%= f.file_field :avatar%>
+              </div>
+
+
+              <div class="input-group conte-text">
+                <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店地址</samp></span>
+                <select class="form-ctrol" name="province">
+                </select> -
+                <select class="form-titrol" name="city">
+                </select>
+              </div>
+              <div class="input-group conte-text">
+                <%= f.text_field :address, class:"form-control", placeholder: "请填写详细地址" %>
+              </div>
+
+            </div>
+        
+
+
+
+
+
+        <div class="fygroup top20">
+          <button type="submit" class="btntn-lg ">确认</button>
+        </div>
+      </div>
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :reg_type %><br>
-    <%= f.number_field :reg_type %>
-  </div>
-  <div class="field">
-    <%= f.label :avatar %><br>
-    <%= f.text_field :avatar %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.number_field :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :service_id %><br>
-    <%= f.number_field :service_id %>
-  </div>
-  <div class="field">
-    <%= f.label :client_id %><br>
-    <%= f.number_field :client_id %>
-  </div>
-  <div class="field">
-    <%= f.label :mobile %><br>
-    <%= f.text_field :mobile %>
-  </div>
-  <div class="field">
-    <%= f.label :source %><br>
-    <%= f.number_field :source %>
-  </div>
-  <div class="field">
-    <%= f.label :birthday %><br>
-    <%= f.datetime_select :birthday %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :remark %><br>
-    <%= f.text_field :remark %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
+
+<script>
+    new PCAS("province", "city", '<%=@user_registration.province%>', '<%=@user_registration.city%>');
+    $(function () {
+                $("#user_registration_birthday").datepicker({
+                    language: 'zh-CN',
+                    format: 'yyyy-mm-dd'
+                });
+//                $('#service_profile_attributes_hobby').multiselect({
+//                    inheritClass: true,
+//                    numberDisplayed: 8,
+//                    nonSelectedText: '请选择提供的健身服务',
+//                    maxHeight: 100,
+//                    dropUp: true
+//                });
+
+            }
+    );
+    /**
+     * 建立一個可存取到該file的url
+     * PS: 瀏覽器必須支援HTML5 File API
+     */
+
+</script>
+
+<script>
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+    $(function () {
+        var file_count = 0;
+        $('#multi').on('change', '.image_uploader', function () {
+            $('#text').remove();
+            $('#film').remove();
+            var remain = 6 - file_count;
+            for (var i = 0; i < (remain > this.files.length ? this.files.length : remain); i++) {
+                var objUrl = getObjectURL(this.files[i]);
+                $(this).parent().children('div').remove();
+                $(this).parent().css('background-image', "url(" + objUrl + ")");
+                $(this).parent().css('background-size', "cover");
+            }
+            file_count = file_count + this.files.length;
+            if (file_count < 6) {
+                var image_div = "<div class='upload_area pull-left'>" +
+                        "<div class='panel-body'>" +
+                        "<i class='iconfont2 lxcop'>&#xe618;</i>" +
+                        "<p class='text-center cot-til'>上传图片</p>" +
+                        "<p class='text-center cot-til'>（还可以上传" + (6 - file_count) + "张）</p>"
+                        + "</div>" +
+                        "<input type='file'     class='image_uploader' name='image[]'/>" +
+                        "</div>";
+                $(this).parent().parent().append(image_div);
+            }
+        })
+
+        $('#multi').on('change', '.film_uploader', function () {
+            $('#image').remove();
+            $('#text').remove();
+            $('#cover').remove();
+            var filename = $('.film_uploader').val();
+            if (filename.length > 15) {
+                $("#film_title").text(filename.substr(0, 15) + '...');
+            } else {
+                $("#film_title").text(filename);
+            }
+
+            var image_div = "<div class='upload_area pull-left' id='cover'>" +
+                    "<div class='panel-body'>" +
+                    "<i class='iconfont2 lxcop'>&#xe618;</i>" +
+                    "<p class='text-center cot-til'>请上传视频的封面</p>" + "</div>" +
+                    "<input type='file' name='cover' class='cover_uploader'/>" +
+                    "</div>";
+            $(this).parent().parent().append(image_div);
+        });
+
+        $('#multi').on('change', '.cover_uploader', function () {
+            var objUrl = getObjectURL(this.files[0]);
+            $(this).parent().children('div').remove();
+            $(this).parent().css('background-image', "url(" + objUrl + ")");
+            $(this).parent().css('background-size', "cover");
+        })
+    })
+
+</script>

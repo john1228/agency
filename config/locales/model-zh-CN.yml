@@ -11,3 +11,11 @@
           approving: "审核中"
           approved: "审核通过"
           rejected: "审核不通过"
+      user_registration:
+        gender:
+          male: "男"
+          female: "女"
+        source:
+          meixing: "美型"
+          input: "录入"
+

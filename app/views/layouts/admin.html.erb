@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bootstrap 101 Template</title>
-  <%= stylesheet_link_tag('css/bootstrap', 'css/style', 'css/main-left', 'css/main', 'css/font-awesome', 'css/iconfont') %>
+  <%= stylesheet_link_tag('css/bootstrap', 'css/style', 'css/main-left', 'css/main', 'css/font-awesome', 'css/iconfont', 'application') %>
   <%= csrf_meta_tags %>
   <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
@@ -34,7 +34,7 @@
     </div>
   </div>
 </div>
-<%= javascript_include_tag 'js/bootstrap.min', 'js/navigation' %>
+<%= javascript_include_tag 'js/bootstrap.min', 'js/navigation','application' %>
 </body>
 
 </html>

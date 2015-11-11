@@ -10,5 +10,29 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require 'js/bootstrap'
 //= require_self
+
+
+// or using File.prototype.objectURL()?
+function getObjectURL(file) {
+    //console.log(file);
+    var url = null;
+    if (window.createObjectURL != undefined) { // basic
+        url = window.createObjectURL(file);
+    } else if (window.URL != undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file);
+    }
+    return url;
+}
+
+$(".file_uploader").change(function () {
+    var objUrl = getObjectURL(this.files[0]);
+    if (objUrl) {
+
+        $('.portrait .place').remove();
+        $('.portrait ').css('background-image', 'url("' + objUrl + '")');
+        $('.portrait ').css('background-size', 'cover');
+    }
+});
