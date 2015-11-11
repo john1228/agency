@@ -1,4 +1,5 @@
 class UserRegistrationsController < InheritedResources::Base
+  layout "admin"
 
   private
 
