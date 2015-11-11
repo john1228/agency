@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :user_registrations
   devise_for :admin_user
   devise_scope :admin_user do
     get 'logout', :to => 'devise/sessions#destroy'

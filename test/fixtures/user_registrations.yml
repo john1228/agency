@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reg_type: 1
+  avatar: MyString
+  name: MyString
+  gender: 1
+  service_id: 1
+  client_id: 1
+  mobile: MyString
+  source: 1
+  birthday: 2015-11-11 11:49:47
+  address: MyString
+  remark: MyString
+
+two:
+  reg_type: 1
+  avatar: MyString
+  name: MyString
+  gender: 1
+  service_id: 1
+  client_id: 1
+  mobile: MyString
+  source: 1
+  birthday: 2015-11-11 11:49:47
+  address: MyString
+  remark: MyString

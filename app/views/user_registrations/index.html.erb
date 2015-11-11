@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing User Registrations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Reg type</th>
+      <th>Avatar</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Service</th>
+      <th>Client</th>
+      <th>Mobile</th>
+      <th>Source</th>
+      <th>Birthday</th>
+      <th>Address</th>
+      <th>Remark</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_registrations.each do |user_registration| %>
+      <tr>
+        <td><%= user_registration.reg_type %></td>
+        <td><%= user_registration.avatar %></td>
+        <td><%= user_registration.name %></td>
+        <td><%= user_registration.gender %></td>
+        <td><%= user_registration.service_id %></td>
+        <td><%= user_registration.client_id %></td>
+        <td><%= user_registration.mobile %></td>
+        <td><%= user_registration.source %></td>
+        <td><%= user_registration.birthday %></td>
+        <td><%= user_registration.address %></td>
+        <td><%= user_registration.remark %></td>
+        <td><%= link_to 'Show', user_registration %></td>
+        <td><%= link_to 'Edit', edit_user_registration_path(user_registration) %></td>
+        <td><%= link_to 'Destroy', user_registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User registration', new_user_registration_path %>

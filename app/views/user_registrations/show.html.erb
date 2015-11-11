@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Reg type:</strong>
+  <%= @user_registration.reg_type %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @user_registration.avatar %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user_registration.name %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @user_registration.gender %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @user_registration.service_id %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @user_registration.client_id %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @user_registration.mobile %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @user_registration.source %>
+</p>
+
+<p>
+  <strong>Birthday:</strong>
+  <%= @user_registration.birthday %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user_registration.address %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @user_registration.remark %>
+</p>
+
+<%= link_to 'Edit', edit_user_registration_path(@user_registration) %> |
+<%= link_to 'Back', user_registrations_path %>
