@@ -7,8 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bootstrap 101 Template</title>
   <%= stylesheet_link_tag('css/bootstrap', 'css/style', 'css/main-left', 'css/main', 'css/font-awesome', 'css/iconfont') %>
+  <%= csrf_meta_tags %>
   <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+  <%= stylesheet_link_tag "css/jgallery" %>
+  <%= javascript_include_tag "js/PCASClass","js/jgallery",'js/bootstrap-datepicker','js/bootstrap-datepicker.zh-CN' %>
 </head>
 
 <body>
@@ -25,6 +28,7 @@
     <nav class="nav-top">
       <%= render partial: 'layouts/header' %>
     </nav>
+    <%= render "/layouts/flash" %>
     <div class="wrapper-Content">
       <%= yield %>
     </div>
