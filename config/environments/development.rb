@@ -32,6 +32,6 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
   config.assets.paths << Rails.root.join('app', 'assets', 'flash')
-  # config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-  # config.assets.precompile += %w( .svg .eot .woff .ttf)
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
 end
