@@ -1,8 +1,8 @@
-class CoachesController < ApplicationController
+class CoachesController < InheritedResources::Base
   layout 'admin'
 
   def index
-    @q = Coach.ransack(params[:q])
+    @q = Coach.where(:client_id=>current_user.client_id).ransack(params[:q])
     @coaches = @q.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
   end
 
@@ -16,20 +16,18 @@ class CoachesController < ApplicationController
   def create
     coach = Coach.new(coach_params)
     coach.client_id = current_user.client_id
+    coach.profile.identity = 1
     if coach.save
-      ServiceMember.create(service: @service, coach: coach)
+      ServiceMember.create(service_id: coach.service_id, coach: coach)
       @success = true
-      @coach = Coach.new
-      @coach.build_profile
+      flash[:success] = "成功创建私教"
+      redirect_to coaches_path
+      return
     else
       @failure = coach.errors
       @coach = coach
     end
     render action: :new
-  end
-
-  def update
-
   end
 
   def destroy
@@ -42,7 +40,7 @@ class CoachesController < ApplicationController
   def coach_params
     params[:coach][:profile_attributes][:province] = params[:province]
     params[:coach][:profile_attributes][:city] = params[:city]
-    params.require(:coach).permit(:mobile, :password, profile_attributes:
-                                             [:avatar, :name, :gender, :birthday, :signature, :province, :city, :identity, hobby: []])
+    params.require(:coach).permit(:mobile, :password, :service_id,profile_attributes:
+                                             [:avatar, :name, :mobile,:gender, :birthday, :signature, :province, :city, :identity, hobby: []])
   end
 end

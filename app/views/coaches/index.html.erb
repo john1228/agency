@@ -20,9 +20,9 @@
     </div>
     <div class="panel  top20">
       <div class="panel-tiading clearfix sure-select">
-        <span class="pull-left">会员统计</span>
+        <span class="pull-left">私教统计</span>
         <p class="top10">
-          <%= f.collection_select :service_id_eq, current_admin_user.all_services,:id,:name,{include_blank:"全部门店"},class:"pull-right"%>
+          <%= f.collection_select :service_id_eq, current_admin_user.all_services,:id,:name,{include_blank:"全部门店"},class:"pull-right",onchange:"return $(this).closest('form').submit()"%>
         </p>
       </div>
       <div class="panel-body">
@@ -36,7 +36,7 @@
 
 
 
-<h3 class="member-h3">会员信息</h3>
+<h3 class="member-h3">私教信息</h3>
 <table class="table table-striped card-list" id="datatable-editable">
   <thead>
   <tr>

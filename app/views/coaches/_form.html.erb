@@ -1,162 +1,118 @@
-<div class="row">
-  <div class="col-lg-12 top10 tdzty">
-    <h3 class="poloklh4">私教信息</h3>
+<%= semantic_form_for @coach, html: {multipart: true} do |f| %>
 
-    <div class="top15 clearfix row">
-      <%= semantic_form_for(@coach) do |f| %>
-          <div class="col-lg-9 col-md-9">
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="panel-headint tdzty clearfix">
-                  <h3 class=" pull-left panel-title">基本信息</h3>
-                </div>
-                <% if @failure.present? %>
-                    <div class="alert alert-danger alert-dismissable">
-                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <% @failure.messages.values.each { |v| %>
-                          <%= v %><br/>
-                      <% } %>
-                    </div>
-                <% end %>
-                <% if @success.present? %>
-                    <div class="alert alert-success" role="alert">
-                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                      添加成功
-                    </div>
-                <% end %>
-                <div>
-                  <%= f.semantic_fields_for :profile do |p| %>
-                      <%= p.hidden_field :identity, value: 1 %>
-                      <div class="top10 clearfix cot-til">
-                        <div class="upload_area pull-left" id="avatar_preview">
-                          <div class="panel-body">
-                            <div id="default_div">
-                              <i class="iconfont2 lxcop">&#xe618;</i>
-
-                              <p class="text-center cot-til">上传头像</p>
-                            </div>
-                            <%= p.file_field :avatar, class: 'image_uploader' %>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-section top15 ">
-                        <label class="input-label">教练昵称</label>
-                        <%= p.text_field :name, class: 'input-text' %>
-                      </div>
-                      <div class="row top15">
-                        <div class="col-xs-6 col-md-5">
-                          <div class="form-group input-group">
-                            <div class='input-group date' id='datetimepicker2'>
-                              <span class="input-group-addon">
-                                生日
-                              </span>
-                              <%= p.text_field :birthday, class: 'input-text', readonly: true %>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="radio-inline margin20">
-                          <%= p.radio_button :gender, 0 %>男
-                        </label>
-                        <label class="radio-inline">
-                          <%= p.radio_button :gender, 1 %>女
-                        </label>
-                      </div>
-                      <div class="form-section">
-                        <label class="input-label">教练签名</label>
-                        <%= p.text_field :signature, class: 'input-text' %>
-                      </div>
-                      <div class="row top15">
-                        <div class="col-md-4">
-                          <div class="form-section">
-                            <select class="input-textl" name="province">
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-section">
-                            <select class="input-textl" name="city">
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                          <div class="form-section top15">
-                            <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true}) %>
-                          </div>
-                        </div>
-                      </div>
-                  <% end %>
-                  <div class="fygroup">
-                    <%= f.submit('确认', class: 'btntn-lg') %>
-                  </div>
-                </div>
-              </div>
+    <h3 class="Content-h3"><%=edit_helper(@coach)%>私教</h3>
+    <div class="panel">
+      <div class="panel-body">
+        <h4 class="clsize">基本资料</h4>
+        <% if @coach.errors.present? %>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <% @coach.errors.messages.values.each { |v| %>
+                  <%= v %><br/>
+              <% } %>
             </div>
+        <% end %>
+
+        <%= f.semantic_fields_for :profile do |p| %>
+        <div class=" pull-right">
+          <div class="portrait" data-url="<%=@coach.profile.avatar.url(:thumb) if @coach.profile.avatar.present? %>">
+
+            <div class="place">
+                  <span>
+                    <i class=" icon"></i>
+                  </span>
+              <p>上传头像</p>
+            </div>
+            <div class="show"></div>
+            <%= p.file_field :avatar,  class:"file_remove_format file_uploader" %>
+          </div>
+        </div>
+
+        <div class="conte-text ">
+
+
+
+          <div class="input-group conte-cteli ">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">私教姓名</samp></span>
+
+            <%= p.text_field :name, :class=>"form-control"%>
           </div>
 
-          <div class="col-lg-3 col-md-3">
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="panel-headint tdzty clearfix">
-                  <h3 class=" pull-left panel-title">登录信息</h3>
-                </div>
-                <div class="form-section  top15">
-                  <label class="input-label">手机号码</label>
-                  <%= f.text_field :mobile, class: 'input-text' %>
-                </div>
-                <div class="form-section top15">
-                  <label class="input-label">密码</label>
-                  <%= f.password_field :password, class: 'input-text' %>
-                </div>
-              </div>
-            </div>
+          <div class="input-group conte-cteli top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">生日</samp></span>
+            <%= p.text_field :birthday, class: "form-control datepicker" %>
           </div>
-      <% end %>
+
+          <div class="input-group conte-cteli top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">性别</samp></span>
+            <%= p.collection_select :gender, UserRegistration.genders.map {|key, value| [I18n.t("activerecord.attributes.gender.#{key}"), key] },:last, :first, class: "form-control" %>
+          </div>
+
+          <div class="input-group conte-cteli top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">手机号码</samp></span>
+            <%= p.text_field :mobile, class: "form-control" %>
+          </div>
+          <div class="input-group conte-cteli top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">私教简介</samp></span>
+            <%= p.text_field :signature, class: "form-control" %>
+          </div>
+
+          <div class="input-group conte-cteli top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
+            <%= f.collection_select :service_id, current_user.all_services,:id,:name,{},class:"form-control"%>
+          </div>
+
+          <div class="input-group conte-cteli top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">健身服务</samp></span>
+            <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true}) %>
+          </div>
+
+          <div class="input-group conte-cteli top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">登录用户名</samp></span>
+            <%= f.text_field :mobile, class: "form-control", placeholder: "请输入手机号" %>
+          </div>
+
+          <div class="input-group conte-cteli top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">登录密码</samp></span>
+            <%= f.password_field :password, class: "form-control" %>
+          </div>
+        </div>
+        <% end %>
+
+
+
+
+
+
+        <div class="fygroup top20">
+          <button type="submit" class="btntn-lg ">确认</button>
+        </div>
+      </div>
+
     </div>
-  </div>
-</div>
+<% end %>
+
 <script>
-    new PCAS("province", "city", '<%=@coach.profile.province%>', '<%=@coach.profile.city%>');
+    new PCAS("coach[province]", "coach[city]", '<%=@coach.profile.province%>', '<%=@coach.profile.city%>');
     $(function () {
-                $("#coach_profile_attributes_birthday").datepicker({
+                $("#coach_birthday").datepicker({
                     language: 'zh-CN',
                     format: 'yyyy-mm-dd'
                 });
-                $('#coach_profile_attributes_hobby').multiselect({
-                    inheritClass: true,
-                    numberDisplayed: 8,
-                    nonSelectedText: '请选择提供的健身服务',
-                    maxHeight: 100,
-                    dropUp: true
-                });
-                $("#coach_profile_attributes_avatar").change(function () {
-                    var objUrl = getObjectURL(this.files[0]);
-                    if (objUrl) {
-                        $('#default_div').remove();
-                        $('#avatar_preview').css('background-image', 'url("' + objUrl + '")');
-                        $('#avatar_preview').css('background-size', 'cover');
-                    }
-                });
+                $(".portrait").Avatar();
+//                $('#service_profile_attributes_hobby').multiselect({
+//                    inheritClass: true,
+//                    numberDisplayed: 8,
+//                    nonSelectedText: '请选择提供的健身服务',
+//                    maxHeight: 100,
+//                    dropUp: true
+//                });
+
             }
     );
     /**
      * 建立一個可存取到該file的url
      * PS: 瀏覽器必須支援HTML5 File API
      */
-    function getObjectURL(file) {
-        var url = null;
-        if (window.createObjectURL != undefined) { // basic
-            url = window.createObjectURL(file);
-        } else if (window.URL != undefined) { // mozilla(firefox)
-            url = window.URL.createObjectURL(file);
-        } else if (window.webkitURL != undefined) { // webkit or chrome
-            url = window.webkitURL.createObjectURL(file);
-        }
-        return url;
-    }
+
 </script>
