@@ -9,9 +9,9 @@ class UserRegistrationsController < InheritedResources::Base
   end
 
   def create
-    @user_registration = UserRegistration.new(user_registration_params)
-    @user_registration.client_id = current_user.client_id
-    if @user_registration.save
+    result, @user_registration = UserRegistration.create_from_input(user_registration_params, current_user.client_id)
+
+    if result
       @success = true
       flash[:success] = "成功创建会员"
       redirect_to user_registrations_path

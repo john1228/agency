@@ -11,8 +11,8 @@ class Profile < ActiveRecord::Base
   validates_presence_of :gender, if: Proc.new { |profile| profile.identity.eql?(1) }, message: '性别不能为空'
   validates_presence_of :hobby, if: Proc.new { |profile| profile.identity.eql?(1) }, message: '健身服务不能为空'
 
-  validates :mobile,:business_hour_start, :business_hour_end, :presence => true
-  validates :hobby,:province,:city,:address, :presence => true
+  validates :mobile, :presence => true
+  validates :business_hour_start, :business_hour_end, :hobby, :presence => true,if: Proc.new { |profile| profile.identity.eql?(2) }
 
 
   BASE_NO = 10000

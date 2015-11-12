@@ -1,7 +1,7 @@
 class CreateUserRegistrations < ActiveRecord::Migration
   def change
     create_table :user_registrations do |t|
-      t.integer :reg_type
+      t.integer :reg_type, default: 0
       t.string :avatar
       t.string :name
       t.integer :gender, default: 0
@@ -12,6 +12,7 @@ class CreateUserRegistrations < ActiveRecord::Migration
       t.datetime :birthday
       t.string :address
       t.string :remark
+      t.integer :user_id
 
       t.timestamps null: false
     end

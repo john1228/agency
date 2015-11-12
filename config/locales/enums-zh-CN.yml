@@ -1,0 +1,13 @@
+"zh-CN":
+  enums:
+    user_registration:
+        gender:
+          male: "男"
+          female: "女"
+        source:
+          meixing: "美型"
+          input: "录入"
+        reg_type:
+          associate_member: "准会员"
+          member: "会员"
+

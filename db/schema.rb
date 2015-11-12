@@ -744,7 +744,7 @@ ActiveRecord::Schema.define(version: 20151111084328) do
   end
 
   create_table "user_registrations", force: :cascade do |t|
-    t.integer  "reg_type"
+    t.integer  "reg_type",   default: 0
     t.string   "avatar"
     t.string   "name"
     t.integer  "gender",     default: 0
@@ -755,6 +755,7 @@ ActiveRecord::Schema.define(version: 20151111084328) do
     t.datetime "birthday"
     t.string   "address"
     t.string   "remark"
+    t.integer  "user_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "province"

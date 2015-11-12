@@ -55,11 +55,11 @@
               <tr>
                 <td><%= image_tag  user_registration.avatar.url(:thumb), class:"img-responsive img-circle" %></td>
                 <td><%= user_registration.name %></td>
-                <td>男</td>
-                <td>威尔士(上海环球金融店)</td>
-                <td>13895768473</td>
-                <td>准会员</td>
-                <td>录入</td>
+                <td><%= I18n.t("activerecord.attributes.user_registration.gender.#{user_registration.gender}")%></td>
+                <td><%= user_registration.service.profile.name %></td>
+                <td><%= user_registration.mobile %></td>
+                <td><%= user_registration.reg_type_i18n%></td>
+                <td><%= user_registration.source_i18n%></td>
                 <td class="list-card-1f">
                   <a href="#">编辑</a>｜<a href="#">详情</a>
                 </td>
