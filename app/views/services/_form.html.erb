@@ -15,7 +15,7 @@
 
     <%= f.semantic_fields_for :profile do |p| %>
         <div class=" pull-right">
-          <div class="portrait">
+          <div class="portrait" data-url="<%=@service.profile.avatar.url(:thumb) if @service.profile.avatar.present? %>">
             <div class="place">
                 <span>
                   <i class=" icon"></i>
@@ -74,6 +74,7 @@
     <script type="text/javascript">
         $( function() {
             $( '#gallery' ).jGallery();
+            $(".portrait").Avatar();
         } );
     </script>
 
