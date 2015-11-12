@@ -14,14 +14,15 @@
         <% end %>
 
         <div class=" pull-right">
-          <div class="portrait">
+          <div class="portrait" data-url="<%=@user_registration.avatar.url(:thumb) if @user_registration.avatar.present? %>">
+
             <div class="place">
-                <span>
-                  <i class=" icon"></i>
-                </span>
-              <p>上传头像</p>
-            </div>
-            <div class="show"></div>
+                  <span>
+                    <i class=" icon"></i>
+                  </span>
+                 <p>上传头像</p>
+                </div>
+              <div class="show"></div>
             <%= f.file_field :avatar,  class:"file_remove_format file_uploader" %>
           </div>
         </div>
@@ -92,6 +93,7 @@
                     language: 'zh-CN',
                     format: 'yyyy-mm-dd'
                 });
+                $(".portrait").Avatar();
 //                $('#service_profile_attributes_hobby').multiselect({
 //                    inheritClass: true,
 //                    numberDisplayed: 8,

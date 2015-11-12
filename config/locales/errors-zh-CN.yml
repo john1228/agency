@@ -24,6 +24,7 @@
               blank: "姓名不能为空"
             mobile:
               blank: "电话不能为空"
+              taken: "已经有此mobile会员"
             birthday:
               blank: "生日不能为空"
             gender:

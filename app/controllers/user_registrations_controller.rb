@@ -23,8 +23,7 @@ class UserRegistrationsController < InheritedResources::Base
   
   def update
     @user_registration = UserRegistration.find(params[:id])
-    @user_registration.assign_attributes(service_params)
-    @user_registration.client_id = current_user.client_id
+    @user_registration.assign_attributes(user_registration_params)
     if @user_registration.save
       @success = true
       flash[:success] = "成功修改会员"
