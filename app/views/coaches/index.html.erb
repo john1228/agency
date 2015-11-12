@@ -1,5 +1,74 @@
-<div class="row">
-  <div id="coach">
-    <%= render partial: 'data' %>
-  </div>
+
+<%= search_form_for @q do |f| %>
+    <div class="histo-top colmd clearfix">
+
+      <div class="member-search pull-left member-type">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>
+          <%= f.search_field :profile_name_or_profile_mobile_cont, placeholder:"私教姓名／手机号码",class:"form-control" %>
+
+        </div>
+
+      </div>
+
+
+      <%=link_to "新建私教", new_coach_path, class:"new-member pull-right" %>
+
+      <input type="submit" class="btn btn-default pull-right" value="搜索" />
+
+
+    </div>
+    <div class="panel  top20">
+      <div class="panel-tiading clearfix sure-select">
+        <span class="pull-left">会员统计</span>
+        <p class="top10">
+          <%= f.collection_select :service_id_eq, current_admin_user.all_services,:id,:name,{include_blank:"全部门店"},class:"pull-right"%>
+        </p>
+      </div>
+      <div class="panel-body">
+        <div class="chart-surrounded">
+          <div id="container" style="min-width:700px;height:400px"></div>
+        </div>
+
+<%end%>
+
+
+
+
+
+<h3 class="member-h3">会员信息</h3>
+<table class="table table-striped card-list" id="datatable-editable">
+  <thead>
+  <tr>
+    <th width="8%">头像</th>
+    <th width="12%">姓名</th>
+    <th width="10%">性别</th>
+    <th width="16%">门店</th>
+    <th width="18%">电话</th>
+    <th width="10%">注册日期</th>
+    <th width="16%">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @coaches.each do |coach| %>
+      <tr>
+        <td><%= image_tag  coach.profile.avatar.url(:thumb), class:"img-responsive img-circle" %></td>
+        <td><%= coach.profile.name %></td>
+        <td><%= I18n.t("activerecord.attributes.gender.#{coach.profile.gender}")%></td>
+        <td><%#= coach.service.profile.name %></td>
+        <td><%= coach.profile.mobile %></td>
+        <td><%= coach.created_at%></td>
+        <td class="list-card-1f">
+          <%= link_to "编辑", edit_coach_path(coach)%>｜<%= link_to "详情", coach %>
+        </td>
+      </tr>
+  <%end%>
+  </tbody>
+</table>
+<div class="clearfix">
+  <%= will_paginate @coaches, renderer: BootstrapPagination::Rails %>
 </div>
+</div>
+
+</div>
+

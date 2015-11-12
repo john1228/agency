@@ -1,4 +1,5 @@
 class Profile < ActiveRecord::Base
+  enum gender: [:male, :female]
   after_create :regist_to_easemob
   after_destroy :delete_from_easemob
   mount_uploader :avatar, ProfileUploader

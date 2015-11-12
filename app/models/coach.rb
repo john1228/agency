@@ -1,4 +1,5 @@
 class Coach<User
+
   default_scope { joins(:profile).where('profiles.identity' => 1) }
   scope :recommended, -> { joins(:recommend).order('recommends.id desc') }
   has_many :coach_docs, dependent: :destroy

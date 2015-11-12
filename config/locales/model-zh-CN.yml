@@ -1,6 +1,9 @@
 "zh-CN":
   activerecord:
     attributes:
+      gender:
+          male: "男"
+          female: "女"
       admin_user:
         status:
           approving: "审核中"

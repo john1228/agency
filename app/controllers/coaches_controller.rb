@@ -2,7 +2,8 @@ class CoachesController < ApplicationController
   layout 'admin'
 
   def index
-    @coaches = @service.coaches.paginate(page: params[:page]||1, per_page: 10)
+    @q = Coach.ransack(params[:q])
+    @coaches = @q.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
   end
 
   def new
@@ -14,6 +15,7 @@ class CoachesController < ApplicationController
 
   def create
     coach = Coach.new(coach_params)
+    coach.client_id = current_user.client_id
     if coach.save
       ServiceMember.create(service: @service, coach: coach)
       @success = true

@@ -3,7 +3,7 @@ class UserRegistrationsController < InheritedResources::Base
 
   def index
 
-    @q = UserRegistration.ransack(params[:q])
+    @q = UserRegistration.where(:client_id => current_user.client_id).ransack(params[:q])
     @user_registrations = @q.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
 
   end
