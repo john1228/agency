@@ -39,3 +39,8 @@
               blank: "市不能为空"
             address:
               blank: "地址不能为空"
+        admin_user:
+          email:
+            blank: "邮件不能为空"
+          password:
+            blank: "密码不能为空"

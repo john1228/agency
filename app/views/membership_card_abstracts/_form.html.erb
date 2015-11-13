@@ -1,57 +1,81 @@
-<%= form_for(@membership_card_abstract) do |f| %>
-  <% if @membership_card_abstract.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@membership_card_abstract.errors.count, "error") %> prohibited this membership_card_abstract from being saved:</h2>
 
-      <ul>
-      <% @membership_card_abstract.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <div class="panel-tiading">新增会员卡种类</div>
+
+  <div class="panel">
+    <div class="panel-body clearfix">
+      <div class="clearfix">
+        <div class="conte-ltext">
+          <div class="Basicdata">
+            <h4 class="clsize">基本资料</h4>
+            <div class="input-group conte-cteli  top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡 名 称</samp></span>
+              <input type="text" class="form-control" placeholder="请输入卡名称">
+
+            </div>
+            <div class="input-group conte-cteli top20">
+              <span class="input-group-addon"><samp class="alert-down">卡 类 型</samp></span>
+              <select class="form-control">
+                <option>请选择</option>
+                <option>储值</option>
+                <option>次数</option>
+                <option>期数</option>
+
+              </select>
+            </div>
+            <div class="input-group conte-cteli  top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
+              <select class="form-control">
+                <option>请选择所属门店</option>
+                <option>储值</option>
+                <option>次数</option>
+                <option>期数</option>
+
+              </select>
+
+            </div>
+
+            <div class="input-group conte-cteli  top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
+              <input type="text" class="form-control" placeholder="0.00">
+              <span class="input-group-addon">元</span>
+            </div>
+            <div class="input-group conte-cteli  top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
+              <input type="text" class="form-control" placeholder="备注">
+
+            </div>
+
+
+            <div class="input-group conte-text">
+              <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1">为该卡设置有效期
+              </label>
+            </div>
+
+          </div>
+          <div class="clearfix">
+            <div class="input-group conte-cteli  top20 pull-left">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">有 效 期</samp></span>
+              <input type="text" class="form-control" placeholder="200">
+              <span class="input-group-addon">天</span>
+            </div>
+            <p class="pull-left edit-p new-type-p">*</p>
+          </div>
+          <div class="clearfix">
+            <div class="input-group conte-cteli  top20 pull-left">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">最晚开卡</samp></span>
+              <input type="text" class="form-control" placeholder="5">
+              <span class="input-group-addon">天后</span>
+            </div>
+            <p class="pull-left edit-p new-type-p">*</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="fygroup top20">
+        <button type="button" class="btntn-lg ">确认</button>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :service_id %><br>
-    <%= f.number_field :service_id %>
-  </div>
-  <div class="field">
-    <%= f.label :client_id %><br>
-    <%= f.number_field :client_id %>
-  </div>
-  <div class="field">
-    <%= f.label :card_type %><br>
-    <%= f.number_field :card_type %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :count %><br>
-    <%= f.number_field :count %>
-  </div>
-  <div class="field">
-    <%= f.label :days %><br>
-    <%= f.number_field :days %>
-  </div>
-  <div class="field">
-    <%= f.label :has_valid_extend_information %><br>
-    <%= f.check_box :has_valid_extend_information %>
-  </div>
-  <div class="field">
-    <%= f.label :valid_days %><br>
-    <%= f.number_field :valid_days %>
-  </div>
-  <div class="field">
-    <%= f.label :latest_delay_days %><br>
-    <%= f.number_field :latest_delay_days %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+

@@ -60,7 +60,7 @@
 
           <div class="input-group conte-cteli top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">身份</samp></span>
-            <%= f.collection_select(:role, I18n.t("enums.admin_user.role").except(:super,:cms,:market,:operator,:superadmin),:first,:last, {include_hidden: false}, {multiple: true}) %>
+            <%= f.collection_select(:role, I18n.t("enums.admin_user.role").except(:super,:admin,:cms,:market,:operator,:superadmin),:first,:last, {include_hidden: false}, {multiple: false}) %>
           </div>
 
           <div class="input-group conte-cteli top20">
