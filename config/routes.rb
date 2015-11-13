@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :message
   resources :mass_message_groups
   resource :profile
+  resources :admin_users
 
 
   get 'password' => 'profiles#password'

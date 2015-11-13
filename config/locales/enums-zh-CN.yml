@@ -10,4 +10,16 @@
         reg_type:
           associate_member: "准会员"
           member: "会员"
-
+    admin_user:
+      role:
+        super: "美型管理员"
+        admin: "管理员"
+        cms: "cms"
+        market: "market"
+        operator: "operator"
+        superadmin: "管理员"
+        sales: "销售"
+        front_desk: "前台"
+        finance: "财务"
+        store_manager: "店长"
+        store_admin: "管理员"

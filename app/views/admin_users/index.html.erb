@@ -1,0 +1,74 @@
+
+<%= search_form_for @q do |f| %>
+    <div class="histo-top colmd clearfix">
+
+      <div class="member-search pull-left member-type">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>
+          <%= f.search_field :name_or_mobile_cont, placeholder:"工作人员姓名／手机号码",class:"form-control" %>
+
+        </div>
+
+      </div>
+
+
+      <%=link_to "新建工作人员", new_admin_user_path, class:"new-member pull-right" %>
+
+      <input type="submit" class="btn btn-default pull-right" value="搜索" />
+
+
+    </div>
+    <div class="panel  top20">
+      <div class="panel-tiading clearfix sure-select">
+        <span class="pull-left">工作人员统计</span>
+        <p class="top10">
+          <%= f.collection_select :service_id_eq, current_admin_user.all_services,:id,:name,{include_blank:"全部门店"},class:"pull-right",onchange:"return $(this).closest('form').submit()"%>
+        </p>
+      </div>
+      <div class="panel-body">
+        <div class="chart-surrounded">
+          <div id="container" style="min-width:700px;height:400px"></div>
+        </div>
+
+<%end%>
+
+
+
+
+
+<h3 class="member-h3">工作人员信息</h3>
+<table class="table table-striped card-list" id="datatable-editable">
+  <thead>
+  <tr>
+    <th width="8%">头像</th>
+    <th width="12%">姓名</th>
+    <th width="10%">性别</th>
+    <th width="16%">门店</th>
+    <th width="18%">电话</th>
+    <th width="10%">注册日期</th>
+    <th width="16%">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @admin_users.each do |admin_user| %>
+      <tr>
+        <td><%= image_tag  admin_user.avatar.url(:thumb), class:"img-responsive img-circle" %></td>
+        <td><%= admin_user.name %></td>
+        <td><%= I18n.t("activerecord.attributes.gender.#{admin_user.gender}")%></td>
+        <td><%= admin_user.service.profile.name rescue nil%></td>
+        <td><%= admin_user.mobile %></td>
+        <td><%= admin_user.created_at%></td>
+        <td class="list-card-1f">
+          <%= link_to "编辑", edit_admin_user_path(admin_user)%>｜<%= link_to "详情", admin_user %>
+        </td>
+      </tr>
+  <%end%>
+  </tbody>
+</table>
+<div class="clearfix">
+  <%= will_paginate @admin_users, renderer: BootstrapPagination::Rails %>
+</div>
+</div>
+
+</div>
+

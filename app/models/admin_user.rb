@@ -7,7 +7,9 @@ class AdminUser < ActiveRecord::Base
   include AASM
 
   ROLE = {super: 0, service: 1, cms: 2, market: 3, operator: 4}
+  enum gender: [:male, :female]
   enum role: [ :super, :admin, :cms, :market, :operator, :superadmin, :sales, :front_desk, :finance, :store_manager,:store_admin ]
+  mount_uploader :avatar, PhotosUploader
 
 
 
