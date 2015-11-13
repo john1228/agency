@@ -1,0 +1,57 @@
+<%= form_for(@membership_card_abstract) do |f| %>
+  <% if @membership_card_abstract.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@membership_card_abstract.errors.count, "error") %> prohibited this membership_card_abstract from being saved:</h2>
+
+      <ul>
+      <% @membership_card_abstract.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :service_id %><br>
+    <%= f.number_field :service_id %>
+  </div>
+  <div class="field">
+    <%= f.label :client_id %><br>
+    <%= f.number_field :client_id %>
+  </div>
+  <div class="field">
+    <%= f.label :card_type %><br>
+    <%= f.number_field :card_type %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :count %><br>
+    <%= f.number_field :count %>
+  </div>
+  <div class="field">
+    <%= f.label :days %><br>
+    <%= f.number_field :days %>
+  </div>
+  <div class="field">
+    <%= f.label :has_valid_extend_information %><br>
+    <%= f.check_box :has_valid_extend_information %>
+  </div>
+  <div class="field">
+    <%= f.label :valid_days %><br>
+    <%= f.number_field :valid_days %>
+  </div>
+  <div class="field">
+    <%= f.label :latest_delay_days %><br>
+    <%= f.number_field :latest_delay_days %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

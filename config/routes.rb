@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :membership_card_abstracts
   resources :user_registrations
   devise_for :admin_user
   devise_scope :admin_user do

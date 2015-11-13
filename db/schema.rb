@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151113025810) do
+ActiveRecord::Schema.define(version: 20151113072845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -506,6 +506,21 @@ ActiveRecord::Schema.define(version: 20151113025810) do
     t.string   "content"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "membership_card_abstracts", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "service_id"
+    t.integer  "client_id"
+    t.integer  "card_type"
+    t.float    "price"
+    t.integer  "count"
+    t.integer  "days"
+    t.boolean  "has_valid_extend_information"
+    t.integer  "valid_days"
+    t.integer  "latest_delay_days"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "news", force: :cascade do |t|

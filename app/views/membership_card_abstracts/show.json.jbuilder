@@ -1,0 +1,1 @@
+json.extract! @membership_card_abstract, :id, :name, :service_id, :client_id, :card_type, :price, :count, :days, :has_valid_extend_information, :valid_days, :latest_delay_days, :created_at, :updated_at

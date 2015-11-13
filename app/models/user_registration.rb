@@ -10,6 +10,7 @@ class UserRegistration < ActiveRecord::Base
 
   validates_uniqueness_of :mobile,scope: :client_id
   belongs_to :service
+  #belongs_to :user
 
   def self.create_from_input(params, client_id)
 
