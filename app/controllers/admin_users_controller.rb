@@ -10,7 +10,7 @@ class AdminUsersController < InheritedResources::Base
 
   def create
     @admin_user = AdminUser.new(admin_user_params, current_user.client_id)
-
+    @admin_user.client_id = current_user.client_id
     if @admin_user.save
       @success = true
       flash[:success] = "成功创建工作人员"
@@ -38,8 +38,8 @@ class AdminUsersController < InheritedResources::Base
 
   def admin_user_params
     fileds = [:reg_type, :avatar, :name, :gender, :service_id, :client_id, :mobile, :source, :birthday, :address, :remark,
-        :province,:city]
-    if params[:password].present?
+        :province,:city,:email,:role]
+    if params[:admin_user] && params[:admin_user][:password].present?
       fileds << :password
     end
     params.require(:admin_user).permit(fileds)

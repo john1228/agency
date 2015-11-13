@@ -40,7 +40,10 @@
             address:
               blank: "地址不能为空"
         admin_user:
-          email:
-            blank: "邮件不能为空"
-          password:
-            blank: "密码不能为空"
+          attributes:
+            email:
+              blank: "邮件不能为空"
+              taken: "邮件被占用"
+            password:
+              blank: "密码不能为空"
+              too_short: "密码太短"
