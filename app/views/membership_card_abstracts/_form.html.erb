@@ -1,81 +1,115 @@
+<%= semantic_form_for @membership_card_abstract, html: {multipart: true} do |f| %>
 
-  <div class="panel-tiading">新增会员卡种类</div>
-
-  <div class="panel">
-    <div class="panel-body clearfix">
-      <div class="clearfix">
-        <div class="conte-ltext">
-          <div class="Basicdata">
-            <h4 class="clsize">基本资料</h4>
-            <div class="input-group conte-cteli  top20">
-              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡 名 称</samp></span>
-              <input type="text" class="form-control" placeholder="请输入卡名称">
-
+    <h3 class="Content-h3"><%=edit_helper(@membership_card_abstract)%>会员卡种类</h3>
+    <div class="panel">
+      <div class="panel-body">
+        <h4 class="clsize">基本资料</h4>
+        <% if @membership_card_abstract.errors.present? %>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <% @membership_card_abstract.errors.messages.values.each { |v| %>
+                  <%= v %><br/>
+              <% } %>
             </div>
-            <div class="input-group conte-cteli top20">
-              <span class="input-group-addon"><samp class="alert-down">卡 类 型</samp></span>
-              <select class="form-control">
-                <option>请选择</option>
-                <option>储值</option>
-                <option>次数</option>
-                <option>期数</option>
-
-              </select>
-            </div>
-            <div class="input-group conte-cteli  top20">
-              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
-              <select class="form-control">
-                <option>请选择所属门店</option>
-                <option>储值</option>
-                <option>次数</option>
-                <option>期数</option>
-
-              </select>
-
-            </div>
-
-            <div class="input-group conte-cteli  top20">
-              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
-              <input type="text" class="form-control" placeholder="0.00">
-              <span class="input-group-addon">元</span>
-            </div>
-            <div class="input-group conte-cteli  top20">
-              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
-              <input type="text" class="form-control" placeholder="备注">
-
-            </div>
+        <% end %>
 
 
-            <div class="input-group conte-text">
-              <label class="checkbox-inline">
-                <input type="checkbox" id="inlineCheckbox1" value="option1">为该卡设置有效期
-              </label>
-            </div>
+        <div class="conte-text ">
 
+
+
+          <div class="input-group conte-cteli ">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">会员卡种类名称</samp></span>
+
+            <%= f.text_field :name, :class=>"form-control"%>
           </div>
-          <div class="clearfix">
-            <div class="input-group conte-cteli  top20 pull-left">
-              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">有 效 期</samp></span>
-              <input type="text" class="form-control" placeholder="200">
-              <span class="input-group-addon">天</span>
-            </div>
-            <p class="pull-left edit-p new-type-p">*</p>
+
+
+          <div class="input-group conte-cteli top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡类型</samp></span>
+            <%= f.collection_select :card_type, I18n.t("enums.membership_card_abstract.card_type").to_a,:first,:last,{include_blank:"全部类型"},class:"form-control"%>
           </div>
-          <div class="clearfix">
-            <div class="input-group conte-cteli  top20 pull-left">
-              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">最晚开卡</samp></span>
-              <input type="text" class="form-control" placeholder="5">
-              <span class="input-group-addon">天后</span>
-            </div>
-            <p class="pull-left edit-p new-type-p">*</p>
+
+          <div class="input-group conte-cteli top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
+            <%= f.collection_select :service_id, current_user.all_services,:id,:name,{},class:"form-control"%>
           </div>
+
+          <div class="input-group conte-cteli ">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
+
+            <%= f.text_field :price, :class=>"form-control"%>
+            <span class="input-group-addon">元</span>
+          </div>
+
+          <div class="input-group conte-cteli ">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
+
+            <%= f.text_field :remark, :class=>"form-control"%>
+          </div>
+
+          <div class="input-group conte-text">
+            <label class="checkbox-inline">
+              <%= f.check_box :has_valid_extend_information %>为该卡设置有效期
+            </label>
+          </div>
+
+          <div class="input-group conte-cteli ">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">有效期</samp></span>
+
+            <%= f.text_field :valid_days, :class=>"form-control"%>
+            <span class="input-group-addon">天</span>
+          </div>
+
+          <div class="input-group conte-cteli ">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">最晚开卡</samp></span>
+
+            <%= f.text_field :latest_delay_days, :class=>"form-control"%>
+            <span class="input-group-addon">天后</span>
+          </div>
+
         </div>
 
-      </div>
-      <div class="fygroup top20">
-        <button type="button" class="btntn-lg ">确认</button>
-      </div>
-    </div>
 
-  </div>
+
+
+
+
+
+        <div class="fygroup top20">
+          <button type="submit" class="btntn-lg ">确认</button>
+        </div>
+      </div>
+
+    </div>
+<% end %>
+
+<script>
+
+    $(function () {
+                $("#membership_card_abstract_birthday").datepicker({
+                    language: 'zh-CN',
+                    format: 'yyyy-mm-dd'
+                });
+                $(".portrait").Avatar();
+//                $('#service_profile_attributes_hobby').multiselect({
+//                    inheritClass: true,
+//                    numberDisplayed: 8,
+//                    nonSelectedText: '请选择提供的健身服务',
+//                    maxHeight: 100,
+//                    dropUp: true
+//                });
+
+            }
+    );
+    /**
+     * 建立一個可存取到該file的url
+     * PS: 瀏覽器必須支援HTML5 File API
+     */
+
+</script>
+
+
+
+
 

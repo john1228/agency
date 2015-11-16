@@ -3,7 +3,7 @@
     <div class="member-search pull-left member-type">
       <div class="input-group">
         <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>
-        <input type="text" class="form-control" placeholder="会员卡名称">
+        <%= f.search_field :name_cont, placeholder:"会员卡名称",class:"form-control" %>
       </div>
     </div>
     <%= link_to '<i class="icon">&#xe613;</i> 添加会员卡'.html_safe, new_membership_card_abstract_path,class:"new-member pull-right" %>
@@ -13,20 +13,9 @@
     <div class="panel-tiading clearfix sure-select">
       <span class="pull-left">商品总数(<%= @membership_card_abstracts.count%>)</span>
       <p class="top10">
-        <select class="sure-select-a pull-right">
-          <option>全部类型</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-        <select class="sure-select-a pull-right">
-          <option>全部门店</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+        <%= f.collection_select :card_type_eq, I18n.t("enums.membership_card_abstract.card_type").to_a,:first,:last,{include_blank:"全部类型"},class:"pull-right sure-select-a",onchange:"return $(this).closest('form').submit()"%>
+        <%= f.collection_select :service_id_eq, current_admin_user.all_services,:id,:name,{include_blank:"全部门店"},class:"pull-right sure-select-a",onchange:"return $(this).closest('form').submit()"%>
+
 
       </p>
     </div>
