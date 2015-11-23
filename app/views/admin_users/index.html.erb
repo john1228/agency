@@ -1,6 +1,6 @@
 
 <%= search_form_for @q do |f| %>
-    <div class="histo-top colmd clearfix">
+    <div class="page-header colmd clearfix">
 
       <div class="member-search pull-left member-type">
         <div class="input-group">
@@ -19,7 +19,7 @@
 
     </div>
     <div class="panel  top20">
-      <div class="panel-tiading clearfix sure-select">
+      <div class="panel-header clearfix sure-select">
         <span class="pull-left">工作人员统计</span>
         <p class="top10">
           <%= f.collection_select :service_id_eq, current_admin_user.all_services,:id,:name,{include_blank:"全部门店"},class:"pull-right",onchange:"return $(this).closest('form').submit()"%>

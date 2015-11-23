@@ -1,76 +1,48 @@
 <div class="row">
-  <div class="col-lg-12  tdzty ">
-    <div class=" clearfix row ">
-      <div class="col-lg-6 col-md-6">
-        <div class="panel panel-default clearfix">
-          <div class="panel-heading">
-            <h3 class="panel-title">动态详情</h3>
-          </div>
-          <dl>
-            <dd class="destion_line top10 ">
-              <div class="panel-body  pciilk">
-                <% if @dynamic.film.present? %>
-                    <div class="col-xs-12 col-md-12" id="HLSPlayer">
-                      <div class="video" id="HLSPlayer">
-                        <SCRIPT LANGUAGE=JavaScript>
-                            var vWidth = "100%";                //播放器宽度设置
-                            var vHeight = 450;                   //播放器宽度设置
-                            var vPlayer = "<%=asset_path('HLSPlayer.swf')%>?v=1.5"; //播放器文件
-                            var vHLSset = "<%=asset_path('HLS.swf')%>";             //HLS配置
-                            var vPic = "<%=(dynamic.cover.url rescue 'http://localhost/assets/default_dynamic.png')%>";    //视频缩略图
-                            var vHLSurl = "<%=(dynamic.film.hls rescue 'http://b.cuplayer.net:8011/hls2-vod/test.mp4.m3u8')%>";
-                            //-->
-                        </SCRIPT>
-                        <%= javascript_include_tag 'js/hls.min' %>
-                      </div>
-                    </div>
-                <% else %>
-                    <div id="gallery">
-                      <% @dynamic.images.each do |image| %>
-
-                          <a href="<%= image.image.url %>"><img src="<%= image.image.url(:thumb)%>"  /></a>
-
-                      <% end %>
-                    </div>
-                    <script type="text/javascript">
-                        $( function() {
-                            $( '#gallery' ).jGallery();
-                        } );
-                    </script>
-                <% end %>
-              </div>
-              <%= @dynamic.content %>
-              <br>
-            </dd>
-            <dd class="destion"><%= @dynamic.created_at.localtime.strftime('%Y-%m-%d') %></dd>
-          </dl>
+  <div class="col-xs-12">
+    <div class="Content-tpli">
+      <div class="panel-body">
+        <div class="media-lmiddle">
+          <ul class="middle-top clearfix">
+            <div class=" pull-right">2015年11月3日</div>
+            <li class="middle-witp img-circle pull-left" style="background: url(<%=@dynamic.user.profile.avatar.url%>); background-size: cover;"></li>
+            <li class="pull-left col8d"><%= @dynamic.user.profile.name %></li>
+          </ul>
+        </div>
+        <div class="media-Picture" style=" background: url(<%=@dynamic.images.first.image.url rescue ''%>); background-size: cover;">
+          <a href="#" data-toggle="modal" data-target="#myModal" class="Picture-Content pull-right"><i class="icon">&#xe623;</i>
+            <%= @dynamic.images.count %>
+          </a>
+        </div>
+        <div class="media-text">
+          <%= @dynamic.content %>
         </div>
       </div>
-      <div class="col-lg-6 col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">用户评论(<%= @dynamic.comments.count %>)</h3>
-          </div>
-          <div class="panel-body" style="max-height: 1008px;overflow: auto">
-            <% @dynamic.comments.order(id: :desc).each { |comment| %>
-                <div class="media clearfix">
-                  <a class="pull-left tpxco" href="#">
-                    <%= image_tag(comment.user.profile.avatar.thumb.url) %>
+
+    </div>
+    <div class="panel panel-default top20">
+      <div class="panel-heading">用户评论(<%= @dynamic.comments.count %>)</div>
+      <div class="panel-body">
+        <% @dynamic.comments do |comment| %>
+            <ul class="media-Underline">
+              <li class="media">
+                <div class="media-left">
+                  <a href="#">
+                    <%= image_tag(comment.user.profile.avatar.url, class: 'media-tobject') %>
                   </a>
-
-                  <div class="media-body clearfix ">
-                    <div class="tcod color8d pull-right"><%= comment.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></div>
-                    <h4 class="media-heading top5 txt-tit"><%= comment.user.profile.name %></h4>
-
-                    <p class="tcod top8 "><%= comment.content %></p>
-                  </div>
                 </div>
+                <div class="media-body ">
+                  <samp class="pull-right"><%= comment.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></samp>
+                  <h4 class="media-heading "><%= comment.user.profile.name %></h4>
 
-                <hr class="bs-docs-separator"/>
-            <% } %>
-          </div>
-        </div>
+                  <p><%= comment.content %></p>
+                </div>
+              </li>
+            </ul>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<

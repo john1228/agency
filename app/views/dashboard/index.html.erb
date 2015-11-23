@@ -1,3 +1,96 @@
-<% if can? :update, nil %>
-    首页,待实现
-<% end %>
+<div class="row home-side">
+  <div class="col-md-3">
+    <a href="<%= services_path %>" class="store-management">
+      <h3 class="text-right">门店管理</h3>
+      <h4 class="text-right">8</h4>
+
+      <div class="iconfont-dianpu text-center"><i class="icon">&#xe609;</i></div>
+      <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+    </a>
+  </div>
+  <div class="col-md-9">
+    <div class="row left-side">
+      <div class="col-md-3">
+        <a href="#" class="user-management home-general">
+          <h3 class="text-right">用户管理</h3>
+
+          <div class="iconfont-dianpu text-center"><i class="icon">&#xe603;</i></div>
+          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+        </a>
+      </div>
+      <div class="col-md-3">
+        <a href="#" class="member-management home-general">
+          <h3 class="text-right">会员卡管理</h3>
+
+          <div class="iconfont-dianpu text-center"><i class="icon">&#xe607;</i></div>
+          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="#" class="financial-management home-general">
+          <h3 class="text-right">财务管理</h3>
+
+          <div class="iconfont-dianpu text-center"><i class="icon">&#xe60a;</i></div>
+          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+        </a>
+      </div>
+      <div class="col-md-3">
+        <a href="#" class="sign-in-management home-general">
+          <h3 class="text-right">签到管理</h3>
+
+          <div class="iconfont-dianpu text-center"><i class="icon">&#xe60b;</i></div>
+          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="#" class="american-College home-general">
+          <h3 class="text-right">美型学院</h3>
+
+          <div class="iconfont-dianpu text-center"><i class="icon icon-ftt80">&#xe601;</i></div>
+          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+        </a>
+      </div>
+      <div class="col-md-3">
+        <a href="#" class="report-management home-general">
+          <h3 class="text-right">报表管理</h3>
+
+          <div class="iconfont-dianpu text-center"><i class="icon">&#xe60c;</i></div>
+          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row top10 inex-tl">
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-header">今日每家店铺流水</div>
+      <div class="panel-body">
+        <%= render 'transaction' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-header">今日每家店铺新增会员</div>
+      <div class="panel-body">
+        <%= render 'member' %>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel">
+  <div class="panel-header sure-select">
+    <span class="pull-left">门店收入排行榜</span>
+
+    <p class="pont10">
+      <select class="sure-select-a pull-right">
+        <option>本月</option>
+      </select>
+    </p>
+  </div>
+  <div class="panel-body">
+    <%= render 'incoming' %>
+  </div>
+</div>

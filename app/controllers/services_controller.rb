@@ -1,5 +1,6 @@
 class ServicesController < InheritedResources::Base
   layout "admin"
+
   def index
     @services = current_user.all_services.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
   end
@@ -42,22 +43,19 @@ class ServicesController < InheritedResources::Base
   end
 
   private
-    def service_params
-      params[:service] ||= {}
-      params[:service][:profile_attributes][:province] = params[:province]
-      params[:service][:profile_attributes][:city] = params[:city]
+  def service_params
+    params[:service] ||= {}
+    params[:service][:profile_attributes][:province] = params[:province]
+    params[:service][:profile_attributes][:city] = params[:city]
 
-      if params[:image].present?
-        params[:service][:photos_attributes] = params[:image].map { |image| {photo: image} }
-      end
-
-      params.require(:service).permit(:mobile, :password, profile_attributes:
-                                               [:id,:avatar, :name, :gender, :address, :birthday, :signature, :province, :city, :identity,
-                                                :business_hour_start, :business_hour_end, :mobile, hobby: []], photos_attributes:[:photo])
-
-
+    if params[:image].present?
+      params[:service][:photos_attributes] = params[:image].map { |image| {photo: image} }
     end
 
+    params.require(:service).permit(:mobile, :password, profile_attributes:
+                                               [:id, :avatar, :name, :gender, :address, :birthday, :signature, :province, :city, :identity,
+                                                :business_hour_start, :business_hour_end, :mobile, hobby: []], photos_attributes: [:photo])
 
 
+  end
 end

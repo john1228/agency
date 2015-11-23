@@ -1,5 +1,4 @@
 // or using File.prototype.objectURL()?
-
 function getObjectURL(file) {
     //console.log(file);
     var url = null;
@@ -16,16 +15,15 @@ function getObjectURL(file) {
 $(".file_uploader").change(function () {
     var objUrl = getObjectURL(this.files[0]);
     if (objUrl) {
-
-        $('.portrait .place').remove();
-        $('.portrait ').css('background-image', 'url("' + objUrl + '")');
-        $('.portrait ').css('background-size', 'cover');
+        $(this).parent().find('.place').remove();
+        $(this).parent().css('background-image', 'url("' + objUrl + '")');
+        $(this).parent().css('background-size', 'cover');
     }
 });
 
-; (function ($) {
-
-    $.fn.Avatar = function (options) {
+;
+(function ($) {
+    $.fn.image_preview = function (options) {
         var defaults = {
             container: '.rotatorWrapper',
             animationduration: 1000,
@@ -36,7 +34,7 @@ $(".file_uploader").change(function () {
         elm = this;
 
 
-        var _show = function(url) {
+        var _show = function (url) {
             elm.find('.place').remove();
             elm.css('background-image', 'url("' + url + '")');
             elm.css('background-size', 'cover');
@@ -44,7 +42,7 @@ $(".file_uploader").change(function () {
 
         var _init = function () {
             url = $(elm).data("url");
-            if(url) {
+            if (url) {
                 _show(url);
             }
             _bindEvents();

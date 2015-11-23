@@ -1,29 +1,41 @@
-<div class="row">
-  <div class="col-lg-12 top10 tdzty">
-    <h3 class="poloklh4">群发记录</h3>
+<div class="page-header colmd clearfix">
+  <div class="pull-left colmd-a">
+    <%= link_to "门店", services_path, class: "pull-left  page-header-text " %>
+    <%= link_to "动态", dynamics_path, class: "pull-left  page-header-text " %>
+    <a href="<%= message_index_path %>" class="pull-left  page-header-text">
+      <samp class="histo-active">
+        <span id="triangle-down"></span>
+        消息
+      </samp>
+    </a>
+    <%= link_to "群组", mass_message_groups_path, class: "pull-left  page-header-text " %>
+  </div>
+  <a href="<%= new_message_path %>" class="colmd-2 pull-right"><i class="icon">&#xe613;</i>新增消息</a>
+</div>
 
-    <div class="panel panel-default top15">
-      <table class="table table-hover txt-zt">
-        <thead>
-        <tr class="prito">
-          <th width="45%">收件组</th>
-          <th width="45%">内容</th>
-          <th class="text-center">操作</th>
-        </tr>
-        </thead>
-        <tbody class="pritbl">
-        <% @mass_messages.each { |message| %>
-            <tr>
-              <td style="text-align: left"><%= (MassMessageGroup.where(id: message.user_id).map { |group| group.name }).join('|') %></td>
-              <td><%= truncate(message.content) %></td>
-              <td></td>
-            </tr>
-        <% } %>
-        </tbody>
-      </table>
-    </div>
-    <div class="dataTables_paginate">
-      <%= will_paginate @mass_messages, renderer: BootstrapPagination::Rails %>
-    </div>
+
+<div class="panel  top20">
+  <div class="panel-header">消息</div>
+  <div class="panel-body">
+    <table class="tablet table-striped">
+      <thead class="table-bordered">
+      <tr class="bordered-bj">
+        <th>门店</th>
+        <th>收件群组</th>
+        <th>内容</th>
+        <th>操作人</th>
+      </tr>
+      </thead>
+      <tbody class="table-bordered">
+      <% @mass_messages.each { |message| %>
+          <tr>
+            <td width="10%"><%= message.service.profile.name %></td>
+            <td width="40%"><%= message.groups %></td>
+            <td width="40%"><%= message.content %></td>
+            <td width="10%">暂未</td>
+          </tr>
+      <% } %>
+      </tbody>
+    </table>
   </div>
 </div>

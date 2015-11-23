@@ -2,7 +2,7 @@ class MessageController < ApplicationController
   layout 'admin'
 
   def index
-    @mass_messages = MassMessage.where(service_id: @service.id).order(id: :desc).paginate(page: params[:page]||1, per_page: 10)
+    @mass_messages = MassMessage.where(service_id: current_user.all_services.pluck(:id)).order(id: :desc).paginate(page: params[:page]||1, per_page: 10)
   end
 
   def new

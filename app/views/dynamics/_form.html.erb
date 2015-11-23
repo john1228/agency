@@ -1,65 +1,35 @@
-<div class="row">
-  <div class="col-lg-12 top10 tdzty">
-    <%= form_for(@dynamic, html: {multipart: true}) do |f| %>
-        <div class="top15 clearfix row">
-          <div class="col-lg-12 col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-headint tdzty clearfix">
-                <h3 class="pull-left panel-title">发布动态</h3>
-              </div>
-              <div class="panel-body">
-                <% if @success.present? %>
-                    <div class="alert alert-success" role="alert">
-                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                      发布成功
-                    </div>
-                <% end %>
+<div class="panel top20">
+  <div class="panel-header">发布动态</div>
+  <%= form_for(@dynamic, html: {multipart: true}) do |f| %>
+      <div class="panel-body">
+        <div class="input-group top10 stor-default">
+          <span class="input-group-addon"><samp class="alert-down">选择门店</samp></span>
+          <%= f.collection_select :user_id, current_admin_user.all_services, :id, :name, {}, {class: 'form-control'} %>
+        </div>
+        <div class="input-group stor-text">
+          <%= f.text_area(:content, class: 'form-control-text textarea-content', rows: 6, placeholder: '请输入动态内容') %>
+        </div>
+        <div class="top20 clearfix" id="multipart">
+          <div class="dynamic-uploader pull-left" id="image">
+            <i class="dynamic-font icon">&#xe619;</i>
+            <samp>添加照片</samp>
+            <samp>(最多支持6张)</samp>
+            <input type="file" class="image-uploader" name="image[]">
+          </div>
 
-                <% if @errors.present? %>
-                    <div class="alert alert-danger" role="alert">
-                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                      <% @errors.messages.values.each { |v| %>
-                          <%= v %><br/>
-                      <% } %>
-                    </div>
-                <% end %>
-                <%= f.collection_select :user_id, current_admin_user.all_services,:id,:name%>
-                <div class="form-section top15">
-                  <%= f.text_area(:content, class: 'input-text  pciilk', rows: 3) %>
-                </div>
-                <div id="multi" class=" top10 clearfix cot-til">
-                  <div id="image">
-                    <div class="upload_area pull-left">
-                      <div class="panel-body">
-                        <i class="iconfont2 lxcop">&#xe618;</i>
+          <p class="pull-left dynamic-text" id="text">或</p>
 
-                        <p class="text-center cot-til">上传图片</p>
-
-                        <p class="text-center cot-til">（可以上传6张）</p>
-                      </div>
-                      <input type="file" class="image_uploader" name="image[]">
-                    </div>
-                  </div>
-                  <div class="pull-left tacative " id="text">或</div>
-                  <div id="film">
-                    <div class="upload_area pull-left">
-                      <div class="panel-body"><i class="iconfont2 lxcop">&#xe60f;</i>
-
-                        <p class="text-center" id="film_title">上传视频</p>
-                      </div>
-                      <input type="file" class="film_uploader" name="film" id="film_uploader">
-                    </div>
-                  </div>
-                </div>
-                <div class="fygroup">
-                  <%= f.submit('确认', class: 'btntn-lg') %>
-                </div>
-              </div>
-            </div>
+          <div class="dynamic-uploader pull-left" id="film">
+            <i class="dynamic-font icon">&#xe61a;</i>
+            <samp>添加视频</samp>
+            <input type="file" class="film-uploader ">
           </div>
         </div>
-    <% end %>
-  </div>
+        <div class="top20">
+          <%= f.submit('确认', class: 'submit') %>
+        </div>
+      </div>
+  <% end %>
 </div>
 
 <script>
@@ -76,53 +46,52 @@
     }
     $(function () {
         var file_count = 0;
-        $('#multi').on('change', '.image_uploader', function () {
+        $('#multipart').on('change', '.image-uploader', function () {
             $('#text').remove();
             $('#film').remove();
             var remain = 6 - file_count;
             for (var i = 0; i < (remain > this.files.length ? this.files.length : remain); i++) {
                 var objUrl = getObjectURL(this.files[i]);
-                $(this).parent().children('div').remove();
+                $(this).parent().children('i').remove();
+                $(this).parent().children('samp').remove();
                 $(this).parent().css('background-image', "url(" + objUrl + ")");
                 $(this).parent().css('background-size', "cover");
+                $(this).parent().append('<button type="button" class="close close_label " aria-label="Close"><span aria-hidden="true">&times;</span></button>');
             }
             file_count = file_count + this.files.length;
             if (file_count < 6) {
-                var image_div = "<div class='upload_area pull-left'>" +
-                        "<div class='panel-body'>" +
-                        "<i class='iconfont2 lxcop'>&#xe618;</i>" +
-                        "<p class='text-center cot-til'>上传图片</p>" +
-                        "<p class='text-center cot-til'>（还可以上传" + (6 - file_count) + "张）</p>"
-                        + "</div>" +
-                        "<input type='file'     class='image_uploader' name='image[]'/>" +
-                        "</div>";
+                var image_div = '<div class="dynamic-uploader pull-left">' +
+                        '<i class="dynamic-font icon">&#xe619;</i>' +
+                        '<samp>添加照片</samp>' +
+                        '<samp>(最多支持6张)</samp>' +
+                        '<input type="file" class="image-uploader" name="image[]">' +
+                        '</div>';
                 $(this).parent().parent().append(image_div);
             }
-        })
-
-        $('#multi').on('change', '.film_uploader', function () {
+        });
+        $('.film-uploader').on('change', function () {
             $('#image').remove();
             $('#text').remove();
             $('#cover').remove();
-            var filename = $('.film_uploader').val();
+            var filename = $('.film-uploader').val();
             if (filename.length > 15) {
-                $("#film_title").text(filename.substr(0, 15) + '...');
+                $(this).parent().children('samp').text(filename.substr(0, 15) + '...');
             } else {
-                $("#film_title").text(filename);
+                $(this).parent().children('samp').text(filename);
             }
 
-            var image_div = "<div class='upload_area pull-left' id='cover'>" +
-                    "<div class='panel-body'>" +
-                    "<i class='iconfont2 lxcop'>&#xe618;</i>" +
-                    "<p class='text-center cot-til'>请上传视频的封面</p>" + "</div>" +
-                    "<input type='file' name='cover' class='cover_uploader'/>" +
-                    "</div>";
+            var image_div = "<div class='dynamic-uploader pull-left' id='cover'>" +
+                    '<i class="dynamic-font icon">&#xe619;</i>' +
+                    '<samp>添加视频封面</samp>' +
+                    '<input type="file" class="cover-uploader" name="cover">' +
+                    '</div>';
             $(this).parent().parent().append(image_div);
         });
 
-        $('#multi').on('change', '.cover_uploader', function () {
+        $('#multipart').on('change', '.cover-uploader', function () {
             var objUrl = getObjectURL(this.files[0]);
-            $(this).parent().children('div').remove();
+            $(this).parent().children('i').remove();
+            $(this).parent().children('samp').remove();
             $(this).parent().css('background-image', "url(" + objUrl + ")");
             $(this).parent().css('background-size', "cover");
         })

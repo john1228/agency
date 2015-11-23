@@ -1,114 +1,108 @@
 <%= semantic_form_for @service, html: {multipart: true} do |f| %>
-
-<h3 class="Content-h3"><%= edit_helper(@service)%>门店</h3>
-<div class="panel">
-  <div class="panel-body">
-    <h4 class="clsize">基本资料</h4>
-    <% if @service.errors.present? %>
-        <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <% @service.errors.messages.values.each { |v| %>
-              <%= v %><br/>
-          <% } %>
-        </div>
-    <% end %>
-
-    <%= f.semantic_fields_for :profile do |p| %>
-        <div class=" pull-right">
-          <div class="portrait" data-url="<%=@service.profile.avatar.url(:thumb) if @service.profile.avatar.present? %>">
-            <div class="place">
-                <span>
-                  <i class=" icon"></i>
-                </span>
-              <p>上传头像</p>
+    <h3 class="Content-h3"><%= edit_helper(@service) %>门店</h3>
+    <div class="panel">
+      <div class="panel-body">
+        <h4 class="base-info">基本资料</h4>
+        <% if @service.errors.present? %>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <% @service.errors.messages.values.each { |v| %>
+                  <%= v %><br/>
+              <% } %>
             </div>
-            <div class="show"></div>
-            <%= p.file_field :avatar,  class:"file_remove_format file_uploader" %>
+        <% end %>
+        <%= f.semantic_fields_for :profile do |p| %>
+            <div class="avatar-35 pull-right">
+              <div class="New-portrait pull-right">
+                <samp>
+                  <i class=" icon">&#xe619;</i>
+                </samp>
+
+                <p>上传门店头像</p>
+                <input type="file" class="file-loading ">
+              </div>
+            </div>
+            <div class="form-main">
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">
+                  <samp class="alert-down">门店名称</samp>
+                </span>
+                <%= p.text_field :name, :class => "form-control" %>
+              </div>
+              <div class="input-group form-main">
+                <span class="input-group-addon" id="sizing-addon2">
+                  <samp class="alert-down">营业时间</samp>
+                </span>
+                <%= p.text_field :business_hour_start, class: "form-control-mine", placeholder: "00:00" %> -
+                <%= p.text_field :business_hour_end, class: "form-control-57-3", placeholder: "23:59" %>
+              </div>
+              <div class="input-group  top20">
+                <span class="input-group-addon" id="sizing-addon2">
+                  <samp class="alert-down">门店电话</samp>
+                </span>
+                <%= p.text_field :mobile, class: "form-control" %>
+              </div>
+
+              <div class="input-group top20">
+                <span class="input-group-addon" id="sizing-addon2">
+                  <samp class="alert-down">健身服务</samp>
+                </span>
+                <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true, class: 'form-control'}) %>
+              </div>
+              <div class="input-group form-main">
+                <span class="input-group-addon" id="sizing-addon2">
+                  <samp class="alert-down">门店地址</samp>
+                </span>
+                <%= p.select(:province, [], {}, {class: 'form-control-28 form-control-no-left-border'}) %>
+                -
+                <%= p.select(:city, [], {}, {class: 'form-control-28 form-control-all-border'}) %>
+                -
+                <%= p.select(:area, [], {}, {class: 'form-control-28 form-control-all-border'}) %>
+              </div>
+              <div class="input-group form-main">
+                <span class="input-group-addon" id="sizing-addon2">
+                  <samp class="alert-down">详细地址</samp>
+                </span>
+                <%= p.text_field :address, class: "form-control" %>
+              </div>
+              <div class="input-group form-main">
+                <%= p.text_area :signature, class: "form-control-text", rows: 6, placeholder: "请填写门店简介" %>
+              </div>
+            </div>
+        <% end %>
+        <h4 class="base-info top20">照片墙</h4>
+
+        <div class="top20 clearfix">
+          <div class="Photo-pil pull-left">
+            <i class="Photo-font icon">&#xe619;</i>
+            <samp>添加照片</samp>
+            <input type="file" class="file-loading">
           </div>
         </div>
-    <div class="conte-text ">
-      <div class="input-group conte-cteli ">
-        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店名称</samp></span>
-
-        <%= p.text_field :name, :class=>"form-control"%>
-      </div>
-      <div class="input-group conte-text">
-        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">营业时间</samp></span>
-        <%= p.text_field :business_hour_start, class:"form-ctrol", placeholder: "00:00" %> -
-        <%= p.text_field :business_hour_end, class:"form-titrol", placeholder: "23:59"%>
-      </div>
-      <div class="input-group conte-cteli top20">
-        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店电话</samp></span>
-        <%= p.text_field :mobile, class: "form-control" %>
-      </div>
-
-      <div class="input-group conte-cteli top20">
-        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">健身服务</samp></span>
-        <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true}) %>
-      </div>
-      <div class="input-group conte-text">
-        <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店地址</samp></span>
-        <select class="form-ctrol" name="province">
-        </select> -
-        <select class="form-titrol" name="city">
-        </select>
-      </div>
-      <div class="input-group conte-text">
-        <%= p.text_field :address, class:"form-control", placeholder: "请填写详细地址" %>
+        <div class="top20">
+          <button type="submit" class="submit ">确认</button>
         </div>
-      <div class="input-group conte-text">
-        <%= p.text_area :signature, class:"form-controt form-kcldv", rows:6, placeholder:"请填写门店简介"%>
-
       </div>
+
     </div>
-    <%end%>
-    <h4 class="clsize top20">照片墙</h4>
-
-    <div id="gallery">
-      <% @service.photos.each do |photo| %>
-
-          <a href="<%= photo.photo.url %>"><img src="<%= photo.photo.url(:thumb)%>"  /></a>
-
-      <% end %>
-    </div>
-    <script type="text/javascript">
-        $( function() {
-            $( '#gallery' ).jGallery();
-            $(".portrait").Avatar();
-        } );
-    </script>
-
-
-    <div class="fygroup top20">
-      <button type="submit" class="btntn-lg ">确认</button>
-    </div>
-  </div>
-
-</div>
 <% end %>
 
 <script>
-    new PCAS("province", "city", '<%=@service.profile.province%>', '<%=@service.profile.city%>');
+    new PCAS("service[profile_attributes][province]", "service[profile_attributes][city]", "service[profile_attributes][area]",
+            '<%=@service.profile.province%>', '<%=@service.profile.city%>', '<%=@service.profile.area%>');
     $(function () {
                 $("#service_profile_attributes_birthday").datepicker({
                     language: 'zh-CN',
                     format: 'yyyy-mm-dd'
                 });
-//                $('#service_profile_attributes_hobby').multiselect({
-//                    inheritClass: true,
-//                    numberDisplayed: 8,
-//                    nonSelectedText: '请选择提供的健身服务',
-//                    maxHeight: 100,
-//                    dropUp: true
-//                });
-                $("#service_profile_attributes_avatar").change(function () {
-                    var objUrl = getObjectURL(this.files[0]);
-                    if (objUrl) {
-                        $('#default_div').remove();
-                        $('#avatar_preview').css('background-image', 'url("' + objUrl + '")');
-                        $('#avatar_preview').css('background-size', 'cover');
-                    }
+                $('#service_profile_attributes_hobby').multiselect({
+                    inheritClass: true,
+                    numberDisplayed: 8,
+                    nonSelectedText: '请选择提供的健身服务',
+                    maxHeight: 100,
+                    dropUp: true
                 });
+                $(".portrait").image_preview();
             }
     );
     /**
