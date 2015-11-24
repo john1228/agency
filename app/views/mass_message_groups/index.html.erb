@@ -1,0 +1,135 @@
+<div class="page-header colmd clearfix">
+  <div class="pull-left colmd-a">
+    <%= link_to "门店", services_path, class: "pull-left  page-header-text " %>
+    <%= link_to "动态", dynamics_path, class: "pull-left  page-header-text " %>
+    <%= link_to "消息", message_index_path, class: "pull-left  page-header-text " %>
+    <a href="<%= mass_message_groups_path %>" class="pull-left  page-header-text">
+      <samp class="histo-active">
+        <span id="triangle-down"></span>
+        群组
+      </samp>
+    </a>
+  </div>
+  <a href="<%= new_message_path %>" class="colmd-2 pull-right"><i class="icon">&#xe613;</i>新建群组</a>
+</div>
+<div class="panel top20">
+  <div class="panel-header">群组</div>
+  <div class="panel-body">
+    <div class="rob clearfix">
+      <div class="group group-area pull-left">
+        <%= render 'service' %>
+      </div>
+      <div class="group group-area pull-right">
+        <%= render 'student' %>
+      </div>
+    </div>
+    <%= render 'choose' %>
+  </div>
+</div>
+
+<script>
+    $(document).on('click', '.student', function () {
+        if ($(this).is(':checked')) {
+            var _id = $(this).attr('data-uid');
+            var _name = $(this).attr('data-name');
+            var _gender = $(this).attr('data-gender');
+            var _source = $(this).attr('data-source');
+            $('#students').append(
+                    '<tr id="student_' + _id + '">' +
+                    '<input type="hidden" name="mass_message_group[user_id][]" value="' + _id +
+                    '"/>' +
+                    '<td>' + _name + '</td>' +
+                    '<td>' + _gender + '</td>' +
+                    '<<td><a href="#" class="delete_icon" data-uid= "' + _id +
+                    '" data-gender="' + _gender +
+                    '" data-name="' + _name +
+                    '" data-source="' + _source + '"><i class="iconfont pritbt"></i> </a></td></tr>'
+            )
+            $('#student_count').text($("#students tr").length - 1);
+        } else {
+            var div = document.getElementById('student_' + $(this).val());
+            div.parentNode.removeChild(div);
+            $('#student_count').text($("#students tr").length - 1);
+        }
+    });
+
+    $('#students').on('click', '.delete_icon', function () {
+        var _id = $(this).attr('data-uid');
+        $('#chk_' + _id).attr('checked', false);
+        var div = document.getElementById('student_' + _id);
+        div.parentNode.removeChild(div);
+        $('#student_count').text($("#students tr").length - 1);
+
+    });
+    $('#groups').on('click', '.delete_icon', function (e) {
+        $.delete(this.href, function (data) {
+            $(this).parent().empty();
+        });
+        e.preventDefault();
+    });
+
+
+    $(document).on('click', '#groups li', function () {
+        $('#groups li').removeClass('ndj');
+        $(this).addClass('ndj');
+        var group_id = $(this).attr('data-group-id');
+        $('#choose_group').attr('value', group_id);
+        $.getJSON('/groups/' + group_id + '/students', function (data) {
+            $("input[type='radio']").removeAttr('checked');
+            $('#students tbody').empty();
+            $('.student').removeAttr('checked');
+            $.each(data.group, function (k, v) {
+                var _id = v.id;
+                var _name = v.name;
+                var _gender = v.gender;
+                var _source = v.source;
+                $('#chk_' + _id).attr('checked', true);
+                $('#students').append(
+                        '<tr id="student_' + _id + '">' +
+                        '<input type="hidden" name="mass_message_group[user_id][]" value="' + _id +
+                        '"/>' +
+                        '<td>' + _name + '</td>' +
+                        '<td>' + _gender + '</td>' +
+                        '<<td><a href="#" class="delete_icon" data-uid= "' + _id +
+                        '" data-gender="' + _gender +
+                        '" data-name="' + _name +
+                        '" data-source="' + _source + '"><i class="iconfont pritbt"></i> </a></td></tr>'
+                );
+                $('#student_count').text($("#students tr").length - 1);
+            });
+        });
+    });
+
+    function addGroup() {
+        $('#myModal').modal('hide');
+        $.post('/groups/', {'name': $('#name').val()}, function (data) {
+            $("#students tbody").empty();
+
+            if (data.code == 1) {
+                $('#groups li').removeClass('ndj');
+                var group_id = data.group.id;
+                var group_name = data.group.name;
+                $('#groups').append(
+                        '<li class="clearfix" id="List-1" class="ndj" data-group-id="' + group_id + '">' +
+                        '<p class="pull-left">' + group_name + '</p>' +
+                        '<a class="pull-right cursor delete_icon"> <i class="iconfont pritbt"></i></a></li>'
+                );
+            } else {
+                alert('创建失败');
+            }
+        })
+    }
+    function updateGroup() {
+        var choose = [];
+        $("input:checked").each(function () {
+            choose.push(this.value);
+        });
+        $.post('/groups/' + $('#choose_group').attr('value') + '/students', {'user_id[]': choose}, function (data) {
+            if (data.code == 1) {
+                alert('更新成功');
+            } else {
+                alert('更新失败');
+            }
+        })
+    }
+</script>

@@ -1,4 +1,6 @@
 class MassMessageGroupsController < ApplicationController
+  layout 'admin'
+
   def index
   end
 

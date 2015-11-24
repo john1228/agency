@@ -1,0 +1,18 @@
+<h1>门店</h1>
+
+<div class="sidebar" role="navigation">
+  <ul class="nav side-menu">
+    <% current_user.all_services.each { |service| %>
+        <li>
+          <a class="menu-toip"><span class="fa arrow"></span><%= service.profile.name %></a>
+          <ul class="nav nav-second-level">
+            <% MassMessageGroup.where(service_id: service.id).map do |group| %>
+                <li class="clearfix"><a href="#" class="pull-left"><%= group.name %></a>
+                  <button type="button" class="close"><i class="icon group-button">&#xe614;</i></button>
+                </li>
+            <% end %>
+          </ul>
+        </li>
+    <% } %>
+  </ul>
+</div>

@@ -1,0 +1,44 @@
+<div class="clearfix top20">
+  <div class="pull-left">提现记录</div>
+  <div class="pull-right sure-select">
+    <samp>
+      <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'sure-select-a', include_blank: "全部门店") %>
+    </samp>
+    <samp>
+      <%= select_tag(:service_id, options_for_select((Date.today.year-5)..Date.today.year), class: 'sure-select-b') %>
+    </samp>
+    <samp>
+      <%= select_tag(:service_id, options_for_select(1..12), class: 'sure-select-c') %>
+    </samp>
+    <a class="sure-Connectpu pull-left" href="#"><i class="icon">&#xe60e;</i>导出表格</a>
+  </div>
+</div>
+<div class="table-responsive top20">
+  <table class="tablet table-striped">
+    <thead>
+    <tr class="table-tr">
+      <th>提现日期</th>
+      <th>门店</th>
+      <th>实名</th>
+      <th>支付宝账号</th>
+      <th>金额（元）</th>
+      <th>操作人</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @withdraws.each do |withdraw| %>
+        <tr>
+          <td><%= withdraw.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+          <td><%= withdraw.user.profile.name rescue '' %></td>
+          <td><%= withdraw.name %></td>
+          <td><%= withdraw.account %></td>
+          <td><%= withdraw.amount.to_i %></td>
+          <td></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="clearfix pull-right">
+  <%= will_paginate @withdraws, renderer: BootstrapPagination::Rails %>
+</div>

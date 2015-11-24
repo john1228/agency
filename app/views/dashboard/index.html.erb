@@ -84,10 +84,8 @@
   <div class="panel-header sure-select">
     <span class="pull-left">门店收入排行榜</span>
 
-    <p class="pont10">
-      <select class="sure-select-a pull-right">
-        <option>本月</option>
-      </select>
+    <p style="padding-top: 8px">
+      <%= select_tag(:month, options_for_select(1..12), class: 'sure-select-a pull-right') %>
     </p>
   </div>
   <div class="panel-body">

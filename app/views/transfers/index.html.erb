@@ -1,0 +1,18 @@
+<div class="panel  top20">
+  <div class="page-header colmd clearfix">
+    <div class="pull-left colmd-a">
+      <a class="pull-left  page-header-text"><samp class="histo-active">
+        <div id="triangle-down"></div>
+        向一人转账</samp></a>
+      <%= link_to "向多人转账", '#', class: "pull-left  page-header-text " %>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div id="form">
+      <%= render 'form' %>
+    </div>
+    <div>
+      <%= render 'table' %>
+    </div>
+  </div>
+</div>

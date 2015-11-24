@@ -1,36 +1,28 @@
-
 <%= search_form_for @q do |f| %>
     <div class="page-header colmd clearfix">
 
       <div class="member-search pull-left member-type">
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>
-          <%= f.search_field :profile_name_or_profile_mobile_cont, placeholder:"私教姓名／手机号码",class:"form-control" %>
-
+          <%= f.search_field :profile_name_or_profile_mobile_cont, placeholder: "私教姓名／手机号码", class: "form-control" %>
         </div>
-
       </div>
-
-
-      <%=link_to "新建私教", new_coach_path, class:"new-member pull-right" %>
-
-      <input type="submit" class="btn btn-default pull-right" value="搜索" />
-
-
+      <%= link_to "新建私教", new_coach_path, class: "new-member pull-right" %>
+      <%= link_to '搜索', '#', class: "detailed-Search pull-right" %>
     </div>
     <div class="panel  top20">
       <div class="panel-header clearfix sure-select">
         <span class="pull-left">私教统计</span>
+
         <p class="top10">
-          <%= f.collection_select :service_id_eq, current_admin_user.all_services,:id,:name,{include_blank:"全部门店"},class:"pull-right",onchange:"return $(this).closest('form').submit()"%>
+          <%= f.collection_select :service_id_eq, current_admin_user.all_services, :id, :name, {include_blank: "全部门店"}, class: "pull-right", onchange: "return $(this).closest('form').submit()" %>
         </p>
       </div>
       <div class="panel-body">
         <div class="chart-surrounded">
           <div id="container" style="min-width:700px;height:400px"></div>
         </div>
-
-<%end%>
+<% end %>
 
 
 
@@ -52,23 +44,22 @@
   <tbody>
   <% @coaches.each do |coach| %>
       <tr>
-        <td><%= image_tag  coach.profile.avatar.url(:thumb), class:"img-responsive img-circle" %></td>
+        <td><%= image_tag coach.profile.avatar.url(:thumb), class: "img-responsive img-circle" %></td>
         <td><%= coach.profile.name %></td>
-        <td><%= I18n.t("activerecord.attributes.gender.#{coach.profile.gender}")%></td>
-        <td><%= coach.service.profile.name rescue nil%></td>
+        <td><%= I18n.t("activerecord.attributes.gender.#{coach.profile.gender}") %></td>
+        <td><%= coach.service.profile.name rescue nil %></td>
         <td><%= coach.profile.mobile %></td>
-        <td><%= coach.created_at%></td>
+        <td><%= coach.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td class="list-card-1f">
-          <%= link_to "编辑", edit_coach_path(coach)%>｜<%= link_to "详情", coach %>
+          <%= link_to "编辑", edit_coach_path(coach) %>｜<%= link_to "详情", coach %>
         </td>
       </tr>
-  <%end%>
+  <% end %>
   </tbody>
 </table>
 <div class="clearfix">
   <%= will_paginate @coaches, renderer: BootstrapPagination::Rails %>
 </div>
 </div>
-
 </div>
 

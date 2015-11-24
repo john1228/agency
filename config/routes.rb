@@ -10,14 +10,18 @@ Rails.application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
 
-  resources :services do
-  end
+  resources :services
   resources :coaches
   resources :dynamics
   resources :message
   resources :mass_message_groups
   resource :profile
   resources :admin_users
+  resources :withdraws
+  resources :transfers
+  resources :orders
+  resources :appointments
+  resources :sales
 
 
   get 'password' => 'profiles#password'
@@ -47,13 +51,6 @@ Rails.application.routes.draw do
   get 'report/appointment' => 'report#appointment_table'
   get 'report/sale' => 'report#sale_table'
 
-
-  get 'finance/transfer' => 'finance#transfer_new'
-  post 'finance/transfer' => 'finance#transfer_create', as: :submit_transfer
-  post 'finance/batch_transfer' => 'finance#batch_transfer', as: :batch_transfer
-  get 'finance/withdraw' => 'finance#withdraw_new'
-  post 'finance/withdraw' => 'finance#withdraw_create', as: :submit_withdraw
-  get 'finance/sale' => 'finance#sale'
 
   post 'message' => 'message#create', as: :batch_message
 

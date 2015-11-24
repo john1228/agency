@@ -2,24 +2,15 @@ class DashboardController < ApplicationController
   layout 'admin'
 
   def index
-    # @date = Date.new((params[:year]||Date.today.year).to_i, (params[:month]||Date.today.month).to_i)
-    # @days = []
-    # @all = []
-    # @coach = []
-    # (@date.at_beginning_of_month..@date.at_end_of_month).each { |day|
-    #   @days << day.day
-    #   @all << Order.where(service_id: @service.id, updated_at: day.at_beginning_of_day..day.at_end_of_day).count
-    #   @coach << Order.where(coach_id: @service.coaches.pluck(:id), updated_at: day.at_beginning_of_day..day.at_end_of_day).count
-    # }
-    # follow_users = Follow.where(service_id: @service.id).pluck(:user_id)||User.all.pluck(:id)
-    # order_users = Order.where(service_id: @service.id).pluck(:user_id)
-    # @users = User.where(id: (follow_users + order_users).uniq).count
-
+    #TODO: 引入真实數據
     authorize! :read, current_user
+    @service = current_user.all_services.map { |service| service.profile.name }
+    @member = current_user.all_services.map { |service| [service.profile.name, rand(35)] }
+    @transaction = current_user.all_services.map { |service| [service.profile.name, rand(35)] }
+    @incoming = current_user.all_services.map { |service| rand(1000) }
 
     respond_to do |format|
       format.html
-      #format.json { render json: {day: @days, all: @all, coach: @coach} }
     end
   end
 end

@@ -1,0 +1,42 @@
+<script>
+    $(function () {
+        $('.orderPagination a').on('click', function (event) {
+            var sku = $('#sku').val();
+            var year = $('#year').val();
+            var month = $('#month').val();
+            $.get(this.href, {sku: sku, year: year, month: month}, null, "script");
+            return false;
+        })
+    });
+</script>
+<table class="table table-striped card-list" id="datatable-editable">
+  <thead>
+  <tr class="prito">
+    <th class="text-center">订单编号</th>
+    <th class="text-center">课程</th>
+    <th class="text-center">买家昵称</th>
+    <th class="text-center">买家</th>
+    <th class="text-center">联系电话</th>
+    <th class="text-center">金额(元)</th>
+    <th class="text-center">支付方式</th>
+    <th class="text-center">时间</th>
+  </tr>
+  </thead>
+  <tbody class="pritbl">
+  <% @orders.each { |order| %>
+      <tr>
+        <td class="text-center tyeq"><%= order.no %></td>
+        <td class="text-center tyeq"><%= order.order_item.name %></td>
+        <th class="text-center tyeq"><%= order.user.profile.name %></th>
+        <td class="text-center tyeq"><%= order.contact_name %></td>
+        <td class="text-center tyeq"><%= order.contact_phone %></td>
+        <td class="text-center tyeq"><%= order.total %></td>
+        <td class="text-center tyeq"><%= order.pay_type_name %></td>
+        <td class="text-center tyeq"><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+      </tr>
+  <% } %>
+  </tbody>
+</table>
+<div class="clearfix pull-right">
+  <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+</div>

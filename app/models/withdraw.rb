@@ -1,5 +1,5 @@
 class Withdraw < ActiveRecord::Base
-  belongs_to :coach
+  belongs_to :user
   before_create :reduce
   after_update :refund
   STATUS ={'提现请求' => 0, '已处理' => 1, '成功' => 2, '失败' => 3}

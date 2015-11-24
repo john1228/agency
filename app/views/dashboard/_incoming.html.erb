@@ -1,1 +1,18 @@
-<%= image_tag('a3.png') %>
+<script>
+    $(function () {
+        $('#incoming').highcharts({
+            chart: {type: 'bar'},
+            title: {text: '门店收入排行榜'},
+            xAxis: {categories: <%=raw @service%>, title: {text: null}},
+            yAxis: {min: 0, title: {text: '元', align: 'high'}, labels: {overflow: 'justify'}},
+            tooltip: {valueSuffix: '元'},
+            plotOptions: {bar: {dataLabels: {enabled: false}}},
+            credits: {enabled: false},
+            series: [{
+                name: '收入',
+                data: <%=raw @incoming%>
+            }]
+        });
+    });
+</script>
+<div id="incoming"></div>

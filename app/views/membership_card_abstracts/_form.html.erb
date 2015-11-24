@@ -15,11 +15,8 @@
 
 
         <div class="form-main">
-
-
-          <div class="input-group  ">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">会员卡种类名称</samp></span>
-
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">种类名称</samp></span>
             <%= f.text_field :name, :class => "form-control" %>
           </div>
 
@@ -34,14 +31,14 @@
             <%= f.collection_select :service_id, current_user.all_services, :id, :name, {}, class: "form-control" %>
           </div>
 
-          <div class="input-group  ">
+          <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
 
             <%= f.text_field :price, :class => "form-control" %>
             <span class="input-group-addon">元</span>
           </div>
 
-          <div class="input-group  ">
+          <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
 
             <%= f.text_field :remark, :class => "form-control" %>
@@ -53,14 +50,14 @@
             </label>
           </div>
 
-          <div class="input-group  ">
+          <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">有效期</samp></span>
 
             <%= f.text_field :valid_days, :class => "form-control" %>
             <span class="input-group-addon">天</span>
           </div>
 
-          <div class="input-group  ">
+          <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">最晚开卡</samp></span>
 
             <%= f.text_field :latest_delay_days, :class => "form-control" %>
@@ -77,32 +74,6 @@
 
     </div>
 <% end %>
-
-<script>
-
-    $(function () {
-                $("#membership_card_abstract_birthday").datepicker({
-                    language: 'zh-CN',
-                    format: 'yyyy-mm-dd'
-                });
-                $(".portrait").Avatar();
-//                $('#service_profile_attributes_hobby').multiselect({
-//                    inheritClass: true,
-//                    numberDisplayed: 8,
-//                    nonSelectedText: '请选择提供的健身服务',
-//                    maxHeight: 100,
-//                    dropUp: true
-//                });
-
-            }
-    );
-    /**
-     * 建立一個可存取到該file的url
-     * PS: 瀏覽器必須支援HTML5 File API
-     */
-
-</script>
-
 
 
 

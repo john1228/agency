@@ -1,0 +1,92 @@
+<div class="clearfix top20">
+  <div class="pull-left">提现记录</div>
+  <div class="pull-right sure-select">
+    <samp>
+      <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'sure-select-a', include_blank: "全部门店") %>
+    </samp>
+    <samp>
+      <%= select_tag(:service_id, options_for_select((Date.today.year-5)..Date.today.year), class: 'sure-select-b') %>
+    </samp>
+    <samp>
+      <%= select_tag(:service_id, options_for_select(1..12), class: 'sure-select-c') %>
+    </samp>
+    <a class="sure-Connectpu pull-left" href="#"><i class="icon">&#xe60e;</i>导出表格</a>
+  </div>
+</div>
+<div class="table-responsive top20">
+  <table class="tablet table-striped">
+    <thead>
+    <tr class="table-tr">
+      <th>提现日期</th>
+      <th>门店</th>
+      <th>支付宝账号</th>
+      <th>金额（元）</th>
+      <th>操作人</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>2015-08-02 10:45</td>
+      <td>威尔士(徐汇店)</td>
+      <td>Lucy@163.com</td>
+      <td>300.00</td>
+      <td>Lucy</td>
+    </tr>
+    <tr>
+      <td>2015-08-02 10:45</td>
+      <td>威尔士(徐汇店)</td>
+      <td>Lucy@163.com</td>
+      <td>300.00</td>
+      <td>Lucy</td>
+    </tr>
+    <tr>
+      <td>2015-08-02 10:45</td>
+      <td>威尔士(徐汇店)</td>
+      <td>Lucy@163.com</td>
+      <td>300.00</td>
+      <td>Lucy</td>
+    </tr>
+    <tr>
+      <td>2015-08-02 10:45</td>
+      <td>威尔士(徐汇店)</td>
+      <td>Lucy@163.com</td>
+      <td>300.00</td>
+      <td>Lucy</td>
+    </tr>
+    <tr>
+      <td>2015-08-02 10:45</td>
+      <td>威尔士(徐汇店)</td>
+      <td>Lucy@163.com</td>
+      <td>300.00</td>
+      <td>Lucy</td>
+    </tr>
+    <tr>
+      <td>2015-08-02 10:45</td>
+      <td>威尔士(徐汇店)</td>
+      <td>Lucy@163.com</td>
+      <td>300.00</td>
+      <td>Lucy</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="clearfix">
+  <nav class="pull-left">
+    <ul class="pagination">
+
+      <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li><a>....</a></li>
+      <li><a href="#">页尾</a></li>
+    </ul>
+  </nav>
+  <nav class="pull-right">
+    <ul class="pager">
+      <li><a href="#"><i class="icon">&#xe611;</i></a></li>
+      <li><a href="#"><i class="icon">&#xe612;</i></a></li>
+    </ul>
+  </nav>
+</div>
