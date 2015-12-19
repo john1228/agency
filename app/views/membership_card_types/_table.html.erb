@@ -1,0 +1,30 @@
+<div class="clearfix">
+  <% @membership_card_types.each do |membership_card_type| %>
+      <div class="typl-List pull-left ">
+        <h1>
+          <span class="pull-left"><%= membership_card_type.name %></span>
+          <span class="pull-right"><%= membership_card_type.card_type_i18n %></span>
+        </h1>
+
+        <div class="pull-Content">
+          <h3><%= membership_card_type.price %>元</h3>
+          <ul class="top20">
+            <li>有效期：<%= membership_card_type.valid_days %>天</li>
+            <li>最晚开卡时间：<%= membership_card_type.latest_delay_days %>天后</li>
+            <li>备注：第一次开卡</li>
+          </ul>
+          <div class="member-bottn clearfix top10">
+            <div class="member-headportrait pull-left"><samp>
+              <%= image_tag(membership_card_type.service.profile.avatar.url, class: 'img-responsive img-circle') %>
+            </samp>
+              威尔士(上海环球金融店)
+            </div>
+            <div class="member-operation pull-right">
+              <a href="<%= edit_membership_card_type_path(membership_card_type) %>"><i class="icon">&#xe615;</i></a>
+              <a href="javascipt:" data-method="delete" data-id="<%= membership_card_type.id %>"><i class="icon">&#xe616;</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

@@ -6,9 +6,7 @@ class MessageController < ApplicationController
   end
 
   def new
-    @groups = MassMessageGroup.where(service_id: @service.id)
-    @mass_message = MassMessage.new
-    @success = params[:success]
+    @message = MassMessage.new
   end
 
   def create

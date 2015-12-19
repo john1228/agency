@@ -1,0 +1,28 @@
+<%= search_form_for @q do |f| %>
+    <div class="page-header colmd clearfix">
+      <div class="member-search pull-left member-type">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>
+          <%= f.search_field :name, placeholder: "会员姓名/手机", class: "form-control" %>
+        </div>
+      </div>
+      <%= link_to '<i class="icon">&#xe613;</i> 添加会员卡'.html_safe, new_membership_card_path, class: "new-member pull-right" %>
+    </div>
+<% end %>
+<div class="panel  top20">
+  <div class="panel-header clearfix sure-select">
+    <span class="pull-left">全部会员卡(<%= @membership_cards.count %>)</span>
+
+    <p class="top10">
+      <%= select_tag(:cart_type, options_for_select(I18n.t("enums.membership_card_type.card_type").to_a), class: 'pull-right selectpicker', include_blank: "全部类型") %>
+      <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'pull-right selectpicker', include_blank: "全部门店") %>
+    </p>
+  </div>
+  <div class="panel-body ">
+    <%= render 'table' %>
+    <div class="clearfix">
+      <%= will_paginate @membership_card_types, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+</div>
+

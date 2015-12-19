@@ -4,7 +4,7 @@
       <div class="panel-body">
         <div class="input-group top10 stor-default">
           <span class="input-group-addon"><samp class="alert-down">选择门店</samp></span>
-          <%= f.collection_select :user_id, current_admin_user.all_services, :id, :name, {}, {class: 'form-control'} %>
+          <%= f.collection_select :user_id, current_admin_user.all_services, :id, :name, {}, {class: 'form-control selectpicker'} %>
         </div>
         <div class="input-group stor-text">
           <%= f.text_area(:content, class: 'form-control-text textarea-content', rows: 6, placeholder: '请输入动态内容') %>

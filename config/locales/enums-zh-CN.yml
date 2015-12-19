@@ -23,9 +23,9 @@
         finance: "财务"
         store_manager: "店长"
         store_admin: "管理员"
-    membership_card_abstract:
+    membership_card_type:
       card_type:
-        deposit: "储值"
-        by_count: "次卡"
-        by_time: "期限"
+        stored: "储值"
+        measured: "次卡"
+        clocked: "期限"
 

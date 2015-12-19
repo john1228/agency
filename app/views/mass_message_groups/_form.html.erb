@@ -1,0 +1,18 @@
+<div class="panel  top20">
+  <div class="panel-header">新增群组</div>
+  <div class="panel-body">
+    <%= form_for(@mass_message_group) do |f| %>
+        <div class="input-group conte-cteli top20 group-width">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
+          <%= f.collection_select :service_id, current_admin_user.all_services, :id, :name, {}, {class: 'form-control selectpicker'} %>
+        </div>
+        <div class="input-group top20 group-width ">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">群组名称</samp></span>
+          <%= f.text_field :name, class: 'form-control', placeholder: '请填写群组名称' %>
+        </div>
+        <div class="fygroup top20">
+          <%= f.submit('确认', class: 'submit') %>
+        </div>
+    <% end %>
+  </div>
+</div>

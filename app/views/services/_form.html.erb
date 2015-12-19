@@ -12,6 +12,7 @@
             </div>
         <% end %>
         <%= f.semantic_fields_for :profile do |p| %>
+            <%= p.hidden_field(:identity) %>
             <div class="avatar-35 pull-right">
               <div class="New-portrait pull-right">
                 <samp>
@@ -19,7 +20,7 @@
                 </samp>
 
                 <p>上传门店头像</p>
-                <input type="file" class="file-loading ">
+                <%= p.file_field(:avatar, class: 'image-uploader') %>
               </div>
             </div>
             <div class="form-main">
@@ -29,12 +30,11 @@
                 </span>
                 <%= p.text_field :name, :class => "form-control" %>
               </div>
-              <div class="input-group form-main">
+              <div class="input-group top20">
                 <span class="input-group-addon" id="sizing-addon2">
                   <samp class="alert-down">营业时间</samp>
                 </span>
-                <%= p.text_field :business_hour_start, class: "form-control-mine", placeholder: "00:00" %> -
-                <%= p.text_field :business_hour_end, class: "form-control-57-3", placeholder: "23:59" %>
+                <%= p.text_field :business, class: 'form-control' %>
               </div>
               <div class="input-group  top20">
                 <span class="input-group-addon" id="sizing-addon2">
@@ -72,11 +72,11 @@
         <% end %>
         <h4 class="base-info top20">照片墙</h4>
 
-        <div class="top20 clearfix">
-          <div class="Photo-pil pull-left">
-            <i class="Photo-font icon">&#xe619;</i>
+        <div class="top20 clearfix" id="photowall">
+          <div class="photowall-item pull-left">
+            <i class="photowall-font icon">&#xe619;</i>
             <samp>添加照片</samp>
-            <input type="file" class="file-loading">
+            <input type="file" class="image-uploader" name="photo[]">
           </div>
         </div>
         <div class="top20">
@@ -102,13 +102,37 @@
                     maxHeight: 100,
                     dropUp: true
                 });
-                $(".portrait").image_preview();
+                $('#service_profile_attributes_avatar').on('change', function () {
+                    var objUrl = getObjectURL(this.files[0]);
+                    $(this).parent().children('samp').remove();
+                    $(this).parent().children('p').remove();
+                    $(this).parent().css('background-image', "url(" + objUrl + ")");
+                    $(this).parent().css('background-size', "cover");
+                });
+                var file_count = 0;
+                $('#photowall').on('change', '.image-uploader', function () {
+                    var remain = 8 - file_count;
+                    for (var i = 0; i < (remain > this.files.length ? this.files.length : remain); i++) {
+                        var objUrl = getObjectURL(this.files[i]);
+                        $(this).parent().children('i').remove();
+                        $(this).parent().children('samp').remove();
+                        $(this).parent().css('background-image', "url(" + objUrl + ")");
+                        $(this).parent().css('background-size', "cover");
+                        $(this).parent().append('<button type="button" class="close close_label " aria-label="Close"><span aria-hidden="true">&times;</span></button>');
+                    }
+                    file_count = file_count + this.files.length;
+                    if (file_count < 8) {
+                        var image_div = '<div class="photowall-item pull-left">' +
+                                '<i class="photowall-font icon">&#xe619;</i>' +
+                                '<samp>添加照片</samp>' +
+                                '<input type="file" class="image-uploader" name="photo[]">' +
+                                '</div>';
+                        $(this).parent().parent().append(image_div);
+                    }
+                });
+
             }
     );
-    /**
-     * 建立一個可存取到該file的url
-     * PS: 瀏覽器必須支援HTML5 File API
-     */
     function getObjectURL(file) {
         var url = null;
         if (window.createObjectURL != undefined) { // basic
@@ -120,72 +144,5 @@
         }
         return url;
     }
-</script>
-
-<script>
-    function getObjectURL(file) {
-        var url = null;
-        if (window.createObjectURL != undefined) { // basic
-            url = window.createObjectURL(file);
-        } else if (window.URL != undefined) { // mozilla(firefox)
-            url = window.URL.createObjectURL(file);
-        } else if (window.webkitURL != undefined) { // webkit or chrome
-            url = window.webkitURL.createObjectURL(file);
-        }
-        return url;
-    }
-    $(function () {
-        var file_count = 0;
-        $('#multi').on('change', '.image_uploader', function () {
-            $('#text').remove();
-            $('#film').remove();
-            var remain = 6 - file_count;
-            for (var i = 0; i < (remain > this.files.length ? this.files.length : remain); i++) {
-                var objUrl = getObjectURL(this.files[i]);
-                $(this).parent().children('div').remove();
-                $(this).parent().css('background-image', "url(" + objUrl + ")");
-                $(this).parent().css('background-size', "cover");
-            }
-            file_count = file_count + this.files.length;
-            if (file_count < 6) {
-                var image_div = "<div class='upload_area pull-left'>" +
-                        "<div class='panel-body'>" +
-                        "<i class='iconfont2 lxcop'>&#xe618;</i>" +
-                        "<p class='text-center cot-til'>上传图片</p>" +
-                        "<p class='text-center cot-til'>（还可以上传" + (6 - file_count) + "张）</p>"
-                        + "</div>" +
-                        "<input type='file'     class='image_uploader' name='image[]'/>" +
-                        "</div>";
-                $(this).parent().parent().append(image_div);
-            }
-        })
-
-        $('#multi').on('change', '.film_uploader', function () {
-            $('#image').remove();
-            $('#text').remove();
-            $('#cover').remove();
-            var filename = $('.film_uploader').val();
-            if (filename.length > 15) {
-                $("#film_title").text(filename.substr(0, 15) + '...');
-            } else {
-                $("#film_title").text(filename);
-            }
-
-            var image_div = "<div class='upload_area pull-left' id='cover'>" +
-                    "<div class='panel-body'>" +
-                    "<i class='iconfont2 lxcop'>&#xe618;</i>" +
-                    "<p class='text-center cot-til'>请上传视频的封面</p>" + "</div>" +
-                    "<input type='file' name='cover' class='cover_uploader'/>" +
-                    "</div>";
-            $(this).parent().parent().append(image_div);
-        });
-
-        $('#multi').on('change', '.cover_uploader', function () {
-            var objUrl = getObjectURL(this.files[0]);
-            $(this).parent().children('div').remove();
-            $(this).parent().css('background-image', "url(" + objUrl + ")");
-            $(this).parent().css('background-size', "cover");
-        })
-    })
 
 </script>

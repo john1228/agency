@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124022155) do
+ActiveRecord::Schema.define(version: 20151217080655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,10 +120,11 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.integer  "course_id"
     t.integer  "amount"
     t.integer  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "sku"
     t.string   "code"
+    t.integer  "lesson_id",  default: 0
   end
 
   add_index "appointments", ["code"], name: "index_appointments_on_code", unique: true, using: :btree
@@ -141,7 +142,7 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.date    "start_date"
     t.date    "end_date"
     t.integer "type"
-    t.integer "link_id"
+    t.string  "link_id",    default: ""
   end
 
   create_table "black_lists", force: :cascade do |t|
@@ -157,9 +158,11 @@ ActiveRecord::Schema.define(version: 20151124022155) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string  "name"
-    t.integer "item",       array: true
-    t.string  "background"
+    t.string   "name"
+    t.integer  "item",       array: true
+    t.string   "background"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "checks", force: :cascade do |t|
@@ -192,6 +195,12 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "clocks", force: :cascade do |t|
+    t.integer  "coach_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "coach_docs", force: :cascade do |t|
     t.integer "coach_id"
     t.string  "image"
@@ -210,6 +219,7 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.integer  "score"
     t.string   "sku"
     t.string   "image",      default: [],              array: true
+    t.integer  "coach_id",   default: 0
   end
 
   create_table "companies", force: :cascade do |t|
@@ -369,6 +379,18 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.integer  "comments_count", default: 0
   end
 
+  create_table "face_to_faces", force: :cascade do |t|
+    t.integer  "sku_id"
+    t.string   "name"
+    t.string   "avatar"
+    t.string   "mobile"
+    t.string   "amount"
+    t.integer  "pay_amount"
+    t.integer  "pay_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "feedbacks", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
@@ -473,6 +495,7 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.string  "contact_name"
     t.string  "contact_phone"
     t.string  "sku"
+    t.string  "code",          default: [], array: true
   end
 
   create_table "likes", force: :cascade do |t|
@@ -501,7 +524,16 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.datetime "updated_at",              null: false
   end
 
-  create_table "membership_card_abstracts", force: :cascade do |t|
+  create_table "members", force: :cascade do |t|
+    t.integer  "coach_id"
+    t.string   "name"
+    t.string   "avatar"
+    t.string   "mobile"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "membership_card_types", force: :cascade do |t|
     t.string   "name"
     t.integer  "service_id"
     t.integer  "client_id"
@@ -512,9 +544,9 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.boolean  "has_valid_extend_information"
     t.integer  "valid_days"
     t.integer  "latest_delay_days"
+    t.string   "remark"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.string   "remark"
   end
 
   create_table "membership_cards", force: :cascade do |t|
@@ -583,6 +615,8 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "service_id"
+    t.integer  "order_type"
+    t.integer  "giveaway"
   end
 
   create_table "overviews", force: :cascade do |t|
@@ -608,6 +642,16 @@ ActiveRecord::Schema.define(version: 20151124022155) do
   end
 
   add_index "places", ["lonlat"], name: "index_places_on_lonlat", using: :gist
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.string   "type"
+    t.string   "image",                    array: true
+    t.string   "description"
+    t.string   "special"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.integer "user_id"
@@ -662,6 +706,21 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.decimal "day_one"
     t.decimal "day_three"
     t.decimal "day_seven"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer  "coach_id"
+    t.integer  "user_id"
+    t.string   "sku_id",       default: ""
+    t.string   "user_name"
+    t.date     "date"
+    t.string   "start"
+    t.string   "end"
+    t.integer  "people_count"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "remark",       default: ""
+    t.integer  "user_type",    default: 0
   end
 
   create_table "service_courses", force: :cascade do |t|
@@ -730,6 +789,8 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.integer   "status",                                                                    default: 0
     t.integer   "service_id"
     t.string    "tag"
+    t.integer   "course_during"
+    t.integer   "sku_type",                                                                  default: 0
   end
 
   add_index "skus", ["coordinate"], name: "index_skus_on_coordinate", using: :gist
@@ -755,8 +816,10 @@ ActiveRecord::Schema.define(version: 20151124022155) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.integer "tag"
-    t.string  "name"
+    t.integer  "tag"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -829,8 +892,10 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.integer  "balance"
     t.string   "coupons"
     t.integer  "bean"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "source",     default: ""
+    t.integer  "integral",   default: 0
   end
 
   create_table "wallets", force: :cascade do |t|
@@ -839,6 +904,7 @@ ActiveRecord::Schema.define(version: 20151124022155) do
     t.integer "bean",         default: 0
     t.integer "coupons",      default: [],  array: true
     t.integer "lock_version"
+    t.integer "integral",     default: 0
   end
 
   create_table "withdraws", force: :cascade do |t|

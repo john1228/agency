@@ -7,15 +7,14 @@ class ServicesController < InheritedResources::Base
 
   def new
     @service = Service.new
-    @service.profile = Profile.new
+    @service.profile = Profile.service.new
     super
   end
 
   def create
-    @service = Service.new(service_params)
-    @service.profile.identity = 2
-    @service.client_id = current_user.client_id
-    @service.sns = SecureRandom.hex
+    service = Service.new(service_params)
+    service.client_id = current_user.client_id
+    service.sns = SecureRandom.hex
     if @service.save
       @success = true
       flash[:success] = "成功创建门店"
@@ -44,18 +43,8 @@ class ServicesController < InheritedResources::Base
 
   private
   def service_params
-    params[:service] ||= {}
-    params[:service][:profile_attributes][:province] = params[:province]
-    params[:service][:profile_attributes][:city] = params[:city]
-
-    if params[:image].present?
-      params[:service][:photos_attributes] = params[:image].map { |image| {photo: image} }
-    end
-
     params.require(:service).permit(:mobile, :password, profile_attributes:
-                                               [:id, :avatar, :name, :gender, :address, :birthday, :signature, :province, :city, :identity,
-                                                :business_hour_start, :business_hour_end, :mobile, hobby: []], photos_attributes: [:photo])
-
-
+                                               [:id, :avatar, :name, :gender, :address, :birthday, :signature, :province, :city, :area, :identity,
+                                                :business, :mobile, hobby: []], photos_attributes: [:photo])
   end
 end

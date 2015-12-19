@@ -4,6 +4,10 @@ class MassMessageGroupsController < ApplicationController
   def index
   end
 
+  def new
+    @mass_message_group = MassMessageGroup.new
+  end
+
   def students
     order_users = User.pluck(:id)
     group_users = User.includes(:profile).where(id: MassMessageGroup.find_by(id: params[:id]).user_id)
@@ -30,17 +34,21 @@ class MassMessageGroupsController < ApplicationController
 
 
   def create
-    group = MassMessageGroup.new(name: params[:name], service_id: @service.id)
+    group = MassMessageGroup.new(group_params)
     if group.save
-      render json: {code: 1, group: {id: group.id, name: group.name}}
+      redirect_to action: :index
     else
-      render json: {code: 0}
+      render action: :new
     end
-
   end
+
+  def groups
+    render json: {group: MassMessageGroup.where(service_id: params[:service_id]).pluck(:id, :name)}
+  end
+
 
   private
   def group_params
-    params.permit(:user_id)
+    params.require(:mass_message_group).permit(:service_id, :name)
   end
 end

@@ -2,10 +2,9 @@ class UserRegistrationsController < InheritedResources::Base
   layout "admin"
 
   def index
-
     @q = UserRegistration.where(:client_id => current_user.client_id).ransack(params[:q])
     @user_registrations = @q.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
-
+    @member = [['准会员', rand(1000)], ['会员', rand(5000)]]
   end
 
   def create
@@ -20,7 +19,7 @@ class UserRegistrationsController < InheritedResources::Base
       render :new
     end
   end
-  
+
   def update
     @user_registration = UserRegistration.find(params[:id])
     @user_registration.assign_attributes(user_registration_params)
@@ -36,9 +35,9 @@ class UserRegistrationsController < InheritedResources::Base
 
   private
 
-    def user_registration_params
-      params.require(:user_registration).permit(:reg_type, :avatar, :name, :gender, :service_id, :client_id, :mobile, :source, :birthday, :address, :remark,
-      :province,:city)
-    end
+  def user_registration_params
+    params.require(:user_registration).permit(:reg_type, :avatar, :name, :gender, :service_id, :client_id, :mobile, :source, :birthday, :address, :remark,
+                                              :province, :city)
+  end
 end
 

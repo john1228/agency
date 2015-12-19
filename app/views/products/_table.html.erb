@@ -1,0 +1,36 @@
+<% @products.each do |product| %>
+    <div class="member-list pull-left">
+      <a href="#">
+        <div class="cover" style="background-image: url('<%=sku.course_cover%>');background-size: cover"></div>
+      </a>
+
+      <div class="caption">
+        <h3 class="member-h3 clearfix top10">
+          <samp class="pull-left member-h3-left"><%= product.course_name %></samp>
+          <samp class="pull-right member-h3-riht"><%= product.market_price %>元</samp>
+        </h3>
+
+        <p class="member-Card"><%= product.membership_card_type.cart_type_i18n %></p>
+        <ul class="top10">
+          <li><samp style="width: 500px">卡名称</samp>美型会员卡</li>
+          <li><samp>应收金额</samp>800.00元</li>
+          <li><samp>商品数量</samp>200</li>
+          <li><samp>已售数量</samp>100</li>
+        </ul>
+        <div class="member-bottn clearfix top20">
+          <div class="member-headportrait pull-left">
+            <samp>
+              <%= image_tag(@sku.service.profile.avatar.url, class: 'img-responsive img-circle') %>
+            </samp>
+            威尔士(上海环球金融店)
+          </div>
+          <div class="member-operation pull-right">
+
+            <a href="#"><i class="icon" title="一键下架">&#xe62f;</i></a>
+            <a href="#" title="编辑"><i class="icon">&#xe615;</i></a>
+            <a href="#"><i class="icon">&#xe616;</i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

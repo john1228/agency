@@ -18,15 +18,17 @@ class Service<User
     event :reject do
       transitions :from => :approving, :to => :rejected
     end
-
     event :approve do
       transitions :from => :approving, :to => :approved
     end
-
   end
 
   def name
     profile.name
+  end
+
+  def profile_address
+    profile.province||'' + profile.city||'' + profile.area||'' + profile.address|''
   end
 
   private

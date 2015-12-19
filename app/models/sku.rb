@@ -1,12 +1,13 @@
 class Sku < ActiveRecord::Base
+  before_create :injection
   scope :online, -> { where(status: 1) }
   scope :coach_courses, -> { where('sku LIKE ?', 'CC%') }
   scope :service_courses, -> { where('sku LIKE ?', 'SC%') }
   scope :recommended, -> { joins(:recommend).order('recommends.id desc') }
   has_one :recommend, -> { where(type: Recommend::TYPE[:course]).order(id: :desc) }, foreign_key: :recommended_id
+  enum sku_type: [:course, :card]
 
-  before_save :offline
-  before_create :injection
+  belongs_to :product
 
   def as_json
     {
@@ -133,10 +134,6 @@ class Sku < ActiveRecord::Base
   end
 
   protected
-  def offline
-    #self.status = 0 if store.eql?(0)
-  end
-
   def injection
     self.orders_count = rand(100)
   end

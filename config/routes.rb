@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :membership_card_abstracts
-  resources :user_registrations
+
   devise_for :admin_user
   devise_scope :admin_user do
     get 'logout', :to => 'devise/sessions#destroy'
@@ -22,7 +21,14 @@ Rails.application.routes.draw do
   resources :orders
   resources :appointments
   resources :sales
+  resources :membership_card_types
+  resources :membership_cards
+  resources :user_registrations
+  resources :skus
+  resources :products
 
+
+  get ':service_id/membership_card_types/:type/cards' => 'membership_card_types#cards'
 
   get 'password' => 'profiles#password'
   post 'password' => 'profiles#change_password', as: :change_password
@@ -50,13 +56,9 @@ Rails.application.routes.draw do
   get 'report/order' => 'report#order_table'
   get 'report/appointment' => 'report#appointment_table'
   get 'report/sale' => 'report#sale_table'
-
-
-  post 'message' => 'message#create', as: :batch_message
-
-
   get 'dashboard' => 'dashboard#index'
 
+  post 'message' => 'message#create', as: :batch_message
 
   root to: 'dashboard#index'
 end

@@ -1,0 +1,88 @@
+<%= semantic_form_for @product, html: {multipart: true} do |f| %>
+    <div class="panel  top20">
+      <div class="panel-header">新增在售会员卡</div>
+      <div class="panel-body">
+        <div class="form-main">
+          <div>
+            <div class="input-group top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店</samp></span>
+              <%= f.select :service_id, current_admin_user.all_services.pluck(:name, :id), {include_blank: false, prompt: '请选择门店'}, {class: "form-control selectpicker"} %>
+            </div>
+            <div class="input-group top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">商品名称</samp></span>
+              <%= f.text_field :name, class: "form-control", placeholder: '请输入名称' %>
+            </div>
+            <div class="input-group top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡种类</samp></span>
+              <%= select_tag(:card_type, options_for_select(MembershipCardType.card_type_for_select), prompt: '请选择卡种类', class: 'form-control selectpicker') %>
+            </div>
+            <div class="input-group top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡名称</samp></span>
+              <%= f.select :type, [], {include_blank: false, prompt: '请选择卡'}, {class: "form-control selectpicker"} %>
+            </div>
+            <div class="input-group top20">
+              <%= f.text_area :description, class: 'form-control-textarea', placeholder: '请输入简介' %>
+            </div>
+            <div class="input-group top20">
+              <%= f.text_area :special, class: 'form-control-textarea', placeholder: '请输入特殊说明' %>
+            </div>
+            <div>
+
+            </div>
+          </div>
+          <div>
+            <h4 class="top20" style="color: #21486a;font-size: 14px; ">商品属性</h4>
+
+            <div class="input-group top20 ">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
+              <%= f.text_field :market_price, class: 'form-control', readonly: true %>
+              <span class="input-group-addon">元</span>
+            </div>
+            <div class="input-group  top20 pull-left">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实收金额</samp></span>
+              <%= f.text_field :selling_price, class: 'form-control' %>
+              <span class="input-group-addon">元</span>
+            </div>
+            <div class="input-group top20 pull-left">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">商品数量</samp></span>
+              <%= f.text_field :store, class: 'form-control', placeholder: '请输入售卖数量,若不输入，视为无限' %>
+            </div>
+            <div class="input-group top20 pull-left">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">商品数量</samp></span>
+              <%= f.text_field :limit, class: 'form-control', placeholder: '请输入限购数量,若不输入，视为无限' %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<script>
+    $(function () {
+                $('#product_service_id').on('change', function () {
+                    card_type = $('#card_type').val();
+                    service_id = $(this).val();
+                    if (card_type != '' && service_id != '') {
+                        $.getJSON('/' + service_id + '/membership_card_types/' + card_type + '/cards', function (data) {
+                            $.each(data.cards, function (index, value) {
+                                console.log(value.id);
+                                console.log(value.name);
+                                $('#product_type').append('<option value="' + value.id + '">"' + value.name + '"</option>');
+                                $('#test').html(value.name);
+                            })
+                        });
+                    }
+                });
+                $('#card_type').on('change', function () {
+                    card_type = $(this).val();
+                    service_id = $('#product_service_id').val();
+                    $.getJSON('/' + service_id + '/membership_card_types/' + card_type + '/cards', function (data) {
+                        $.each(data.cards, function (index, value) {
+                            $('#product_type').append('<option value="' + value.id + '">"' + value.name + '"</option>');
+                        })
+                    });
+                })
+            }
+    )
+</script>
