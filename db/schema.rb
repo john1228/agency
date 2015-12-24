@@ -550,10 +550,17 @@ ActiveRecord::Schema.define(version: 20151217080655) do
   end
 
   create_table "membership_cards", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "card_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "client_id"
+    t.integer  "service_id"
+    t.integer  "coach_id"
+    t.integer  "member_id"
+    t.integer  "card_type"
+    t.string   "name"
+    t.integer  "value"
+    t.date     "valid_start"
+    t.date     "Valid_end"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "news", force: :cascade do |t|

@@ -17,7 +17,7 @@
             <div class="member-headportrait pull-left"><samp>
               <%= image_tag(membership_card_type.service.profile.avatar.url, class: 'img-responsive img-circle') %>
             </samp>
-              威尔士(上海环球金融店)
+              <%= membership_card_type.service.profile.name %>
             </div>
             <div class="member-operation pull-right">
               <a href="<%= edit_membership_card_type_path(membership_card_type) %>"><i class="icon">&#xe615;</i></a>

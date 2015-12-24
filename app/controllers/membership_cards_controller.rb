@@ -1,6 +1,16 @@
 class MembershipCardsController < ApplicationController
+  layout 'admin'
+
   def index
-    @q = MembershipCard.where(:client_id => current_user.client_id).ransack(params[:q])
-    @membership_cards = @q.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
+    @query = MembershipCard.where(:client_id => current_user.client_id).ransack(params[:query])
+    @membership_cards = @query.result.paginate(page: params[:page]||1, per_page: 10).order("updated_at desc")
+  end
+
+  def new
+    @membership_card = MembershipCard.new(client_id: current_user.id)
+  end
+
+  def create
+
   end
 end

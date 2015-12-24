@@ -28,4 +28,9 @@
         stored: "储值"
         measured: "次卡"
         clocked: "期限"
+    membership_card:
+      card_type:
+        stored: "储值"
+        measured: "次卡"
+        clocked: "期限"
 

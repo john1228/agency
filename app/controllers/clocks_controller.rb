@@ -1,0 +1,2 @@
+class ClocksController < ApplicationController
+end

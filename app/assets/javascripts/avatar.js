@@ -15,13 +15,24 @@ function getObjectURL(file) {
 $(".file_uploader").change(function () {
     var objUrl = getObjectURL(this.files[0]);
     if (objUrl) {
-        $(this).parent().find('.place').remove();
+        $(this).parent().find('.default_icon').remove();
+        $(this).parent().find('.default_title').remove();
         $(this).parent().css('background-image', 'url("' + objUrl + '")');
         $(this).parent().css('background-size', 'cover');
     }
 });
 
-;
+$(".image-uploader").change(function () {
+    var objUrl = getObjectURL(this.files[0]);
+    if (objUrl) {
+        $(this).parent().find('.default_icon').remove();
+        $(this).parent().find('.default_title').remove();
+        $(this).parent().css('background-image', 'url("' + objUrl + '")');
+        $(this).parent().css('background-size', 'cover');
+    }
+});
+
+
 (function ($) {
     $.fn.image_preview = function (options) {
         var defaults = {
@@ -32,10 +43,9 @@ $(".file_uploader").change(function () {
 
         options = $.extend(defaults, options);
         elm = this;
-
-
         var _show = function (url) {
-            elm.find('.place').remove();
+            elm.find('.default_icon').remove();
+            elm.find('.default_title').remove();
             elm.css('background-image', 'url("' + url + '")');
             elm.css('background-size', 'cover');
         }

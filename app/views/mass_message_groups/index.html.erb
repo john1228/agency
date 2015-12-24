@@ -1,16 +1,16 @@
-<div class="page-header colmd clearfix">
-  <div class="pull-left colmd-a">
+<div class="page-header  clearfix">
+  <div class="pull-left mx-tabs">
     <%= link_to "门店", services_path, class: "pull-left  page-header-text " %>
     <%= link_to "动态", dynamics_path, class: "pull-left  page-header-text " %>
     <%= link_to "消息", message_index_path, class: "pull-left  page-header-text " %>
     <a href="<%= mass_message_groups_path %>" class="pull-left  page-header-text">
-      <samp class="histo-active">
+      <samp class="mx-tab-active">
         <span id="triangle-down"></span>
         群组
       </samp>
     </a>
   </div>
-  <a href="<%= new_mass_message_group_path %>" class="colmd-2 pull-right"><i class="icon">&#xe613;</i>新建群组</a>
+  <a href="<%= new_mass_message_group_path %>" class="-2 pull-right"><i class="icon">&#xe613;</i>新建群组</a>
 </div>
 <div class="panel top20">
   <div class="panel-header">群组</div>

@@ -28,7 +28,7 @@ class Service<User
   end
 
   def profile_address
-    profile.province||'' + profile.city||'' + profile.area||'' + profile.address|''
+    (profile.province||'') + (profile.city||'') + (profile.area||'') + (profile.address||'')
   end
 
   private

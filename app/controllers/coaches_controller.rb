@@ -2,8 +2,8 @@ class CoachesController < InheritedResources::Base
   layout 'admin'
 
   def index
-    @q = Coach.where(:client_id=>current_user.client_id).ransack(params[:q])
-    @coaches = @q.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
+    @query= Coach.where(:client_id => current_user.client_id).ransack(params[:q])
+    @coaches = @query.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
   end
 
   def new
@@ -40,7 +40,7 @@ class CoachesController < InheritedResources::Base
   def coach_params
     params[:coach][:profile_attributes][:province] = params[:province]
     params[:coach][:profile_attributes][:city] = params[:city]
-    params.require(:coach).permit(:mobile, :password, :service_id,profile_attributes:
-                                             [:avatar, :name, :mobile,:gender, :birthday, :signature, :province, :city, :identity, hobby: []])
+    params.require(:coach).permit(:mobile, :password, :service_id, profile_attributes:
+                                             [:avatar, :name, :mobile, :gender, :birthday, :signature, :province, :city, :identity, hobby: []])
   end
 end

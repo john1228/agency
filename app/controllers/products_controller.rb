@@ -8,12 +8,17 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @product.image = Array.new(6)
+    @card_type = params[:card_type]||0
   end
 
   def create
-    @sku = Sku.new(create_params)
-    if @sku.save
+    @product = Product.new(create_params)
+    if @product.save
+      redirect_to action: :index
     else
+      @card_type = params[:card_type].to_i
+      render action: :new
     end
   end
 
@@ -25,9 +30,17 @@ class ProductsController < ApplicationController
 
   end
 
+
+  def card_types
+    @membership_card_types = MembershipCardType.where(card_type: params[:type], service_id: params[:service_id])
+    render json: @membership_card_types.map { |card_type|
+             card_type.as_json(only: [:id, :name, :count, :price, :valid_days, :latest_delay_days])
+           }
+  end
+
   private
   def create_params
-
+    params.require(:product).permit(:service_id, :type, :name, :description, :special, :market_price, :selling_price, :store, :limit, image: [])
   end
 
   def update_params

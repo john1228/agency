@@ -1,4 +1,4 @@
-#encoding : utf-8
+  #encoding : utf-8
 class AdminUser < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable

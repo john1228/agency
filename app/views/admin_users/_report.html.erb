@@ -1,0 +1,33 @@
+<script>
+    $(function () {
+        $('#admin_user').highcharts({
+            chart: {plotBackgroundColor: null, plotBorderWidth: null, plotShadow: false},
+            title: {text: '店铺流水'},
+            tooltip: {pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'},
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '占比',
+                data: [
+                    ['管理员', <%=@query.result.store_admin.count%>],
+                    ['店长', <%=@query.result.store_manager.count%>],
+                    ['财务', <%=@query.result.finance.count%>],
+                    ['前台', <%=@query.result.front_desk.count%>],
+                    ['销售', <%=@query.result.sales.count%>]
+                ]
+            }]
+        });
+    });
+</script>
+<div id="admin_user"></div>

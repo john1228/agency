@@ -1,7 +1,6 @@
 <%= semantic_form_for @membership_card_type, html: {multipart: true} do |f| %>
-
-    <h3 class="Content-h3"><%= edit_helper(@membership_card_type) %>会员卡种类</h3>
-    <div class="panel">
+    <div class="panel  top20">
+      <div class="panel-header">新增期限卡</div>
       <div class="panel-body">
         <h4 class="base-info">基本资料</h4>
         <% if @membership_card_type.errors.present? %>
@@ -15,20 +14,15 @@
 
 
         <div class="form-main">
-          <div class="input-group top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">种类名称</samp></span>
-            <%= f.text_field :name, :class => "form-control" %>
-          </div>
-
-
-          <div class="input-group  top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡类型</samp></span>
-            <%= f.collection_select :card_type, I18n.t("enums.membership_card_type.card_type").to_a, :first, :last, {include_blank: "全部类型"}, class: "form-control" %>
-          </div>
-
+          <%= f.hidden_field :card_type, value: 'clocked' %>
           <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
             <%= f.collection_select :service_id, current_user.all_services, :id, :name, {}, class: "form-control" %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">种类名称</samp></span>
+            <%= f.text_field :name, :class => "form-control" %>
           </div>
 
           <div class="input-group  top20">
@@ -42,12 +36,6 @@
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
 
             <%= f.text_field :remark, :class => "form-control" %>
-          </div>
-
-          <div class="input-group form-main">
-            <label class="checkbox-inline">
-              <%= f.check_box :has_valid_extend_information %>为该卡设置有效期
-            </label>
           </div>
 
           <div class="input-group  top20">

@@ -1,12 +1,12 @@
 <%= search_form_for @query do |f| %>
-    <div class="page-header colmd clearfix">
-      <div class="pull-left colmd-a">
-        <a href="#" class="pull-left  page-header-text"><samp class="histo-active">
+    <div class="page-header  clearfix">
+      <div class="pull-left mx-tabs">
+        <a href="#" class="pull-left  page-header-text"><samp class="mx-tab-active">
           <div id="triangle-down"></div>
           在售商品</samp></a>
         <a href="#" class="pull-left  page-header-text">下架商品</a>
       </div>
-      <%= link_to '<i class="icon">&#xe613;</i>新增出售会员卡'.html_safe, new_product_path, class: "colmd-2 pull-right" %>
+      <%= link_to '<i class="icon">&#xe613;</i>新增出售会员卡'.html_safe, new_product_path, class: "new-member pull-right" %>
       <div class="member-search pull-right">
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>
@@ -20,7 +20,7 @@
     <span class="pull-left">商品总数(<%= @query.result.count %>)</span>
 
     <p class="top10">
-      <%= select_tag(:cart_type, options_for_select(I18n.t("enums.membership_card_type.card_type").to_a), class: 'pull-right selectpicker', include_blank: "全部类型") %>
+      <%= select_tag(:cart_type, options_for_select(MembershipCardType.card_type_for_select), class: 'pull-right selectpicker', include_blank: "全部类型") %>
       <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'pull-right selectpicker', include_blank: "全部门店") %>
     </p>
   </div>

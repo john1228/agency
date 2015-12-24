@@ -1,0 +1,27 @@
+<script>
+    $(function () {
+        $('#coach').highcharts({
+            chart: {plotBackgroundColor: null, plotBorderWidth: null, plotShadow: false},
+            title: {text: '店铺流水'},
+            tooltip: {pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'},
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '占比',
+                data: [['男私教', <%=@query.result.where(profiles: {gender: 0}).count%>], ['女私教', <%=@query.result.where(profiles: {gender: 1}).count%>]]
+            }]
+        });
+    });
+</script>
+<div id="coach"></div>

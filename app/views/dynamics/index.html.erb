@@ -1,14 +1,14 @@
-<div class="page-header colmd clearfix">
+<div class="page-header  clearfix">
 
-  <div class="pull-left colmd-a">
+  <div class="pull-left mx-tabs">
     <%= link_to "门店", services_path, class: "pull-left  page-header-text" %>
-    <a href="#" class="pull-left  page-header-text "><samp class="histo-active">
+    <a href="#" class="pull-left  page-header-text "><samp class="mx-tab-active">
       <div id="triangle-down"></div>
       动态</samp></a>
     <a href="#" class="pull-left  page-header-text">消息</a>
     <a href="#" class="pull-left  page-header-text">群组</a>
   </div>
-  <%= link_to '<i class="icon">&#xe613;</i>新增动态'.html_safe, new_dynamic_path, class: "colmd-2 pull-right" %>
+  <%= link_to '<i class="icon">&#xe613;</i>新增动态'.html_safe, new_dynamic_path, class: "-2 pull-right" %>
 </div>
 <div class="panel  top20">
   <div class="panel-header">历史动态(<%= @dynamics.count %>)</div>

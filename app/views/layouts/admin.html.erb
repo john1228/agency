@@ -6,6 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>美型管理平台</title>
+  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+  <%= javascript_include_tag 'js/PCASClass',
+                             'js/jgallery',
+                             'js/bootstrap-datepicker',
+                             'js/bootstrap-datepicker.zh-CN',
+                             'js/bootstrap-multiselect',
+                             'js/bootstrap-select'
+  %>
   <%= stylesheet_link_tag 'css/bootstrap.min',
                           'css/style',
                           'css/main-left',
@@ -14,19 +23,10 @@
                           'css/font-awesome',
                           'css/iconfont',
                           'css/album',
-                          'css/bootstrap-select'
+                          'css/bootstrap-select',
+                          'css/jgallery'
   %>
   <%= csrf_meta_tags %>
-  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
-  <%= stylesheet_link_tag "css/jgallery" %>
-  <%= javascript_include_tag 'js/PCASClass',
-                             'js/jgallery',
-                             'js/bootstrap-datepicker',
-                             'js/bootstrap-datepicker.zh-CN',
-                             'js/bootstrap-multiselect',
-                             'js/bootstrap-select'
-  %>
 </head>
 
 <body>

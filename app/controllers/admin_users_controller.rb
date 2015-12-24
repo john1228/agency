@@ -2,9 +2,8 @@ class AdminUsersController < InheritedResources::Base
   layout "admin"
 
   def index
-
-    @q = AdminUser.where(:client_id => current_user.client_id).where("role > 4").ransack(params[:q])
-    @admin_users = @q.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
+    @query = AdminUser.where(:client_id => current_user.client_id).where("role > 4").ransack(params[:q])
+    @admin_users = @query.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
 
   end
 
@@ -38,7 +37,7 @@ class AdminUsersController < InheritedResources::Base
 
   def admin_user_params
     fileds = [:reg_type, :avatar, :name, :gender, :service_id, :client_id, :mobile, :source, :birthday, :address, :remark,
-        :province,:city,:email,:role]
+              :province, :city, :email, :role]
     if params[:admin_user] && params[:admin_user][:password].present?
       fileds << :password
     end

@@ -1,30 +1,38 @@
-<div class="clearfix">
-  <% @membership_card_types.each do |membership_card_type| %>
-      <div class="typl-List pull-left ">
-        <h1>
-          <span class="pull-left"><%= membership_card_type.name %></span>
-          <span class="pull-right"><%= membership_card_type.card_type_i18n %></span>
-        </h1>
-
-        <div class="pull-Content">
-          <h3><%= membership_card_type.price %>元</h3>
-          <ul class="top20">
-            <li>有效期：<%= membership_card_type.valid_days %>天</li>
-            <li>最晚开卡时间：<%= membership_card_type.latest_delay_days %>天后</li>
-            <li>备注：第一次开卡</li>
-          </ul>
-          <div class="member-bottn clearfix top10">
-            <div class="member-headportrait pull-left"><samp>
-              <%= image_tag(membership_card_type.service.profile.avatar.url, class: 'img-responsive img-circle') %>
-            </samp>
-              威尔士(上海环球金融店)
-            </div>
-            <div class="member-operation pull-right">
-              <a href="<%= edit_membership_card_type_path(membership_card_type) %>"><i class="icon">&#xe615;</i></a>
-              <a href="javascipt:" data-method="delete" data-id="<%= membership_card_type.id %>"><i class="icon">&#xe616;</i></a>
-            </div>
-          </div>
-        </div>
-      </div>
+<script>
+    $(function () {
+        $('.coach_pagination a').on('click', function (event) {
+            $.get(this.href, null, null, 'script');
+            return false;
+        });
+    });
+</script>
+<table class="table table-striped card-list">
+  <thead>
+  <tr>
+    <th width="5%">编号</th>
+    <th width="10%">名称</th>
+    <th width="10%">类型</th>
+    <th width="18%">所属门店</th>
+    <th width="18%">绑定会员</th>
+    <th width="10%">余额</th>
+    <th width="10%">状态</th>
+    <th width="19%">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @membership_cards.each do |membership_card| %>
+      <tr>
+        <td><%= membership_card.id %></td>
+        <td><%= membership_card.name %></td>
+        <td><%= membership_card.card_type_i18n %></td>
+        <td><%= membership_card.service.profile.name %></td>
+        <td><%= membership_card.member.name %></td>
+        <td><%= membership_card.value %></td>
+        <td class="net-color"><%= membership_card.statu %></td>
+        <td class="list-card-1f">
+          <%= link_to('消费记录') %> | <%= link_to('转卡') %> | <%= link_to('激活') %>
+        </td>
+      </tr>
   <% end %>
-</div>
+  </tbody>
+</table>

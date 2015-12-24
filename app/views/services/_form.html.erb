@@ -13,15 +13,13 @@
         <% end %>
         <%= f.semantic_fields_for :profile do |p| %>
             <%= p.hidden_field(:identity) %>
-            <div class="avatar-35 pull-right">
-              <div class="New-portrait pull-right">
-                <samp>
-                  <i class=" icon">&#xe619;</i>
-                </samp>
+            <div class="new-portrait pull-right">
+              <samp>
+                <i class=" icon">&#xe619;</i>
+              </samp>
 
-                <p>上传门店头像</p>
-                <%= p.file_field(:avatar, class: 'image-uploader') %>
-              </div>
+              <p>上传门店头像</p>
+              <%= p.file_field(:avatar, class: 'image-uploader') %>
             </div>
             <div class="form-main">
               <div class="input-group">
