@@ -1,17 +1,28 @@
 <div class="page-header  clearfix">
-  <a class="pull-left  page-header-text"><samp class="mx-tab-active">
-    <div id="triangle-down"></div>
-    向一人转账</samp></a>
-  <%= link_to "向多人转账", '#', class: "pull-left  page-header-text " %>
+  <% if @type.eql?('signal') %>
+      <%= link_to '<samp class="mx-tab-active">
+        <div id="triangle-down"></div>
+        单人转账</samp>'.html_safe, '/transfers?type=signal', class: 'pull-left page-header-text' %>
+      <%= link_to "多人转账", '/transfers?type=multiple ', class: "pull-left  page-header-text " %>
+  <% elsif @type.eql?('multiple') %>
+      <%= link_to '单人转账', '/transfers?type=signal', class: 'pull-left page-header-text' %>
+      <%= link_to '<samp class="mx-tab-active">
+        <div id="triangle-down"></div>
+        多人转账</samp>'.html_safe, '/transfers?type=multiple ', class: "pull-left  page-header-text " %>
+  <% end %>
 </div>
 <div class="panel top20">
-  <div class="panel-header clearfix sure-select">
-    <span class="pull-left"></span>
+  <div class="panel-header clearfix header-selector">
+    <span class="pull-left">转账请求</span>
   </div>
   <div>
     <div class="panel-body">
       <div id="form">
-        <%= render 'form' %>
+        <% if @type.eql?('signal') %>
+            <%= render 'form' %>
+        <% elsif @type.eql?('multiple') %>
+            <%= render 'multi_form' %>
+        <% end %>
       </div>
       <div>
         <%= render 'table' %>

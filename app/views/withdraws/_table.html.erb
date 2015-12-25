@@ -1,22 +1,24 @@
 <div class="clearfix top20">
   <div class="pull-left">提现记录</div>
-  <div class="pull-right sure-select">
+  <div class="pull-right header-selector">
     <samp>
-      <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'sure-select-a', include_blank: "全部门店") %>
+      <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'selectpicker', include_blank: "全部门店") %>
     </samp>
     <samp>
-      <%= select_tag(:service_id, options_for_select((Date.today.year-5)..Date.today.year), class: 'sure-select-b') %>
+      <%= select_tag(:service_id, options_for_select((Date.today.year-5)..Date.today.year), class: 'selectpicker') %>
     </samp>
     <samp>
-      <%= select_tag(:service_id, options_for_select(1..12), class: 'sure-select-c') %>
+      <%= select_tag(:service_id, options_for_select(1..12), class: 'selectpicker') %>
     </samp>
-    <a class="sure-Connectpu pull-left" href="#"><i class="icon">&#xe60e;</i>导出表格</a>
+    <samp style="padding-left: 8px">
+      <a class="header-button pull-right" href="#"><i class="icon">&#xe60e;</i>导出表格</a>
+    </samp>
   </div>
 </div>
 <div class="table-responsive top20">
-  <table class="tablet table-striped">
+  <table class="table table-striped">
     <thead>
-    <tr class="table-tr">
+    <tr class="table-header">
       <th>提现日期</th>
       <th>门店</th>
       <th>实名</th>

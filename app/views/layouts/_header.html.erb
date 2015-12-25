@@ -9,20 +9,18 @@
       <li class="media">
         <div class="badge-left pull-left">
 
-          <%= image_tag "1.jpg", class: "media-object" %>
+          <%= image_tag current_user.avatar.url||'', class: "media-object" %>
 
         </div>
         <div class="pull-left">
-          我是标题
+          <%= current_user.name %>
         </div>
       </li>
     </ul>
   </a>
   <ul class="dropdown-menu dropup " aria-labelledby="dropdownMenu1">
-
     <li><a href="#"><i class="iconfont icon">&#xe605;</i>修改密码</a></li>
     <li role="separator" class="divider"></li>
     <li><%= link_to '<i class="iconfont icon">&#xe624;</i>登出'.html_safe, logout_path %></li>
-
   </ul>
 </div>

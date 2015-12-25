@@ -1,22 +1,27 @@
 <div class="input-group  top20 group-width">
   <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
-  <%= select_tag(:service_id,
+  <%= select_tag(:service,
                  options_for_select(current_admin_user.all_services.pluck(:name, :id)),
-                 class: 'form-control',
+                 class: 'form-control selectpicker',
                  include_blank: "请选择门店"
       ) %>
 </div>
 <div class="input-group top20 group-width">
-  <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">选择私教</samp></span>
-  <%= select_tag(:coach_id, options_for_select([]), class: 'form-control', include_blank: "请选择私教") %>
+  <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">帐号</samp></span>
+  <%= text_field_tag(:account, '', class: 'form-control') %>
 </div>
 <div class="input-group top20 group-width ">
   <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">转账金额</samp></span>
-  <input type="text" class="form-control" placeholder="请输入转账金额">
+  <%= text_field_tag(:name, '', class: 'form-control') %>
+  <span class="input-group-addon">元</span>
+</div>
+<div class="input-group top20 group-width ">
+  <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">转账金额</samp></span>
+  <%= text_field_tag(:amount, '', class: 'form-control') %>
   <span class="input-group-addon">元</span>
 </div>
 <h4 class="top20" style=" color: #1b1b1b;font-size: 14px;">
-  余额：<samp style="color: #ff623c;font-size: 18px;margin-right: 5px;">33333</samp>
+  余额：<samp style="color: #ff623c;font-size: 18px;margin-right: 5px;" id="balance">0</samp>
   <samp style=" color: #a2a9b5;font-size: 14px;">元</samp>
 </h4>
 
@@ -26,15 +31,18 @@
 <p class="sure-explain top10">首次输入的支付宝帐号将直接绑定为服务号提现帐号，如需更改，请联系客服 021-67854738。</p>
 <script>
     $(function () {
-        $('#service_id').on('change', function () {
-            $.getJSON('/services/' + this.value + '/coaches', function (data) {
-                var coach_select = $('#coach_id');
-                coach_select.empty();
-                coach_select.append("<option value=''>选择私教</option>");
-                $.each(data.coaches, function (k, v) {
-                    coach_select.append("<option value=''>v</option>");
+        $('#service').on('change', function () {
+            var service = $(this).val();
+            if (service != '') {
+                $.getJSON('/transfers/' + this.value + '/service', function (data) {
+                    $.each(data.coach, function (key, value) {
+                        $("<option value='" + value.id +
+                        "'>" + value.name + "</option>").appendTo('#coach');
+                        $("#coach").selectpicker('refresh');
+                    });
+                    $('#balance').html(data.balance);
                 })
-            })
+            }
         });
     })
 </script>

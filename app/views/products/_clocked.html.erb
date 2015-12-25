@@ -91,18 +91,27 @@
     $(function () {
                 $('#product_service_id').on('change', function () {
                     var service_id = $(this).val();
-                    alert(service_id);
                     if (service_id != '') {
                         $("#product_type").empty();
                         $("<option>请选择卡</option>").appendTo('#product_type');
-                        $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['clocked']%> +'/cards', function (data) {
+                        $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['stored']%> +'/cards', function (data) {
                             $.each(data, function (i, value) {
-                                $("<option value='" + value.id + "'>" + value.name + "</option>").appendTo('#product_type');
+                                $("<option value='" + value.id +
+                                "' data-count='" + value.count +
+                                "' data-price='" + value.price +
+                                "' data-valid-days='" + value.valid_days +
+                                "' data-delay-days='" + value.latest_delay_days +
+                                "'>" + value.name + "</option>").appendTo('#product_type');
                             });
                             $("#product_type").selectpicker('refresh');
                         });
                     }
                 });
+                $('#product_type').on('change', function () {
+                    $('#valid_days').val($(this).find("option:selected").attr("data-valid-days"));
+                    $('#latest_delay_days').val($(this).find("option:selected").attr("data-delay-days"));
+                    $('#product_market_price').val($(this).find("option:selected").attr("data-price"));
+                })
             }
     )
 </script>

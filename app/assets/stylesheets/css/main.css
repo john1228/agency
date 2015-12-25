@@ -676,20 +676,20 @@
     line-height: 55px;
 }
 
-.tablet {
+.table {
     width: 100%;
 }
 
-.tablet tr th, .tablet tr td {
+.table tr th, .table tr td {
     padding: 0 0 0 20px;
 }
 
-.tablet tr th {
+.table tr th {
     color: #a1aab7;
     font-weight: normal;
 }
 
-.tablet tr td {
+.table tr td {
     height: 60px;
     line-height: 20px;
 }
@@ -955,7 +955,7 @@
     padding-bottom: 20px;
 }
 
-.sure-select select {
+.header-selector select {
     float: left;
     margin-right: 10px;
     display: block;
@@ -975,19 +975,7 @@
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
-.sure-select-a {
-    width: 200px;
-}
-
-.sure-select-b {
-    width: 100px;
-}
-
-.sure-select-c {
-    width: 80px;
-}
-
-.sure-Connectpu {
+.header-button {
     width: 110px;
     height: 34px;
     line-height: 34px;
@@ -997,21 +985,21 @@
     color: #fff;
 }
 
-.sure-Connectpu:hover {
+.header-button:hover {
     color: #fff;
 }
 
-.sure-Connectpu i {
+. header-button i {
     margin-right: 5px;
 }
 
-.table-responsive .table-tr {
+.table .table-header {
     background: #dbe4ef;
     height: 55px;
     line-height: 55px;
 }
 
-.table-responsive .table-tr th {
+.table .table-header th {
     border-bottom: none;
 }
 
@@ -1376,7 +1364,7 @@
     background-color: #f8f8f8;
 }
 
-.sure-select .top8 .bootstrap-select {
+.header-selector .top8 .bootstrap-select {
     margin-right: 10px;
 }
 
@@ -1605,7 +1593,7 @@
     border: 1px solid #ccc;
 }
 
-.sure-select .btn {
+.header-selector .btn {
     border: 1px solid #ccc;
 }
 

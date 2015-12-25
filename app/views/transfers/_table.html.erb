@@ -1,31 +1,48 @@
 <script>
     $(function () {
         $('.log_pagination a').on('click', function () {
-            $.get(this.href, {sku: sku, year: year, month: month}, null, "script");
+            $.get(this.href, null, null, "script");
             return false;
         })
     });
 </script>
-<div>
+<div class="clearfix top20">
+  <div class="pull-left">提现记录</div>
+  <div class="pull-right header-selector">
+    <samp>
+      <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: ' selectpicker', include_blank: "全部门店") %>
+    </samp>
+    <samp>
+      <%= select_tag(:service_id, options_for_select((Date.today.year-5)..Date.today.year), class: 'selectpicker') %>
+    </samp>
+    <samp>
+      <%= select_tag(:service_id, options_for_select(1..12), class: 'selectpicker') %>
+    </samp>
+    <samp style="padding-left: 8px">
+      <a class="header-button pull-right" href="#"><i class="icon">&#xe60e;</i>导出表格</a>
+    </samp>
+  </div>
+</div>
+<div id="table">
   <div>
-    <table class="table table-striped card-list" id="datatable-editable">
+    <table class="table table-striped" id="datatable-editable">
       <thead>
-      <tr class="prito">
-        <th class="text-center">转账日期</th>
-        <th class="text-center">门店</th>
-        <th class="text-center">私教</th>
-        <th class="text-center">金额</th>
-        <th class="text-center">操作人</th>
+      <tr class="table-header">
+        <th>转账日期</th>
+        <th>门店</th>
+        <th>私教</th>
+        <th>金额</th>
+        <th>操作人</th>
       </tr>
       </thead>
       <tbody class="pritbl">
       <% @logs.each { |log| %>
           <tr>
-            <td class="text-center"><%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
-            <td class="text-center"><%= log.wallet.user.profile.name %></td>
-            <td class="text-center"><%= log.coach.profile.name %></td>
-            <td class="text-center"><%= log.balance.to_i %></td>
-            <td class="text-center"><%= nil %></td>
+            <td><%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            <td><%= log.wallet.user.profile.name %></td>
+            <td><%= log.coach.profile.name %></td>
+            <td><%= log.balance.to_i %></td>
+            <td><%= nil %></td>
           </tr>
       <% } %>
       </tbody>

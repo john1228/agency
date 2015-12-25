@@ -1,31 +1,12 @@
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
-    <div class="login-panel panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">请登录</h3>
-      </div>
-      <div class="panel-body">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <fieldset>
-            <div class="form-group">
-              <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "请输入邮件" %>
-            </div>
-            <div class="form-group">
-              <%= f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder:"请输入密码" %>
-              </div>
-
-            <p class="forgot"><a href="javascript:void(alert('请联系官方服务人员或拨打客服电话021-62418505'));">忘记密码?</a></p>
-            <!--<div class="checkbox">-->
-              <!--<label>-->
-                <!--<input name="remember" type="checkbox" value="Remember Me">Remember Me-->
-              <!--</label>-->
-            <!--</div>-->
-            <!-- Change this to a button or input when using this as a form -->
-            <button  class="btn btn-lg btn-success btn-block">登陆</button>
-          </fieldset>
-        <%end%>
-      </div>
-    </div>
-  </div>
-</div>
-
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <ul>
+      <li>
+        <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "请输入邮件" %>
+      </li>
+      <li class="top20">
+        <%= f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: "请输入密码" %>
+      </li>
+      <a class="top20" href="javascript:void(alert('请联系官方服务人员或拨打客服电话021-62418505'));">忘记密码?</a>
+    </ul>
+    <%= f.submit('登陆', class: 'land-button') %>
+<% end %>

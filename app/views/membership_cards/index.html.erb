@@ -8,7 +8,7 @@
   <%= link_to '<i class="icon">&#xe613;</i> 添加会员卡'.html_safe, new_membership_card_path, class: "new-member pull-right" %>
 </div>
 <div class="panel  top20">
-  <div class="panel-header clearfix sure-select">
+  <div class="panel-header clearfix header-selector">
     <span class="pull-left">全部会员卡(<%= @query.result.count %>)</span>
     <%= search_form_for @query do |f| %>
         <p class="top10">

@@ -1,6 +1,6 @@
 <div class="input-group  top20 group-width">
   <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
-  <%= select_tag(:service_id,
+  <%= select_tag(:service,
                  options_for_select(current_admin_user.all_services.pluck(:name, :id)),
                  class: 'form-control',
                  include_blank: "请选择门店"
@@ -8,7 +8,7 @@
 </div>
 <div class="input-group  top20 group-width">
   <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">选择私教</samp></span>
-  <%= select_tag(:coach_id, options_for_select([]), class: 'form-control', include_blank: "请选择私教") %>
+  <%= select_tag(:coach, options_for_select([]), class: 'form-control', include_blank: "请选择私教") %>
 </div>
 <div class="input-group  top20 group-width ">
   <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">转账金额</samp></span>
@@ -27,15 +27,19 @@
 <p class="sure-explain top10">首次输入的支付宝帐号将直接绑定为服务号提现帐号，如需更改，请联系客服 021-67854738。</p>
 <script>
     $(function () {
-        $('#service_id').on('change', function () {
-            $.getJSON('/services/' + this.value + '/coaches', function (data) {
-                var coach_select = $('#coach_id');
-                coach_select.empty();
-                coach_select.append("<option value=''>选择私教</option>");
-                $.each(data.coaches, function (k, v) {
-                    coach_select.append("<option value=''>v</option>");
+        $('#service').on('change', function () {
+            var service = $(this).val();
+            if (service != '') {
+                $("#coach").empty();
+                $.getJSON('/transfers/' + this.value + '/service', function (data) {
+                    $.each(data.coach, function (key, value) {
+                        $("<option value='" + value.id +
+                        "'>" + value.name + "</option>").appendTo('#coach');
+                        $("#coach").selectpicker('refresh');
+                    });
+                    $('#balance').html(data.balance);
                 })
-            })
+            }
         });
     })
 </script>

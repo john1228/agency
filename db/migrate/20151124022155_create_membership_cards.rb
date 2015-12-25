@@ -10,6 +10,7 @@ class CreateMembershipCards < ActiveRecord::Migration
       t.integer :value
       t.date :valid_start
       t.date :Valid_end
+      t.string :coach
       t.timestamps null: false
     end
   end

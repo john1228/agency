@@ -26,8 +26,12 @@ Rails.application.routes.draw do
   resources :user_registrations
   resources :skus
   resources :products
-  
+  resources :check_ins
+
+
   get ':service_id/membership_card_types/:type/cards' => 'products#card_types'
+  get 'transfers/:service_id/service' => 'transfers#service'
+
 
   get 'password' => 'profiles#password'
   post 'password' => 'profiles#change_password', as: :change_password
