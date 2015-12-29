@@ -17,7 +17,7 @@
           <%= f.hidden_field :card_type, value: 'stored' %>
           <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
-            <%= f.collection_select :service_id, current_user.all_services, :id, :name, {}, class: "form-control" %>
+            <%= f.collection_select :service_id, current_user.all_services, :id, :name, {}, class: "form-control selectpicker" %>
           </div>
 
           <div class="input-group top20">

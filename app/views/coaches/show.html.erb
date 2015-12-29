@@ -1,1 +1,63 @@
-<%= render partial: 'form' %>
+<div class="panel">
+  <div class="panel-header">私教详情</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-8">
+        <h1 class="card-details-h1"><%= @coach.profile.name %>
+          <% if @coach.profile.male? %>
+              <i class="icon details-icon">&#xe61e;</i>
+          <% else %>
+              <i class="icon details-icon-f5">&#xe61d;</i>
+          <% end %>
+        </h1>
+
+        <h3 class="details-h3">
+          <samp class="heading-sa-b"><i class="icon">&#xe61f;</i><%= @coach.profile.mxid %></samp>
+        </h3>
+        <ul class="details-ul">
+          <li><span>生日</span><%= @coach.profile.birthday %></li>
+          <li><span>私教简介</span><%= @coach.profile.signature %></li>
+          <li><span>所属门店</span><%= @coach.service.profile.name %></li>
+          <li><span>手机号码</span><%= @coach.profile.birthday %></li>
+          <li><span>健身服务</span><%= @coach.profile.hobby_string %></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="pull-right details-timg"><img class="img-responsive img-circle" src="img/08.jpg"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel">
+  <div class="panel-header">优惠信息</div>
+  <div class="panel-body">
+    <div class="general-offer top20 clearfix">
+      <div class="row">
+        <ul>
+          <li class="pull-left col-md-2">
+            <span>实收金额</span>
+            <span>折扣 <b><%= @default_discount.discount %>%</b></span>
+          </li>
+          <li class="pull-left col-md-2">
+            <span>充值卡</span>
+            <span>赠送金额  <b><%= @default_discount.giveaway_cash %>元</b></span>
+          </li>
+          <li class="pull-left col-md-2">
+            <span>次卡</span>
+            <span>赠送次数  <b><%= @default_discount.giveaway_count %>次</b></span></li>
+          <li class="pull-left col-md-2">
+            <span>期限卡</span>
+            <span>赠送天数  <b><%= @default_discount.giveaway_day %>天</b></span>
+          </li>
+          <li class="pull-left col-md-4 text-right line-height">
+            <a href="#" data-toggle="modal" data-target="#myModal">设置</a> | <a href="#">应用所有会员卡</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel-header">优惠列表</div>
+  <div class="panel-body">
+    <%= render 'discount' %>
+  </div>
+</div>

@@ -23,10 +23,12 @@ Rails.application.routes.draw do
   resources :sales
   resources :membership_card_types
   resources :membership_cards
-  resources :user_registrations
+  resources :members
   resources :skus
   resources :products
-  resources :check_ins
+
+  get 'checkin' => 'checkin#index', as: :checkin
+  get 'checkin/list' => 'checkin#list', as: :checkin_list
 
 
   get ':service_id/membership_card_types/:type/cards' => 'products#card_types'

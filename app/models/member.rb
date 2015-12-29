@@ -1,5 +1,10 @@
 class Member < ActiveRecord::Base
-  belongs_to :coach
-  validates_uniqueness_of :mobile, scope: :coach_id, message: '您已经添加该手机号为会员'
+  enum gender: [:male, :female]
+  enum origin: [:mxing, :input]
+  enum member_type: [:associate, :full]
+  validates :name, :birthday, :gender, :mobile, :service_id, :province, :city, :area, :address, :avatar, presence: true
   mount_uploader :avatar, ProfileUploader
+
+  belongs_to :service
+  belongs_to :user
 end

@@ -33,4 +33,11 @@
         stored: "储值"
         measured: "次卡"
         clocked: "期限"
+    member:
+      origin:
+        mxing: '美型'
+        input: '输入'
+      member_type:
+        associate: '准会员'
+        full: '会员'
 

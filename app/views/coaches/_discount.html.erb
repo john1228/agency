@@ -1,0 +1,41 @@
+<script>
+    $(function () {
+        $('.discount_pagination a').on('click', function (event) {
+            $.get(this.href, null, null, 'script');
+            return false;
+        });
+    });
+</script>
+<div id="discount_table" class="panel">
+  <table class="table table-striped card-list" id="datatable-editable">
+    <thead>
+    <tr>
+      <th>会员卡名称</th>
+      <th>所属门店</th>
+      <th>卡类</th>
+      <th>售价</th>
+      <th>折扣</th>
+      <th>赠送</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @discounts.each { |discount| %>
+        <tr>
+          <td><%= discount.card.course_name %></td>
+          <td><%= discount.card.service.profile.name %></td>
+          <td><%= discount.card.course_type %></td>
+          <td><%= discount.card.selling_price %></td>
+          <td><%= discount.discount %></td>
+          <td><%= discount.giveaway %></td>
+          <td class="list-card-1f">
+            <%= link_to "设置", '#' %>
+          </td>
+        </tr>
+    <% } %>
+    </tbody>
+  </table>
+  <div class="dataTables_paginate">
+    <%= will_paginate @discounts, renderer: BootstrapPagination::Rails, class: 'discount_pagination', inner_window: 2 %>
+  </div>
+</div>

@@ -5,7 +5,7 @@ class Sku < ActiveRecord::Base
   enum status: [:offline, :online]
 
 
-  belongs_to :product
+  belongs_to :course, class: Product
   belongs_to :service
 
   protected

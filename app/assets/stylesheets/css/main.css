@@ -168,7 +168,7 @@
     color: #555;
     background-color: #fff;
     background-image: none;
-    border-radius: 0px 4px 4px 0px;
+    border-radius: 4px 4px 4px 4px;
     height: 40px;
 }
 
@@ -1560,8 +1560,8 @@
 }
 
 /*--------*/
-.ticonte-text {
-    width: 408px;
+.address_selector {
+    width: 550px;
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -1574,8 +1574,8 @@
     margin-left: 10px;
 }
 
-.tiform-ctrol {
-    width: 100px;
+.address_province_selector {
+    width: 30%;
     color: #555;
     background-color: #fff;
     background-image: none;
@@ -1597,12 +1597,12 @@
     border: 1px solid #ccc;
 }
 
-.tiform-titrol {
+.address_city_selector {
     border-radius: 4px;
     height: 40px;
     border: 1px solid #ccc;
     padding: 0 6px;
-    width: 90px;
+    width: 30%;
 }
 
 /*----*/

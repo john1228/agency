@@ -1,26 +1,24 @@
-<%= semantic_form_for @user_registration, html: {multipart: true} do |f| %>
-
-    <h3 class="Content-h3">新增用户</h3>
+<%= semantic_form_for @member, html: {multipart: true} do |f| %>
     <div class="panel">
+      <div class="panel-header">新建会员</div>
       <div class="panel-body">
-        <h4 class="base-info">基本资料</h4>
         <!--错误提示-->
-        <% if @user_registration.errors.present? %>
+        <% if @member.errors.present? %>
             <div class="alert alert-danger alert-dismissable">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <% @user_registration.errors.messages.values.each { |v| %>
+              <% @member.errors.messages.values.each { |v| %>
                   <%= v %><br/>
               <% } %>
             </div>
         <% end %>
-
+        <%= f.hidden_field :client_id, value: current_user.client_id %>
         <div class="new-portrait pull-right">
-          <samp>
+          <samp class="default_icon">
             <i class=" icon">&#xe619;</i>
           </samp>
 
-          <p>上传门店头像</p>
-          <input type="file" class="image-uploader">
+          <p class="default_title">上传门店头像</p>
+          <%= f.file_field :avatar, class: 'image-uploader' %>
         </div>
 
         <div class="form-main ">
@@ -37,7 +35,7 @@
 
           <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">性别</samp></span>
-            <%= f.collection_select :gender, UserRegistration.genders.map { |key, value| [I18n.t("activerecord.attributes.user_registration.gender.#{key}"), key] }, :last, :first, {}, {class: "form-control"} %>
+            <%= f.select :gender, [['男', 'male'], ['女', 'female']], {}, class: "form-control selectpicker" %>
           </div>
 
           <div class="input-group  top20">
@@ -47,16 +45,18 @@
 
           <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
-            <%= f.collection_select :service_id, current_admin_user.all_services, :id, :name, {}, class: "form-control" %>
+            <%= f.collection_select :service_id, current_admin_user.all_services, :id, :name, {}, class: "form-control selectpicker" %>
           </div>
 
-          <div class="input-group form-main">
+          <div class="input-group top20  address_selector tiform">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">会员地址</samp></span>
-            <%= f.select(:province, [], {}, {class: 'form-control-28 form-control-no-left-border'}) %>
+            <%= f.select(:province, [], {}, {class: 'address_province_selector  selectpicker'}) %>
             -
-            <%= f.select(:city, [], {}, {class: 'form-control-28 form-control-all-border'}) %>
+            <%= f.select(:city, [], {}, {class: 'address_city_selector  selectpicker'}) %>
+            -
+            <%= f.select(:area, [], {}, {class: 'address_city_selector selectpicker'}) %>
           </div>
-          <div class="input-group form-main">
+          <div class="input-group top20">
                 <span class="input-group-addon" id="sizing-addon2">
                   <samp class="alert-down">详细地址</samp>
                 </span>
@@ -69,7 +69,6 @@
           </div>
         </div>
 
-
         <div class="fygroup top20">
           <button type="submit" class="submit ">确认</button>
         </div>
@@ -79,9 +78,9 @@
 <% end %>
 
 <script>
-    new PCAS("user_registration[province]", "user_registration[city]", '<%=@user_registration.province%>', '<%=@user_registration.city%>');
+    new PCAS("member[province]", "member[city]", "member[area]", '<%=@member.province%>', '<%=@member.city%>', '<%=@member.area%>');
     $(function () {
-                $("#user_registration_birthday").datepicker({
+                $("#member_birthday").datepicker({
                     language: 'zh-CN',
                     format: 'yyyy-mm-dd'
                 });

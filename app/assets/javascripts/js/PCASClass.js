@@ -371,7 +371,7 @@ function PCAS() {
     this.SelP.PCA = this;
     this.SelC.PCA = this;
     this.SelP.onchange = function () {
-        PCAS.SetC(this.PCA)
+        PCAS.SetC(this.PCA);
     };
     if (this.SelA)this.SelC.onchange = function () {
         PCAS.SetA(this.PCA)
@@ -396,6 +396,7 @@ PCAS.SetC = function (PCA) {
         PCA.SelC.options.add(new Option(PCACT, PCACV));
         if (PCA.DefC == PCACV)PCA.SelC[i - 1].selected = true
     }
+    $(PCA.SelC).selectpicker('refresh');
     if (PCA.SelA)PCAS.SetA(PCA)
 };
 PCAS.SetA = function (PCA) {
@@ -408,4 +409,5 @@ PCAS.SetA = function (PCA) {
         PCA.SelA.options.add(new Option(PCAAT, PCAAV));
         if (PCA.DefA == PCAAV)PCA.SelA[i - 1].selected = true
     }
+    $(PCA.SelA).selectpicker('refresh');
 }

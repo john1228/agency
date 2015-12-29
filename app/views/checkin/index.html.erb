@@ -1,0 +1,43 @@
+<div class="page-header  clearfix">
+  <div class="pull-left mx-tabs">
+    <%= link_to '<samp class="mx-tab-active">
+        <div id="triangle-down"></div>
+        会员签到</samp>'.html_safe, '#', class: 'pull-left page-header-text' %>
+    <%= link_to "全部会员签到记录", checkin_list_path, class: "pull-left  page-header-text " %>
+  </div>
+  <div class="pull-right member-search">
+    <%= select_tag(:member,
+                   options_for_select(@members),
+                   {
+                           class: 'form-control selectpicker search',
+                           'data-live-search' => 'true',
+                           id: 'search-field'
+                   }) %>
+  </div>
+</div>
+<div class="panel top20">
+  <div class="panel-header clearfix header-selector">
+    <span class="pull-left">会员详情</span>
+  </div>
+  <div class="panel-body">
+    <% if @member.present? %>
+        <%= render 'member' %>
+    <% end %>
+  </div>
+</div>
+<div class="panel top20">
+  <div class="panel-header clearfix header-selector">
+    <span class="pull-left">会员卡信息</span>
+  </div>
+  <div class="panel-body">
+    <%= render 'card' %>
+  </div>
+</div>
+<script>
+    $(function () {
+        $('.search').on('change', function () {
+            alert($(this).val());
+        });
+    });
+</script>
+

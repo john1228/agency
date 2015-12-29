@@ -35,7 +35,7 @@
         <th>操作人</th>
       </tr>
       </thead>
-      <tbody class="pritbl">
+      <tbody >
       <% @logs.each { |log| %>
           <tr>
             <td><%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>

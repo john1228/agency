@@ -13,6 +13,13 @@ class CoachesController < InheritedResources::Base
     @failure = params[:failure]
   end
 
+  def show
+    @coach = Coach.find(params[:id])
+    @default_discount = @coach.default_discount
+    @default_discount = @coach.build_default_discount(discount: 80, giveaway_cash: 50, giveaway_count: 5, giveaway_day: 20) if @default_discount.nil?
+    @discounts = @coach.discounts.includes(:card).paginate(page: params[:page]||1, per_page: 5).order('id desc')
+  end
+
   def create
     coach = Coach.new(coach_params)
     coach.client_id = current_user.client_id

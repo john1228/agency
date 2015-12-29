@@ -15,7 +15,7 @@
         </li>
         <li><a href="#"><i class="iconfont icon">&#xe603;</i>用户管理<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li class="nav-li-a"> <%= link_to "会员", user_registrations_path %> </li>
+            <li class="nav-li-a"> <%= link_to "会员", members_path %> </li>
             <li class="nav-li-a"> <%= link_to "私教", coaches_path %> </li>
             <li class="nav-li-a"> <%= link_to "工作人员", admin_users_path %> </li>
 
@@ -28,7 +28,7 @@
             <li class="nav-li-a"><%= link_to "出售会员卡", products_path %></li>
           </ul>
         </li>
-        <li> <%= link_to '<i class="iconfont icon">&#xe60a;</i>签到记录'.html_safe, check_ins_path %> </li>
+        <li> <%= link_to '<i class="iconfont icon">&#xe60a;</i>签到记录'.html_safe, checkin_path %> </li>
         <li><a href="#"><i class="iconfont icon">&#xe60b;</i>财务管理<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
             <li class="nav-li-a"><%= link_to "转账", transfers_path %></li>

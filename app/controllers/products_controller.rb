@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.image = Array.new(6)
-    @card_type = params[:card_type]||0
+    @card_type = params[:card_type].to_i
   end
 
   def create

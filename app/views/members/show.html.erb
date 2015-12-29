@@ -1,0 +1,62 @@
+<div class="panel">
+  <div class="panel-header">会员详细</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-8">
+        <h1 class="card-details-h1"><%= @member.name %>
+          <% if @member.male? %>
+              <i class="icon details-icon">&#xe61d;</i>
+          <% else %>
+              <i class="icon details-icon-f5">&#xe61e;</i>
+          <% end %>
+        </h1>
+        <% if @member.user.present? %>
+            <h3 class="details-h3">
+              <samp class="heading-sa-b">
+                <i class="icon">&#xe61f;</i><%= @member.profile.mxid %>
+              </samp>
+            </h3>
+        <% end %>
+        <ul class="details-ul">
+          <li>
+            <span>生日</span><%= @member.birthday %>
+          </li>
+          <li>
+            <span>地址</span><%= @member.province.to_s + @member.city.to_s + @member.area.to_s + @member.address.to_s %>
+          </li>
+          <li>
+            <span>所属门店</span>
+            <%= @member.service.profile.name %>
+          </li>
+          <li>
+            <span>手机号码</span>
+            <%= @member.mobile %>
+          </li>
+          <li>
+            <span>身份</span>
+            <%= @member.member_type_i18n %>
+          </li>
+          <li>
+            <span>来源</span>
+            <%= @member.origin_i18n %>
+          </li>
+          <li>
+            <span>备注</span>
+            <%= @member.remark %>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="pull-right details-timg"><img class="img-responsive img-circle" src="img/08.jpg"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel">
+  <div class="panel-header">会员卡信息</div>
+  <div class="panel-body"></div>
+</div>
+<div class="panel">
+  <div class="panel-header">操作记录</div>
+  <div class="panel-body"></div>
+</div>
