@@ -30,9 +30,10 @@
         clocked: "期限"
     membership_card:
       card_type:
-        stored: "储值"
+        stored: "储值卡"
         measured: "次卡"
-        clocked: "期限"
+        clocked: "期限卡"
+
     member:
       origin:
         mxing: '美型'
