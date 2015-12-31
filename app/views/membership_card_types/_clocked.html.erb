@@ -24,6 +24,14 @@
             <%= f.text_field :name, :class => "form-control" %>
           </div>
 
+
+          <div class="input-group  top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">期限</samp></span>
+
+            <%= f.text_field :count, :class => "form-control" %>
+            <span class="input-group-addon">天</span>
+          </div>
+
           <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
 
@@ -32,24 +40,18 @@
           </div>
 
           <div class="input-group  top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
-
-            <%= f.text_field :remark, :class => "form-control" %>
-          </div>
-
-          <div class="input-group  top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">有效期</samp></span>
-
-            <%= f.text_field :valid_days, :class => "form-control" %>
-            <span class="input-group-addon">天</span>
-          </div>
-
-          <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">最晚开卡</samp></span>
 
             <%= f.text_field :latest_delay_days, :class => "form-control" %>
             <span class="input-group-addon">天后</span>
           </div>
+
+          <div class="input-group  top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
+
+            <%= f.text_field :remark, :class => "form-control" %>
+          </div>
+
 
         </div>
 

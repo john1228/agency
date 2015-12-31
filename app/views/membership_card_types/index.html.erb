@@ -20,7 +20,7 @@
   </div>
   <div class="panel-body ">
     <%= render 'table' %>
-    <div class="clearfix">
+    <div class="dataTables_paginate">
       <%= will_paginate @membership_card_types, renderer: BootstrapPagination::Rails %>
     </div>
   </div>
