@@ -35,8 +35,13 @@
         measured: "次卡"
         clocked: "期限卡"
         coach: "私教卡"
+    membership_card_log:
       pay_type:
-        alipay: '支付宝'
+        mx: '美型'
+        cash: '现金'
+        card: '刷卡'
+        transfer: '转账'
+        other: '其他'
     member:
       origin:
         mxing: '美型'
@@ -44,4 +49,5 @@
       member_type:
         associate: '准会员'
         full: '会员'
+
 

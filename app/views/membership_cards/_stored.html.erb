@@ -62,12 +62,12 @@
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">支付类型</samp></span>
-            <%= text_field_tag :pay_type, '', class: 'form-control' %>
+            <%= select_tag :pay_type, options_for_select(MembershipCardLog.pay_type_for_select), class: 'form-control selectpicker' %>
           </div>
 
           <div class="input-group top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">銷售人员</samp></span>
-            <%= text_field_tag :seller, '', class: 'form-control' %>
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">销售人员</samp></span>
+            <%= select_tag :seller, '', class: 'form-control selectpicker' %>
           </div>
 
           <div class="input-group top20">
@@ -88,27 +88,6 @@
 <% end %>
 <script>
     $(function () {
-        var service_id = $('#membership_card_service_id').val();
-        if (service_id != '') {
-            $("#membership_card_name").empty();
-            $("<option>请选择卡</option>").appendTo('#membership_card_name');
-            $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['stored']%> +'/cards', function (data) {
-                $.each(data, function (i, value) {
-                    $("<option value='" + value.name +
-                    "' data-count='" + value.count +
-                    "' data-price='" + value.price +
-                    "' data-valid-days='" + value.valid_days +
-                    "' data-delay-days='" + value.latest_delay_days +
-                    "'>" + value.name + "</option>").appendTo('#membership_card_name');
-                });
-                $("#membership_card_name").selectpicker('refresh');
-            });
-        }
-    })
-</script>
-
-<script>
-    $(function () {
         $('#membership_card_service_id').on('change', function () {
             var service_id = $(this).val();
             if (service_id != '') {
@@ -124,6 +103,13 @@
                         "'>" + value.name + "</option>").appendTo('#membership_card_name');
                     });
                     $("#membership_card_name").selectpicker('refresh');
+                });
+
+                $.getJSON('/' + service_id + '/salesman', function (data) {
+                    $.each(data, function (i, value) {
+                        $("<option value='" + value.id + "'>" + value.name + "</option>").appendTo('#seller');
+                    });
+                    $("#seller").selectpicker('refresh');
                 });
             }
         })

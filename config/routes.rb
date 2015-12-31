@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   get ':service_id/membership_card_types/:type/cards' => 'json#card_types'
   get ':service_id/coaches' => 'json#coaches'
+  get ':service_id/salesman' => 'json#salesman'
 
   get 'transfers/:service_id/service' => 'transfers#service'
 

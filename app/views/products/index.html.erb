@@ -25,11 +25,8 @@
     </p>
   </div>
   <div class="panel-body ">
-    <div class="panel">
+    <div>
       <%= render 'table' %>
-      <div class="clearfix">
-        <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
-      </div>
     </div>
   </div>
 </div>

@@ -15,4 +15,14 @@ class JsonController < ApplicationController
              }
            }
   end
+
+  def salesman
+    salesman = AdminUser.sales.where(service_id: params[:service_id])
+    render json: salesman.map { |item|
+             {
+                 id: item.id,
+                 name: item.name
+             }
+           }
+  end
 end

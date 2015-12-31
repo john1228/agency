@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151230142417) do
+ActiveRecord::Schema.define(version: 20151231112836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -603,11 +603,13 @@ ActiveRecord::Schema.define(version: 20151230142417) do
     t.integer  "card_type"
     t.string   "name"
     t.integer  "value"
-    t.date     "valid_start"
-    t.date     "valid_end"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "physical_card"
+    t.integer  "delay_days",    default: 0
+    t.integer  "active",        default: 0
+    t.date     "open"
+    t.integer  "valid_days"
   end
 
   create_table "news", force: :cascade do |t|
@@ -671,6 +673,7 @@ ActiveRecord::Schema.define(version: 20151230142417) do
     t.integer  "service_id"
     t.integer  "order_type"
     t.integer  "giveaway"
+    t.integer  "seller_id"
   end
 
   create_table "overviews", force: :cascade do |t|

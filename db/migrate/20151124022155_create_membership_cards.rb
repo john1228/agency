@@ -8,8 +8,10 @@ class CreateMembershipCards < ActiveRecord::Migration
       t.integer :card_type #卡类型
       t.string :name
       t.integer :value
-      t.date :valid_start
-      t.date :valid_end
+      t.date :open
+      t.integer :valid_days
+      t.integer :delay_days
+      t.boolean :active, default: false
       t.string :coach
       t.string :physical_card
       t.timestamps null: false
