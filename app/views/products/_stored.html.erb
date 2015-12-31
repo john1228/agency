@@ -90,27 +90,6 @@
 <% end %>
 <script>
     $(function () {
-        var service_id = $('#product_service_id').val();
-        if (service_id != '') {
-            $("#product_type").empty();
-            $("<option>请选择卡</option>").appendTo('#product_type');
-            $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['stored']%> +'/cards', function (data) {
-                $.each(data, function (i, value) {
-                    $("<option value='" + value.id +
-                    "' data-count='" + value.count +
-                    "' data-price='" + value.price +
-                    "' data-valid-days='" + value.valid_days +
-                    "' data-delay-days='" + value.latest_delay_days +
-                    "'>" + value.name + "</option>").appendTo('#product_card_type_id');
-                });
-                $("#product_card_type_id").selectpicker('refresh');
-            });
-        }
-    })
-</script>
-
-<script>
-    $(function () {
                 $('#product_service_id').on('change', function () {
                     var service_id = $(this).val();
                     if (service_id != '') {

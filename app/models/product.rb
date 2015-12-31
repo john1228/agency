@@ -8,14 +8,14 @@ class Product < ActiveRecord::Base
   after_create :generate_sku
 
   accepts_nested_attributes_for :prop
-  
+
   private
   def generate_sku
     service = Service.find(service_id)
     Sku.card.create(
         sku: 'SM'+'-' + '%06d' % id + '-' + '%06d' % (service.id),
         course_id: id,
-        course_type: type,
+        course_type: card_type_id,
         course_name: name,
         seller: service.profile.name,
         seller_id: seller_id||service.id,
