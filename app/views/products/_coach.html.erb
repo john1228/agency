@@ -127,8 +127,8 @@
                 $('#product_service_id').on('change', function () {
                     var service_id = $(this).val();
                     if (service_id != '') {
-                        $("#product_type").empty();
-                        $("<option>请选择卡</option>").appendTo('#product_type');
+                        $("#product_card_type_id").empty();
+                        $("<option>请选择卡</option>").appendTo('#product_card_type_id');
                         $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['coach']%> +'/cards', function (data) {
                             $.each(data, function (i, value) {
                                 $("<option value='" + value.id +
@@ -136,9 +136,9 @@
                                 "' data-price='" + value.price +
                                 "' data-valid-days='" + value.valid_days +
                                 "' data-delay-days='" + value.latest_delay_days +
-                                "'>" + value.name + "</option>").appendTo('#product_type');
+                                "'>" + value.name + "</option>").appendTo('#product_card_type_id');
                             });
-                            $("#product_type").selectpicker('refresh');
+                            $("#product_card_type_id").selectpicker('refresh');
                         });
                         $.getJSON('/' + service_id + '/coaches', function (data) {
                             $.each(data, function (i, value) {
@@ -149,7 +149,7 @@
                         });
                     }
                 });
-                $('#product_type').on('change', function () {
+                $('#product_card_type_id').on('change', function () {
                     $('#product_market_price').val($(this).find("option:selected").attr("data-price"));
                 })
             }
