@@ -35,6 +35,8 @@
         measured: "次卡"
         clocked: "期限卡"
         coach: "私教卡"
+      pay_type:
+        alipay: '支付宝'
     member:
       origin:
         mxing: '美型'

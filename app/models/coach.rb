@@ -88,7 +88,7 @@ class Coach<User
           {
               id: service.profile.id,
               venues: service.profile.name,
-              address: service.profile.address
+              address: service.profile.province||''+ service.profile.city||'' + service.profile.area||'' + service.profile.address
           }
       ]
     end

@@ -34,6 +34,12 @@
           </div>
 
           <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实体卡号</samp></span>
+            <%= f.text_field :physical_card, readonly: f.object.physical_card.present?, class: 'form-control' %>
+          </div>
+          <h5 class="top20">充值会员卡</h5>
+
+          <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">开始时间</samp></span>
             <%= f.text_field :valid_start, readonly: true, class: 'form-control' %>
           </div>
@@ -43,14 +49,10 @@
             <%= f.text_field :valid_end, readonly: true, class: 'form-control' %>
           </div>
 
-          <div class="input-group top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实体卡号</samp></span>
-            <%= f.text_field :physical_card, readonly: f.object.physical_card.present?, class: 'form-control' %>
-          </div>
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
-            <%= text_field_tag :market_price, '', class: 'form-control' %>
+            <%= text_field_tag :market_price, '', class: 'form-control', readonly: true %>
           </div>
 
           <div class="input-group top20">
@@ -72,6 +74,7 @@
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
             <%= text_field_tag :remark, '', class: 'form-control' %>
           </div>
+
 
         </div>
 

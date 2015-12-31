@@ -7,8 +7,9 @@ class MembershipCardsController < ApplicationController
   end
 
   def new
-    @membership_card = MembershipCard.new(client_id: current_user.id, card_type: params[:type].to_i)
+    @membership_card = MembershipCard.new(client_id: current_user.id, card_type: params[:card_type].to_i)
     @membership_card.logs.build
+    logger.info "<<#{@membership_card.card_type}"
   end
 
   def create

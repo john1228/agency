@@ -1,6 +1,6 @@
 <%= semantic_form_for @membership_card, html: {multipart: true} do |f| %>
     <div class="panel  top20">
-      <div class="panel-header">新增储值卡</div>
+      <div class="panel-header">新增私教卡</div>
       <div class="panel-body">
         <% if @membership_card.errors.present? %>
             <div class="alert alert-danger alert-dismissable">
@@ -32,6 +32,12 @@
                                  'data-live-search' => 'true'
                          } %>
           </div>
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实体卡号</samp></span>
+            <%= f.text_field :physical_card, readonly: f.object.physical_card.present?, class: 'form-control' %>
+          </div>
+
+          <h5 class="top20">充值会员卡</h5>
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">开始时间</samp></span>
@@ -44,13 +50,8 @@
           </div>
 
           <div class="input-group top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实体卡号</samp></span>
-            <%= f.text_field :physical_card, readonly: f.object.physical_card.present?, class: 'form-control' %>
-          </div>
-
-          <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
-            <%= text_field_tag :market_price, '', class: 'form-control' %>
+            <%= text_field_tag :market_price, '', class: 'form-control', readonly: true %>
           </div>
 
           <div class="input-group top20">
@@ -72,7 +73,6 @@
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
             <%= text_field_tag :remark, '', class: 'form-control' %>
           </div>
-
         </div>
 
 

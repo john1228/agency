@@ -1,7 +1,7 @@
 <% @products.each do |product| %>
     <div class="member-list pull-left">
       <a href="#">
-        <div class="cover" style="background-image: url('<%=product.sku.course_cover rescue ''%>');background-size: cover"></div>
+        <div class="cover" style="background-image: url('<%=(product.sku.course_cover + '-cover' rescue '')%>');background-size: cover"></div>
       </a>
 
       <div class="caption">
@@ -20,7 +20,7 @@
         <div class="member-bottn clearfix top20">
           <div class="member-headportrait pull-left">
             <samp>
-              <%= image_tag(product.sku.service.profile.avatar.url, class: 'img-responsive img-circle') %>
+              <%= image_tag(product.sku.service.profile.avatar.url + '-avatar', class: 'img-responsive img-circle') %>
             </samp>
             <%= product.sku.service.profile.name %>
           </div>

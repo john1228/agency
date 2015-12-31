@@ -7,7 +7,7 @@
     <% else %>
         <%= link_to('储值卡', new_membership_card_path + '?card_type=0', class: 'pull-left  page-header-text') %>
     <% end %>
-    <% if @membership_card.measured? %> %>
+    <% if @membership_card.measured? %>
         <%= link_to('<samp class="mx-tab-active">
           <div id="triangle-down"></div>
           次卡</samp>'.html_safe, '#', class: 'pull-left  page-header-text') %>
