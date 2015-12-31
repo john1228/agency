@@ -6,11 +6,11 @@ class CreateMembershipCardTypes < ActiveRecord::Migration
       t.integer :client_id
       t.integer :card_type
       t.float :price
-      t.integer :count
+      t.integer :value
       t.integer :days
       t.boolean :has_valid_extend_information
       t.integer :valid_days
-      t.integer :latest_delay_days
+      t.integer :delay_days
       t.string :remark
 
       t.timestamps null: false

@@ -1,8 +1,6 @@
 class ChangeColumnsOfMembershipCard < ActiveRecord::Migration
   def change
-    remove_column :membership_cards, :valid_start
-    remove_column :membership_cards, :valid_end
-    add_column :membership_cards, :open, :date
-    add_column :membership_cards, :valid_days, :integer
+    rename_column :membership_card_type, :last_delay_days, :delay_days
+    rename_column :membership_card_type, :count, :value
   end
 end
