@@ -16,23 +16,13 @@ class Product < ActiveRecord::Base
 
   private
   def generate_sku
-    service = Service.find(service_id)
-    Sku.card.create(
-        sku: 'SM'+'-' + '%06d' % id + '-' + '%06d' % (service.id),
-        course_id: id,
-        course_type: card_type_id,
-        course_name: name,
-        course_cover: image.first.url,
-        seller: service.profile.name,
-        seller_id: seller_id||service.id,
-        service_id: service_id,
-        market_price: market_price,
-        selling_price: selling_price,
-        store: store,
-        limit: limit,
-        address: service.profile_address,
-        coordinate: (service.place.lonlat rescue 'POINT(0 0)'),
-        status: Sku.statuses[:online]
-    )
+    GenerateSkuJob.perform_now(product, {
+                                          service_id: service_id,
+                                          market_price: market_price,
+                                          selling_price: selling_price,
+                                          store: store||'-1',
+                                          limit: limit||'-1',
+                                          seller_id: seller_id
+                                      })
   end
 end
