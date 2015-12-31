@@ -22,6 +22,7 @@ class Product < ActiveRecord::Base
         course_id: id,
         course_type: card_type_id,
         course_name: name,
+        course_cover: image.first.url,
         seller: service.profile.name,
         seller_id: seller_id||service.id,
         service_id: service_id,
