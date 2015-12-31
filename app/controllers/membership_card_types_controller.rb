@@ -7,8 +7,7 @@ class MembershipCardTypesController < InheritedResources::Base
   end
 
   def new
-    @membership_card_type = MembershipCardType.new
-    @card_type = params[:card_type].to_i
+    @membership_card_type = MembershipCardType.new(card_type: params[:card_type].to_i)
   end
 
   def create

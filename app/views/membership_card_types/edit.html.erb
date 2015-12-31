@@ -1,1 +1,16 @@
-<%= render 'form' %>
+<% if @membership_card_type.stored? %>
+    <%= render 'stored' %>
+<%
+   elsif @membership_card_type.measured? %>
+    <%= render 'measured' %>
+<%
+   elsif @membership_card_type.clocked?
+%>
+    <%= render 'clocked' %>
+<%
+   elsif @membership_card_type.coach?
+%>
+    <%= render 'coach' %>
+<%
+   end
+%>

@@ -1,0 +1,143 @@
+<%= semantic_form_for @membership_card, html: {multipart: true} do |f| %>
+    <div class="panel  top20">
+      <div class="panel-header">新增次卡</div>
+      <div class="panel-body">
+        <% if @membership_card.errors.present? %>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <% @membership_card.errors.messages.values.each { |v| %>
+                  <%= v %><br/>
+              <% } %>
+            </div>
+        <% end %>
+        <div class="form-main">
+          <%= f.hidden_field :card_type, value: 'stored' %>
+          <div class="input-group  top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店</samp></span>
+            <%= f.collection_select :service_id, current_user.all_services, :id, :name, {}, class: "form-control selectpicker" %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡名称</samp></span>
+            <%= f.select :name, options_for_select(MembershipCard.card_type_for_select), {}, class: "form-control selectpicker" %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">绑定会员</samp></span>
+            <%= f.select :member_id,
+                         options_for_select(Member.where(client_id: current_user.client_id).pluck(:name, :id)),
+                         {include_blank: '请选择会员'},
+                         {
+                                 class: "form-control selectpicker search",
+                                 'data-live-search' => 'true'
+                         } %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">开始时间</samp></span>
+            <%= f.text_field :valid_start, readonly: true, class: 'form-control' %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">结束时间</samp></span>
+            <%= f.text_field :valid_end, readonly: true, class: 'form-control' %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实体卡号</samp></span>
+            <%= f.text_field :physical_card, readonly: f.object.physical_card.present?, class: 'form-control' %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
+            <%= text_field_tag :market_price, '', class: 'form-control' %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实收金额</samp></span>
+            <%= text_field_tag :selling_price, '', class: 'form-control' %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">支付类型</samp></span>
+            <%= text_field_tag :pay_type, '', class: 'form-control' %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">銷售人员</samp></span>
+            <%= text_field_tag :seller, '', class: 'form-control' %>
+          </div>
+
+          <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
+            <%= text_field_tag :remark, '', class: 'form-control' %>
+          </div>
+
+        </div>
+
+
+        <div class="fygroup top20">
+          <button type="submit" class="submit ">确认</button>
+        </div>
+      </div>
+
+    </div>
+<% end %>
+<script>
+    $(function () {
+        var service_id = $('#membership_card_service_id').val();
+        if (service_id != '') {
+            $("#membership_card_name").empty();
+            $("<option>请选择卡</option>").appendTo('#membership_card_name');
+            $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['stored']%> +'/cards', function (data) {
+                $.each(data, function (i, value) {
+                    $("<option value='" + value.name +
+                    "' data-count='" + value.count +
+                    "' data-price='" + value.price +
+                    "' data-valid-days='" + value.valid_days +
+                    "' data-delay-days='" + value.latest_delay_days +
+                    "'>" + value.name + "</option>").appendTo('#membership_card_name');
+                });
+                $("#membership_card_name").selectpicker('refresh');
+            });
+        }
+    })
+</script>
+
+<script>
+    $(function () {
+        $('#membership_card_service_id').on('change', function () {
+            var service_id = $(this).val();
+            if (service_id != '') {
+                $("#membership_card_name").empty();
+                $("<option>请选择卡</option>").appendTo('#membership_card_name');
+                $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['stored']%> +'/cards', function (data) {
+                    $.each(data, function (i, value) {
+                        $("<option value='" + value.name +
+                        "' data-count='" + value.count +
+                        "' data-price='" + value.price +
+                        "' data-valid-days='" + value.valid_days +
+                        "' data-delay-days='" + value.latest_delay_days +
+                        "'>" + value.name + "</option>").appendTo('#membership_card_name');
+                    });
+                    $("#membership_card_name").selectpicker('refresh');
+                });
+            }
+        })
+
+        $('#membership_card_name').on('change', function () {
+            var valid_day = ($(this).find("option:selected").attr("data-valid-days"));
+            var today = new Date();
+            $('#membership_card_valid_start').val(today.getFullYear() + '-' + today.getMonth() + '-' + today.getDay());
+            if (valid_day == 'null') {
+                $('#membership_card_valid_end').val('永久');
+            } else {
+                today.setDate(today.getDate() + $(this).find("option:selected").attr("data-valid-days"));
+                $('#membership_card_valid_end').val(today.getFullYear() + '-' + today.getMonth() + '-' + today.getDay());
+            }
+        })
+    })
+</script>
+
+
+

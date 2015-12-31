@@ -14,7 +14,7 @@
             </div>
             <div class="input-group top20" id="card_types_area">
               <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡名称</samp></span>
-              <%= f.select(:type,
+              <%= f.select(:card_type_id,
                            [],
                            {prompt: '请选择卡'},
                            {class: 'form-control selectpicker'}) %>
@@ -94,7 +94,7 @@
                     if (service_id != '') {
                         $("#product_type").empty();
                         $("<option>请选择卡</option>").appendTo('#product_type');
-                        $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['stored']%> +'/cards', function (data) {
+                        $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['measured']%> +'/cards', function (data) {
                             $.each(data, function (i, value) {
                                 $("<option value='" + value.id +
                                 "' data-count='" + value.count +

@@ -14,7 +14,7 @@
             </div>
             <div class="input-group top20" id="card_types_area">
               <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡名称</samp></span>
-              <%= f.select(:type,
+              <%= f.select(:card_type_id,
                            [],
                            {prompt: '请选择卡'},
                            {class: 'form-control selectpicker'}) %>

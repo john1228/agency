@@ -1,37 +1,59 @@
 <div class="page-header  clearfix">
   <div class="pull-left mx-tabs">
-    <% if @card_type.eql?(MembershipCardType.card_types['stored']) %>
+    <%
+       if @product.card_type.stored?
+    %>
         <%= link_to('<samp class="mx-tab-active">
           <div id="triangle-down"></div>
           储值卡</samp>'.html_safe, '#', class: 'pull-left  page-header-text') %>
     <% else %>
         <%= link_to('储值卡', new_product_path + '?card_type=0', class: 'pull-left  page-header-text') %>
     <% end %>
-    <% if @card_type.eql?(MembershipCardType.card_types['measured']) %>
+    <%
+       if @product.card_type.measured?
+    %>
         <%= link_to('<samp class="mx-tab-active">
           <div id="triangle-down"></div>
           次卡</samp>'.html_safe, '#', class: 'pull-left  page-header-text') %>
     <% else %>
         <%= link_to('次卡', new_product_path + '?card_type=1', class: 'pull-left  page-header-text') %>
     <% end %>
-    <% if @card_type.eql?(MembershipCardType.card_types['clocked']) %>
+    <%
+       if @product.card_type.clocked?
+    %>
         <%= link_to('<samp class="mx-tab-active">
           <div id="triangle-down"></div>
           时效卡</samp>'.html_safe, '#', class: 'pull-left  page-header-text') %>
     <% else %>
-        <%= link_to('时效卡', new_product_path + '?card_type=2', class: 'pull-left  page-header-text') %>
+        <%= link_to('期限卡', new_product_path + '?card_type=2', class: 'pull-left  page-header-text') %>
+    <% end %>
+    <%
+       if @product.card_type.coach?
+    %>
+        <%= link_to('<samp class="mx-tab-active">
+          <div id="triangle-down"></div>
+          私教卡</samp>'.html_safe, '#', class: 'pull-left  page-header-text') %>
+    <% else %>
+        <%= link_to('私教卡', new_product_path + '?card_type=3', class: 'pull-left  page-header-text') %>
     <% end %>
   </div>
 </div>
-<% if @card_type.eql?(MembershipCardType.card_types['stored']) %>
+<%
+   if @product.card_type.stored?
+%>
     <%= render 'stored' %>
 <%
-   elsif @card_type.eql?(MembershipCardType.card_types['measured']) %>
+   elsif @product.card_type.measured?
+%>
     <%= render 'measured' %>
 <%
-   elsif @card_type.eql?(MembershipCardType.card_types['clocked'])
+   elsif @product.card_type.clocked?
 %>
     <%= render 'clocked' %>
+<%
+   elsif @product.card_type.coach?
+%>
+    <%= render 'coach' %>
 <%
    end
 %>

@@ -9,7 +9,10 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.image = Array.new(6)
-    @card_type = params[:card_type].to_i
+    @product.build_card_type(card_type: params[:card_type].to_i)
+    if @product.card_type.coach?
+      @product.build_prop
+    end
   end
 
   def create
@@ -27,16 +30,8 @@ class ProductsController < ApplicationController
   end
 
   def update
-
   end
 
-
-  def card_types
-    @membership_card_types = MembershipCardType.where(card_type: params[:type], service_id: params[:service_id])
-    render json: @membership_card_types.map { |card_type|
-             card_type.as_json(only: [:id, :name, :count, :price, :valid_days, :latest_delay_days])
-           }
-  end
 
   private
   def create_params

@@ -10,12 +10,11 @@
 <div class="panel  top20">
   <div class="panel-header clearfix header-selector">
     <span class="pull-left">全部会员卡(<%= @query.result.count %>)</span>
-    <%= search_form_for @query do |f| %>
-        <p class="top10">
-          <%= f.collection_select :service_id_eq, current_admin_user.all_services, :id, :name, {include_blank: "全部门店"}, class: "pull-right", onchange: "return $(this).closest('form').submit()" %>
-          <%= f.collection_select :service_id_eq, current_admin_user.all_services, :id, :name, {include_blank: "全部门店"}, class: "pull-right", onchange: "return $(this).closest('form').submit()" %>
-        </p>
-    <% end %>
+
+    <p class="top10">
+      <%= select_tag :service, options_for_select(current_admin_user.all_services.pluck('profiles.name', :id)), {include_blank: "全部门店", class: "pull-right"} %>
+      <%= select_tag :card_type, options_for_select(current_admin_user.all_services.pluck(:id, 'profiles.name')), {include_blank: "全部类型", class: "pull-right"} %>
+    </p>
   </div>
   <div class="panel-body ">
     <%= render 'table' %>
@@ -24,4 +23,3 @@
     </div>
   </div>
 </div>
-

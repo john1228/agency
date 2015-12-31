@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   get 'checkin/list' => 'checkin#list', as: :checkin_list
 
 
-  get ':service_id/membership_card_types/:type/cards' => 'products#card_types'
+  get ':service_id/membership_card_types/:type/cards' => 'json#card_types'
+  get ':service_id/coaches' => 'json#coaches'
+
   get 'transfers/:service_id/service' => 'transfers#service'
 
 

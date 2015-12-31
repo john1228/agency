@@ -10,31 +10,29 @@
               <% } %>
             </div>
         <% end %>
-
-
         <div class="form-main">
           <%= f.hidden_field :card_type, value: 'clocked' %>
           <div class="input-group  top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店</samp></span>
             <%= f.collection_select :service_id, current_user.all_services, :id, :name, {}, class: "form-control selectpicker" %>
           </div>
 
           <div class="input-group top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">种类名称</samp></span>
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">名称</samp></span>
             <%= f.text_field :name, :class => "form-control" %>
           </div>
 
           <div class="input-group  top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">项目</samp></span>
 
-            <%= f.text_field :price, :class => "form-control" %>
-            <span class="input-group-addon">元</span>
+            <%= f.select :count, options_for_select([]), {}, :class => "form-control selectpicker" %>
           </div>
 
           <div class="input-group  top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">金额</samp></span>
 
-            <%= f.text_field :remark, :class => "form-control" %>
+            <%= f.text_field :price, :class => "form-control" %>
+            <span class="input-group-addon">元</span>
           </div>
 
           <div class="input-group  top20">
@@ -45,12 +43,10 @@
           </div>
 
           <div class="input-group  top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">最晚开卡</samp></span>
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">备注</samp></span>
 
-            <%= f.text_field :latest_delay_days, :class => "form-control" %>
-            <span class="input-group-addon">天后</span>
+            <%= f.text_field :remark, :class => "form-control" %>
           </div>
-
         </div>
 
 

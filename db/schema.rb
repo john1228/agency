@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228033544) do
+ActiveRecord::Schema.define(version: 20151230142417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -568,6 +568,17 @@ ActiveRecord::Schema.define(version: 20151228033544) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "membership_card_logs", force: :cascade do |t|
+    t.integer  "membership_card_id"
+    t.integer  "market_price"
+    t.integer  "selling_price"
+    t.integer  "pay_type"
+    t.string   "seller"
+    t.string   "remark"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "membership_card_types", force: :cascade do |t|
     t.string   "name"
     t.integer  "service_id"
@@ -593,9 +604,10 @@ ActiveRecord::Schema.define(version: 20151228033544) do
     t.string   "name"
     t.integer  "value"
     t.date     "valid_start"
-    t.date     "Valid_end"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.date     "valid_end"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "physical_card"
   end
 
   create_table "news", force: :cascade do |t|
@@ -685,14 +697,21 @@ ActiveRecord::Schema.define(version: 20151228033544) do
 
   add_index "places", ["lonlat"], name: "index_places_on_lonlat", using: :gist
 
+  create_table "product_props", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "during"
+    t.integer "proposal"
+    t.string  "style"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
-    t.string   "type"
-    t.string   "image",                    array: true
+    t.string   "card_type_id"
+    t.string   "image",                     array: true
     t.string   "description"
     t.string   "special"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "profiles", force: :cascade do |t|
