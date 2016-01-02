@@ -1,6 +1,5 @@
 class ChangeColumnOfMclog < ActiveRecord::Migration
   def change
-    add_column :membership_cards, :status, :integer, default: 0
     remove_column :membership_cards, :active
     add_column :membership_card_logs, :action, :integer, default: 0
     remove_column :membership_card_logs, :market_price
