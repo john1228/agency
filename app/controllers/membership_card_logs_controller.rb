@@ -1,4 +1,4 @@
-class MembershipCardLogController < ApplicationController
+class MembershipCardLogsController < ApplicationController
   layout 'admin'
 
   def index
