@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   resources :appointments
   resources :sales
   resources :membership_card_types
-  resources :membership_cards
+  resources :membership_cards do
+    resources :membership_card_logs, path: 'records'
+  end
   resources :members
   resources :skus
   resources :products

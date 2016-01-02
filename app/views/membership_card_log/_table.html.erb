@@ -1,0 +1,42 @@
+<script>
+    $(function () {
+        $('.coach_pagination a').on('click', function (event) {
+            $.get(this.href, null, null, 'script');
+            return false;
+        });
+    });
+</script>
+<table class="table table-striped card-list">
+  <thead>
+  <tr>
+    <th width="20%">时间</th>
+    <th width="20%">描述</th>
+    <th width="20%">
+      <% if @membership_card.stored? %>
+          充值金额
+      <% elsif @membership_card.measured? %>
+          充值次數
+      <% elsif @membership_card.clocked %>
+          充值期限
+      <% elsif @membership_card.coach? %>
+          充值节数
+      <% end %>
+    </th>
+    <th width="10%">支付方式</th>
+    <th width="10%">金额(元)</th>
+    <th width="20%">操作人</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @logs.each do |log| %>
+      <tr>
+        <td><%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= log.action_i18n %></td>
+        <td><%= log.change_amount %></td>
+        <td><%= log.pay_type_i18n %></td>
+        <td><%= log.pay_amount %></td>
+        <td><%= log.operator %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

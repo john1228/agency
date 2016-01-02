@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151231112836) do
+ActiveRecord::Schema.define(version: 20160102084412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -570,13 +570,15 @@ ActiveRecord::Schema.define(version: 20151231112836) do
 
   create_table "membership_card_logs", force: :cascade do |t|
     t.integer  "membership_card_id"
-    t.integer  "market_price"
-    t.integer  "selling_price"
     t.integer  "pay_type"
     t.string   "seller"
     t.string   "remark"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "action",             default: 0
+    t.integer  "change_amount"
+    t.integer  "pay_amount"
+    t.string   "operator"
   end
 
   create_table "membership_card_types", force: :cascade do |t|
@@ -607,9 +609,9 @@ ActiveRecord::Schema.define(version: 20151231112836) do
     t.datetime "updated_at",                null: false
     t.string   "physical_card"
     t.integer  "delay_days",    default: 0
-    t.integer  "active",        default: 0
     t.date     "open"
     t.integer  "valid_days"
+    t.integer  "status",        default: 0
   end
 
   create_table "news", force: :cascade do |t|

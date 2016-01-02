@@ -1,0 +1,17 @@
+<h3 class="card-details-top bottom20"><%= @membership_card.name %></h3>
+<div class="row card-details-text">
+  <div class="col-md-4"><span>所属门店</span><%= @membership_card.service.profile.name %></div>
+  <div class="col-md-4"><span>绑定会员</span><%= @membership_card.member.name %></div>
+  <div class="col-md-4"><span>累计充值</span><i>500元</i></div>
+  <div class="col-md-4"><span>实体卡号</span><%= @membership_card.physical_card %></div>
+  <div class="col-md-4"><span>手机号码</span><%= @membership_card.member.mobile %></div>
+  <div class="col-md-4"><span>累计实收</span><i>500元</i></div>
+  <div class="col-md-4"><span>建卡时间</span><%= @membership_card.created_at.localtime.strftime('%Y-%m-%d %H:%M') %></div>
+  <div class="col-md-8"><span>状态</span><%= @membership_card.status_i18n %></div>
+  <div class="col-md-12"><span>类型</span><%= @membership_card.card_type_i18n %></div>
+  <div class="col-md-12"><span>余额</span><%= @membership_card.value %></div>
+</div>
+<div class="row card-details-text top20">
+  <div class="col-md-12"><span>备注</span>每次卡到期前一周通知每次卡到期前一周通知每次卡到期前一周通知每次卡到期前一周通知每次卡到期前一周通知每次卡到期前一 我续卡
+  </div>
+</div>
