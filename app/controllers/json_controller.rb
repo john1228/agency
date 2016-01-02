@@ -2,7 +2,7 @@ class JsonController < ApplicationController
   def card_types
     @membership_card_types = MembershipCardType.where(card_type: params[:type], service_id: params[:service_id])
     render json: @membership_card_types.map { |card_type|
-             card_type.as_json(only: [:id, :name, :count, :price, :valid_days, :latest_delay_days])
+             card_type.as_json(only: [:id, :name, :count, :price, :valid_days, :delay_days])
            }
   end
 

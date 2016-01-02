@@ -1,6 +1,5 @@
 class MembershipCard < ActiveRecord::Base
   enum card_type: [:stored, :measured, :clocked, :coach]
-  enum pay_type: [:cash,:transfer,]
   belongs_to :member
   has_many :logs, class: MembershipCardLog, dependent: :destroy
   class << self

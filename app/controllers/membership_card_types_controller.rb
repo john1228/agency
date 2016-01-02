@@ -35,7 +35,7 @@ class MembershipCardTypesController < InheritedResources::Base
                                                  :remark,
                                                  :has_valid_extend_information,
                                                  :valid_days,
-                                                 :latest_delay_days)
+                                                 :delay_days)
   end
 end
 

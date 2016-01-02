@@ -92,10 +92,9 @@
             $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['stored']%> +'/cards', function (data) {
                 $.each(data, function (i, value) {
                     $("<option value='" + value.name +
-                    "' data-count='" + value.count +
                     "' data-price='" + value.price +
                     "' data-valid-days='" + value.valid_days +
-                    "' data-delay-days='" + value.latest_delay_days +
+                    "' data-delay-days='" + value.delay_days +
                     "'>" + value.name + "</option>").appendTo('#membership_card_name');
                 });
                 $("#membership_card_name").selectpicker('refresh');
@@ -114,10 +113,9 @@
                 $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['stored']%> +'/cards', function (data) {
                     $.each(data, function (i, value) {
                         $("<option value='" + value.name +
-                        "' data-count='" + value.count +
                         "' data-price='" + value.price +
                         "' data-valid-days='" + value.valid_days +
-                        "' data-delay-days='" + value.latest_delay_days +
+                        "' data-delay-days='" + value.delay_days +
                         "'>" + value.name + "</option>").appendTo('#membership_card_name');
                     });
                     $("#membership_card_name").selectpicker('refresh');

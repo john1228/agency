@@ -55,7 +55,7 @@
             </div>
             <div class="input-group top20 ">
               <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">最晚开卡</samp></span>
-              <%= text_field_tag :latest_delay_days, '', class: 'form-control', readonly: true %>
+              <%= text_field_tag :delay_days, '', class: 'form-control', readonly: true %>
               <span class="input-group-addon">天后</span>
             </div>
             <div class="input-group top20 ">
@@ -100,7 +100,7 @@
                                 "' data-count='" + value.count +
                                 "' data-price='" + value.price +
                                 "' data-valid-days='" + value.valid_days +
-                                "' data-delay-days='" + value.latest_delay_days +
+                                "' data-delay-days='" + value.delay_days +
                                 "'>" + value.name + "</option>").appendTo('#product_card_type_id');
                             });
                             $("#product_card_type_id").selectpicker('refresh');
@@ -109,7 +109,7 @@
                 });
                 $('#product_card_type_id').on('change', function () {
                     $('#valid_days').val($(this).find("option:selected").attr("data-valid-days"));
-                    $('#latest_delay_days').val($(this).find("option:selected").attr("data-delay-days"));
+                    $('#delay_days').val($(this).find("option:selected").attr("data-delay-days"));
                     $('#product_market_price').val($(this).find("option:selected").attr("data-price"));
                 })
             }
