@@ -11,8 +11,7 @@ class CreateMembershipCards < ActiveRecord::Migration
       t.date :open
       t.integer :valid_days
       t.integer :delay_days
-      t.boolean :active, default: false
-      t.string :coach
+      t.integer :status, default: 0
       t.string :physical_card
       t.timestamps null: false
     end
