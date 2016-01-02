@@ -41,7 +41,7 @@ class MembershipCardTypesController < InheritedResources::Base
                                                  :client_id,
                                                  :card_type,
                                                  :price,
-                                                 :count,
+                                                 :value,
                                                  :days,
                                                  :remark,
                                                  :has_valid_extend_information,
