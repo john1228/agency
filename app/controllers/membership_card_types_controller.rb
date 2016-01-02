@@ -23,6 +23,17 @@ class MembershipCardTypesController < InheritedResources::Base
     end
   end
 
+  def update
+    @membership_card_type = MembershipCardType.find(params[:id])
+    if @membership_card_type.update(cart_params)
+      @success = true
+      flash[:success] = "成功更新会员卡种类"
+      redirect_to membership_card_types_path
+    else
+      render :edit
+    end
+  end
+
   private
   def cart_params
     params.require(:membership_card_type).permit(:name,
