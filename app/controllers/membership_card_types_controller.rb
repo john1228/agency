@@ -3,7 +3,7 @@ class MembershipCardTypesController < InheritedResources::Base
 
   def index
     @query_result = MembershipCardType.where(:client_id => current_user.client_id).ransack(params[:q])
-    @membership_card_types = @query_result.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
+    @membership_card_types = @query_result.result.paginate(page: params[:page]||1, per_page: 8).order("updated_at desc")
   end
 
   def new
