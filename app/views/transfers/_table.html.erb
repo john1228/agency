@@ -23,7 +23,7 @@
       <% @logs.each { |log| %>
           <tr>
             <td><%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
-            <td><%= log.wallet.service.profile.name %></td>
+            <td><%= log.wallet.user.profile.name %></td>
             <td><%= log.coach.profile.name %></td>
             <td><%= log.balance.to_i %></td>
             <td><%= nil %></td>
