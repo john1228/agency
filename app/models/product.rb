@@ -16,13 +16,13 @@ class Product < ActiveRecord::Base
 
   private
   def generate_sku
-    GenerateSkuJob.perform_now(product, {
-                                          service_id: service_id,
-                                          market_price: market_price,
-                                          selling_price: selling_price,
-                                          store: store||'-1',
-                                          limit: limit||'-1',
-                                          seller_id: seller_id
-                                      })
+    GenerateSkuJob.perform_now(self, {
+                                       service_id: service_id,
+                                       market_price: market_price,
+                                       selling_price: selling_price,
+                                       store: store||'-1',
+                                       limit: limit||'-1',
+                                       seller_id: seller_id
+                                   })
   end
 end

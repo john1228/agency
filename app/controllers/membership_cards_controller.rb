@@ -2,7 +2,7 @@ class MembershipCardsController < ApplicationController
   layout 'admin'
 
   def index
-    @query = MembershipCard.where(:client_id => current_user.id).ransack(params[:query])
+    @query = MembershipCard.where(:client_id => current_user.client_id).ransack(params[:query])
     @membership_cards = @query.result.paginate(page: params[:page]||1, per_page: 10).order("updated_at desc")
   end
 
@@ -28,7 +28,7 @@ class MembershipCardsController < ApplicationController
   end
 
   def update
-    
+
   end
 
   protected
