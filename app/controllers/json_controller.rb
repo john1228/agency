@@ -25,4 +25,10 @@ class JsonController < ApplicationController
              }
            }
   end
+
+  def balance
+    service = Service.find(params[:service_id])
+    render json: {balance: service.wallet.balance.to_f.round(2)}
+  end
 end
+

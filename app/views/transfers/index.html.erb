@@ -49,5 +49,13 @@
     </div>
   </div>
 </div>
+<script>
+    $(function () {
+        $('#service_id').on('change', function () {
+            $.get(this.href, {page: 1, service: $(this).find("option:selected").val()}, null, 'script');
+            return false;
+        });
+    })
+</script>
 
 

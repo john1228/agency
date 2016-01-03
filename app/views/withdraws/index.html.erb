@@ -5,7 +5,32 @@
       <%= render 'form' %>
     </div>
     <div>
+      <div class="clearfix top20">
+        <div class="pull-left">提现记录</div>
+        <div class="pull-right header-selector">
+          <samp>
+            <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'selectpicker', include_blank: "全部门店") %>
+          </samp>
+          <samp>
+            <%= select_tag(:year, options_for_select((Date.today.year-5)..Date.today.year), class: 'selectpicker') %>
+          </samp>
+          <samp>
+            <%= select_tag(:month, options_for_select(1..12), class: 'selectpicker') %>
+          </samp>
+          <samp style="padding-left: 8px">
+            <a class="header-button pull-right" href="#"><i class="icon">&#xe60e;</i>导出表格</a>
+          </samp>
+        </div>
+      </div>
       <%= render 'table' %>
     </div>
   </div>
 </div>
+<script>
+    $(function () {
+        $('#service_id').on('change', function () {
+            $.get(this.href, {page: 1, service: $(this).find("option:selected").val()}, null, 'script');
+            return false;
+        });
+    })
+</script>

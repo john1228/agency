@@ -1,31 +1,25 @@
 class Withdraw < ActiveRecord::Base
   belongs_to :user
   before_create :reduce
-  after_update :refund
-  STATUS ={'提现请求' => 0, '已处理' => 1, '成功' => 2, '失败' => 3}
+  validates_numericality_of :amount, greater_than_or_equal_to: 200, message: '提现金额不能少于200元'
+  validates_presence_of :account, message: '请填写支付宝账户'
+  validates_presence_of :name, message: '请填写支付宝账户对应的实名'
 
+  attr_accessor :operator
+
+  enum status: [:request, :processed, :success, :failed]
   private
   def reduce
-    begin
-      wallet = Wallet.find_or_create_by(user_id: coach_id)
-      wallet.with_lock do
-        wallet.balance = wallet.balance - amount
-        wallet.action = WalletLog::ACTIONS['提现']
-        wallet.save
-      end
-    rescue
+    wallet = Wallet.find_or_create_by(user_id: coach_id)
+    if wallet.update_attributes(
+        balance: wallet.balance - amount,
+        action: 'withdraw',
+        source: account,
+        operator: operator
+    )
+      true
+    else
       false
-    end
-  end
-
-  def refund
-    if status.eql?(STATUS['失败']) && status_was.eql?(status)
-      wallet = Wallet.find_or_create_by(user_id: coach_id)
-      wallet.with_lock do
-        wallet.balance = wallet.balance + amount
-        wallet.action = WalletLog::ACTIONS['提现退款']
-        wallet.save
-      end
     end
   end
 end

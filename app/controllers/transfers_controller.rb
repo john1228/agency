@@ -2,8 +2,14 @@ class TransfersController < ApplicationController
   layout 'admin'
 
   def index
+    filter = {}
+    if params[:service].present?
+      service = Service.find(params[:service])
+      filter[:wallet_id] = service.wallet.id
+    end
     @logs = WalletLog.transfer.joins(:wallet)
                 .where(wallets: {user_id: current_user.all_services.pluck(:id)})
+                .where(filter)
                 .order(id: :desc)
                 .paginate(page: params[:page]||1, per_page: 5)
     @type = params[:type]||'signal'
