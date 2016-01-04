@@ -15,16 +15,9 @@
 </div>
 <div class="panel top20">
   <div class="panel-header clearfix header-selector">
-    <span class="pull-left">签到记录</span>
+    <span class="pull-left">签到记录(<%= @logs.total_entries %>)</span>
   </div>
-  <div class="panel-body">
+  <div class="panel-body" id="list-panel">
+    <% render 'list' %>
   </div>
 </div>
-<script>
-    $(function () {
-        $('.coach_pagination a').on('click', function (event) {
-            $.get(this.href, null, null, 'script');
-            return false;
-        });
-    });
-</script>
