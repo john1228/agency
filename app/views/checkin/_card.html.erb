@@ -1,17 +1,17 @@
-<div>
-  <table class="table table-striped" id="datatable-editable">
-    <thead>
-    <tr class="table-header">
-      <th width="5%">编码</th>
-      <th width="25%">会员卡名称</th>
-      <th width="25%">所属门店</th>
-      <th width="20%">卡类</th>
-      <th width="20%">余额(元/次/有效期)</th>
-      <th width="5%">操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @cards.each do |card| %>
+<table class="table table-striped" id="datatable-editable">
+  <thead>
+  <tr class="table-header">
+    <th width="5%">编码</th>
+    <th width="25%">会员卡名称</th>
+    <th width="25%">所属门店</th>
+    <th width="20%">卡类</th>
+    <th width="20%">余额(元/次/有效期)</th>
+    <th width="5%">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @cards.each do |card| %>
+      <tr>
         <td><%= card.id %></td>
         <td><%= card.name %></td>
         <td><%= card.service.profile.name %></td>
@@ -19,7 +19,7 @@
         <td><%= card.value %></td>
         <td class="sign-in">
           <% link_to "签到", "#", 'data-toggle' => 'modal', 'data-target' => '#myModal' %></td>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
