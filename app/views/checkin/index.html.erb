@@ -9,9 +9,9 @@
     <%= select_tag(:member,
                    options_for_select(@members),
                    {
-                           class: 'form-control selectpicker search',
-                           'data-live-search' => 'true',
-                           id: 'search-field'
+                           include_blank: '请选择会员',
+                           class: 'form-control selectpicker search header-search',
+                           'data-live-search' => 'true'
                    }) %>
   </div>
 </div>
@@ -19,24 +19,48 @@
   <div class="panel-header clearfix header-selector">
     <span class="pull-left">会员详情</span>
   </div>
-  <div class="panel-body">
-    <% if @member.present? %>
-        <%= render 'member' %>
-    <% end %>
+  <div class="panel-body" id="member_panel">
+    <%= render 'member' %>
   </div>
 </div>
 <div class="panel top20">
   <div class="panel-header clearfix header-selector">
     <span class="pull-left">会员卡信息</span>
   </div>
-  <div class="panel-body">
+  <div class="panel-body" id="card_panel">
     <%= render 'card' %>
+  </div>
+</div>
+
+<div class="modal fade sign-in-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">储值卡签到</h4>
+      </div>
+      <div class="modal-body">
+        <h3 class="Title-top">签到收费</h3>
+
+        <div class="input-group top20">
+          <div class="input-group-addon">请输入金额</div>
+          <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入金额">
+
+          <div class="input-group-addon">元</div>
+        </div>
+        <div class="fygroup top20 bottom20">
+          <button type="button" class="btntn-lg ">确认</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <script>
     $(function () {
-        $('.search').on('change', function () {
-            alert($(this).val());
+        $('#member').on('change', function () {
+            $.get(this.href, {page: 1, member: $(this).find("option:selected").val()}, null, 'script');
+            return false;
         });
     });
 </script>

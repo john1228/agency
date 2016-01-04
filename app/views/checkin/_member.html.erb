@@ -1,29 +1,32 @@
-<div class="row">
-  <div class="col-md-8">
-    <h1 class="card-details-h1"><%= @member.name %>
-      <% if @member.male? %>
-          <i class="icon details-icon">&#xe61e;</i>
-      <% else %>
-          <i class="icon details-icon-f5">&#xe61d;</i>
-      <% end %>
-    </h1>
+<% if @member.present? %>
+    <div class="row">
+      <div class="col-md-8">
+        <h1 class="card-details-h1"><%= @member.name %>
+          <% if @member.male? %>
+              <i class="icon details-icon">&#xe61e;</i>
+          <% else %>
+              <i class="icon details-icon-f5">&#xe61d;</i>
+          <% end %>
+        </h1>
 
-    <h3 class="details-h3">
-      <samp class="heading-sa-b"><i class="icon">&#xe61f;</i><%= @member.user.profile.mxid %></samp>
-    </h3>
-    <ul class="details-ul">
-      <li><span>生日</span><%= @member.birthday %></li>
-      <li><span>地址</span><%= @member.profile.signature %></li>
-      <li><span>所属门店</span><%= @member.service.profile.name %></li>
-      <li><span>手机号码</span><%= @member.profile.birthday %></li>
-      <li><span>身份</span><%= @member.profile.hobby_string %></li>
-      <li><span>来源</span><%= @member.profile.hobby_string %></li>
-      <li><span>备注</span><%= @member.profile.hobby_string %></li>
-    </ul>
-  </div>
-  <div class="col-md-4">
-    <div class="pull-right details-timg">
-      <%= image_tag(@member.avatar.url, class: 'img-responsive img-circle') %>
+        <h3 class="details-h3">
+          <samp class="heading-sa-b"><i class="icon">&#xe61f;</i><%= @member.user.profile.mxid rescue '' %></samp>
+        </h3>
+        <ul class="details-ul">
+          <li><span>生日</span><%= @member.birthday %></li>
+          <li><span>地址</span><%= @member.province||'' + @member.city||'' + @member.area||'' + @member.address||'' %>
+          </li>
+          <li><span>所属门店</span><%= @member.service.profile.name %></li>
+          <li><span>手机号码</span><%= @member.mobile %></li>
+          <li><span>身份</span><%= @member.member_type_i18n %></li>
+          <li><span>来源</span><%= @member.origin_i18n %></li>
+          <li><span>备注</span><%= @member.remark %></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="pull-right details-timg">
+          <%= image_tag(@member.avatar.url, class: 'img-responsive img-circle') %>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+<% end %>

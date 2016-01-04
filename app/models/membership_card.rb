@@ -11,4 +11,12 @@ class MembershipCard < ActiveRecord::Base
       end
     end
   end
+
+  def valid_start
+
+  end
+
+  def valid_end
+
+  end
 end
