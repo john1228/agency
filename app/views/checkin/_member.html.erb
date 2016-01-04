@@ -14,7 +14,7 @@
         </h3>
         <ul class="details-ul">
           <li><span>生日</span><%= @member.birthday %></li>
-          <li><span>地址</span><%= @member.province||'' + @member.city||'' + @member.area||'' + @member.address||'' %>
+          <li><span>地址</span><%= (@member.province||'') + (@member.city||'') +( @member.area||'') + (@member.address||'') %>
           </li>
           <li><span>所属门店</span><%= @member.service.profile.name %></li>
           <li><span>手机号码</span><%= @member.mobile %></li>

@@ -21,27 +21,42 @@ module Api
                  name: service.profile.name,
                  avatar: service.profile.avatar,
                  card: MembershipCard.where(service: service).where('updated_at > ?', time).map { |membership_card|
-                   membership_card.as_json(
-                       only: [:id, :name, :card_type, :value],
-                       methods: [:valid_start, :valid_end],
-                       include: {member: {only: [:name, :avatar]}}
-                   )
+                   {
+                       id: membership_card.id,
+                       name: membership_card.name,
+                       card_type: membership_card.card_type,
+                       value: membership_card.value,
+                       valid_start: membership_card.valid_start,
+                       valid_end: membership_card.valid_end,
+                       member: {
+                           name: membership_card.member.name,
+                           avatar: membership_card.member.avatar
+                       }
+                   }
                  }
              }
     end
 
     def checkin
-      card = MembershipCard.find(id)
+      membership_card = MembershipCard.find(id)
       if card.present?
         if card.valid_start <= Date.today && card.valid_end >= Date.today
+          membership_card.checkin!
           render json: {
                      code: 1,
                      data: {
-                         card: card.id,
-                         name: card.name,
-                         value: card.value,
-                         start: card.valid_start,
-                         end: card.valid_end
+                         card: {
+                             id: membership_card.id,
+                             name: membership_card.name,
+                             card_type: membership_card.card_type,
+                             value: membership_card.value,
+                             valid_start: membership_card.valid_start,
+                             valid_end: membership_card.valid_end,
+                             member: {
+                                 name: membership_card.member.name,
+                                 avatar: membership_card.member.avatar
+                             }
+                         }
                      }
                  }
         else
