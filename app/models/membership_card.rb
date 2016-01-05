@@ -30,12 +30,19 @@ class MembershipCard < ActiveRecord::Base
             update(open: last_delay_date, status: 'normal')
           else
             errors.add(expired: '该卡已过期')
+            false
           end
         end
       end
     end
-    logs.checkin.new.save if normal?
-    errors.add(expired: '该卡已过期') if disable?
+    if normal?
+      logs.checkin.new.save
+      true
+    end
+    if disable?
+       errors.add(expired: '该卡已过期')
+       false
+     end
   end
 
   def valid_end

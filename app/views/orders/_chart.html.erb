@@ -8,12 +8,9 @@
         }
     });
     $(function () {
-        var day = <%=@day%>;
-        var s_order = <%=@s_order%>;
-        var c_order = <%=@c_order%>;
-        $('#order').highcharts({
+        $('.chart-surrounded').highcharts({
             chart: {
-                type: 'areaspline'
+                type: 'area'
             },
             title: {text: '订单统计'},
             legend: {
@@ -24,17 +21,14 @@
                 borderWidth: 1,
                 backgroundColor: '#FFFFFF'
             },
-            xAxis: {categories: day},
+            xAxis: {categories: <%=raw @day%>},
             yAxis: {title: {text: '单数'}},
             tooltip: {shared: true, valueSuffix: '单'},
             credits: {enabled: false},
             plotOptions: {areaspline: {fillOpacity: 0.5}},
-            series: [
-                {name: '总订单', data: s_order},
-                {name: '私教订单', data: c_order}
-            ]
+            series: <%=raw @data%>
         });
     });
 </script>
-<div class="highchart-order" id="order">
+<div class="chart-surrounded">
 </div>

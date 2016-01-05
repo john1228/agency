@@ -12,9 +12,9 @@ class ServicesController < InheritedResources::Base
   end
 
   def create
-    service = Service.new(service_params)
-    service.client_id = current_user.client_id
-    service.sns = SecureRandom.hex
+    @service = Service.new(service_params)
+    @service.client_id = current_user.client_id
+    @service.sns = SecureRandom.hex
     if @service.save
       @success = true
       flash[:success] = "成功创建门店"

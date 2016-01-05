@@ -15,17 +15,17 @@ gem 'spring', group: :development
 gem 'execjs'
 gem 'therubyracer'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
-gem "carrierwave-qiniu",github: 'huobazi/carrierwave-qiniu'
-gem "qiniu"
+gem "carrierwave-qiniu", github: 'huobazi/carrierwave-qiniu'
+gem 'qiniu'
 gem 'devise'
 gem 'puma'
 gem 'enum_help'
-gem "aasm"
+gem 'aasm'
 gem "cancancan"
 
 gem 'mina'
-gem 'mina-sidekiq',:require => false
-gem 'mina-puma',:require => false
+gem 'mina-sidekiq', :require => false
+gem 'mina-puma', :require => false
 gem 'mina-nginx', :require => false
 
 gem "inherited_resources"

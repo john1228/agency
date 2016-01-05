@@ -600,7 +600,7 @@ ActiveRecord::Schema.define(version: 20160103075044) do
   create_table "membership_cards", force: :cascade do |t|
     t.integer  "client_id"
     t.integer  "service_id"
-    t.integer  "coach_id"
+    t.integer  "order_id"
     t.integer  "member_id"
     t.integer  "card_type"
     t.string   "name"

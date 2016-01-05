@@ -1,6 +1,9 @@
 <%= semantic_form_for @service, html: {multipart: true} do |f| %>
-    <h3 class="Content-h3"><%= edit_helper(@service) %>门店</h3>
+
     <div class="panel">
+      <div class="panel-header">
+        <%= edit_helper(@service) %>门店
+      </div>
       <div class="panel-body">
         <h4 class="base-info">基本资料</h4>
         <% if @service.errors.present? %>
@@ -14,12 +17,12 @@
         <%= f.semantic_fields_for :profile do |p| %>
             <%= p.hidden_field(:identity) %>
             <div class="new-portrait pull-right">
-              <samp>
-                <i class=" icon">&#xe619;</i>
+              <samp class="default_icon">
+                <i class=" icon"></i>
               </samp>
 
-              <p>上传门店头像</p>
-              <%= p.file_field(:avatar, class: 'image-uploader') %>
+              <p class="default_title">上传门店头像</p>
+              <%= p.file_field :avatar, class: "image-uploader" %>
             </div>
             <div class="form-main">
               <div class="input-group">
@@ -45,9 +48,11 @@
                 <span class="input-group-addon" id="sizing-addon2">
                   <samp class="alert-down">健身服务</samp>
                 </span>
-                <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_hidden: false}, {multiple: true, class: 'form-control'}) %>
+                <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] },
+                             {include_blank: '请选择健身服务'},
+                             {multiple: true, class: 'form-control selectpicker'}) %>
               </div>
-              <div class="input-group form-main">
+              <div class="input-group top20  address_selector tiform">
                 <span class="input-group-addon" id="sizing-addon2">
                   <samp class="alert-down">门店地址</samp>
                 </span>
@@ -89,24 +94,6 @@
     new PCAS("service[profile_attributes][province]", "service[profile_attributes][city]", "service[profile_attributes][area]",
             '<%=@service.profile.province%>', '<%=@service.profile.city%>', '<%=@service.profile.area%>');
     $(function () {
-                $("#service_profile_attributes_birthday").datepicker({
-                    language: 'zh-CN',
-                    format: 'yyyy-mm-dd'
-                });
-                $('#service_profile_attributes_hobby').multiselect({
-                    inheritClass: true,
-                    numberDisplayed: 8,
-                    nonSelectedText: '请选择提供的健身服务',
-                    maxHeight: 100,
-                    dropUp: true
-                });
-                $('#service_profile_attributes_avatar').on('change', function () {
-                    var objUrl = getObjectURL(this.files[0]);
-                    $(this).parent().children('samp').remove();
-                    $(this).parent().children('p').remove();
-                    $(this).parent().css('background-image', "url(" + objUrl + ")");
-                    $(this).parent().css('background-size', "cover");
-                });
                 var file_count = 0;
                 $('#photowall').on('change', '.image-uploader', function () {
                     var remain = 8 - file_count;
@@ -131,16 +118,4 @@
 
             }
     );
-    function getObjectURL(file) {
-        var url = null;
-        if (window.createObjectURL != undefined) { // basic
-            url = window.createObjectURL(file);
-        } else if (window.URL != undefined) { // mozilla(firefox)
-            url = window.URL.createObjectURL(file);
-        } else if (window.webkitURL != undefined) { // webkit or chrome
-            url = window.webkitURL.createObjectURL(file);
-        }
-        return url;
-    }
-
 </script>

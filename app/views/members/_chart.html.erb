@@ -1,6 +1,6 @@
 <script>
     $(function () {
-        $('#member').highcharts({
+        $('.chart-surrounded').highcharts({
             chart: {plotBackgroundColor: null, plotBorderWidth: null, plotShadow: false},
             title: {text: '新增会员'},
             tooltip: {pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'},
@@ -24,4 +24,4 @@
         });
     });
 </script>
-<div id="member" style="min-width:700px;height:400px"></div>
+<div class="chart-surrounded"></div>
