@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
                                 service_id: current_user.all_services.pluck(:id),
                                 updated_at: current_date..current_date.tomorrow,
                                 order_items: {
-                                    type: 1
+                                    type: 2
                                 }
                             )
       clocked_order << Order.joins(:order_item)
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
                                service_id: current_user.all_services.pluck(:id),
                                updated_at: current_date..current_date.tomorrow,
                                order_items: {
-                                   type: 1
+                                   type: 3
                                }
                            )
       course_order << Order.joins(:order_item)
@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
                               service_id: current_user.all_services.pluck(:id),
                               updated_at: current_date..current_date.tomorrow,
                               order_items: {
-                                  type: 1
+                                  type: 4
                               }
                           )
     }
