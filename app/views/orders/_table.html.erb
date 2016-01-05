@@ -27,9 +27,8 @@
       <tr>
         <td><%= order.no %></td>
         <td><%= order.order_item.name %></td>
-        <td><%= order.user.profile.name %></td>
-        <td><%= order.contact_name %></td>
-        <td><%= order.contact_phone %></td>
+        <td><%= order.contact_name %>/<%= order.contact_phone %></td>
+        <td><%= order.service.profile.name rescue '' %></td>
         <td><%= order.total %></td>
         <td><%= order.pay_type_i18n %></td>
         <td><%= order.order_type_i18n %></td>
