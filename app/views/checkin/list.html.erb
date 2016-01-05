@@ -19,5 +19,16 @@
   </div>
   <div class="panel-body" id="list-panel">
     <%= render 'list' %>
+    <div class="clearfix pull-right">
+      <%= will_paginate @logs, renderer: BootstrapPagination::Rails, class: 'logs_pagination' %>
+    </div>
   </div>
 </div>
+<script>
+    $(function () {
+        $('.logs_pagination a').on('click', function (event) {
+            $.get(this.href, null, null, 'script');
+            return false;
+        });
+    });
+</script>

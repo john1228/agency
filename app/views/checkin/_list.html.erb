@@ -14,32 +14,32 @@
   </thead>
   <tbody>
   <% @logs.each do |log| %>
-  <tr>
-    <td width="8%">
-      <%= image_tag(log.membership_card.member.avatar_url + '-avatar') %>
-    </td>
-    <td width="13%">
-      <%= log.membership_card.member.name %>
-    </td>
-    <td width="13%">
-      <%= log.membership_card.service.profile.name %>
-    </td>
-    <td width="13%">
-      <%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M') %>
-    </td>
-    <td width="10%">
-      <%= log.membership_card.name %>
-    </td>
-    <td width="10%">
-      <%= log.membership_card.card_type_i18n %>
-    </td>
-    <td width="10%">
-      <%= log.membership_card.value %>
-    </td>
-    <td width="13%"> <%= log.operator %></td>
-    <td class="sign-in">
-      <% link_to "签到", "#", 'data-toggle' => 'modal', 'data-target' => '#myModal' %></td>
-  </tr>
+      <tr>
+        <td width="8%">
+          <%= image_tag(log.membership_card.member.avatar_url + '-avatar') %>
+        </td>
+        <td width="13%">
+          <%= log.membership_card.member.name %>
+        </td>
+        <td width="13%">
+          <%= log.membership_card.service.profile.name %>
+        </td>
+        <td width="13%">
+          <%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M') %>
+        </td>
+        <td width="10%">
+          <%= log.membership_card.name %>
+        </td>
+        <td width="10%">
+          <%= log.membership_card.card_type_i18n %>
+        </td>
+        <td width="10%">
+          <%= log.membership_card.value %>
+        </td>
+        <td width="13%"> <%= log.operator %></td>
+        <td class="sign-in">
+          <% link_to "签到", "#", 'data-toggle' => 'modal', 'data-target' => '#myModal' %></td>
+      </tr>
   <% end %>
   </tbody>
 </table>
