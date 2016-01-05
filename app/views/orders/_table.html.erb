@@ -22,7 +22,7 @@
     <th class="text-center">时间</th>
   </tr>
   </thead>
-  <tbody >
+  <tbody>
   <% @orders.each { |order| %>
       <tr>
         <td class="text-center tyeq"><%= order.no %></td>
@@ -31,7 +31,7 @@
         <td class="text-center tyeq"><%= order.contact_name %></td>
         <td class="text-center tyeq"><%= order.contact_phone %></td>
         <td class="text-center tyeq"><%= order.total %></td>
-        <td class="text-center tyeq"><%= order.pay_type_name %></td>
+        <td class="text-center tyeq"><%= order.pay_type_i18n %></td>
         <td class="text-center tyeq"><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
       </tr>
   <% } %>
