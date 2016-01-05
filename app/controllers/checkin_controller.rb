@@ -12,7 +12,7 @@ class CheckinController < ApplicationController
     @cards = MembershipCard.where(member: @member)
     @logs = MembershipCardLog.checkin
                 .where(membership_card_id: MembershipCard.where(member_id: Member.full.where(client_id: current_user.client_id).pluck(:id)).pluck(:id))
-                .paginate(page: params[:page]||1, per_page: 20)
+                .paginate(page: params[:page]||1, per_page: 10)
   end
 
   def create
