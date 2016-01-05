@@ -8,47 +8,54 @@ class OrdersController < ApplicationController
     measured_order = []
     clocked_order = []
     course_order = []
-    (date.at_beginning_of_month..date.at_end_of_month).each { |date|
-      @day << date
+    (date.at_beginning_of_month..date.at_end_of_month).each { |current_date|
+      @day << current_date.day
       stored_order << Order.joins(:order_item)
                           .where(
                               service_id: current_user.all_services.pluck(:id),
-                              updated_at: date..date.tomorrow,
+                              updated_at: current_date..current_date.tomorrow,
                               order_items: {
                                   type: 1
                               }
-                          ).count
+                          )
       measured_order << Order.joins(:order_item)
                             .where(
                                 service_id: current_user.all_services.pluck(:id),
-                                updated_at: date..date.tomorrow,
+                                updated_at: current_date..current_date.tomorrow,
                                 order_items: {
                                     type: 1
                                 }
-                            ).count
+                            )
       clocked_order << Order.joins(:order_item)
                            .where(
                                service_id: current_user.all_services.pluck(:id),
-                               updated_at: date..date.tomorrow,
+                               updated_at: current_date..current_date.tomorrow,
                                order_items: {
                                    type: 1
                                }
-                           ).count
+                           )
       course_order << Order.joins(:order_item)
                           .where(
                               service_id: current_user.all_services.pluck(:id),
-                              updated_at: date..date.tomorrow,
+                              updated_at: current_date..current_date.tomorrow,
                               order_items: {
                                   type: 1
                               }
-                          ).count
+                          )
     }
-    @data = [
-        {name: '储值卡', data: stored_order},
-        {name: '次卡', data: measured_order},
-        {name: '时效卡', data: clocked_order},
-        {name: '私教卡', data: course_order}
+    @order = [
+        {name: '储值卡', data: stored_order.map { |item| item.count }},
+        {name: '次卡', data: measured_order.map { |item| item.count }},
+        {name: '时效卡', data: clocked_order.map { |item| item.count }},
+        {name: '私教卡', data: course_order.map { |item| item.count }}
     ].to_json
+    @sale = [
+        {name: '储值卡', data: stored_order.map { |item| item.sum(:total) }},
+        {name: '次卡', data: measured_order.map { |item| item.sum(:total) }},
+        {name: '时效卡', data: clocked_order.map { |item| item.sum(:total) }},
+        {name: '私教卡', data: course_order.map { |item| item.sum(:total) }}
+    ].to_json
+
     @orders = Order
                   .where(service_id: current_user.all_services.pluck(:id), updated_at: date.at_beginning_of_month..date.at_end_of_month)
                   .order(updated_at: :desc)

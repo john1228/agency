@@ -8,11 +8,11 @@
         }
     });
     $(function () {
-        $('.chart-surrounded').highcharts({
+        $('#sale').highcharts({
             chart: {
                 type: 'area'
             },
-            title: {text: '订单统计'},
+            title: {text: '销售额统计'},
             legend: {
                 layout: 'vertical',
                 align: 'right',
@@ -22,13 +22,13 @@
                 backgroundColor: '#FFFFFF'
             },
             xAxis: {categories: <%=raw @day%>},
-            yAxis: {title: {text: '单数'}},
-            tooltip: {shared: true, valueSuffix: '单'},
+            yAxis: {title: {text: '元'}},
+            tooltip: {shared: true, valueSuffix: '元'},
             credits: {enabled: false},
             plotOptions: {areaspline: {fillOpacity: 0.5}},
-            series: <%=raw @data%>
+            series: <%=raw @sale%>
         });
     });
 </script>
-<div class="chart-surrounded">
+<div class="chart-surrounded" id="sale">
 </div>

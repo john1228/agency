@@ -1,16 +1,20 @@
 <div class="panel">
   <div class="panel-header clearfix">
-    <span class="pull-left">订单统计</span>
+    <span class="pull-left">报表</span>
   </div>
-
-  <div class="panel-body chart-surrounded">
-    <%= render 'chart' %>
+  <div class="panel-body">
+    <button >订单统计</button>
+    <button>销售额统计</button>
+    <%= render 'order' %>
   </div>
 </div>
 <div class="panel">
-  <div class="clearfix form-top">
-    <h5 class="pull-left">表单</h5>
+  <div class="panel-header">
+    <div class="pull-left">订单列表</div>
     <a class="pull-right" href="#"><i class="icon">&#xe60e;</i>导出表格</a>
   </div>
   <%= render 'table' %>
 </div>
+<script>
+
+</script>

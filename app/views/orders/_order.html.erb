@@ -1,0 +1,34 @@
+<script type="text/javascript">
+    Highcharts.setOptions({
+        colors: [
+            '#b5edff', '#ffbab7', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+        xAxis: {
+            labels: {style: {color: '#ED561B', font: "Microsoft Yahei"}},
+            lineColor: '#ED561B'
+        }
+    });
+    $(function () {
+        $('#order').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {text: '订单统计'},
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF'
+            },
+            xAxis: {categories: <%=raw @day%>},
+            yAxis: {title: {text: '单数'}},
+            tooltip: {shared: true, valueSuffix: '单'},
+            credits: {enabled: false},
+            plotOptions: {areaspline: {fillOpacity: 0.5}},
+            series: <%=raw @order%>
+        });
+    });
+</script>
+<div class="chart-surrounded" id="order">
+</div>

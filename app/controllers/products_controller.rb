@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   def index
     @query = Product.joins(:sku).where(skus: {sku_type: Sku.sku_types[:card], service_id: current_user.all_services.pluck(:id)}).ransack(params[:q])
-    @products = @query.result.paginate(page: params[:page]||1, per_page: 8).order("created_at desc")
+    @products = @query.result.paginate(page: params[:page]||1, per_page: 10).order("created_at desc")
   end
 
   def new

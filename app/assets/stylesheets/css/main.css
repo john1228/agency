@@ -1549,6 +1549,7 @@
     border-bottom: 1px solid #e8e8e8;
     margin-bottom: 30px;
     min-width: 700px;
+    max-width: 1620px;
     height: 400px
 }
 
