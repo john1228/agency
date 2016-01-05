@@ -66,4 +66,7 @@
         alipay: '支付宝'
         wx: '微信'
         jd: '京东'
+      order_type:
+        platform: '美型平台'
+        face_to_face: '当面付'
 

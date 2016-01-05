@@ -12,27 +12,28 @@
 <table class="table table-striped card-list" id="datatable-editable">
   <thead>
   <tr class="prito">
-    <th class="text-center">订单编号</th>
-    <th class="text-center">课程</th>
-    <th class="text-center">买家昵称</th>
-    <th class="text-center">买家</th>
-    <th class="text-center">联系电话</th>
-    <th class="text-center">金额(元)</th>
-    <th class="text-center">支付方式</th>
-    <th class="text-center">时间</th>
+    <th width="15%">订单编号</th>
+    <th width="15%">商品</th>
+    <th width="15%">卖家／联系电话</th>
+    <th width="15%">所属门店</th>
+    <th width="8%">金额（元）</th>
+    <th width="10%">支付方式</th>
+    <th width="10%">来源</th>
+    <th width="12%">日期</th>
   </tr>
   </thead>
   <tbody>
   <% @orders.each { |order| %>
       <tr>
-        <td class="text-center tyeq"><%= order.no %></td>
-        <td class="text-center tyeq"><%= order.order_item.name %></td>
-        <th class="text-center tyeq"><%= order.user.profile.name %></th>
-        <td class="text-center tyeq"><%= order.contact_name %></td>
-        <td class="text-center tyeq"><%= order.contact_phone %></td>
-        <td class="text-center tyeq"><%= order.total %></td>
-        <td class="text-center tyeq"><%= order.pay_type_i18n %></td>
-        <td class="text-center tyeq"><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= order.no %></td>
+        <td><%= order.order_item.name %></td>
+        <td><%= order.user.profile.name %></td>
+        <td><%= order.contact_name %></td>
+        <td><%= order.contact_phone %></td>
+        <td><%= order.total %></td>
+        <td><%= order.pay_type_i18n %></td>
+        <td><%= order.order_type_i18n %></td>
+        <td><%= order.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
       </tr>
   <% } %>
   </tbody>

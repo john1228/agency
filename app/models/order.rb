@@ -4,4 +4,5 @@ class Order < ActiveRecord::Base
   has_one :order_item, dependent: :destroy
   belongs_to :user
   enum pay_type: [:alipay, :wx, :jd]
+  enum order_type: [:platform, :face_to_face]
 end
