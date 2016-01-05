@@ -28,13 +28,13 @@
         stored: "储值"
         measured: "次卡"
         clocked: "期限"
-        coach: "私教卡"
+        course: "私教卡"
     membership_card:
       card_type:
         stored: "储值卡"
         measured: "次卡"
         clocked: "期限卡"
-        coach: "私教卡"
+        course: "课程卡"
       status:
         to_be_activated: '待激活'
         normal: '正常'

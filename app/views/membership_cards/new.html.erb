@@ -21,7 +21,7 @@
     <% else %>
         <%= link_to('期限卡', new_membership_card_path + '?card_type=2', class: 'pull-left  page-header-text') %>
     <% end %>
-    <% if @membership_card.coach? %>
+    <% if @membership_card.course? %>
         <%= link_to('<samp class="mx-tab-active">
           <div id="triangle-down"></div>
           私教卡</samp>'.html_safe, '#', class: 'pull-left  page-header-text') %>
@@ -40,9 +40,9 @@
 %>
     <%= render 'clocked' %>
 <%
-   elsif @membership_card.coach?
+   elsif @membership_card.course?
 %>
-    <%= render 'coach' %>
+    <%= render 'course' %>
 <%
    end
 %>

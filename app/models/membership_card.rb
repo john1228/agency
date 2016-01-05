@@ -1,5 +1,5 @@
 class MembershipCard < ActiveRecord::Base
-  enum card_type: [:stored, :measured, :clocked, :coach]
+  enum card_type: [:stored, :measured, :clocked, :course]
   enum status: [:to_be_activated, :normal, :disable]
   belongs_to :member
   belongs_to :service

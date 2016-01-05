@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
     @product = Product.new
     @product.image = Array.new(6)
     @product.build_card_type(card_type: params[:card_type].to_i)
-    if @product.card_type.coach?
+    if @product.card_type.course?
       @product.build_prop
     end
   end
