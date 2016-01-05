@@ -26,7 +26,6 @@ module Api
                        name: membership_card.name,
                        card_type: membership_card.card_type,
                        value: membership_card.value,
-                       valid_start: membership_card.valid_start,
                        valid_end: membership_card.valid_end,
                        member: {
                            name: membership_card.member.name,
@@ -41,7 +40,7 @@ module Api
       membership_card = MembershipCard.find(id)
       if card.present?
         if card.valid_start <= Date.today && card.valid_end >= Date.today
-          membership_card.checkin!
+          membership_card.checkin
           render json: {
                      code: 1,
                      data: {
@@ -50,7 +49,6 @@ module Api
                              name: membership_card.name,
                              card_type: membership_card.card_type,
                              value: membership_card.value,
-                             valid_start: membership_card.valid_start,
                              valid_end: membership_card.valid_end,
                              member: {
                                  name: membership_card.member.name,

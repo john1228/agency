@@ -1249,7 +1249,7 @@
     line-height: 58px;
 }
 
-.new-member {
+.new-btn {
     width: 200px;
     height: 58px;
     line-height: 58px;
@@ -1260,7 +1260,7 @@
     font-size: 16px;
 }
 
-.new-member:hover {
+.new-btn:hover {
     color: #fff;
 }
 

@@ -7,6 +7,10 @@ class Service<User
 
   has_many :service_members, dependent: :destroy
   has_many :coaches, through: :service_members
+
+  
+  has_many :orders, foreign_key: :service_id
+  has_many :members
   alias_attribute :service_id, :id
 
   include AASM

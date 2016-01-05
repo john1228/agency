@@ -1,7 +1,12 @@
 <script>
     $(function () {
         $('.modal').on('show.bs.modal', function (e) {
-            alert($(e.relatedTarget).data('data-type'));
+            var type = $(e.relatedTarget).data('type');
+            $(e.currentTarget).find('#type').html(type);
+            $(e.currentTarget).find('#name').html("(" + $(e.relatedTarget).data('name') + ")");
+            if (type == '') {
+
+            }
         })
     })
 </script>
@@ -25,75 +30,33 @@
         <td><%= card.card_type_i18n %></td>
         <td><%= card.value %></td>
         <td class="sign-in">
-          <%= link_to "签到", "#", 'data-toggle' => 'modal', 'data-target' => '#stored', 'data-type' => card.card_type_i18n, 'data-name' => card.name %>
+          <%= link_to "签到", "#", 'data-toggle' => 'modal', 'data-target' => '#modal', 'data-type' => card.card_type_i18n, 'data-name' => card.name %>
         </td>
       </tr>
   <% end %>
   </tbody>
 </table>
-<div class="modal fade sign-in-modal" id="stored" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade sign-in-modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">签到收费</h4>
-      </div>
-      <div class="modal-body">
-        <div class="input-group top20">
-          <div class="input-group-addon">请输入金额</div>
-          <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入金额">
+    <%= form_tag("", method: :post) do %>
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><span id="type"></span><span id="name"></span>签到收费</h4>
+          </div>
+          <div class="modal-body">
+            <div class="input-group top20">
+              <div class="input-group-addon">请输入</div>
+              <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入金额">
 
-          <div class="input-group-addon">元</div>
+              <div class="input-group-addon" id="">元</div>
+            </div>
+            <div class="fygroup top20 bottom20">
+              <button type="submit" class="button">确认</button>
+            </div>
+          </div>
         </div>
-        <div class="fygroup top20 bottom20">
-          <button type="button" class="btntn-lg ">确认</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade sign-in-modal" id="measured" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">签到收费</h4>
-      </div>
-      <div class="modal-body">
-        <div class="input-group top20">
-          <div class="input-group-addon">请输入金额</div>
-          <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入金额">
-
-          <div class="input-group-addon">元</div>
-        </div>
-        <div class="fygroup top20 bottom20">
-          <button type="button" class="btntn-lg ">确认</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade sign-in-modal" id="clocked" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">签到收费</h4>
-      </div>
-      <div class="modal-body">
-        <div class="input-group top20">
-          <div class="input-group-addon">请输入金额</div>
-          <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入金额">
-
-          <div class="input-group-addon">元</div>
-        </div>
-        <div class="fygroup top20 bottom20">
-          <button type="button" class="btntn-lg ">确认</button>
-        </div>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
