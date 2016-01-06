@@ -13,6 +13,7 @@
         <div class="form-main">
           <%= f.hidden_field :card_type, value: 'stored' %>
           <%= f.hidden_field :valid_days %>
+          <%= f.hidden_field :value %>
           <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店</samp></span>
             <%= f.collection_select :service_id, current_user.all_services, :id, :name, {}, class: "form-control selectpicker" %>
@@ -42,12 +43,6 @@
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">开始时间</samp></span>
-            <%= f.text_field :value, readonly: true, class: 'form-control' %>
-          </div>
-
-
-          <div class="input-group top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">开始时间</samp></span>
             <%= text_field_tag :valid_start, '', readonly: true, class: 'form-control' %>
           </div>
 
@@ -68,12 +63,12 @@
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">支付类型</samp></span>
-            <%= text_field_tag :pay_type, '', class: 'form-control' %>
+            <%= select_tag :pay_type, options_for_select(MembershipCardLog.pay_type_for_select), class: 'form-control selectpicker' %>
           </div>
 
           <div class="input-group top20">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">銷售人员</samp></span>
-            <%= text_field_tag :seller, '', class: 'form-control' %>
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">销售人员</samp></span>
+            <%= select_tag :seller, '', class: 'form-control selectpicker' %>
           </div>
 
           <div class="input-group top20">
@@ -98,12 +93,13 @@
             if (service_id != '') {
                 $("#membership_card_name").empty();
                 $("<option>请选择卡</option>").appendTo('#membership_card_name');
-                $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['stored']%> +'/cards', function (data) {
+                $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['clocked']%> +'/cards', function (data) {
                     $.each(data, function (i, value) {
                         $("<option value='" + value.name +
                         "' data-price='" + value.price +
                         "' data-valid-days='" + value.valid_days +
                         "' data-delay-days='" + value.delay_days +
+                        "' data-value='" + value.value +
                         "'>" + value.name + "</option>").appendTo('#membership_card_name');
                     });
                     $("#membership_card_name").selectpicker('refresh');
@@ -129,6 +125,7 @@
                 $('#valid_end').val(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
                 $('#membership_card_valid_days').val(valid_days);
                 $('#market_price').val(market_price);
+                $('#membership_card_value').val(value);
             }
         })
     })

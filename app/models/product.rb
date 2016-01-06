@@ -19,7 +19,7 @@ class Product < ActiveRecord::Base
         sku: 'SM'+'-' + '%06d' % id + '-' + '%06d' % (service.id),
         course_type: card_type_id,
         course_name: name,
-        course_cover: image.first.url,
+        course_cover: (image.first.url rescue ''),
         seller: service.profile.name,
         seller_id: seller_id||service_id,
         service_id: service_id,
