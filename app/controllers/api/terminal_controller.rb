@@ -32,6 +32,7 @@ module Api
                      name: service.profile.name,
                      avatar: service.profile.avatar.url,
                      card: MembershipCard.where(service: service).where('updated_at > ?', time).map { |membership_card|
+                       physical_card = PhysicalCard.find_by(virtual_number: membership_card.physical_card)
                        {
                            id: membership_card.id,
                            name: membership_card.name,
@@ -42,7 +43,7 @@ module Api
                                name: membership_card.member.name,
                                avatar: membership_card.member.avatar
                            },
-                           physical_card: membership_card.physical_card
+                           physical_card: physical_card.entity_number
                        }
                      }
                  }
@@ -51,40 +52,46 @@ module Api
 
     def checkin
       service = Service.find_by_mxid(@terminal.mxid)
-      membership_cards = MembershipCard.where(physical_card: params[:id], service_id: service.id)
-      if membership_cards.blank?
+      physical_card = PhysicalCard.find_by(virtual_number: params[:id])
+      if physical_card.blank?
         render json: {code: 0, message: '无效的会员卡'}
       else
-        valid_cards = membership_cards.find_all { |membership_card|
-          membership_card.value > 0 && !membership_card.valid.eql?('已过期')
-        }
-        if valid_cards.present?
-          MembershipCardLog.checkin.create(
-              service_id: service.id,
-              physical_card: params[:id],
-              remark: '终端机签到'
-          )
-          render json: {
-                     code: 1,
-                     data: {
-                         card: valid_cards.map { |membership_card|
-                           {
-                               id: membership_card.id,
-                               name: membership_card.name,
-                               card_type: membership_card.card_type,
-                               value: membership_card.value,
-                               valid_end: membership_card.valid_end,
-                               member: {
-                                   name: membership_card.member.name,
-                                   avatar: membership_card.member.avatar
-                               },
-                               physical_card: membership_card.physical_card
-                           }
-                         }
-                     }
-                 }
+        membership_cards = MembershipCard.where(physical_card: params[:id], service_id: service.id)
+        if membership_cards.blank?
+          render json: {code: 0, message: '无效的会员卡'}
         else
-          render json: {code: 0, message: '会员卡已过期或者余额不足'}
+          valid_cards = membership_cards.find_all { |membership_card|
+            membership_card.value > 0 && !membership_card.valid.eql?('已过期')
+          }
+          if valid_cards.present?
+            MembershipCardLog.checkin.create(
+                service_id: service.id,
+                physical_card: params[:id],
+                remark: '终端机签到'
+            )
+            render json: {
+                       code: 1,
+                       data: {
+                           card: valid_cards.map { |membership_card|
+                             physical_card = PhysicalCard.find_by(virtual_number: membership_card.physical_card)
+                             {
+                                 id: membership_card.id,
+                                 name: membership_card.name,
+                                 card_type: membership_card.card_type,
+                                 value: membership_card.value,
+                                 valid_end: membership_card.valid_end,
+                                 member: {
+                                     name: membership_card.member.name,
+                                     avatar: membership_card.member.avatar
+                                 },
+                                 physical_card: physical_card.entity_number
+                             }
+                           }
+                       }
+                   }
+          else
+            render json: {code: 0, message: '会员卡已过期或者余额不足'}
+          end
         end
       end
     end
