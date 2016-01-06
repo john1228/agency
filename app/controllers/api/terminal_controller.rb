@@ -52,11 +52,11 @@ module Api
 
     def checkin
       service = Service.find_by_mxid(@terminal.mxid)
-      physical_card = PhysicalCard.find_by(virtual_number: params[:id])
+      physical_card = PhysicalCard.find_by(entity_number: params[:id])
       if physical_card.blank?
         render json: {code: 0, message: '无效的会员卡'}
       else
-        membership_cards = MembershipCard.where(physical_card: params[:id], service_id: service.id)
+        membership_cards = MembershipCard.where(physical_card: physical_card.virtual_number, service_id: service.id)
         if membership_cards.blank?
           render json: {code: 0, message: '无效的会员卡'}
         else
