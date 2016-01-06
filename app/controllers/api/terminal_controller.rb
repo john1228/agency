@@ -41,7 +41,8 @@ module Api
                            member: {
                                name: membership_card.member.name,
                                avatar: membership_card.member.avatar
-                           }
+                           },
+                           physical_card: membership_card.physical_card
                        }
                      }
                  }
@@ -76,7 +77,8 @@ module Api
                                member: {
                                    name: membership_card.member.name,
                                    avatar: membership_card.member.avatar
-                               }
+                               },
+                               physical_card: membership_card.physical_card
                            }
                          }
                      }
