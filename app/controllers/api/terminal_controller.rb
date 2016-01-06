@@ -16,22 +16,25 @@ module Api
       service = @terminal.service
       time = Time.parse(params[:ver]) rescue Time.parse('2015-01-01')
       render json: {
-                 ver: MembershipCard.where(service: service).where('updated_at > ?', time).order(updated_at: :desc).first.updated_at.strftime('%Y%m%d%H%M%S'),
-                 time: Time.now.strftime('%Y-%m-%d'),
-                 name: service.profile.name,
-                 avatar: service.profile.avatar,
-                 card: MembershipCard.where(service: service).where('updated_at > ?', time).map { |membership_card|
-                   {
-                       id: membership_card.id,
-                       name: membership_card.name,
-                       card_type: membership_card.card_type,
-                       value: membership_card.value,
-                       valid_end: membership_card.valid_end,
-                       member: {
-                           name: membership_card.member.name,
-                           avatar: membership_card.member.avatar
+                 code: 1,
+                 data: {
+                     ver: MembershipCard.where(service: service).where('updated_at > ?', time).order(updated_at: :desc).first.updated_at.strftime('%Y%m%d%H%M%S'),
+                     time: Time.now.strftime('%Y-%m-%d'),
+                     name: service.profile.name,
+                     avatar: service.profile.avatar,
+                     card: MembershipCard.where(service: service).where('updated_at > ?', time).map { |membership_card|
+                       {
+                           id: membership_card.id,
+                           name: membership_card.name,
+                           card_type: membership_card.card_type,
+                           value: membership_card.value,
+                           valid_end: membership_card.valid_end,
+                           member: {
+                               name: membership_card.member.name,
+                               avatar: membership_card.member.avatar
+                           }
                        }
-                   }
+                     }
                  }
              }
     end
