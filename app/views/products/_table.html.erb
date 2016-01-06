@@ -17,13 +17,13 @@
 
           <div class="caption">
             <h3 class="member-h3 clearfix top10">
-              <samp class="pull-left member-h3-left"><%= product.name %></samp>
+              <samp class="pull-left member-h3-left"><%= truncate(product.name) %></samp>
               <samp class="pull-right member-h3-riht"><%= product.sku.market_price %>元</samp>
             </h3>
 
             <p class="member-Card"><%= product.card_type.card_type_i18n %></p>
             <ul class="top10">
-              <li><samp>卡名称</samp><%= product.name %></li>
+              <li><samp>卡名称</samp><%= truncate(product.name) %></li>
               <li><samp>现价</samp><%= product.sku.selling_price %>元</li>
               <li><samp>商品数量</samp><%= product.sku.store.eql?(-1) ? '无限' : product.sku.store %></li>
               <li><samp>已售数量</samp><%= product.sku.limit.eql?(-1) ? '无限' : product.sku.limit %></li>
@@ -33,7 +33,7 @@
                 <samp>
                   <%= image_tag(product.sku.service.profile.avatar.url + '-avatar', class: 'img-responsive img-circle') %>
                 </samp>
-                <%= product.sku.service.profile.name %>
+                <%= truncate(product.sku.service.profile.name) %>
               </div>
               <div class="member-operation pull-right">
 
