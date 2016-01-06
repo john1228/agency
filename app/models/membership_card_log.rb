@@ -4,8 +4,8 @@ class MembershipCardLog < ActiveRecord::Base
   enum action: [:buy, :transfer_card, :disable, :re_activated, :charge, :checkin, :cancel_checkin]
   class << self
     def pay_type_for_select
-      pay_types.map do |key, value|
-        [I18n.t("enums.membership_card_log.pay_type.#{key}"), value]
+      pay_types.keys.map do |key|
+        [I18n.t("enums.membership_card_log.pay_type.#{key}"), key]
       end
     end
   end
