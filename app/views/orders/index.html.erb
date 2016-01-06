@@ -3,9 +3,10 @@
     <span class="pull-left">报表</span>
   </div>
   <div class="panel-body">
-    <button type="button" class="btn btn-primary active" data-url="">订单统计</button>
-    <button type="button" class="btn btn-default" data-url="">销售额统计</button>
-    <%= render 'order' %>
+    <div id="highchart-div">
+      <%= render 'order' %>
+      <%= render 'sale' %>
+    </div>
   </div>
 </div>
 <div class="panel">
@@ -15,5 +16,3 @@
   </div>
   <%= render 'table' %>
 </div>
-<script>
-</script>
