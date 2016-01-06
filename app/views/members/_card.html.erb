@@ -1,0 +1,22 @@
+<table class="table table-striped" id="datatable-editable">
+  <thead>
+  <tr class="table-header">
+    <th width="5%">编码</th>
+    <th width="25%">会员卡名称</th>
+    <th width="25%">所属门店</th>
+    <th width="20%">卡类</th>
+    <th width="20%">余额(元/次/有效期)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @member.cards.each do |card| %>
+      <tr>
+        <td><%= card.id %></td>
+        <td><%= card.name %></td>
+        <td><%= card.service.profile.name %></td>
+        <td><%= card.card_type_i18n %></td>
+        <td><%= card.value %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

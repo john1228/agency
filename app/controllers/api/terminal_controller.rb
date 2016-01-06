@@ -64,7 +64,7 @@ module Api
           if valid_cards.present?
             MembershipCardLog.checkin.create(
                 service_id: service.id,
-                physical_card: params[:id],
+                entity_number: physical_card.virtual_number,
                 remark: '终端机签到'
             )
             render json: {
