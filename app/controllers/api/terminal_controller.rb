@@ -41,7 +41,7 @@ module Api
                            valid_end: membership_card.valid_end,
                            member: {
                                name: membership_card.member.name,
-                               avatar: membership_card.member.avatar
+                               avatar: (membership_card.member.avatar.url rescue '')
                            },
                            physical_card: (physical_card.entity_number rescue '')
                        }
@@ -82,7 +82,7 @@ module Api
                                  valid_end: membership_card.valid_end,
                                  member: {
                                      name: membership_card.member.name,
-                                     avatar: membership_card.member.avatar
+                                     avatar: (membership_card.member.avatar.url rescue '')
                                  },
                                  physical_card: physical_card.entity_number
                              }
