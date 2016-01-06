@@ -21,7 +21,7 @@ module Api
                      ver: MembershipCard.where(service: service).where('updated_at > ?', time).order(updated_at: :desc).first.updated_at.strftime('%Y%m%d%H%M%S'),
                      time: Time.now.strftime('%Y-%m-%d'),
                      name: service.profile.name,
-                     avatar: service.profile.avatar,
+                     avatar: service.profile.avatar.url,
                      card: MembershipCard.where(service: service).where('updated_at > ?', time).map { |membership_card|
                        {
                            id: membership_card.id,
