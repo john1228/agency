@@ -29,6 +29,12 @@ Rails.application.routes.draw do
   resources :skus
   resources :products
 
+  namespace :api do
+    post 'terminal' => 'terminal#active'
+    get 'terminal' => 'terminal#show'
+    post 'terminal/checkin' => 'terminal#checkin'
+  end
+
   get 'checkin' => 'checkin#index', as: :checkin
   get 'checkin/list' => 'checkin#list', as: :checkin_list
 

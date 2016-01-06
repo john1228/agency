@@ -20,7 +20,6 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to action: :index
     else
-      @card_type = params[:card_type].to_i
       render action: :new
     end
   end
@@ -39,6 +38,5 @@ class ProductsController < ApplicationController
   end
 
   def update_params
-
   end
 end
