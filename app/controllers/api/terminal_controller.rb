@@ -39,10 +39,8 @@ module Api
                            card_type: membership_card.card_type,
                            value: membership_card.value,
                            valid_end: membership_card.valid_end,
-                           member: {
-                               name: membership_card.member.name,
-                               avatar: (membership_card.member.avatar.url rescue '')
-                           },
+                           member_name: membership_card.member.name,
+                           member_avatar: (membership_card.member.avatar.url rescue ''),
                            physical_card: (physical_card.entity_number rescue '')
                        }
                      }
@@ -80,10 +78,8 @@ module Api
                                  card_type: membership_card.card_type,
                                  value: membership_card.value,
                                  valid_end: membership_card.valid_end,
-                                 member: {
-                                     name: membership_card.member.name,
-                                     avatar: (membership_card.member.avatar.url rescue '')
-                                 },
+                                 member_name: membership_card.member.name,
+                                 member_avatar: (membership_card.member.avatar.url rescue ''),
                                  physical_card: physical_card.entity_number
                              }
                            }
