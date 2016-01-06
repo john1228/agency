@@ -11,7 +11,7 @@ class CheckinController < ApplicationController
     @members = Member.full.where(client_id: current_user.client_id).pluck(:name, :id)
     @cards = MembershipCard.where(member: @member)
     @logs = MembershipCardLog.checkin
-                .where(membership_card_id: MembershipCard.where(member_id: Member.full.where(client_id: current_user.client_id).pluck(:id)).pluck(:id))
+                .where(service_id: current_user.all_service.pluck(:id))
                 .paginate(page: params[:page]||1, per_page: 10)
   end
 
