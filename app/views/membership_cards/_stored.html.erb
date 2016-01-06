@@ -12,6 +12,7 @@
         <% end %>
         <div class="form-main">
           <%= f.hidden_field :card_type, value: 'stored' %>
+          <%= f.hidden_field :valid_days %>
           <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店</samp></span>
             <%= f.collection_select :service_id, current_user.all_services, :id, :name, {}, class: "form-control selectpicker" %>
@@ -19,7 +20,7 @@
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡名称</samp></span>
-            <%= f.select :name, options_for_select(MembershipCard.card_type_for_select), {}, class: "form-control selectpicker" %>
+            <%= f.select :name, options_for_select([]), {}, class: "form-control selectpicker" %>
           </div>
 
           <div class="input-group top20">
@@ -28,7 +29,7 @@
                          options_for_select(Member.where(client_id: current_user.client_id).pluck(:name, :id)),
                          {include_blank: '请选择会员'},
                          {
-                                 class: "form-control selectpicker search",
+                                 class: "form-control selectpicker",
                                  'data-live-search' => 'true'
                          } %>
           </div>
@@ -41,15 +42,13 @@
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">开始时间</samp></span>
-            <%= f.text_field :valid_start, readonly: true, class: 'form-control' %>
+            <%= text_field_tag :valid_start, '', readonly: true, class: 'form-control' %>
           </div>
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">结束时间</samp></span>
-            <%= f.text_field :valid_end, readonly: true, class: 'form-control' %>
+            <%= text_field_tag :valid_end, '', readonly: true, class: 'form-control' %>
           </div>
-
-
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
             <%= text_field_tag :market_price, '', class: 'form-control', readonly: true %>
@@ -114,14 +113,15 @@
         })
 
         $('#membership_card_name').on('change', function () {
-            var valid_day = ($(this).find("option:selected").attr("data-valid-days"));
+            var valid_days = ($(this).find("option:selected").attr("data-valid-days"));
             var today = new Date();
-            $('#membership_card_valid_start').val(today.getFullYear() + '-' + today.getMonth() + '-' + today.getDay());
-            if (valid_day == 'null') {
-                $('#membership_card_valid_end').val('永久');
+            $('#valid_start').val(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
+            if (valid_days == 'null') {
+                $('#valid_end').val('永久');
             } else {
                 today.setDate(today.getDate() + $(this).find("option:selected").attr("data-valid-days"));
-                $('#membership_card_valid_end').val(today.getFullYear() + '-' + today.getMonth() + '-' + today.getDay());
+                $('#valid_end').val(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
+                $('#membership_card_valid_days').val(valid_days);
             }
         })
     })

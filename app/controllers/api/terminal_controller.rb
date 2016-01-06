@@ -19,6 +19,15 @@ module Api
                  code: 1,
                  data: {
                      ver: MembershipCard.where(service: service).where('updated_at > ?', time).order(updated_at: :desc).first.updated_at.strftime('%Y%m%d%H%M%S'),
+                     mxing: ['http://h.hiphotos.baidu.com/image/pic/item/4ec2d5628535e5dd2820232370c6a7efce1b623a.jpg', 'http://a.hiphotos.baidu.com/image/pic/item/9c16fdfaaf51f3de6cee3f9892eef01f3b2979ea.jpg'],
+                     venue: {
+                         first: ['http://f.hiphotos.baidu.com/image/pic/item/838ba61ea8d3fd1f7ca6f808374e251f95ca5f50.jpg',
+                                 'http://d.hiphotos.baidu.com/image/pic/item/b21bb051f819861865a669784ced2e738ad4e66d.jpg'],
+                         second: ['http://h.hiphotos.baidu.com/image/pic/item/6609c93d70cf3bc798e14b10d700baa1cc112a6c.jpg',
+                                  'http://b.hiphotos.baidu.com/image/pic/item/8435e5dde71190efa71d1423c81b9d16fcfa606c.jpg'],
+                         third: ['http://b.hiphotos.baidu.com/image/pic/item/7aec54e736d12f2e70a7289c49c2d562843568a8.jpg',
+                                 'http://h.hiphotos.baidu.com/image/pic/item/dbb44aed2e738bd4644fb353a78b87d6277ff962.jpg']
+                     },
                      time: Time.now.strftime('%Y-%m-%d'),
                      name: service.profile.name,
                      avatar: service.profile.avatar.url,
