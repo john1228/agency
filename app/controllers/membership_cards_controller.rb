@@ -37,6 +37,6 @@ class MembershipCardsController < ApplicationController
   end
 
   def membership_card_log_params
-    params.permit(:market_price, :selling_price, :pay_type, :seller, :remark)
+    params.permit(:change_amount, :pay_amount, :pay_type, :seller, :remark)
   end
 end

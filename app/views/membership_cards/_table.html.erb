@@ -23,7 +23,7 @@
   <% @membership_cards.each do |membership_card| %>
       <tr>
         <td><%= membership_card.id %></td>
-        <td><%= membership_card.name %></td>
+        <td><%= truncate(membership_card.name, length: 6) %></td>
         <td><%= membership_card.card_type_i18n %></td>
         <td><%= membership_card.service.profile.name %></td>
         <td><%= membership_card.member.name %></td>

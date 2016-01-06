@@ -49,31 +49,41 @@ module Api
     end
 
     def checkin
-      membership_card = MembershipCard.find(id)
-      if card.present?
-        if card.valid_start <= Date.today && card.valid_end >= Date.today
-          membership_card.checkin
+      service = Service.find_by_mxid(@terminal.mxid)
+      membership_cards = MembershipCard.where(physical_card: params[:id], service_id: service.id)
+      if membership_cards.blank?
+        render json: {code: 0, message: '无效的会员卡'}
+      else
+        valid_cards = membership_cards.find_all { |membership_card|
+          membership_card.value > 0 && !membership_card.valid.eql?('已过期')
+        }
+        if valid_cards.present?
+          MembershipCardLog.checkin.create(
+              service_id: service.id,
+              physical_card: params[:id],
+              remark: '终端机签到'
+          )
           render json: {
                      code: 1,
                      data: {
-                         card: {
-                             id: membership_card.id,
-                             name: membership_card.name,
-                             card_type: membership_card.card_type,
-                             value: membership_card.value,
-                             valid_end: membership_card.valid_end,
-                             member: {
-                                 name: membership_card.member.name,
-                                 avatar: membership_card.member.avatar
-                             }
+                         card: valid_cards.map { |membership_card|
+                           {
+                               id: membership_card.id,
+                               name: membership_card.name,
+                               card_type: membership_card.card_type,
+                               value: membership_card.value,
+                               valid_end: membership_card.valid_end,
+                               member: {
+                                   name: membership_card.member.name,
+                                   avatar: membership_card.member.avatar
+                               }
+                           }
                          }
                      }
                  }
         else
-          render json: {code: 0, message: '该卡已过期或者余额不足'}
+          render json: {code: 0, message: '会员卡已过期或者余额不足'}
         end
-      else
-        render json: {code: 1, message: '无效的会员卡'}
       end
     end
 

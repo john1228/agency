@@ -7,6 +7,8 @@ class CreateMembershipCardLogs < ActiveRecord::Migration
       t.integer :pay_type
       t.string :seller
       t.string :remark
+      t.string :entity_number
+      t.integer :service_id
 
       t.timestamps null: false
     end
