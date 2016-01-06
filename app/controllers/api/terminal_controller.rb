@@ -1,6 +1,6 @@
 module Api
-  class TerminalController < ApplicationController
-    before_action :auth, only: [:show, :checkin]
+  class TerminalController < ActionController::Base
+    before_filter :auth, only: [:show, :checkin]
 
     def active
       terminal = Terminal.new(active_params)

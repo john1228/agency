@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :find_manager_service
 
   $hls_host = 'http://video.e-mxing.com/hls'
-  
+
   protected
   def find_manager_service
     @service = Service.find_by(id: current_admin_user.service_id) if admin_user_signed_in?
@@ -20,5 +20,6 @@ class ApplicationController < ActionController::Base
   def current_user
     current_admin_user
   end
+
   helper_method :current_user
 end
