@@ -28,7 +28,7 @@ module Api
                          third: ['http://b.hiphotos.baidu.com/image/pic/item/7aec54e736d12f2e70a7289c49c2d562843568a8.jpg',
                                  'http://h.hiphotos.baidu.com/image/pic/item/dbb44aed2e738bd4644fb353a78b87d6277ff962.jpg']
                      },
-                     time: Time.now.strftime('%Y-%m-%d'),
+                     time: Time.now.strftime('%Y-%m-%d %H:%M:%S'),
                      name: service.profile.name,
                      avatar: service.profile.avatar.url,
                      card: MembershipCard.where(service: service).where('updated_at > ?', time).map { |membership_card|
