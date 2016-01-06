@@ -122,6 +122,7 @@
             var valid_days = ($(this).find("option:selected").attr("data-valid-days"));
             var today = new Date();
             $('#valid_start').val(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
+            console.log(valid_days);
             if (valid_days == 'null') {
                 $('#valid_end').val('永久');
             } else {
