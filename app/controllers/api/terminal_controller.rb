@@ -84,7 +84,7 @@ module Api
                                      name: membership_card.member.name,
                                      avatar: membership_card.member.avatar
                                  },
-                                 physical_card: (physical_card.entity_number rescue '')
+                                 physical_card: physical_card.entity_number
                              }
                            }
                        }
