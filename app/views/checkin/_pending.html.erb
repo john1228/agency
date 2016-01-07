@@ -16,10 +16,10 @@
           <%= image_tag(log.member.avatar.url + '-avatar') %>
         </td>
         <td>
-          <%= log.membership_card.member.name %>
+          <%= log.member.name %>
         </td>
         <td>
-          <%= log.membership_card.service.profile.name %>
+          <%= log.service.profile.name %>
         </td>
         <td>
           <%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M') %>

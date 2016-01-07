@@ -1,5 +1,6 @@
 class MembershipCardLog < ActiveRecord::Base
   belongs_to :membership_card
+  belongs_to :service
   enum pay_type: [:mx, :cash, :card, :transfer, :other]
   enum action: [:buy, :transfer_card, :disable, :re_activated, :charge, :checkin, :cancel_checkin]
   enum status: [:pending, :confirm, :cancel]
