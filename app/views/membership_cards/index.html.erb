@@ -16,7 +16,7 @@
       <%= select_tag :card_type, options_for_select(MembershipCard.card_type_for_select), {include_blank: "全部类型", class: "pull-right selectpicker search-item"} %>
     </div>
   </div>
-  <div class="panel-body ">
+  <div class="panel-body" id="list">
     <%= render 'table' %>
   </div>
 </div>
