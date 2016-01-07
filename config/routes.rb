@@ -36,7 +36,8 @@ Rails.application.routes.draw do
   end
 
   get 'checkin' => 'checkin#index', as: :checkin
-  get 'checkin/list' => 'checkin#list', as: :checkin_list
+  get 'checkin/pending' => 'checkin#pending', as: :pending_list
+  get 'checkin/confirm' => 'checkin#confirm', as: :confirm_list
 
 
   get ':service_id/membership_card_types/:type/cards' => 'json#card_types'

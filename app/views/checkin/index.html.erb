@@ -3,7 +3,8 @@
     <%= link_to '<samp class="mx-tab-active">
         <div id="triangle-down"></div>
         会员签到</samp>'.html_safe, '#', class: 'pull-left page-header-text' %>
-    <%= link_to "全部会员签到记录", checkin_list_path, class: "pull-left  page-header-text " %>
+    <%= link_to "待确认", pending_list_path, class: "pull-left  page-header-text " %>
+    <%= link_to "全部会员签到记录", confirm_list_path, class: "pull-left  page-header-text " %>
   </div>
   <div class="pull-right member-search">
     <%= select_tag(:member,
