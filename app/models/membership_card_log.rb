@@ -15,7 +15,7 @@ class MembershipCardLog < ActiveRecord::Base
     if membership_card.present?
       membership_card.member
     else
-      MembershipCard.find_by(service_id: service_id, physical_card: entity_number)
+      MembershipCard.find_by(service_id: service_id, physical_card: entity_number).member
     end
   end
 end
