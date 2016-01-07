@@ -13,7 +13,7 @@
   <% @logs.each do |log| %>
       <tr>
         <td>
-          <%= image_tag(log.membership_card.member.avatar.url + '-avatar') %>
+          <%= image_tag(log.member.avatar.url + '-avatar') %>
         </td>
         <td>
           <%= log.membership_card.member.name %>

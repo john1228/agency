@@ -10,4 +10,12 @@ class MembershipCardLog < ActiveRecord::Base
       end
     end
   end
+
+  def member
+    if membership_card.present?
+      membership_card.member
+    else
+      MembershipCard.find_by(service_id: service_id, physical_card: entity_number)
+    end
+  end
 end
