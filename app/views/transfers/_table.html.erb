@@ -24,7 +24,7 @@
           <tr>
             <td><%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
             <td><%= log.wallet.user.profile.name %></td>
-            <td><%= log.coach.profile.name %></td>
+            <td><%= log.coach.profile.name rescue '' %></td>
             <td><%= log.balance.to_i %></td>
             <td><%= log.operator %></td>
           </tr>
