@@ -615,6 +615,7 @@ ActiveRecord::Schema.define(version: 20160106114651) do
     t.date     "open"
     t.integer  "valid_days"
     t.integer  "status",        default: 0
+    t.integer  "supply_value"
   end
 
   create_table "news", force: :cascade do |t|

@@ -8,8 +8,8 @@ class DashboardController < ApplicationController
     @member = current_user.all_services.includes(:profile).map { |service|
       [service.profile.name, service.members.count] }
     @transaction = current_user.all_services.includes(:profile).map { |service| [
-        service.profile.name, service.orders.sum(:total)] }
-    @incoming = current_user.all_services.includes(:profile).map { |service| service.orders.sum(:total) }
+        service.profile.name, service.orders.sum(:total).floor] }
+    @incoming = current_user.all_services.includes(:profile).map { |service| service.orders.sum(:total).floor }
 
     respond_to do |format|
       format.html
