@@ -24,12 +24,14 @@ class TransfersController < ApplicationController
       coach_wallet.update_attributes(
           action: WalletLog.actions['transfer'],
           balance: coach_wallet.balance + BigDecimal(params[:amount]),
-          source: service.id
+          source: service.id,
+          operator: current_user.name
       )
       service_wallet.update_attributes(
           action: WalletLog.actions['transfer'],
           balance: service_wallet.balance - BigDecimal(params[:amount]),
-          source: coach.id
+          source: coach.id,
+          operator: current_user.name
       )
     end
     redirect_to action: :index

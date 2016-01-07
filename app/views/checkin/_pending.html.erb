@@ -13,7 +13,7 @@
   <% @logs.each do |log| %>
       <tr>
         <td>
-          <%= image_tag(log.member.avatar.url + '-avatar') %>
+          <%= image_tag(log.member.avatar.url + '-avatar', class: "img-responsive img-circle") %>
         </td>
         <td>
           <%= log.member.name %>
@@ -29,7 +29,7 @@
         </td>
         <td class="sign-in">
           <%= link_to "签到", "#", 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
-          |<%= link_to "忽略", "#", 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
+          |<%= link_to "忽略", "#" %>
         </td>
       </tr>
   <% end %>
@@ -46,3 +46,16 @@
         });
     });
 </script>
+<div class="modal-dialog" id="myModal">
+  <div class="modal-header">签到确认扣费</div>
+  <div class="modal-body">
+    <table>
+      <tr class="table-header">
+        <th>会员卡</th>
+        <th>卡类型</th>
+        <th>余额</th>
+        <th>口服</th>
+      </tr>
+    </table>
+  </div>
+</div>
