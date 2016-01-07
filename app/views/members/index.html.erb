@@ -8,7 +8,7 @@
         </div>
       </div>
       <%= link_to '新建会员', new_member_path, class: "new-btn pull-right" %>
-      <%= link_to '搜索', '#', class: "detailed-Search pull-right" %>
+      <%= link_to '搜索', '#', class: "detailed-Search pull-right", onclick: "return $(this).closest('form').submit()" %>
     </div>
 <% end %>
 <div class="panel  top20">
@@ -30,4 +30,3 @@
     <%= render 'table' %>
   </div>
 </div>
-
