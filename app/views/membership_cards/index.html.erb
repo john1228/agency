@@ -2,21 +2,32 @@
   <div class="member-search pull-left member-type">
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>
-      <%= search_field_tag :name, '', placeholder: "会员姓名/手机", class: "form-control" %>
+      <%= search_field_tag :name, '', placeholder: "会员姓名/手机", class: "form-control search-item" %>
     </div>
   </div>
   <%= link_to '<i class="icon">&#xe613;</i> 添加会员卡'.html_safe, new_membership_card_path, class: "new-btn pull-right" %>
 </div>
-<div class="panel  top20">
+<div class="panel top20">
   <div class="panel-header clearfix header-selector">
     <span class="pull-left">全部会员卡(<%= @query.result.count %>)</span>
 
-    <p class="top10">
-      <%= select_tag :service, options_for_select(current_admin_user.all_services.pluck('profiles.name', :id)), {include_blank: "全部门店", class: "pull-right"} %>
-      <%= select_tag :card_type, options_for_select(MembershipCard.card_type_for_select), {include_blank: "全部类型", class: "pull-right"} %>
-    </p>
+    <div style="margin-top:6px;">
+      <%= select_tag :service, options_for_select(current_admin_user.all_services.pluck('profiles.name', :id)), {include_blank: "全部门店", class: "pull-right selectpicker search-item"} %>
+      <%= select_tag :card_type, options_for_select(MembershipCard.card_type_for_select), {include_blank: "全部类型", class: "pull-right selectpicker search-item"} %>
+    </div>
   </div>
   <div class="panel-body ">
     <%= render 'table' %>
   </div>
 </div>
+<script>
+    $(function () {
+        $('.search-item').on('change', function () {
+            var name_or_mobile = $('#name').val();
+            var service = $('#service').val();
+            var card_type = $('#card_type').val();
+            $.get(this.href, {name_or_mobile: name_or_mobile, service: service, card_type: card_type}, null, "script");
+            return false;
+        })
+    })
+</script>

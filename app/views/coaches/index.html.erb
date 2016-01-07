@@ -8,14 +8,14 @@
         </div>
       </div>
       <%= link_to "新建私教", new_coach_path, class: "new-btn pull-right" %>
-      <%= link_to '搜索', '#', class: "detailed-Search pull-right" %>
+      <%= link_to '搜索', '#', class: "detailed-Search pull-right", onclick: "return $(this).closest('form').submit()" %>
     </div>
     <div class="panel  top20">
       <div class="panel-header clearfix header-selector">
         <span class="pull-left">私教统计</span>
 
         <p class="top10">
-          <%= f.collection_select :service_id_eq, current_admin_user.all_services, :id, :name, {include_blank: "全部门店"}, class: "pull-right", onchange: "return $(this).closest('form').submit()" %>
+          <%= f.collection_select :service_id_eq, current_admin_user.all_services, :id, :name, {include_blank: "全部门店"}, class: "pull-right selectpicker", onchange: "return $(this).closest('form').submit()" %>
         </p>
       </div>
 <% end %>
