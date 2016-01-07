@@ -2,6 +2,7 @@ class MembershipCardLog < ActiveRecord::Base
   belongs_to :membership_card
   enum pay_type: [:mx, :cash, :card, :transfer, :other]
   enum action: [:buy, :transfer_card, :disable, :re_activated, :charge, :checkin, :cancel_checkin]
+  enum status: [:pending, :confirm, :cancel]
   class << self
     def pay_type_for_select
       pay_types.keys.map do |key|

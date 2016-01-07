@@ -1,44 +1,36 @@
 <table class="table table-striped" id="datatable-editable">
   <thead>
   <tr class="table-header">
-    <th width="8%">头像</th>
-    <th width="13%">姓名</th>
-    <th width="13%">门店</th>
-    <th width="13%">时间</th>
-    <th width="10%">名称</th>
-    <th width="10%">类型</th>
-    <th width="10%">余额</th>
-    <th width="13%">操作员</th>
-    <th width="10%">操作</th>
+    <th>头像</th>
+    <th>姓名</th>
+    <th>门店</th>
+    <th>时间</th>
+    <th>实体卡号</th>
+    <th>操作</th>
   </tr>
   </thead>
   <tbody>
   <% @logs.each do |log| %>
       <tr>
-        <td width="8%">
+        <td>
           <%= image_tag(log.membership_card.member.avatar_url + '-avatar') %>
         </td>
-        <td width="13%">
+        <td>
           <%= log.membership_card.member.name %>
         </td>
-        <td width="13%">
+        <td>
           <%= log.membership_card.service.profile.name %>
         </td>
-        <td width="13%">
+        <td>
           <%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M') %>
         </td>
-        <td width="10%">
-          <%= log.membership_card.name %>
+        <td>
+          <%= log.entity_number||log.remark %>
         </td>
-        <td width="10%">
-          <%= log.membership_card.card_type_i18n %>
-        </td>
-        <td width="10%">
-          <%= log.membership_card.value %>
-        </td>
-        <td width="13%"> <%= log.operator %></td>
         <td class="sign-in">
-          <%= link_to "签到", "#", 'data-toggle' => 'modal', 'data-target' => '#myModal' %></td>
+          <%= link_to "签到", "#", 'data-toggle' => 'modal', 'data-target' => '#myModal' %>|
+          <%= link_to "忽略", "#", 'data-toggle' => 'modal', 'data-target' => '#myModal' %>|
+        </td>
       </tr>
   <% end %>
   </tbody>
