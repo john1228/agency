@@ -12,8 +12,7 @@ class CreateMembershipCardLogs < ActiveRecord::Migration
       t.string :seller
       t.string :remark
       t.string :operator
-
-
+      t.string :option_code
       t.timestamps null: false
     end
   end

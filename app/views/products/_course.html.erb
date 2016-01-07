@@ -107,7 +107,7 @@
         if (service_id != '') {
             $("#product_type").empty();
             $("<option>请选择卡</option>").appendTo('#product_type');
-            $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['stored']%> +'/cards', function (data) {
+            $.getJSON('/' + service_id + '/membership_card_types/' + <%=MembershipCardType.card_types['course']%> +'/cards', function (data) {
                 $.each(data, function (i, value) {
                     $("<option value='" + value.id +
                     "' data-count='" + value.count +

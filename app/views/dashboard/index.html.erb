@@ -83,10 +83,6 @@
 <div class="panel">
   <div class="panel-header header-selector">
     <span class="pull-left">门店收入排行榜</span>
-
-    <p style="padding-top: 8px">
-      <%= select_tag(:month, options_for_select(1..12), class: 'header-selector-a pull-right') %>
-    </p>
   </div>
   <div class="panel-body">
     <%= render 'incoming' %>

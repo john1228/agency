@@ -5,6 +5,7 @@ class MembershipCard < ActiveRecord::Base
   belongs_to :service
   has_many :logs, class: MembershipCardLog, dependent: :destroy
 
+  before_create :build_code
   class << self
     def card_type_for_select
       card_types.map do |key, value|
@@ -107,5 +108,12 @@ class MembershipCard < ActiveRecord::Base
         '永久'
       end
     end
+  end
+
+  protected
+  def build_code
+    self.option_code = (1..supply_value).map { |index|
+      'L' + Time.now.to_i.to_s + index.to_s + %w'0 1 2 3 4 5 6 7 8 9'.sample(2).join
+    }
   end
 end

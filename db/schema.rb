@@ -582,6 +582,7 @@ ActiveRecord::Schema.define(version: 20160106114651) do
     t.string   "operator"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.string   "option_code"
   end
 
   create_table "membership_card_types", force: :cascade do |t|
@@ -608,14 +609,15 @@ ActiveRecord::Schema.define(version: 20160106114651) do
     t.integer  "card_type"
     t.string   "name"
     t.integer  "value"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "physical_card"
     t.integer  "delay_days",    default: 0
     t.date     "open"
     t.integer  "valid_days"
     t.integer  "status",        default: 0
     t.integer  "supply_value"
+    t.string   "option_code",   default: [],              array: true
   end
 
   create_table "news", force: :cascade do |t|

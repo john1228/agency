@@ -19,14 +19,15 @@ module Api
                  code: 1,
                  data: {
                      ver: MembershipCard.where(service: service).where('updated_at > ?', time).order(updated_at: :desc).first.updated_at.strftime('%Y%m%d%H%M%S'),
-                     mxing: ['http://h.hiphotos.baidu.com/image/pic/item/4ec2d5628535e5dd2820232370c6a7efce1b623a.jpg', 'http://a.hiphotos.baidu.com/image/pic/item/9c16fdfaaf51f3de6cee3f9892eef01f3b2979ea.jpg'],
+                     mxing: ['http://h.hiphotos.baidu.com/image/pic/item/00e93901213fb80e7c4a24ce31d12f2eb938940b.jpg',
+                             'http://e.hiphotos.baidu.com/image/pic/item/f2deb48f8c5494eeecd34b002af5e0fe99257e31.jpg'],
                      venue: {
-                         first: ['http://f.hiphotos.baidu.com/image/pic/item/838ba61ea8d3fd1f7ca6f808374e251f95ca5f50.jpg',
-                                 'http://d.hiphotos.baidu.com/image/pic/item/b21bb051f819861865a669784ced2e738ad4e66d.jpg'],
-                         second: ['http://h.hiphotos.baidu.com/image/pic/item/6609c93d70cf3bc798e14b10d700baa1cc112a6c.jpg',
-                                  'http://b.hiphotos.baidu.com/image/pic/item/8435e5dde71190efa71d1423c81b9d16fcfa606c.jpg'],
-                         third: ['http://b.hiphotos.baidu.com/image/pic/item/7aec54e736d12f2e70a7289c49c2d562843568a8.jpg',
-                                 'http://h.hiphotos.baidu.com/image/pic/item/dbb44aed2e738bd4644fb353a78b87d6277ff962.jpg']
+                         first: ['http://f.hiphotos.baidu.com/image/pic/item/7dd98d1001e939012499c8277cec54e736d1960b.jpg',
+                                 'http://c.hiphotos.baidu.com/image/pic/item/7aec54e736d12f2eb3f4ea7948c2d56285356831.jpg'],
+                         second: ['http://e.hiphotos.baidu.com/image/pic/item/37d12f2eb9389b50430ea44b8235e5dde7116e31.jpg',
+                                  'http://a.hiphotos.baidu.com/image/pic/item/77094b36acaf2edda36a0cf08a1001e93901930b.jpg'],
+                         third: ['http://h.hiphotos.baidu.com/image/pic/item/3801213fb80e7bec532b47f8282eb9389b506b31.jpg',
+                                 'http://f.hiphotos.baidu.com/image/pic/item/8c1001e93901213fbdc20ac553e736d12f2e9531.jpg']
                      },
                      time: Time.now.strftime('%Y-%m-%d %H:%M:%S'),
                      name: service.profile.name,

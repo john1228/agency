@@ -14,6 +14,7 @@ class CreateMembershipCards < ActiveRecord::Migration
       t.integer :delay_days
       t.integer :status, default: 0
       t.string :physical_card
+      t.string :option_code, array: true, default: [] #课程卡时，存储消课码
       t.timestamps null: false
     end
   end

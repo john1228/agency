@@ -25,16 +25,14 @@ class MembershipCardsController < ApplicationController
 
 
   def edit
-
   end
 
   def update
-
   end
 
   protected
   def membership_card_params
-    params.require(:membership_card).permit(:card_type, :service_id, :member_id, :name, :value, :valid_start, :valid_end, :physical_card)
+    params.require(:membership_card).permit(:card_type, :service_id, :member_id, :name, :value, :valid_days, :delay_days, :physical_card)
   end
 
   def membership_card_log_params
