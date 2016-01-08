@@ -46,6 +46,6 @@ class CheckinController < ApplicationController
 
   protected
   def update_params
-    params.permit(:membership_card_id).merge(change_amount: params["value_#{params[:membership_card_id]}".to_sym], status: confirm)
+    params.permit(:membership_card_id).merge(change_amount: params["value_#{params[:membership_card_id]}".to_sym], status: 'confirm')
   end
 end
