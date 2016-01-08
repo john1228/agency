@@ -7,7 +7,7 @@
         $("#myModal").on("hidden.bs.modal", function () {
             $(this).removeData("bs.modal");
         });
-        $(".post a").on("click", function () {
+        $(".post").on("click", function () {
             $.post(this.href);
             return false;
         })
