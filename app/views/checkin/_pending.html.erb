@@ -7,6 +7,11 @@
         $("#myModal").on("hidden.bs.modal", function () {
             $(this).removeData("bs.modal");
         });
+        $(".post a").on("click", function () {
+            $.post(this.href);
+            return false;
+        })
+
     });
 </script>
 <table class="table table-striped card-list" id="datatable-editable">
@@ -40,7 +45,7 @@
         </td>
         <td class="sign-in">
           <%= link_to "签到", card_list_path(log), 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
-          |<%= link_to "忽略", ignore_checkin_path(log), method: :post, remote: true %>
+          |<%= link_to "忽略", ignore_checkin_path(log), class: 'post' %>
         </td>
       </tr>
   <% end %>
