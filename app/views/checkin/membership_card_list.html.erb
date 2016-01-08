@@ -1,4 +1,4 @@
-<%= form_tag('', method: :post) do %>
+<%= form_tag(confirm_checkin_path(@checkin), method: :post) do %>
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span></button>
@@ -18,24 +18,24 @@
         <tbody>
         <% @cards.each do |card| %>
             <tr>
-              <td><%= check_box_tag(:card_id, value: card.id) %></td>
+              <td><%= check_box_tag(:card_id, card.id) %></td>
               <td><%= card.name %></td>
               <td><%= card.card_type_i18n %></td>
               <td><%= card.value %></td>
               <td>
                 <% if card.stored? %>
                     <div class="input-group">
-                      <%= text_field_tag 'value[]', '', class: 'form-control form-control-all-border' %>
+                      <%= text_field_tag 'value[]', '', class: 'form-control', style: 'border-left: 1px solid #ccc' %>
                       <span class="input-group-addon">元</span>
                     </div>
                 <% elsif card.measured? %>
                     <div class="input-group">
-                      <%= text_field_tag 'value[]', '', class: 'form-control form-control-all-border' %>
+                      <%= text_field_tag 'value[]', '', class: 'form-control', style: 'border-left: 1px solid #ccc' %>
                       <span class="input-group-addon">次</span>
                     </div>
                 <% elsif card.course? %>
                     <div class="input-group">
-                      <%= text_field_tag 'value[]', '', class: 'form-control form-control-all-border' %>
+                      <%= text_field_tag 'value[]', '', class: 'form-control', style: 'border-left: 1px solid #ccc' %>
                       <span class="input-group-addon">节</span>
                     </div>
                 <% end %>
