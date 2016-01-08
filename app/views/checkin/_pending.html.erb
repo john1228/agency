@@ -1,3 +1,15 @@
+<script>
+    $(function () {
+        $('.logs_pagination a').on('click', function (event) {
+            $.get(this.href, null, null, 'script');
+            return false;
+        });
+        $("#myModal").on("show.bs.modal", function () {
+            $(this).removeData("bs.modal");
+        });
+
+    });
+</script>
 <table class="table table-striped card-list" id="datatable-editable">
   <thead>
   <tr class="table-header">
@@ -28,6 +40,7 @@
           <%= log.entity_number||log.remark %>
         </td>
         <td class="sign-in">
+          <a data-toggle="modal" href="1.html" data-toggle="'modal">111</a>
           <%= link_to "签到", 'http://www.baidu.com', 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
           |<%= link_to "忽略", "#" %>
         </td>
@@ -38,14 +51,6 @@
 <div class="clearfix pull-right">
   <%= will_paginate @logs, renderer: BootstrapPagination::Rails, class: 'logs_pagination' %>
 </div>
-<script>
-    $(function () {
-        $('.logs_pagination a').on('click', function (event) {
-            $.get(this.href, null, null, 'script');
-            return false;
-        });
-    });
-</script>
 <div class="modal fade sign-in-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
