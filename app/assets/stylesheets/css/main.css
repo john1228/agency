@@ -1975,7 +1975,7 @@
 }
 
 .sign-in-modal .modal-dialog {
-    width: 500px;
+    min-width: 800px;
     margin: 130px auto;
 }
 
