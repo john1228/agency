@@ -27,9 +27,10 @@
                           'css/jgallery'
   %>
   <script>
-      $("a[date-remote = 'true']").on('click', function () {
+      $("a[data-remote='true']").on('click', function () {
+          alert($(this).attr('data-method'));
           $.ajax({type: $(this).attr('data-method'), url: $(this).attr('href')});
-          return false
+          return false;
       });
   </script>
   <%= csrf_meta_tags %>
