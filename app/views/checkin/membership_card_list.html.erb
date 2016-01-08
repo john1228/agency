@@ -1,36 +1,38 @@
-<div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span></button>
-  <h4 class="modal-title" id="myModalLabel">签到确认</h4>
-</div>
-<div class="modal-body">
-  <table class="table table-striped" id="datatable-editable">
-    <thead>
-    <tr class="table-header">
-      <th>会员卡名称</th>
-      <th>卡类</th>
-      <th>余额(元/次/有效期)</th>
-      <th>扣费</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @cards.each do |card| %>
-        <tr>
-          <td><%= card.name %></td>
-          <td><%= card.card_type_i18n %></td>
-          <td><%= card.value %></td>
-          <td><%= text_field_tag 'value[]', '', class: 'form-control' %></td>
+<%= form_tag('', method: :post) do %>
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="myModalLabel">签到确认</h4>
+    </div>
+    <div class="modal-body">
+      <table class="table table-striped" id="datatable-editable">
+        <thead>
+        <tr class="table-header">
+          <th>会员卡名称</th>
+          <th>卡类</th>
+          <th>余额(元/次/有效期)</th>
+          <th>扣费</th>
         </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-default"
-          data-dismiss="modal">关闭
-  </button>
-  <button type="button" class="btn btn-primary">
-    提交
-  </button>
-</div>
+        </thead>
+        <tbody>
+        <% @cards.each do |card| %>
+            <tr>
+              <td><%= card.name %></td>
+              <td><%= card.card_type_i18n %></td>
+              <td><%= card.value %></td>
+              <td><%= text_field_tag 'value[]', '', class: 'form-control-all-border' %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-all-border btn-default"
+              data-dismiss="modal">关闭
+      </button>
+      <button type="button" class="btn-all-border btn-primary">
+        提交
+      </button>
+    </div>
+<% end %>
 

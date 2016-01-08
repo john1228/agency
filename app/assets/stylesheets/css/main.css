@@ -150,6 +150,11 @@
     border-left: 0;
 }
 
+.form-control-all-border {
+    height: 40px;
+    padding: 6px 3px;
+}
+
 .form-control-mine {
     width: 170px;
     color: #555;
@@ -185,10 +190,6 @@
     border-top: 1px solid #ccc;
     border-right: 1px solid #ccc;
     border-left: 0;
-}
-
-.form-control-all-border {
-    border: 1px solid #ccc;
 }
 
 .form-titrol {
@@ -2254,6 +2255,11 @@
 .btn {
     height: 40px;
     border-left: 0;
+    border-radius: 4px;
+}
+
+.btn-all-border {
+    height: 40px;
     border-radius: 4px;
 }
 
