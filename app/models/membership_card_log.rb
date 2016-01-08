@@ -4,6 +4,7 @@ class MembershipCardLog < ActiveRecord::Base
   enum pay_type: [:mx, :cash, :card, :transfer, :other]
   enum action: [:buy, :transfer_card, :disable, :re_activated, :charge, :checkin, :cancel_checkin]
   enum status: [:pending, :confirm, :cancel]
+  after_update :backend
   class << self
     def pay_type_for_select
       pay_types.keys.map do |key|
@@ -17,6 +18,17 @@ class MembershipCardLog < ActiveRecord::Base
       membership_card.member
     else
       MembershipCard.find_by(service_id: service_id, physical_card: entity_number).member
+    end
+  end
+
+  protected
+  def backend
+    if confirm? && status_was.pending?
+      if membership_card.store? || membership_card.measured?
+        membership_card.update(value: membership_card.value - change_amount)
+      elsif membership_card.course?
+        membership_card.update(supply_value: membership_card.supply_value - change_amount)
+      end
     end
   end
 end
