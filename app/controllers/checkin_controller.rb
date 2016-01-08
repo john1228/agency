@@ -37,7 +37,7 @@ class CheckinController < ApplicationController
 
   def update
     @check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
-    if @check_in.update(update_params)
+    if @check_in.confirm(update_params)
       redirect_to action: :index, flash: '确认成功'
     else
       redirect_to :index, flash: '确认失败'
@@ -46,6 +46,6 @@ class CheckinController < ApplicationController
 
   protected
   def update_params
-    params.permit(:membership_card_id).merge(change_amount: params["value_#{params[:membership_card_id]}".to_sym], status: 'confirm')
+    params.permit(:membership_card_id).merge(change_amount: params["value_#{params[:membership_card_id]}".to_sym])
   end
 end

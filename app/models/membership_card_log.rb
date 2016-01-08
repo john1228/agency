@@ -21,10 +21,26 @@ class MembershipCardLog < ActiveRecord::Base
     end
   end
 
+
+  include AASM
+  aasm :status do
+    state :pending, :initial => true
+    state :confirm
+    state :cancel
+
+    event :confirm do
+      transitions :from => :pending, :to => :confirm
+    end
+
+    event :cancel do
+      transitions :from => :pending, :to => :cancel
+    end
+  end
+
   protected
   def backend
     if confirm? && status_was.eql?('pending')
-      if membership_card.store? || membership_card.measured?
+      if membership_card.stored? || membership_card.measured?
         membership_card.update(value: membership_card.value - change_amount)
       elsif membership_card.course?
         membership_card.update(supply_value: membership_card.supply_value - change_amount)
