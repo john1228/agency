@@ -23,7 +23,7 @@ class MembershipCardLog < ActiveRecord::Base
 
   protected
   def backend
-    if confirm? && status_was.pending?
+    if confirm? && status_was.eql?('pending')
       if membership_card.store? || membership_card.measured?
         membership_card.update(value: membership_card.value - change_amount)
       elsif membership_card.course?
