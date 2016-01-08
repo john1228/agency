@@ -36,7 +36,7 @@
           <%= log.entity_number||log.remark %>
         </td>
         <td class="sign-in">
-          <%= link_to "签到", 'http://www.baidu.com', 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
+          <%= link_to "签到", card_list_path(log), 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
           |<%= link_to "忽略", "#" %>
         </td>
       </tr>

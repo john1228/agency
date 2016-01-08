@@ -1,0 +1,20 @@
+<table class="table table-striped" id="datatable-editable">
+  <thead>
+  <tr class="table-header">
+    <th>会员卡名称</th>
+    <th>卡类</th>
+    <th>余额(元/次/有效期)</th>
+    <th>扣费</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @cards.each do |card| %>
+      <tr>
+        <td><%= card.name %></td>
+        <td><%= card.card_type_i18n %></td>
+        <td><%= card.value %></td>
+        <td><%= text_field_tag 'value[]', class: 'form-control' %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

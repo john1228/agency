@@ -25,7 +25,27 @@ class CheckinController < ApplicationController
                 .paginate(page: params[:page]||1, per_page: 10)
   end
 
-  def create
-
+  def membership_card_list
+    checkin = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    if checkin.membership_card.present?
+      @cards = [checkin.membership_card]
+    else
+      @cards = MembershipCard.where(physical_card: checkin.entity_number, service_id: current_user.all_services.pluck(:id))
+    end
   end
+
+  def update
+    @check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    if @check_in.update(update_params)
+      redirect_to :index, flash: '确认成功'
+    else
+      redirect_to :index, flash: '确认失败'
+    end
+  end
+
+  protected
+  def update_params
+    params.permit(:check_in).permit(:membership_card_id, :change_amount)
+  end
+
 end
