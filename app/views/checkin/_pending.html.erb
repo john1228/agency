@@ -4,10 +4,6 @@
             $.get(this.href, null, null, 'script');
             return false;
         });
-        $("a[data-toggle=modal]").click(function () {
-            $("#myModal").load($(this).attr("href"));
-        });
-
     });
 </script>
 <table class="table table-striped card-list" id="datatable-editable">
@@ -61,14 +57,7 @@
       <h4 class="modal-title" id="myModalLabel">签到确认</h4>
     </div>
     <div class="modal-body">
-      <table>
-        <tr class="table-header">
-          <th>会员卡</th>
-          <th>卡类型</th>
-          <th>余额</th>
-          <th>口服</th>
-        </tr>
-      </table>
+      body..................
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default"
