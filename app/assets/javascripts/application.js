@@ -12,7 +12,7 @@
 //= require avatar
 //= require_self
 
-$(a[remote = 'true']).on('click', function () {
+$("a[date-remote = 'true']").on('click', function () {
     $.ajax({type: $(this).attr('data-method'), url: $(this).attr('href')});
     return false
 });
