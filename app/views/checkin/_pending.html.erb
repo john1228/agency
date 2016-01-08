@@ -4,8 +4,8 @@
             $.get(this.href, null, null, 'script');
             return false;
         });
-        $("#myModal").on("show.bs.modal", function () {
-            $(this).removeData("bs.modal");
+        $("a[data-toggle=modal]").click(function () {
+            $("#myModal").load($(this).attr("href"));
         });
 
     });
@@ -40,7 +40,6 @@
           <%= log.entity_number||log.remark %>
         </td>
         <td class="sign-in">
-          <a data-toggle="modal" href="1.html" data-toggle="'modal">111</a>
           <%= link_to "签到", 'http://www.baidu.com', 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
           |<%= link_to "忽略", "#" %>
         </td>
