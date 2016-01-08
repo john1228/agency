@@ -39,7 +39,7 @@
         <td width="13%"> <%= log.operator %></td>
         <td class="sign-in">
           <% if log.confirm? %>
-              <%= form_tag(cancel_checkin_path(this), method: :post) do %>
+              <%= form_tag(cancel_checkin_path(log), method: :post) do %>
                   <%= link_to "取消签到", '#', onclick: "return $(this).closest('form').submit()" %>
               <% end %>
           <% else %>
