@@ -150,11 +150,6 @@
     border-left: 0;
 }
 
-.form-control-all-border {
-    height: 40px;
-    padding: 6px 3px;
-}
-
 .form-control-mine {
     width: 170px;
     color: #555;
@@ -2253,12 +2248,6 @@
 }
 
 .btn {
-    height: 40px;
-    border-left: 0;
-    border-radius: 4px;
-}
-
-.btn-all-border {
     height: 40px;
     border-radius: 4px;
 }

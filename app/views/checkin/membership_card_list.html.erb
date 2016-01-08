@@ -8,6 +8,7 @@
       <table class="table table-striped" id="datatable-editable">
         <thead>
         <tr class="table-header">
+          <th></th>
           <th>会员卡名称</th>
           <th>卡类</th>
           <th>余额(元/次/有效期)</th>
@@ -17,20 +18,38 @@
         <tbody>
         <% @cards.each do |card| %>
             <tr>
+              <td><%= check_box_tag(:card_id, value: card.id) %></td>
               <td><%= card.name %></td>
               <td><%= card.card_type_i18n %></td>
               <td><%= card.value %></td>
-              <td><%= text_field_tag 'value[]', '', class: 'form-control form-control-all-border' %></td>
+              <td>
+                <% if card.stored? %>
+                    <div class="input-group">
+                      <%= text_field_tag 'value[]', '', class: 'form-control form-control-all-border' %>
+                      <span class="input-group-addon">元</span>
+                    </div>
+                <% elsif card.measured %>
+                    <div class="input-group">
+                      <%= text_field_tag 'value[]', '', class: 'form-control form-control-all-border' %>
+                      <span class="input-group-addon">次</span>
+                    </div>
+                <% elsif card.measured %>
+                    <div class="input-group">
+                      <%= text_field_tag 'value[]', '', class: 'form-control form-control-all-border' %>
+                      <span class="input-group-addon">节</span>
+                    </div>
+                <% end %>
+              </td>
             </tr>
         <% end %>
         </tbody>
       </table>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-all-border btn-default"
+      <button type="button" class="btn btn-default"
               data-dismiss="modal">关闭
       </button>
-      <button type="button" class="btn btn-all-border btn-primary">
+      <button type="button" class="btn btn-primary">
         提交
       </button>
     </div>
