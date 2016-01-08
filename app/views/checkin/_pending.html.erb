@@ -4,6 +4,9 @@
             $.get(this.href, null, null, 'script');
             return false;
         });
+        $("#myModal").on("hidden.bs.modal", function () {
+            $(this).removeData("bs.modal");
+        });
     });
 </script>
 <table class="table table-striped card-list" id="datatable-editable">
