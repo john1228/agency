@@ -40,11 +40,11 @@ class MembershipCardLog < ActiveRecord::Base
           membership_card.update(supply_value: membership_card.supply_value - change_amount)
         end
       end
-      transitions :from => :pending, :to => :confirm
+      transitions from: :pending, to: :confirm
     end
 
     event :ignore do
-      transitions :from => :pending, :to => :ignore
+      transitions fro: :pending, to: :ignore
     end
 
     event :cancel do

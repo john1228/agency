@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   resources :withdraws
   resources :transfers
   resources :orders
-  resources :appointments
   resources :sales
   resources :membership_card_types
   resources :membership_cards do
@@ -40,6 +39,8 @@ Rails.application.routes.draw do
   get 'checkin/confirm' => 'checkin#confirm', as: :confirm_list
   get 'checkin/:id/card_list' => 'checkin#membership_card_list', as: :card_list
   patch 'checkin/:id' => 'checkin#update', as: :confirm_checkin
+  post 'checkin/:id/ignore' => 'checkin#ignore', as: :ignore_checkin
+  post 'checkin/:id/cancel' => 'checkin#cancel', as: :cancel_checkin
 
 
   get ':service_id/membership_card_types/:type/cards' => 'json#card_types'
@@ -70,11 +71,9 @@ Rails.application.routes.draw do
   get 'report' => 'report#course'
 
   post 'report/order' => 'report#order'
-  post 'report/appointment' => 'report#appointment'
   post 'report/sale' => 'report#sale'
 
   get 'report/order' => 'report#order_table'
-  get 'report/appointment' => 'report#appointment_table'
   get 'report/sale' => 'report#sale_table'
   get 'dashboard' => 'dashboard#index'
 
