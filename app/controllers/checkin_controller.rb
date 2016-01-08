@@ -28,9 +28,9 @@ class CheckinController < ApplicationController
   def membership_card_list
     @checkin = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
     if @checkin.membership_card.present?
-      @cards = [checkin.membership_card]
+      @cards = [@checkin.membership_card]
     else
-      @cards = MembershipCard.where(physical_card: checkin.entity_number, service_id: current_user.all_services.pluck(:id))
+      @cards = MembershipCard.where(physical_card: @checkin.entity_number, service_id: current_user.all_services.pluck(:id))
     end
     render layout: false
   end
