@@ -20,6 +20,10 @@ class MembershipCardLog < ActiveRecord::Base
     end
   end
 
+  def charge(membership_card_id, value)
+    self.membership_card_id = membership_card_id
+    self.change_amount = value
+  end
 
   include AASM
   aasm :status do
