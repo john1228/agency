@@ -28,12 +28,12 @@
                       <%= text_field_tag 'value[]', '', class: 'form-control form-control-all-border' %>
                       <span class="input-group-addon">元</span>
                     </div>
-                <% elsif card.measured %>
+                <% elsif card.measured? %>
                     <div class="input-group">
                       <%= text_field_tag 'value[]', '', class: 'form-control form-control-all-border' %>
                       <span class="input-group-addon">次</span>
                     </div>
-                <% elsif card.measured %>
+                <% elsif card.course? %>
                     <div class="input-group">
                       <%= text_field_tag 'value[]', '', class: 'form-control form-control-all-border' %>
                       <span class="input-group-addon">节</span>
