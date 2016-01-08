@@ -8,20 +8,22 @@ class CheckinController < ApplicationController
   end
 
   def pending
+    @flash = params[:flash]
+    @error = params[:error]
     @members = Member.full.where(client_id: current_user.client_id).pluck(:name, :id)
     @cards = MembershipCard.where(member: @member)
     @logs = MembershipCardLog.checkin.pending
                 .where(service_id: current_user.all_services.pluck(:id))
-                .order(id: :desc)
+                .order(created_at: :desc)
                 .paginate(page: params[:page]||1, per_page: 10)
   end
 
   def confirm
     @members = Member.full.where(client_id: current_user.client_id).pluck(:name, :id)
     @cards = MembershipCard.where(member: @member)
-    @logs = MembershipCardLog.checkin.where.not(status: 'pending')
+    @logs = MembershipCardLog.checkin.where(status: [MembershipCardLog.statuses[:confirm], MembershipCardLog.statuses[:cancel]])
                 .where(service_id: current_user.all_services.pluck(:id))
-                .order(id: :desc)
+                .order(updated_at: :desc)
                 .paginate(page: params[:page]||1, per_page: 10)
   end
 
@@ -39,10 +41,11 @@ class CheckinController < ApplicationController
     check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
     check_in.membership_card_id = params[:membership_card_id]
     check_in.change_amount = params["value_#{params[:membership_card_id]}".to_sym]
+    check_in.operator = current_user.name
     if check_in.confirm!
-      redirect_to action: :index, flash: '确认成功'
+      redirect_to action: :pending, flash: '确认成功'
     else
-      redirect_to :index, flash: '确认失败'
+      redirect_to action: :pending, error: '确认失败'
     end
   end
 
