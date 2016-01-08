@@ -36,10 +36,10 @@ class CheckinController < ApplicationController
   end
 
   def update
-    @check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
-    @check_in.membership_card_id = params[:membership_card_id]
-    @check_in.change_amount = params["value_#{params[:membership_card_id]}".to_sym]
-    if @check_in.confirm!
+    check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    check_in.membership_card_id = params[:membership_card_id]
+    check_in.change_amount = params["value_#{params[:membership_card_id]}".to_sym]
+    if check_in.confirm!
       redirect_to action: :index, flash: '确认成功'
     else
       redirect_to :index, flash: '确认失败'
@@ -47,8 +47,8 @@ class CheckinController < ApplicationController
   end
 
   def ignore
-    @check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
-    if @check_in.ignore!
+    check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    if check_in.ignore!
       redirect_to action: :index, flash: '忽略成功'
     else
       redirect_to :index, error: '忽略失败'
@@ -56,8 +56,8 @@ class CheckinController < ApplicationController
   end
 
   def cancel
-    @check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
-    if @check_in.cancel!
+    check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    if check_in.cancel!
       redirect_to action: :index, flash: '取消成功'
     else
       redirect_to :index, error: '取消失败'
