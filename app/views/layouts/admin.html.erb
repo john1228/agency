@@ -26,6 +26,12 @@
                           'css/bootstrap-select',
                           'css/jgallery'
   %>
+  <script>
+      $("a[date-remote = 'true']").on('click', function () {
+          $.ajax({type: $(this).attr('data-method'), url: $(this).attr('href')});
+          return false
+      });
+  </script>
   <%= csrf_meta_tags %>
 </head>
 
