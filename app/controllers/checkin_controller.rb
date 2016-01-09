@@ -20,11 +20,20 @@ class CheckinController < ApplicationController
     member = Member.where(client_id: current_user.client_id).find_by(id: params[:member])
     if member.present?
       cards = member.cards.where(service_id: current_user.all_services.pluck(:id))
-      member_logs = MembershipCardLog.checkin.pending.ransack(membership_card_in: cards.pluck(:id), enitiy_number_in: cards.pluck(:physical_card), m: 'or')
-      @logs = member_logs.result
-                  .where(service_id: current_user.all_services.pluck(:id))
-                  .order(created_at: :desc)
-                  .paginate(page: params[:page]||1, per_page: 10)
+      membership_card_ids = cards.pluck(:id)
+      physical_cards = cards.pluck(:physical_card).compact!
+      if physical_cards.present?
+        @logs = MembershipCardLog.checkin.pending.where("membership_card_id IN (?) OR entity_number IN (?)", membership_card_ids, physical_cards)
+                    .where(enitiy_number_in: cards.pluck(:physical_card))
+                    .where(service_id: current_user.all_services.pluck(:id))
+                    .order(created_at: :desc)
+                    .paginate(page: params[:page]||1, per_page: 10)
+      else
+        @logs = MembershipCardLog.checkin.pending.where(membership_card_in: membership_card_ids)
+                    .where(service_id: current_user.all_services.pluck(:id))
+                    .order(created_at: :desc)
+                    .paginate(page: params[:page]||1, per_page: 10)
+      end
     else
       @logs = MembershipCardLog.checkin.pending
                   .where(service_id: current_user.all_services.pluck(:id))
@@ -41,8 +50,8 @@ class CheckinController < ApplicationController
     member = Member.where(client_id: current_user.client_id).find_by(id: params[:member])
     if member.present?
       cards = member.cards.where(service_id: current_user.all_services.pluck(:id))
-      member_logs = MembershipCardLog.checkin.ransack(membership_card_in: cards.pluck(:id), enitiy_number_in: cards.pluck(:physical_card), m: 'or')
-      @logs = member_logs.result.where(status: [MembershipCardLog.statuses[:confirm], MembershipCardLog.statuses[:cancel]])
+      @logs = MembershipCardLog.checkin.where(status: [MembershipCardLog.statuses[:confirm], MembershipCardLog.statuses[:cancel]])
+                  .where(membership_card_id: cards.pluck(:id))
                   .where(service_id: current_user.all_services.pluck(:id))
                   .order(created_at: :desc)
                   .paginate(page: params[:page]||1, per_page: 10)
