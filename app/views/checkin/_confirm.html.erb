@@ -34,7 +34,11 @@
           <%= log.membership_card.card_type_i18n %>
         </td>
         <td width="10%">
-          <%= log.membership_card.value %>
+          <% if log.membership_card.course %>
+              <%= log.membership_card.supply_value %>
+          <% else %>
+              <%= log.membership_card.value %>
+          <% end %>
         </td>
         <td width="13%"> <%= log.operator %></td>
         <td class="sign-in">
