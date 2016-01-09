@@ -59,7 +59,7 @@ class CheckinController < ApplicationController
   end
 
   def cancel
-    check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    check_in = MembershipCardLog.checkin.confirm.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
     if check_in.cancel!
       redirect_to action: :index, flash: '取消成功'
     else
