@@ -3,7 +3,10 @@ class CheckinController < ApplicationController
 
   def index
     @member = Member.where(client_id: current_user.client_id).find_by(id: params[:member])
-    @members = Member.full.where(client_id: current_user.client_id).pluck(:name, :id)
+    @members = Member.where.not(member_type: Member.member_types['coach'])
+                   .where(client_id: current_user.client_id).map { |member|
+      ["#{member.name}(#{member.mobile})", member.id]
+    }
     @cards = MembershipCard.where(member: @member)
   end
 
@@ -61,9 +64,9 @@ class CheckinController < ApplicationController
   def cancel
     check_in = MembershipCardLog.checkin.confirm.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
     if check_in.cancel!
-      redirect_to action: :index, flash: '取消成功'
+      redirect_to action: :confirm, flash: '取消成功'
     else
-      redirect_to :index, error: '取消失败'
+      redirect_to action: :confirm, error: '取消失败'
     end
   end
 end
