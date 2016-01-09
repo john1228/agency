@@ -22,7 +22,8 @@ class CheckinController < ApplicationController
       cards = member.cards.where(service_id: current_user.all_services.pluck(:id))
       membership_card_ids = cards.pluck(:id)
       physical_cards = cards.pluck(:physical_card)
-      if physical_cards.compact!.present?
+      physical_cards.compact!
+      if physical_cards.present?
         @logs = MembershipCardLog.checkin.pending.where("membership_card_id IN (?) OR entity_number IN (?)", membership_card_ids, physical_cards)
                     .where(service_id: current_user.all_services.pluck(:id))
                     .order(created_at: :desc)
