@@ -13,21 +13,45 @@ class CheckinController < ApplicationController
   def pending
     @flash = params[:flash]
     @error = params[:error]
-    @members = Member.full.where(client_id: current_user.client_id).pluck(:name, :id)
-    @cards = MembershipCard.where(member: @member)
-    @logs = MembershipCardLog.checkin.pending
-                .where(service_id: current_user.all_services.pluck(:id))
-                .order(created_at: :desc)
-                .paginate(page: params[:page]||1, per_page: 10)
+    @members = Member.where.not(member_type: Member.member_types['coach'])
+                   .where(client_id: current_user.client_id).map { |member|
+      ["#{member.name}(#{member.mobile})", member.id]
+    }
+    member = Member.where(client_id: current_user.client_id).find_by(id: params[:member])
+    if member.present?
+      cards = member.cards.where(service_id: current_user.all_services.pluck(:id))
+      @logs = MembershipCardLog.checkin.pending
+                  .where(service_id: current_user.all_services.pluck(:id))
+                  .where("membership_card_id in (?) or entity_number in (?)", cards.pluck(:id).join(','), cards.pluck(:physical_card).join(','))
+                  .order(created_at: :desc)
+                  .paginate(page: params[:page]||1, per_page: 10)
+    else
+      @logs = MembershipCardLog.checkin.pending
+                  .where(service_id: current_user.all_services.pluck(:id))
+                  .order(created_at: :desc)
+                  .paginate(page: params[:page]||1, per_page: 10)
+    end
   end
 
   def confirm
-    @members = Member.full.where(client_id: current_user.client_id).pluck(:name, :id)
-    @cards = MembershipCard.where(member: @member)
-    @logs = MembershipCardLog.checkin.where(status: [MembershipCardLog.statuses[:confirm], MembershipCardLog.statuses[:cancel]])
-                .where(service_id: current_user.all_services.pluck(:id))
-                .order(updated_at: :desc)
-                .paginate(page: params[:page]||1, per_page: 10)
+    @members = Member.where.not(member_type: Member.member_types['coach'])
+                   .where(client_id: current_user.client_id).map { |member|
+      ["#{member.name}(#{member.mobile})", member.id]
+    }
+    member = Member.where(client_id: current_user.client_id).find_by(id: params[:member])
+    if member.present?
+      cards = member.cards.where(service_id: current_user.all_services.pluck(:id))
+      @logs = MembershipCardLog.checkin.pending
+                  .where(service_id: current_user.all_services.pluck(:id))
+                  .where("membership_card_id in (?) or entity_number in (?)", cards.pluck(:id).join(','), cards.pluck(:physical_card).join(','))
+                  .order(created_at: :desc)
+                  .paginate(page: params[:page]||1, per_page: 10)
+    else
+      @logs = MembershipCardLog.checkin.where(status: [MembershipCardLog.statuses[:confirm], MembershipCardLog.statuses[:cancel]])
+                  .where(service_id: current_user.all_services.pluck(:id))
+                  .order(updated_at: :desc)
+                  .paginate(page: params[:page]||1, per_page: 10)
+    end
   end
 
   def membership_card_list

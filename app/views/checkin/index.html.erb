@@ -10,7 +10,7 @@
     <%= select_tag(:member,
                    options_for_select(@members),
                    {
-                           include_blank: '请选择会员',
+                           include_blank: '会员名称/手机号码',
                            class: 'form-control selectpicker search header-search',
                            'data-live-search' => 'true'
                    }) %>

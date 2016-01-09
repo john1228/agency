@@ -7,12 +7,14 @@
     <%= link_to '全部会员签到记录', confirm_list_path, class: 'pull-left page-header-text' %>
   </div>
   <div class="pull-right member-search">
-    <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>
-      <input type="text" class="form-control" placeholder="会员名称/手机号码">
-    </div>
+    <%= select_tag(:member,
+                   options_for_select(@members),
+                   {
+                           include_blank: '会员名称/手机号码',
+                           class: 'form-control selectpicker search header-search',
+                           'data-live-search' => 'true'
+                   }) %>
   </div>
-
 </div>
 <div class="panel top20">
   <div class="panel-header clearfix header-selector">
@@ -22,3 +24,11 @@
     <%= render 'pending' %>
   </div>
 </div>
+<script>
+    $(function () {
+        $('#member').on('change', function () {
+            $.get(this.href, {page: 1, member: $(this).find("option:selected").val()}, null, 'script');
+            return false;
+        });
+    });
+</script>

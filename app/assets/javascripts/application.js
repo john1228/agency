@@ -9,6 +9,6 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
-//= require avatar
 //= require_self
-
+//= require avatar
+//= require chosen-jquery
