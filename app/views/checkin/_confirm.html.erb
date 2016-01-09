@@ -34,7 +34,7 @@
           <%= log.membership_card.card_type_i18n %>
         </td>
         <td width="10%">
-          <% if log.membership_card.course %>
+          <% if log.membership_card.course? %>
               <%= log.membership_card.supply_value %>
           <% else %>
               <%= log.membership_card.value %>
