@@ -15,5 +15,9 @@ class CreateMembershipCardLogs < ActiveRecord::Migration
       t.string :option_code
       t.timestamps null: false
     end
+
+    add_index :membership_card_logs, :membership_card_id
+    add_index :membership_card_logs, :action
+    add_index :membership_card_logs, :status
   end
 end
