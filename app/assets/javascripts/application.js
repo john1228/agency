@@ -11,4 +11,3 @@
 // about supported directives.
 //= require_self
 //= require avatar
-//= require chosen-jquery
