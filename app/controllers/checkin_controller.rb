@@ -89,9 +89,9 @@ class CheckinController < ApplicationController
   def ignore
     check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
     if check_in.ignore!
-      redirect_to action: :index, flash: '忽略成功'
+      redirect_to action: :pending, flash: '忽略成功'
     else
-      redirect_to :index, error: '忽略失败'
+      redirect_to action: :pending, error: '忽略失败'
     end
   end
 
