@@ -27,7 +27,17 @@
         <td><%= membership_card.card_type_i18n %></td>
         <td><%= membership_card.service.profile.name %></td>
         <td><%= membership_card.member.name %></td>
-        <td><%= membership_card.value %></td>
+        <td>
+          <% if membership_card.stored? %>
+              <%= membership_card.value %>元
+          <% elsif membership_card.measured? %>
+              <%= membership_card.value %>次
+          <% elsif membership_card.clocked? %>
+              <%= membership_card.value %>天
+          <% elsif membership_card.stored? %>
+              <%= membership_card.value %>节
+          <% end %>
+        </td>
         <td class="net-color"><%= membership_card.status_i18n %></td>
         <td class="list-card-1f">
           <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
