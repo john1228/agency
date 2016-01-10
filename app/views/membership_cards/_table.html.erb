@@ -1,4 +1,4 @@
-<script>
+<script xmlns="http://www.w3.org/1999/html">
     $(function () {
         $('.coach_pagination a').on('click', function (event) {
             $.get(this.href, null, null, 'script');
@@ -38,11 +38,21 @@
               <%= membership_card.value %>节
           <% end %>
         </td>
-        <td class="net-color"><%= membership_card.status_i18n %></td>
+        <td>
+          <% if membership_card.to_be_activated? %>
+              <span style="color: #808080"><%= membership_card.status_i18n %></span>
+          <% elsif membership_card.normal %>
+              <span style="color: #1fbba6"><%= membership_card.status_i18n %></span>
+          <% elsif membership_card.disable %>
+              <span style="color: red"><%= membership_card.status_i18n %></span>
+          <% end %>
+        </td>
         <td class="list-card-1f">
           <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
-          | <%= link_to('转卡') %>
-          | <%= link_to('激活') %>
+          | <%= link_to('转卡', card_list_path(log), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>|
+          <%= form_tag('') do %>
+              <%= link_to('激活', '#', onclick: "return $(this).closest('form').submit()") %>
+          <% end %>
         </td>
       </tr>
   <% end %>
@@ -50,4 +60,11 @@
 </table>
 <div class="clearfix pull-right">
   <%= will_paginate @membership_cards, renderer: BootstrapPagination::Rails %>
+</div>
+
+<div class="modal fade sign-in-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
 </div>

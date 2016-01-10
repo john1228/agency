@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   post 'checkin/:id/ignore' => 'checkin#ignore', as: :ignore_checkin
   post 'checkin/:id/cancel' => 'checkin#cancel', as: :cancel_checkin
 
+  post 'membership_cards/:id/active' => 'membership_cards#active', as: :active_membership_card
+
 
   get ':service_id/membership_card_types/:type/cards' => 'json#card_types'
   get ':service_id/coaches' => 'json#coaches'

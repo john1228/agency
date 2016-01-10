@@ -22,6 +22,10 @@ class MembershipCardsController < ApplicationController
     end
   end
 
+  def active
+    @membership_card = MembershipCard.find_by(id: params[:id])
+  end
+
 
   def edit
   end

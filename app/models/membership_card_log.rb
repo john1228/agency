@@ -35,9 +35,17 @@ class MembershipCardLog < ActiveRecord::Base
     event :confirm do
       after do
         if membership_card.stored? || membership_card.measured?
-          membership_card.update(value: membership_card.value - change_amount)
+          if membership_card.to_be_activated?
+            membership_card.update(value: membership_card.value - change_amount, status: 'normal')
+          else
+            membership_card.update(value: membership_card.value - change_amount)
+          end
         elsif membership_card.course?
-          membership_card.update(supply_value: membership_card.supply_value - change_amount)
+          if membership_card.to_be_activated?
+            membership_card.update(supply_value: membership_card.supply_value, status: 'normal')
+          else
+            membership_card.update(supply_value: membership_card.supply_value)
+          end
         end
       end
       transitions from: :pending, to: :confirm
