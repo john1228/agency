@@ -35,15 +35,15 @@
           <% elsif membership_card.clocked? %>
               <%= membership_card.value %>天
           <% elsif membership_card.stored? %>
-              <%= membership_card.value %>节
+              <%= membership_card.supply_value %>节
           <% end %>
         </td>
         <td>
           <% if membership_card.to_be_activated? %>
               <span style="color: #808080"><%= membership_card.status_i18n %></span>
-          <% elsif membership_card.normal %>
+          <% elsif membership_card.normal? %>
               <span style="color: #1fbba6"><%= membership_card.status_i18n %></span>
-          <% elsif membership_card.disable %>
+          <% elsif membership_card.disable? %>
               <span style="color: red"><%= membership_card.status_i18n %></span>
           <% end %>
         </td>
