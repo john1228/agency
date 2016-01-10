@@ -52,6 +52,7 @@ class MembershipCardsController < ApplicationController
   def transfer_member
     @membership_card = MembershipCard.find_by(id: params[:id])
     @members = Member.where(service_id: @membership_card.service_id)
+    render layout: false
   end
 
 

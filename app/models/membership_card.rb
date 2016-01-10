@@ -4,7 +4,7 @@ class MembershipCard < ActiveRecord::Base
   belongs_to :member
   belongs_to :service
   has_many :logs, class: MembershipCardLog, dependent: :destroy
-  validates_uniqueness_of :physical_card, scope: :member_id, message: '该卡已使用'
+  validate :valid_physical_card
 
 
   class << self
@@ -123,6 +123,18 @@ class MembershipCard < ActiveRecord::Base
 
     event :disable do
       transitions from: :normal, to: :disable
+    end
+  end
+
+  protected
+  def valid_physical_card
+    if physical_card.present?
+      relation_cards = MembershipCard.where(physical_card: physical_card)
+      if relation_cards.present?
+        unless relation_cards.first.member_id.eql?(member_id)
+          errors.add(:physical_card,'该卡已经被其他用户绑定过')
+        end
+      end
     end
   end
 end
