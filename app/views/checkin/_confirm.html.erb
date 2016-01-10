@@ -16,7 +16,7 @@
   <% @logs.each do |log| %>
       <tr>
         <td width="8%">
-          <%= image_tag(log.membership_card.member.avatar_url + '-avatar') %>
+          <%= image_tag(log.membership_card.member.avatar_url + '-avatar', class: "img-responsive img-circle") %>
         </td>
         <td width="13%">
           <%= log.membership_card.member.name %>
