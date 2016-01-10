@@ -48,10 +48,19 @@
           <% end %>
         </td>
         <td class="list-card-1f">
-          <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
-          | <%= link_to('转卡', "#", 'data-toggle' => 'modal', 'data-target' => '#myModal') %>|
-          <%= form_tag('') do %>
-              <%= link_to('激活', '#', onclick: "return $(this).closest('form').submit()") %>
+          <% if membership_card.to_be_activated? %>
+              <%= form_tag(active_membership_card_path(membership_card)) do %>
+                  <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
+                  | <%= link_to('转卡', "#", 'data-toggle' => 'modal', 'data-target' => '#myModal') %>|
+                  <%= link_to('激活', '#', onclick: "return $(this).closest('form').submit()") %>
+              <% end %>
+          <% end %>
+          <% if membership_card.normal? %>
+              <%= form_tag(active_membership_card_path(membership_card)) do %>
+                  <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
+                  | <%= link_to('转卡', "#", 'data-toggle' => 'modal', 'data-target' => '#myModal') %>|
+                  <%= link_to('停卡', '#', onclick: "return $(this).closest('form').submit()") %>
+              <% end %>
           <% end %>
         </td>
       </tr>

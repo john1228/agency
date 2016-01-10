@@ -4,6 +4,7 @@ class MembershipCard < ActiveRecord::Base
   belongs_to :member
   belongs_to :service
   has_many :logs, class: MembershipCardLog, dependent: :destroy
+  validates_uniqueness_of :physical_card, scope: :member_id, message: '该卡已使用'
 
   class << self
     def card_type_for_select

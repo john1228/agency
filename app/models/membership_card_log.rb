@@ -36,15 +36,19 @@ class MembershipCardLog < ActiveRecord::Base
       after do
         if membership_card.stored? || membership_card.measured?
           if membership_card.to_be_activated?
-            membership_card.update(value: membership_card.value - change_amount, status: 'normal')
+            membership_card.update(value: membership_card.value - change_amount, status: 'normal', open: Date.today)
           else
             membership_card.update(value: membership_card.value - change_amount)
           end
         elsif membership_card.course?
           if membership_card.to_be_activated?
-            membership_card.update(supply_value: membership_card.supply_value, status: 'normal')
+            membership_card.update(supply_value: membership_card.supply_value, status: 'normal', open: Date.today)
           else
             membership_card.update(supply_value: membership_card.supply_value)
+          end
+        elsif membership_card.clocked?
+          if membership_card.to_be_activated?
+            membership_card.update(status: 'normal', open: Date.today)
           end
         end
       end
