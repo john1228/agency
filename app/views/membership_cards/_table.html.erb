@@ -49,7 +49,7 @@
         </td>
         <td class="list-card-1f">
           <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
-          | <%= link_to('转卡', card_list_path(log), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>|
+          | <%= link_to('转卡', "#", 'data-toggle' => 'modal', 'data-target' => '#myModal') %>|
           <%= form_tag('') do %>
               <%= link_to('激活', '#', onclick: "return $(this).closest('form').submit()") %>
           <% end %>
