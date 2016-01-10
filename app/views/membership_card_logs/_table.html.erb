@@ -32,7 +32,13 @@
       <tr>
         <td><%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td><%= log.action_i18n %></td>
-        <td><%= log.change_amount %></td>
+        <td>
+          <% if log.confirm? && log.checkin? %>
+              <span style="color: red"> -<%= log.change_amount %></span>
+          <% elsif log.cancel? && log.checkin? %>
+              <span style="color: green"> + <%= log.change_amount %></span>
+          <% end %>
+        </td>
         <td><%= log.pay_type_i18n %></td>
         <td><%= log.pay_amount %></td>
         <td><%= log.operator %></td>
