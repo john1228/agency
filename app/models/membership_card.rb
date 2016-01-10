@@ -132,7 +132,7 @@ class MembershipCard < ActiveRecord::Base
       relation_cards = MembershipCard.where(physical_card: physical_card)
       if relation_cards.present?
         unless relation_cards.first.member_id.eql?(member_id)
-          errors.add(:physical_card,'该卡已经被其他用户绑定过')
+          errors.add(:physical_card, '该卡已经被其他用户绑定过')
         end
       end
     end

@@ -33,7 +33,7 @@ class MembershipCardsController < ApplicationController
 
   def disable
     membership_card = MembershipCard.find_by(id: params[:id])
-    if membership_card.active!
+    if membership_card.disable!
       redirect_to action: :index, flash: "停用成功"
     else
       redirect_to action: :index, error: "停用失败"
@@ -51,7 +51,9 @@ class MembershipCardsController < ApplicationController
 
   def transfer_member
     @membership_card = MembershipCard.find_by(id: params[:id])
-    @members = Member.where(service_id: @membership_card.service_id)
+    @members = Member.where(service_id: @membership_card.service_id).map { |member|
+      ["#{member.name}(#{member.mobile})", member.id]
+    }
     render layout: false
   end
 
