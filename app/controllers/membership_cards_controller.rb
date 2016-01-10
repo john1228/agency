@@ -23,16 +23,37 @@ class MembershipCardsController < ApplicationController
   end
 
   def active
+    membership_card = MembershipCard.find_by(id: params[:id])
+    if membership_card.active!
+      redirect_to action: :index, flash: "激活成功"
+    else
+      redirect_to action: :index, error: "激活失败"
+    end
+  end
+
+  def disable
+    membership_card = MembershipCard.find_by(id: params[:id])
+    if membership_card.active!
+      redirect_to action: :index, flash: "停用成功"
+    else
+      redirect_to action: :index, error: "停用失败"
+    end
+  end
+
+  def transfer
+    membership_card = MembershipCard.find_by(id: params[:id])
+    if membership_card.update(transfer_params)
+      redirect_to action: :index, flash: "转卡成功"
+    else
+      redirect_to action: :index, error: "转卡失败"
+    end
+  end
+
+  def transfer_member
     @membership_card = MembershipCard.find_by(id: params[:id])
+    @members = Member.where(service_id: @membership_card.service_id)
   end
 
-
-  def edit
-  end
-
-  def update
-
-  end
 
   protected
   def membership_card_params
@@ -41,5 +62,9 @@ class MembershipCardsController < ApplicationController
 
   def membership_card_log_params
     params.permit(:change_amount, :pay_amount, :pay_type, :seller, :remark)
+  end
+
+  def transfer_params
+    params.permit(:member_id, :physical_card)
   end
 end

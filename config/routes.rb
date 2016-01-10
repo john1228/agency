@@ -43,6 +43,9 @@ Rails.application.routes.draw do
   post 'checkin/:id/cancel' => 'checkin#cancel', as: :cancel_checkin
 
   post 'membership_cards/:id/active' => 'membership_cards#active', as: :active_membership_card
+  post 'membership_cards/:id/disable' => 'membership_cards#disable', as: :disable_membership_card
+  post 'membership_cards/:id/transfer' => 'membership_cards#transfer', as: :transfer_membership_card
+  get 'membership_cards/:id/transfer_list' => 'membership_cards#transfer_member', as: :transfer_members_path
 
 
   get ':service_id/membership_card_types/:type/cards' => 'json#card_types'

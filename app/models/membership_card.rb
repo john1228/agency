@@ -6,6 +6,7 @@ class MembershipCard < ActiveRecord::Base
   has_many :logs, class: MembershipCardLog, dependent: :destroy
   validates_uniqueness_of :physical_card, scope: :member_id, message: '该卡已使用'
 
+
   class << self
     def card_type_for_select
       card_types.map do |key, value|
@@ -107,6 +108,21 @@ class MembershipCard < ActiveRecord::Base
       else
         '永久'
       end
+    end
+  end
+
+  include AASM
+  aasm :status do
+    state :to_be_activated, :initial => true
+    state :normal
+    state :disable
+
+    event :active do
+      transitions from: [:to_be_activated, :disable], to: :normal
+    end
+
+    event :disable do
+      transitions from: :normal, to: :disable
     end
   end
 end

@@ -56,7 +56,7 @@
               <% end %>
           <% end %>
           <% if membership_card.normal? %>
-              <%= form_tag(active_membership_card_path(membership_card)) do %>
+              <%= form_tag(disable_membership_card_path(membership_card)) do %>
                   <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
                   | <%= link_to('转卡', "#", 'data-toggle' => 'modal', 'data-target' => '#myModal') %>|
                   <%= link_to('停卡', '#', onclick: "return $(this).closest('form').submit()") %>

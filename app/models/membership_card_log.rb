@@ -56,7 +56,7 @@ class MembershipCardLog < ActiveRecord::Base
     end
 
     event :ignore do
-      transitions fro: :pending, to: :ignore
+      transitions from: :pending, to: :ignore
     end
 
     event :cancel do
