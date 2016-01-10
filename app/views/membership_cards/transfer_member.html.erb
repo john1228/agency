@@ -20,7 +20,7 @@
         </div>
 
         <div class="col-md-6">
-          <span>建卡时间</span><%= @membership_card.created_at.localtime.stftime('%Y-%m-%d %H:%M') %>
+          <span>建卡时间</span><%= @membership_card.created_at.localtime.strftime('%Y-%m-%d %H:%M') %>
         </div>
         <div class="col-md-6">
           <span>状态</span><%= @membership_card.status_i18n %>
