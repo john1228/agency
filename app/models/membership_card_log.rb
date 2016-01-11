@@ -71,13 +71,13 @@ class MembershipCardLog < ActiveRecord::Base
       end
       transitions :from => :confirm, :to => :cancel
     end
-    protected
-    def value_enough?
-      if membership_card.course?
-        false if change_amount > membership_card.supply_value
-      elsif membership_card.stored? || membership_card.measured?
-        false if change_amount > membership_card.value
-      end
+  end
+  protected
+  def value_enough?
+    if membership_card.course?
+      false if change_amount > membership_card.supply_value
+    elsif membership_card.stored? || membership_card.measured?
+      false if change_amount > membership_card.value
     end
   end
 end
