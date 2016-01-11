@@ -75,14 +75,15 @@ class CheckinController < ApplicationController
   end
 
   def update
-    check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
-    check_in.membership_card_id = params[:membership_card_id]
-    check_in.change_amount = params["value_#{params[:membership_card_id]}".to_sym]
-    check_in.operator = current_user.name
-    if check_in.confirm!
+    checkin = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    checkin.membership_card_id = params[:membership_card_id]
+    checkin.change_amount = params["value_#{params[:membership_card_id]}".to_sym]
+    checkin.operator = current_user.name
+    if check_in.may_confirm?
+      checkin.confirm!
       redirect_to action: :pending, flash: '确认成功'
     else
-      redirect_to action: :pending, error: '确认失败'
+      redirect_to action: :pending, error: '确认失败: 卡余额不足'
     end
   end
 
