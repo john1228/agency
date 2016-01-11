@@ -9,8 +9,8 @@ class Wallet < ActiveRecord::Base
   def create_wallet_log
     wallet_logs.create(
         action: action,
-        balance: balance_was - balance,
-        integral: integral_was - integral,
+        balance: balance - balance_was,
+        integral: integral - integral_was,
         coupons: coupons.size > coupons_was.size ? (coupons - coupons_was) : (coupons_was - coupons),
         bean: bean - bean_was,
         source: source,

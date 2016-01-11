@@ -44,23 +44,21 @@
       <h3 class="Title-top top20">转卡至</h3>
 
       <div class="clearfix top20">
-        <div class="input-group pull-left ">
-          <%= select_tag(:member_id,
-                         options_for_select(@members),
-                         {
-                                 include_blank: '会员名称/手机号码',
-                                 class: 'form-control selectpicker search',
-                                 'data-live-search' => 'true'
-                         }) %>
+        <div class="input-group pull-left" style="width: 408px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">会员</samp></span>
+          <%= select_tag(:member, options_for_select(@members), {include_blank: '会员名称/手机号码',
+                                                                 class: 'form-control selectpicker search header-search',
+                                                                 'data-live-search' => 'true'}) %>
         </div>
-        <p class="pull-left ticonte-text-p">*</p>
       </div>
       <div class="clearfix top20">
         <div class="input-group  pull-left ">
           <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实体卡号</samp></span>
           <%= text_field_tag(:physical_card, '', class: "form-control", placeholder: "请输入实体卡号") %>
         </div>
-        <p class="pull-left ticonte-text-p">*</p>
       </div>
     </div>
     <div class="modal-footer">
