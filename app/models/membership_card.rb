@@ -77,11 +77,11 @@ class MembershipCard < ActiveRecord::Base
         #开卡日期
         created_date = Date.new(created_at.year, created_at.month, created_at.day)
         #最晚开卡日
-        last_delay_date = created_date.next_day(delay_days)
+        last_delay_date = created_date.next_day(delay_days||0)
         #最晚的有效期
-        last_valid_date = last_delay_date.next_day(valid_days)
+        last_valid_date = last_delay_date.next_day(valid_days||0)
       else
-        last_valid_date = open.next_day(valid_days)
+        last_valid_date = open.next_day(valid_days||0)
       end
       if last_valid_date >= Date.today
         last_valid_date
@@ -95,10 +95,10 @@ class MembershipCard < ActiveRecord::Base
           #开卡日期
           created_date = Date.new(created_at.year, created_at.month, created_at.day)
           #最晚开卡日
-          last_delay_date = created_date.next_day(delay_days)
-          last_valid_date = last_delay_date.next_day(value)
+          last_delay_date = created_date.next_day(delay_days||0)
+          last_valid_date = last_delay_date.next_day(value||0)
         else
-          last_valid_date = open.next_day(value)
+          last_valid_date = open.next_day(value||0)
         end
         if last_valid_date > Date.today
           last_valid_date
