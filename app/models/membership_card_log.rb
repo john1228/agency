@@ -33,6 +33,14 @@ class MembershipCardLog < ActiveRecord::Base
     state :cancel
 
     event :confirm do
+      before do
+        if membership_card.course?
+          false if change_amount > membership_card.supply_value
+        elsif membership_card.stored? || membership_card.measured?
+          false if change_amount > membership_card.value
+        end
+      end
+
       after do
         if membership_card.stored? || membership_card.measured?
           if membership_card.to_be_activated?
@@ -42,9 +50,9 @@ class MembershipCardLog < ActiveRecord::Base
           end
         elsif membership_card.course?
           if membership_card.to_be_activated?
-            membership_card.update(supply_value: membership_card.supply_value, status: 'normal', open: Date.today)
+            membership_card.update(supply_value: membership_card.supply_value - change_amount, status: 'normal', open: Date.today)
           else
-            membership_card.update(supply_value: membership_card.supply_value)
+            membership_card.update(supply_value: membership_card.supply_value - change_amount,)
           end
         elsif membership_card.clocked?
           if membership_card.to_be_activated?
