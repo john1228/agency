@@ -4,6 +4,9 @@
             $.get(this.href, null, null, 'script');
             return false;
         });
+        $("#myModal").on("hidden.bs.modal", function () {
+            $(this).removeData("bs.modal");
+        });
     });
 </script>
 <table class="table table-striped card-list">
@@ -48,7 +51,7 @@
           <% end %>
         </td>
         <td class="list-card-1f">
-          <% if membership_card.to_be_activated? %>
+          <% if membership_card.to_be_activated?||membership_card.disable? %>
               <%= form_tag(active_membership_card_path(membership_card)) do %>
                   <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
                   | <%= link_to('转卡', transfer_members_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
