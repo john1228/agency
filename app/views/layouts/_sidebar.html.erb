@@ -23,12 +23,19 @@
         </li>
         <li><a href="#"><i class="iconfont icon">&#xe607;</i>会员卡管理<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li class="nav-li-a"><%= link_to "全部会员卡", membership_cards_path %></li>
             <li class="nav-li-a"><%= link_to "会员卡种类", membership_card_types_path %></li>
             <li class="nav-li-a"><%= link_to "出售会员卡", products_path %></li>
+            <li class="nav-li-a"><%= link_to "全部会员卡", membership_cards_path %></li>
           </ul>
         </li>
-        <li> <%= link_to '<i class="iconfont icon">&#xe60a;</i>签到记录'.html_safe, checkin_path %> </li>
+        <li>
+          <a href="#"><i class="iconfont icon">&#xe60a;</i>签到记录<span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+            <li class="nav-li-a"><%= link_to "会员签到", checkin_path %></li>
+            <li class="nav-li-a"><%= link_to "待确认", pending_list_path %></li>
+            <li class="nav-li-a"><%= link_to "全部签到记录", confirm_list_path %></li>
+          </ul>
+        </li>
         <li><a href="#"><i class="iconfont icon">&#xe60b;</i>财务管理<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
             <li class="nav-li-a"><%= link_to "转账", transfers_path %></li>
