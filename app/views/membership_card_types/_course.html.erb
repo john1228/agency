@@ -25,7 +25,7 @@
           <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">项目</samp></span>
 
-            <%= f.select :value, options_for_select([]), {}, :class => "form-control selectpicker" %>
+            <%= f.select :value, options_for_select(INTERESTS['items'].map { |item| [item['name'], item['id']] }), {}, :class => "form-control selectpicker" %>
           </div>
 
           <div class="input-group  top20">
