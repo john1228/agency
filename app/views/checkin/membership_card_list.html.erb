@@ -21,7 +21,13 @@
               <td><%= radio_button_tag(:membership_card_id, card.id) %></td>
               <td><%= card.name %></td>
               <td><%= card.card_type_i18n %></td>
-              <td><%= card.value %></td>
+              <td>
+                <% if card.course? %>
+                    <%= card.supply_value %>
+                <% else %>
+                    <%= card.value %>
+                <% end %>
+              </td>
               <td>
                 <% if card.stored? %>
                     <div class="input-group">
