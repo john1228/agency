@@ -33,13 +33,7 @@ class MembershipCardLog < ActiveRecord::Base
     state :cancel
 
     event :confirm do
-      before do
-        if membership_card.course?
-          false if change_amount > membership_card.supply_value
-        elsif membership_card.stored? || membership_card.measured?
-          false if change_amount > membership_card.value
-        end
-      end
+
 
       after do
         if membership_card.stored? || membership_card.measured?
@@ -60,7 +54,7 @@ class MembershipCardLog < ActiveRecord::Base
           end
         end
       end
-      transitions from: :pending, to: :confirm
+      transitions from: :pending, to: :confirm, guards: :value_enough?
     end
 
     event :ignore do
@@ -76,6 +70,14 @@ class MembershipCardLog < ActiveRecord::Base
         end
       end
       transitions :from => :confirm, :to => :cancel
+    end
+    protected
+    def value_enough?
+      if membership_card.course?
+        false if change_amount > membership_card.supply_value
+      elsif membership_card.stored? || membership_card.measured?
+        false if change_amount > membership_card.value
+      end
     end
   end
 end
