@@ -40,7 +40,7 @@
               <%= log.membership_card.value %>次
           <% elsif log.membership_card.clocked? %>
               <%= log.membership_card.value %>天
-          <% elsif log.membership_card.stored? %>
+          <% elsif log.membership_card.course? %>
               <%= log.membership_card.supply_value %>节
           <% end %>
         </td>
