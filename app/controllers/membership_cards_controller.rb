@@ -27,7 +27,7 @@ class MembershipCardsController < ApplicationController
 
   def active
     membership_card = MembershipCard.find_by(id: params[:id])
-    membership_card.open = Date.todayd
+    membership_card.open = Date.today
     if membership_card.active!
       redirect_to action: :index, flash: "激活成功"
     else
