@@ -55,10 +55,9 @@ class MembershipCardsController < ApplicationController
 
   def transfer_member
     @membership_card = MembershipCard.find_by(id: params[:id])
-    # @members = Member.where(service_id: @membership_card.service_id).map { |member|
-    #   ["#{member.name}(#{member.mobile})", member.id]
-    # }
-    @members = [['1', 1], ['2', 2], ['3', 3], ['4', 4]]
+    @members = Member.where(service_id: @membership_card.service_id).map { |member|
+      ["#{member.name}(#{member.mobile})", member.id]
+    }
     render layout: false
   end
 

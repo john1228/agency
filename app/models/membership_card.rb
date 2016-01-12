@@ -79,14 +79,18 @@ class MembershipCard < ActiveRecord::Base
         #最晚开卡日
         last_delay_date = created_date.next_day(delay_days||0)
         #最晚的有效期
-        last_valid_date = last_delay_date.next_day(valid_days)  rescue nil
+        last_valid_date = last_delay_date.next_day(valid_days) rescue nil
       else
-        last_valid_date = open.next_day(valid_days)  rescue nil
+        last_valid_date = open.next_day(valid_days) rescue nil
       end
-      if last_valid_date >= Date.today
-        last_valid_date
+      if last_valid_date.present?
+        if last_valid_date >= Date.today
+          last_valid_date
+        else
+          '已过期'
+        end
       else
-        '已过期'
+        '永久'
       end
     else
       #期限卡以卡值计算
