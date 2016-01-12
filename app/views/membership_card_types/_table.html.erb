@@ -10,9 +10,13 @@
           <h3><%= membership_card_type.price.floor %>元</h3>
           <ul class="top20">
             <% if membership_card_type.course? %>
-                <li>面值：<%= membership_card_type.price.floor %></li>
-            <% else %>
-                <li>面值：<%= membership_card_type.value %></li>
+                <li>面值：<%= membership_card_type.price.floor %>元</li>
+            <% elsif membership_card_type.stored? %>
+                <li>面值：<%= membership_card_type.value %>元</li>
+            <% elsif membership_card_type.measured? %>
+                <li>面值：<%= membership_card_type.value %>次</li>
+            <% elsif membership_card_type.clocked? %>
+                <li>面值：<%= membership_card_type.value %>天</li>
             <% end %>
             <li>有效期：<%= membership_card_type.valid_days.nil? ? '无' : "#{membership_card_type.valid_days}天" %></li>
             <li>最晚开卡时间：<%= membership_card_type.delay_days.nil? ? '无' : "#{membership_card_type.delay_days}天后" %></li>

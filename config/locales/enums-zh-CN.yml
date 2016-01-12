@@ -28,7 +28,7 @@
         stored: "储值"
         measured: "次卡"
         clocked: "期限"
-        course: "私教卡"
+        course: "课程卡"
     membership_card:
       card_type:
         stored: "储值卡"

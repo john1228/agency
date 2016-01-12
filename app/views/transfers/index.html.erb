@@ -1,16 +1,8 @@
 <div class="page-header  clearfix">
   <div class="pull-left mx-tabs">
-    <% if @type.eql?('signal') %>
-        <%= link_to '<samp class="mx-tab-active">
+    <%= link_to '<samp class="mx-tab-active">
         <div id="triangle-down"></div>
         单人转账</samp>'.html_safe, '/transfers?type=signal', class: 'pull-left page-header-text' %>
-        <%= link_to "多人转账", '/transfers?type=multiple ', class: "pull-left  page-header-text " %>
-    <% elsif @type.eql?('multiple') %>
-        <%= link_to '单人转账', '/transfers?type=signal', class: 'pull-left page-header-text' %>
-        <%= link_to '<samp class="mx-tab-active">
-        <div id="triangle-down"></div>
-        多人转账</samp>'.html_safe, '/transfers?type=multiple ', class: "pull-left  page-header-text " %>
-    <% end %>
   </div>
 </div>
 <div class="panel top20">

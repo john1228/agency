@@ -24,9 +24,9 @@
     <% if @membership_card.course? %>
         <%= link_to('<samp class="mx-tab-active">
           <div id="triangle-down"></div>
-          私教卡</samp>'.html_safe, '#', class: 'pull-left  page-header-text') %>
+          课程卡</samp>'.html_safe, '#', class: 'pull-left  page-header-text') %>
     <% else %>
-        <%= link_to('私教卡', new_membership_card_path + '?card_type=3', class: 'pull-left  page-header-text') %>
+        <%= link_to('课程卡', new_membership_card_path + '?card_type=3', class: 'pull-left  page-header-text') %>
     <% end %>
   </div>
 </div>

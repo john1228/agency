@@ -7,7 +7,7 @@ class CreateMembershipCards < ActiveRecord::Migration
       t.integer :member_id #关联会员ID
       t.integer :card_type #卡类型
       t.string :name
-      t.integer :value #私教卡时,存储课程的类型
+      t.integer :value #课程卡时,存储课程的类型
       t.integer :supply_value
       t.date :open
       t.integer :valid_days

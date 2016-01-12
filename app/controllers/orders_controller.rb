@@ -47,13 +47,13 @@ class OrdersController < ApplicationController
         {name: '储值卡', data: stored_order.map { |item| item.count }},
         {name: '次卡', data: measured_order.map { |item| item.count }},
         {name: '时效卡', data: clocked_order.map { |item| item.count }},
-        {name: '私教卡', data: course_order.map { |item| item.count }}
+        {name: '课程卡', data: course_order.map { |item| item.count }}
     ].to_json
     @sale = [
         {name: '储值卡', data: stored_order.map { |item| item.sum(:total).to_i }},
         {name: '次卡', data: measured_order.map { |item| item.sum(:total).to_i }},
         {name: '时效卡', data: clocked_order.map { |item| item.sum(:total).to_i }},
-        {name: '私教卡', data: course_order.map { |item| item.sum(:total).to_i }}
+        {name: '课程卡', data: course_order.map { |item| item.sum(:total).to_i }}
     ].to_json
 
     @orders = Order
