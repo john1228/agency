@@ -16,7 +16,7 @@
           充值金额
       <% elsif @membership_card.measured? %>
           充值次數
-      <% elsif @membership_card.clocked %>
+      <% elsif @membership_card.clocked? %>
           充值期限
       <% elsif @membership_card.course? %>
           充值节数
