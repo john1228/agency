@@ -69,4 +69,8 @@
       order_type:
         platform: '美型平台'
         face_to_face: '当面付'
+    profile:
+      gender:
+        male: '男'
+        female: '女'
 

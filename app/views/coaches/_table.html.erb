@@ -24,9 +24,9 @@
         <tr>
           <td><%= image_tag coach.profile.avatar.url(:thumb), class: "img-responsive img-circle" %></td>
           <td><%= coach.profile.name %></td>
-          <td><%= I18n.t("activerecord.attributes.gender.#{coach.profile.gender}") %></td>
+          <td><%= coach.profile.gender_i18n %></td>
           <td><%= coach.service.profile.name rescue nil %></td>
-          <td><%= coach.profile.mobile %></td>
+          <td><%= coach.mobile %></td>
           <td><%= coach.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
           <td class="list-card-1f">
             <%= link_to "编辑", edit_coach_path(coach) %>｜<%= link_to "详情", coach %>
