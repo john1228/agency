@@ -75,9 +75,9 @@ class MembershipCardLog < ActiveRecord::Base
   protected
   def value_enough?
     if membership_card.course?
-      change_amount <= membership_card.supply_value
+      change_amount <= membership_card.supply_value && change_amount > 0
     elsif membership_card.stored? || membership_card.measured?
-      change_amount <= membership_card.value
+      change_amount <= membership_card.value && change_amount > 0
     elsif membership_card.clocked?
       true
     end

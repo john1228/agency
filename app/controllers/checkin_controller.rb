@@ -81,9 +81,9 @@ class CheckinController < ApplicationController
     checkin.operator = current_user.name
     if checkin.may_confirm?
       checkin.confirm!
-      redirect_to action: :pending, flash: '确认成功'
+      redirect_to action: :pending, flash[:success] => '确认成功'
     else
-      redirect_to action: :pending, error: '确认失败: 卡余额不足'
+      redirect_to action: :pending, flash[:error] => '确认失败: 卡余额不足'
     end
   end
 
