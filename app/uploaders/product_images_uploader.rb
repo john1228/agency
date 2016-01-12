@@ -7,7 +7,7 @@ class ProductImagesUploader < CarrierWave::Uploader::Base
   after :store, :update_relation_sku
 
   def store_dir
-    'images/product'
+    'images/course'
   end
 
   def filename
