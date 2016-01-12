@@ -1,76 +1,75 @@
-<%= form_tag(transfer_membership_card_path(@membership_card), method: :patch) do %>
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title" id="myModalLabel">转卡</h4>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">转卡</h4>
+</div>
+<div class="modal-body">
+  <div class="row card-details-text">
+    <div class="col-md-6">
+      <span>所属门店</span><%= @membership_card.service.profile.name %>
     </div>
-    <div class="modal-body">
-      <div class="row card-details-text">
-        <div class="col-md-6">
-          <span>所属门店</span><%= @membership_card.service.profile.name %>
-        </div>
-        <div class="col-md-6">
-          <span>绑定会员</span><%= @membership_card.member.name %>
-        </div>
-        <div class="col-md-6">
-          <span>实体卡号</span><%= @membership_card.physical_card %>
-        </div>
-        <div class="col-md-6">
-          <span>手机号码</span><%= @membership_card.member.mobile %>
-        </div>
+    <div class="col-md-6">
+      <span>绑定会员</span><%= @membership_card.member.name %>
+    </div>
+    <div class="col-md-6">
+      <span>实体卡号</span><%= @membership_card.physical_card %>
+    </div>
+    <div class="col-md-6">
+      <span>手机号码</span><%= @membership_card.member.mobile %>
+    </div>
 
-        <div class="col-md-6">
-          <span>建卡时间</span><%= @membership_card.created_at.localtime.strftime('%Y-%m-%d %H:%M') %>
-        </div>
-        <div class="col-md-6">
-          <span>状态</span><%= @membership_card.status_i18n %>
-        </div>
-        <div class="col-md-12">
-          <span>类型</span><%= @membership_card.card_type_i18n %>
-        </div>
-        <div class="col-md-12">
-          <span>余额</span>
-          <% if @membership_card.stored? %>
-              <%= @membership_card.value %>
-          <% elsif @membership_card.measured? %>
-              <%= @membership_card.value %>
-          <% elsif @membership_card.clocked? %>
-              <%= @membership_card.value %>
-          <% elsif @membership_card.course? %>
-              <%= @membership_card.supply_value %>
-          <% end %>
+    <div class="col-md-6">
+      <span>建卡时间</span><%= @membership_card.created_at.localtime.strftime('%Y-%m-%d %H:%M') %>
+    </div>
+    <div class="col-md-6">
+      <span>状态</span><%= @membership_card.status_i18n %>
+    </div>
+    <div class="col-md-12">
+      <span>类型</span><%= @membership_card.card_type_i18n %>
+    </div>
+    <div class="col-md-12">
+      <span>余额</span>
+      <% if @membership_card.stored? %>
+          <%= @membership_card.value %>
+      <% elsif @membership_card.measured? %>
+          <%= @membership_card.value %>
+      <% elsif @membership_card.clocked? %>
+          <%= @membership_card.value %>
+      <% elsif @membership_card.course? %>
+          <%= @membership_card.supply_value %>
+      <% end %>
+    </div>
+  </div>
+  <h3 class="Title-top top20">转卡至</h3>
+
+  <%= form_tag(transfer_membership_card_path(@membership_card), method: :patch) do %>
+      <div class="clearfix top20">
+        <div class="input-group  ticonte-text pull-left ">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">绑定会员</samp></span>
+          <%= select_tag(:member,
+                         options_for_select(@members),
+                         {
+                                 include_blank: '会员名称/手机号码',
+                                 class: 'selectpicker',
+                                 'data-live-search' => 'true'
+                         }) %>
         </div>
       </div>
-      <h3 class="Title-top top20">转卡至</h3>
-
-      <form>
-        <div class="clearfix top20">
-          <div class="input-group pull-left" style="width: 408px;
-                  height: 40px;
-                  line-height: 40px;
-                  text-align: center;">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">会员</samp></span>
-            <%= select_tag(:member, options_for_select(@members), {include_blank: '会员名称/手机号码',
-                                                                   class: 'form-control selectpicker search header-search',
-                                                                   'data-live-search' => 'true'}) %>
-          </div>
+      <div class="clearfix top20">
+        <div class="input-group  pull-left ">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实体卡号</samp></span>
+          <%= text_field_tag(:physical_card, '', class: "form-control", placeholder: "请输入实体卡号") %>
         </div>
-        <div class="clearfix top20">
-          <div class="input-group  pull-left ">
-            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实体卡号</samp></span>
-            <%= text_field_tag(:physical_card, '', class: "form-control", placeholder: "请输入实体卡号") %>
-          </div>
-        </div>
-      </form>
+      </div>
 
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default"
-              data-dismiss="modal">关闭
-      </button>
-      <button type="submit" class="btn btn-primary">
-        提交
-      </button>
-    </div>
-<% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+                data-dismiss="modal">关闭
+        </button>
+        <button type="submit" class="btn btn-primary">
+          提交
+        </button>
+      </div>
+  <% end %>
 

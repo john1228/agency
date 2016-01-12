@@ -52,10 +52,40 @@ class MembershipCardsController < ApplicationController
 
   def transfer_member
     @membership_card = MembershipCard.find_by(id: params[:id])
-    @members = Member.where(service_id: @membership_card.service_id).map { |member|
-      ["#{member.name}(#{member.mobile})", member.id]
-    }
+    # @members = Member.where(service_id: @membership_card.service_id).map { |member|
+    #   ["#{member.name}(#{member.mobile})", member.id]
+    # }
+    @members = [['1', 1], ['2', 2], ['3', 3], ['4', 4]]
     render layout: false
+  end
+
+
+  def binding_request
+    @membership_card = MembershipCard.find_by(id: params[:id])
+    render action: :binding, layout: false
+  end
+
+  def binding_confirm
+    membership_card = MembershipCard.find_by(id: params[:id])
+    if membership_card.update(binding_params)
+      redirect_to action: :index, flash: "绑定实体卡成功"
+    else
+      redirect_to action: :index, error: "绑定实体卡失败"
+    end
+  end
+
+  def charge_request
+    @membership_card = MembershipCard.find_by(id: params[:id])
+    render action: :charge, layout: false
+  end
+
+  def charge_confirm
+    membership_card = MembershipCard.find_by(id: params[:id])
+    if membership_card.update(charge_params)
+      redirect_to action: :index, flash: "绑定实体卡成功"
+    else
+      redirect_to action: :index, error: "绑定实体卡失败"
+    end
   end
 
 
@@ -70,5 +100,13 @@ class MembershipCardsController < ApplicationController
 
   def transfer_params
     params.permit(:member_id, :physical_card)
+  end
+
+  def binding_params
+    params.permit(:physical_card)
+  end
+
+  def charge_params
+
   end
 end

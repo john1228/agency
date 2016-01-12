@@ -1,0 +1,48 @@
+<%= form_tag(charge_confirm_path(@membership_card), method: :patch) do %>
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="myModalLabel">转卡</h4>
+    </div>
+    <div class="modal-body">
+      <div class="clearfix top20">
+        <div class="input-group  pull-left top20 ">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡名称</samp></span>
+          <%= text_field_tag(:name, @membership_card.name, class: "form-control", readonly: true) %>
+        </div>
+        <div class="input-group  pull-left top20 ">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡类型</samp></span>
+          <%= text_field_tag(:change_amount, @membership_card.card_type_i18n, class: "form-control", readonly: true) %>
+        </div>
+        <div class="input-group  pull-left top20">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">充值額</samp></span>
+          <%= text_field_tag(:change_amount, '', class: "form-control", placeholder: "请输入要充值的额度") %>
+        </div>
+        <div class="input-group  pull-left top20">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应付款</samp></span>
+          <%= text_field_tag(:selling_price, '', class: "form-control", placeholder: "请输入应支付到金额") %>
+        </div>
+        <div class="input-group  pull-left top20">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实付款</samp></span>
+          <%= text_field_tag(:pay_amount, '', class: "form-control", placeholder: "请输入实际支付的金额") %>
+        </div>
+        <div class="input-group  pull-left top20">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">支付方式</samp></span>
+          <%= text_field_tag(:pay_type, '', class: "form-control", placeholder: "请输入实体卡号") %>
+        </div>
+        <div class="input-group  pull-left top20">
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">销售</samp></span>
+          <%= text_field_tag(:seller, '', class: "form-control", placeholder: "请输入实体卡号") %>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default"
+              data-dismiss="modal">关闭
+      </button>
+      <button type="submit" class="btn btn-primary">
+        提交
+      </button>
+    </div>
+<% end %>
+

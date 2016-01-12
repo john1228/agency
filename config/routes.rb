@@ -46,6 +46,10 @@ Rails.application.routes.draw do
   post 'membership_cards/:id/disable' => 'membership_cards#disable', as: :disable_membership_card
   post 'membership_cards/:id/transfer' => 'membership_cards#transfer', as: :transfer_membership_card
   get 'membership_cards/:id/transfer_list' => 'membership_cards#transfer_member', as: :transfer_members
+  get 'membership_card/:id/binding' => 'membership_cards#binding_request', as: :binding_request
+  patch 'membership_card/:id/binding' => 'membership_cards#binding_confirm', as: :binding_confirm
+  get 'membership_card/:id/charge' => 'membership_cards#charge_request', as: :charge_request
+  patch 'membership_card/:id/charge' => 'membership_cards#charge_confirm', as: :charge_confirm
 
 
   get ':service_id/membership_card_types/:type/cards' => 'json#card_types'
