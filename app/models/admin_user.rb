@@ -32,6 +32,8 @@ class AdminUser < ActiveRecord::Base
       Service.where(id: service_id)
     elsif super?||cms?||market?||operator?
       Service.all
+    elsif superadmin?
+      Service.where(client_id: id)
     end
   end
 end
