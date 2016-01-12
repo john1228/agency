@@ -79,7 +79,7 @@ class CheckinController < ApplicationController
     checkin.membership_card_id = params[:membership_card_id]
     checkin.change_amount = params["value_#{params[:membership_card_id]}".to_sym]
     checkin.operator = current_user.name
-    if check_in.may_confirm?
+    if checkin.may_confirm?
       checkin.confirm!
       redirect_to action: :pending, flash: '确认成功'
     else
@@ -88,8 +88,8 @@ class CheckinController < ApplicationController
   end
 
   def ignore
-    check_in = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
-    if check_in.ignore!
+    checkin = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    if checkin.ignore!
       redirect_to action: :pending, flash: '忽略成功'
     else
       redirect_to action: :pending, error: '忽略失败'
@@ -97,8 +97,8 @@ class CheckinController < ApplicationController
   end
 
   def cancel
-    check_in = MembershipCardLog.checkin.confirm.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
-    if check_in.cancel!
+    checkin = MembershipCardLog.checkin.confirm.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    if checkin.cancel!
       redirect_to action: :confirm, flash: '取消成功'
     else
       redirect_to action: :confirm, error: '取消失败'
