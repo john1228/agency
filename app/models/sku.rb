@@ -1,9 +1,8 @@
 class Sku < ActiveRecord::Base
   self.primary_key = :sku
   before_create :injection
-  enum sku_type: [:course, :card]
   enum status: [:offline, :online]
-
+  enum course_type: [:stored, :measured, :clocked, :course]
 
   belongs_to :course, class: Product
   belongs_to :service
