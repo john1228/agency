@@ -11,8 +11,8 @@ class CheckinController < ApplicationController
   end
 
   def pending
-    @flash = params[:flash]
-    @error = params[:error]
+    flash[:success] = params[:success]
+    flash[:error] = params[:error]
     @members = Member.where.not(member_type: Member.member_types['coach'])
                    .where(service_id: current_user.all_services.pluck(:id)).map { |member|
       ["#{member.name}(#{member.mobile})", member.id]
@@ -81,16 +81,16 @@ class CheckinController < ApplicationController
     checkin.operator = current_user.name
     if checkin.may_confirm?
       checkin.confirm!
-      redirect_to action: :pending, flash[:success] => '确认成功'
+      redirect_to action: :pending, success: '确认成功'
     else
-      redirect_to action: :pending, flash[:error] => '确认失败: 卡余额不足'
+      redirect_to action: :pending, error: '确认失败: 卡余额不足或者消课数量为0'
     end
   end
 
   def ignore
     checkin = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
     if checkin.ignore!
-      redirect_to action: :pending, flash: '忽略成功'
+      redirect_to action: :pending, success: '忽略成功'
     else
       redirect_to action: :pending, error: '忽略失败'
     end
@@ -99,7 +99,7 @@ class CheckinController < ApplicationController
   def cancel
     checkin = MembershipCardLog.checkin.confirm.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
     if checkin.cancel!
-      redirect_to action: :confirm, flash: '取消成功'
+      redirect_to action: :confirm, success: '取消成功'
     else
       redirect_to action: :confirm, error: '取消失败'
     end
