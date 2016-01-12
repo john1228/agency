@@ -50,7 +50,7 @@
                          options_for_select(@members),
                          {
                                  include_blank: '会员名称/手机号码',
-                                 class: 'selectpicker',
+                                 class: 'selectpicker form-control',
                                  'data-live-search' => 'true'
                          }) %>
         </div>
@@ -72,4 +72,10 @@
         </button>
       </div>
   <% end %>
+
+  <script>
+      $(function () {
+          $(".modal-body .selectpicker").selectpicker();
+      })
+  </script>
 

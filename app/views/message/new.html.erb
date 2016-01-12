@@ -4,7 +4,7 @@
     <%= form_tag(batch_message_path) do %>
         <div class="input-group conte-cteli group-width">
           <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">所属门店</samp></span>
-          <%= select_tag(:service, options_for_select(current_user.all_services.pluck('profiles.name', :id)), class: 'form-control') %>
+          <%= select_tag(:service, options_for_select(current_user.all_services.pluck('profiles.name', :id)), class: 'form-control selectpicker') %>
         </div>
         <dl class="message-horizontal top20 bottom10 clearfix">
           <dt>群组</dt>

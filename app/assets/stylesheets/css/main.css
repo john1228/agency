@@ -2182,18 +2182,6 @@
     font-weight: 400;
 }
 
-.inex-tl {
-    margin-right: -10px;
-    margin-left: -10px;
-}
-
-.inex-tl .col-md-6 {
-    position: relative;
-    min-height: 1px;
-    padding-right: 10px;
-    padding-left: 10px;
-}
-
 .icon-ftt80 {
     font-size: 80px;
 }
@@ -2235,12 +2223,6 @@
     font-size: 14px;
 }
 
-.meida-img .media-wbjectr {
-    border-radius: 0;
-    width: 174px;
-    height: 130px;
-}
-
 @media (min-width: 768px) {
     .wrapper-right {
         margin-left: 220px;
@@ -2249,6 +2231,7 @@
 
 .btn {
     height: 40px;
+    border-left: 0px;
     border-radius: 4px;
 }
 
