@@ -46,12 +46,14 @@
         </td>
         <td width="13%"> <%= log.operator %></td>
         <td class="sign-in">
-          <% if log.confirm? && !log.membership_card.clocked? %>
-              <%= form_tag(cancel_checkin_path(log), method: :post) do %>
-                  <%= link_to "取消签到", '#', onclick: "return $(this).closest('form').submit()" %>
+          <% unless log.membership_card.clocked? %>
+              <% if log.confirm? %>
+                  <%= form_tag(cancel_checkin_path(log), method: :post) do %>
+                      <%= link_to "取消签到", '#', onclick: "return $(this).closest('form').submit()" %>
+                  <% end %>
+              <% else %>
+                  <span style="color: red">已取消</span>
               <% end %>
-          <% else %>
-              <span style="color: red">已取消</span>
           <% end %>
         </td>
       </tr>
