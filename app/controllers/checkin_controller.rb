@@ -2,9 +2,9 @@ class CheckinController < ApplicationController
   layout 'admin'
 
   def index
-    @member = Member.where(client_id: current_user.client_id).find_by(id: params[:member])
+    @member = Member.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:member])
     @members = Member.where.not(member_type: Member.member_types['coach'])
-                   .where(client_id: current_user.client_id).map { |member|
+                   .where(service_id: current_user.all_services.pluck(:id)).map { |member|
       ["#{member.name}(#{member.mobile})", member.id]
     }
     @cards = MembershipCard.where(member: @member)
@@ -14,10 +14,10 @@ class CheckinController < ApplicationController
     @flash = params[:flash]
     @error = params[:error]
     @members = Member.where.not(member_type: Member.member_types['coach'])
-                   .where(client_id: current_user.client_id).map { |member|
+                   .where(service_id: current_user.all_services.pluck(:id)).map { |member|
       ["#{member.name}(#{member.mobile})", member.id]
     }
-    member = Member.where(client_id: current_user.client_id).find_by(id: params[:member])
+    member = Member.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:member])
     if member.present?
       cards = member.cards.where(service_id: current_user.all_services.pluck(:id))
       membership_card_ids = cards.pluck(:id)
@@ -44,10 +44,10 @@ class CheckinController < ApplicationController
 
   def confirm
     @members = Member.where.not(member_type: Member.member_types['coach'])
-                   .where(client_id: current_user.client_id).map { |member|
+                   .where(service_id: current_user.all_services.pluck(:id)).map { |member|
       ["#{member.name}(#{member.mobile})", member.id]
     }
-    member = Member.where(client_id: current_user.client_id).find_by(id: params[:member])
+    member = Member.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:member])
     if member.present?
       cards = member.cards.where(service_id: current_user.all_services.pluck(:id))
       @logs = MembershipCardLog.checkin.where(status: [MembershipCardLog.statuses[:confirm], MembershipCardLog.statuses[:cancel]])

@@ -2,8 +2,11 @@ class CoachesController < InheritedResources::Base
   layout 'admin'
 
   def index
-    @query= Coach.where(:client_id => current_user.client_id).ransack(params[:q])
-    @coaches = @query.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
+    @query= Coach.ransack(params[:q])
+    @coaches = @query.result.includes(:service)
+                   .where(service_members: {service_id: current_user.all_services.pluck(:id)})
+                   .order("service_members.updated_at desc")
+                   .paginate(page: params[:page]||1, per_page: 5)
   end
 
   def new

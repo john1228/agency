@@ -27,7 +27,7 @@
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">绑定会员</samp></span>
             <%= f.select :member_id,
-                         options_for_select(Member.where(client_id: current_user.client_id).pluck(:name, :id)),
+                         options_for_select([]),
                          {include_blank: '请选择会员'},
                          {
                                  class: "form-control selectpicker",
@@ -104,7 +104,13 @@
                     });
                     $("#membership_card_name").selectpicker('refresh');
                 });
-
+                $.getJSON('/' + service_id + '/members', function (data) {
+                    $.each(data, function (i, value) {
+                        $("<option value='" + value.id +
+                        "'>" + value.name + "(" + value.mobile + ")" + "</option>").appendTo('#membership_card_member_id');
+                    });
+                    $("#membership_card_member_id").selectpicker('refresh');
+                });
                 $.getJSON('/' + service_id + '/salesman', function (data) {
                     $.each(data, function (i, value) {
                         $("<option value='" + value.id + "'>" + value.name + "</option>").appendTo('#seller');

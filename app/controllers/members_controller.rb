@@ -2,10 +2,10 @@ class MembersController < InheritedResources::Base
   layout "admin"
 
   def index
-    @query = Member.where(:client_id => current_user.client_id).where.not(member_type: Member.member_types['coach']).ransack(params[:q])
-    @members = @query.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
-    @member = [['准会员', Member.associate.where(:client_id => current_user.client_id).count],
-               ['会员', Member.full.where(:client_id => current_user.client_id).count]]
+    @query = Member.ransack(params[:q])
+    @members = @query.result.where(service_id: current_user.all_services.pluck(:id)).where.not(member_type: Member.member_types['coach']).paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
+    @member = [['准会员', Member.associate.where(service_id: current_user.all_services.pluck(:id)).count],
+               ['会员', Member.full.where(service_id: current_user.all_services.pluck(:id)).count]]
   end
 
   def create

@@ -1,4 +1,4 @@
-  #encoding : utf-8
+#encoding : utf-8
 class AdminUser < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -8,9 +8,8 @@ class AdminUser < ActiveRecord::Base
 
   ROLE = {super: 0, service: 1, cms: 2, market: 3, operator: 4}
   enum gender: [:male, :female]
-  enum role: [ :super, :admin, :cms, :market, :operator, :superadmin, :sales, :front_desk, :finance, :store_manager,:store_admin ]
+  enum role: [:super, :admin, :cms, :market, :operator, :superadmin, :sales, :front_desk, :finance, :store_manager, :store_admin]
   mount_uploader :avatar, PhotosUploader
-
 
 
   aasm :status do
@@ -29,11 +28,10 @@ class AdminUser < ActiveRecord::Base
   end
 
   def all_services
-    services = Service.where(:client_id => self.client_id)
-    if self.service.present?
-      services = Service.where(:id=>self.service_id)
+    if store_manager?||sales?||front_desk?||finance?||store_admin?
+      Service.where(id: service_id)
+    elsif super?||cms?||market?||operator?
+      Service.all
     end
-    services
   end
-  #benchmark :to_s
 end

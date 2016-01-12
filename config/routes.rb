@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   get ':service_id/coaches' => 'json#coaches'
   get ':service_id/salesman' => 'json#salesman'
   get ':service_id/balance' => 'json#balance'
+  get ':service_id/members' => 'json#member'
 
   get 'transfers/:service_id/service' => 'transfers#service'
 

@@ -30,5 +30,16 @@ class JsonController < ApplicationController
     service = Service.find(params[:service_id])
     render json: {balance: service.wallet.balance.to_f.round(2)}
   end
+
+  def member
+    service = Service.find(params[:service_id])
+    render json: Member.where(service: service).map { |member|
+             {
+                 id: member.id,
+                 name: member.name,
+                 mobile: member.mobile
+             }
+           }
+  end
 end
 

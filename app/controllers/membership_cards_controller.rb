@@ -2,9 +2,12 @@ class MembershipCardsController < ApplicationController
   layout 'admin'
 
   def index
-    members = Member.where(client_id: current_user.client_id).ransack(name_or_mobile_cont: params[:name_or_mobile])
+    members = Member.ransack(name_or_mobile_cont: params[:name_or_mobile])
     @query = MembershipCard.ransack(card_type_eq: params[:card_type], service_id_eq: params[:service])
-    @membership_cards = @query.result.includes(:member).where(member: members.result).paginate(page: params[:page]||1, per_page: 10).order("updated_at desc")
+    @membership_cards = @query.result.includes(:member)
+                            .where(member_id: members.result.where(service_id: current_user.all_services.pluck(:id)))
+                            .order("updated_at desc")
+                            .paginate(page: params[:page]||1, per_page: 10)
   end
 
   def new
