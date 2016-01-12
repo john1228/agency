@@ -78,6 +78,8 @@ class MembershipCardLog < ActiveRecord::Base
       change_amount < membership_card.supply_value
     elsif membership_card.stored? || membership_card.measured?
       change_amount < membership_card.value
+    elsif membership_card.clocked?
+      true
     end
   end
 end
