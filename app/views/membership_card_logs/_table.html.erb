@@ -37,6 +37,8 @@
               <span style="color: red"> -<%= log.change_amount %></span>
           <% elsif log.cancel? && log.checkin? %>
               <span style="color: green"> + <%= log.change_amount %></span>
+          <% elsif log.charge? || log.buy? %>
+              <span style="color: green"> + <%= log.change_amount.to_i %></span>
           <% end %>
         </td>
         <td><%= log.pay_type_i18n %></td>

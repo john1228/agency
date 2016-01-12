@@ -12,28 +12,36 @@
         </div>
         <div class="input-group  pull-left top20 ">
           <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡类型</samp></span>
-          <%= text_field_tag(:change_amount, @membership_card.card_type_i18n, class: "form-control", readonly: true) %>
+          <%= text_field_tag(:type, @membership_card.card_type_i18n, class: "form-control", readonly: true) %>
         </div>
         <div class="input-group  pull-left top20">
-          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down"> 充值额</samp></span>
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down"> 充值</samp></span>
           <%= text_field_tag(:change_amount, '', class: "form-control", placeholder: "请输入要充值的额度") %>
-          <span class="input-group-addon">元</span>
+          <% if @membership_card.stored? %>
+              <span class="input-group-addon">元</span>
+          <% elsif @membership_card.measured? %>
+              <span class="input-group-addon">次</span>
+          <% elsif @membership_card.clocked? %>
+              <span class="input-group-addon">天</span>
+          <% elsif @membership_card.course? %>
+              <span class="input-group-addon">节</span>
+          <% end %>
         </div>
         <div class="input-group  pull-left top20">
-          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应付款</samp></span>
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应付金额</samp></span>
           <%= text_field_tag(:selling_price, '', class: "form-control", placeholder: "请输入应支付到金额") %>
         </div>
         <div class="input-group  pull-left top20">
-          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实付款</samp></span>
+          <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实收金额</samp></span>
           <%= text_field_tag(:pay_amount, '', class: "form-control", placeholder: "请输入实际支付的金额") %>
         </div>
         <div class="input-group  pull-left top20">
           <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">支付方式</samp></span>
-          <%= text_field_tag(:pay_type, '', class: "form-control", placeholder: "请输入实体卡号") %>
+          <%= select_tag(:pay_type, options_for_select(MembershipCardLog.pay_type_for_select), class: "form-control selectpicker") %>
         </div>
         <div class="input-group  pull-left top20">
           <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">销售</samp></span>
-          <%= text_field_tag(:seller, '', class: "form-control", placeholder: "请输入实体卡号") %>
+          <%= select_tag(:seller, options_for_select(@seller), class: "form-control selectpicker") %>
         </div>
       </div>
     </div>
@@ -46,4 +54,8 @@
       </button>
     </div>
 <% end %>
-
+<script>
+    $(function () {
+        $(".modal-body .selectpicker").selectpicker();
+    })
+</script>

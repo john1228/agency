@@ -78,15 +78,22 @@ class MembershipCardsController < ApplicationController
 
   def charge_request
     @membership_card = MembershipCard.find_by(id: params[:id])
+    @seller = AdminUser.where(service_id: @membership_card.service_id).sales.map { |user| [user.name, user.name] }
     render action: :charge, layout: false
   end
 
   def charge_confirm
     membership_card = MembershipCard.find_by(id: params[:id])
-    if membership_card.update(charge_params)
-      redirect_to action: :index, flash: "绑定实体卡成功"
+    membership_card.logs.build(charge_log_params)
+    if membership_card.course?
+      membership_card.supply_value = membership_card.supply_value.to_i + params[:change_amount].to_i
     else
-      redirect_to action: :index, error: "绑定实体卡失败"
+      membership_card.value = membership_card.value.to_i + params[:change_amount].to_i
+    end
+    if membership_card.save
+      redirect_to action: :index, flash: "充值成功"
+    else
+      redirect_to action: :index, error: "充值失败"
     end
   end
 
@@ -108,7 +115,7 @@ class MembershipCardsController < ApplicationController
     params.permit(:physical_card)
   end
 
-  def charge_params
-
+  def charge_log_params
+    params.permit(:change_amount, :pay_amount, :seller, :pay_type).merge(operator: current_user.name, remark: '美型平台充值', action: 'charge')
   end
 end

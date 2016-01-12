@@ -2,7 +2,7 @@
   <div class="col-md-3">
     <a href="<%= services_path %>" class="store-management">
       <h3 class="text-right">门店管理</h3>
-      <h4 class="text-right">8</h4>
+      <h4 class="text-right"><%= current_user.all_services.count %></h4>
 
       <div class="iconfont-dianpu text-center"><i class="icon">&#xe609;</i></div>
       <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
