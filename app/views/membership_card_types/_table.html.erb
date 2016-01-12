@@ -7,10 +7,10 @@
         </h1>
 
         <div class="pull-Content">
-          <h3><%= membership_card_type.price %>元</h3>
+          <h3><%= membership_card_type.price.floor %>元</h3>
           <ul class="top20">
             <% if membership_card_type.course? %>
-                <li>面值：<%= membership_card_type.price %></li>
+                <li>面值：<%= membership_card_type.price.floor %></li>
             <% else %>
                 <li>面值：<%= membership_card_type.value %></li>
             <% end %>
