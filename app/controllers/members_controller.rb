@@ -10,7 +10,6 @@ class MembersController < InheritedResources::Base
 
   def create
     @member = Member.input.new(member_params)
-
     if @member.save
       @success = true
       flash[:success] = "成功创建会员"

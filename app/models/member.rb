@@ -9,4 +9,21 @@ class Member < ActiveRecord::Base
   belongs_to :user
 
   has_many :cards, class: MembershipCard
+
+  validates_presence_of :name, message: '姓名必须输入'
+  validates_presence_of :mobile, message: '手机号必须输入'
+
+  before_create :valid_user
+
+  protected
+  def valid_user
+    if user.blank?
+      user = User.find_by(mobile: mobile)
+      if user.present?
+        self.user_id = user.id
+      else
+        build_user(mobile: mobile, password: '12345678', profile_attributes: {name: name})
+      end
+    end
+  end
 end
