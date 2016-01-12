@@ -15,7 +15,7 @@ class Product < ActiveRecord::Base
   protected
   def build_default_sku
     service = Service.find(service_id)
-    seller = Coach.find(seller_id)
+    seller = (Coach.find(seller_id) rescue nil)
     create_sku(
         sku: 'SM'+'-' + '%06d' % id + '-' + '%06d' % (service.id),
         course_type: card_type.card_type,

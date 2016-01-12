@@ -2,7 +2,7 @@ class AdminUsersController < InheritedResources::Base
   layout "admin"
 
   def index
-    @query = AdminUser.where(:client_id => current_user.client_id).where("role > 4").ransack(params[:q])
+    @query = AdminUser.where(:service_id => current_user.all_services.pluck(:id)).where("role > 4").ransack(params[:q])
     @admin_users = @query.result.paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
 
   end
