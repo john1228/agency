@@ -9,7 +9,7 @@ class Profile < ActiveRecord::Base
   validates_presence_of :birthday, if: Proc.new { |profile| profile.coach? }, message: '生日不能为空'
   validates_presence_of :gender, if: Proc.new { |profile| profile.coach? }, message: '性别不能为空'
   validates_presence_of :hobby, if: Proc.new { |profile| profile.coach? }, message: '健身服务不能为空'
-  validates :mobile, :presence => true
+ 
 
   validates_presence_of :name, if: Proc.new { |profile| profile.service? }, message: '名字不能为空'
   validates_presence_of :avatar, if: Proc.new { |profile| profile.service? }, message: '头像不能为空'

@@ -9,6 +9,7 @@ class Member < ActiveRecord::Base
   belongs_to :user
 
   has_many :cards, class: MembershipCard
+  has_many :logs, class: MemberLog, dependent: :destroy
 
   validates_presence_of :name, message: '姓名必须输入'
   validates_presence_of :mobile, message: '手机号必须输入'
