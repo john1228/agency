@@ -10,7 +10,6 @@ class DashboardController < ApplicationController
     @transaction = current_user.all_services.includes(:profile).map { |service| [
         service.profile.name, service.orders.sum(:total).floor] }
     @incoming = current_user.all_services.includes(:profile).map { |service| service.orders.sum(:total).floor }
-
     respond_to do |format|
       format.html
     end

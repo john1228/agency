@@ -12,7 +12,7 @@ class CheckinController < ApplicationController
 
   def pending
     flash[:success] = params[:success]
-    flash[:error] = params[:error]
+    flash[:danger] = params[:error]
     @members = Member.where.not(member_type: Member.member_types['coach'])
                    .where(service_id: current_user.all_services.pluck(:id)).map { |member|
       ["#{member.name}(#{member.mobile})", member.id]
