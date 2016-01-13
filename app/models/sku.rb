@@ -9,6 +9,6 @@ class Sku < ActiveRecord::Base
 
   protected
   def injection
-    self.orders_count = rand(100) unless card?
+    self.orders_count = rand(100)
   end
 end
