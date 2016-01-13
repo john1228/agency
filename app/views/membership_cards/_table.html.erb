@@ -29,14 +29,14 @@
         <td><%= truncate(membership_card.name, length: 6) %></td>
         <td><%= membership_card.card_type_i18n %></td>
         <td><%= membership_card.service.profile.name %></td>
-        <td><%= membership_card.member.name %></td>
+        <td><%= membership_card.member.name + '(' + membership_card.member.mobile + ')' %></td>
         <td>
           <% if membership_card.stored? %>
               <%= membership_card.value %>元
           <% elsif membership_card.measured? %>
               <%= membership_card.value %>次
           <% elsif membership_card.clocked? %>
-              <%= membership_card.value %>天
+              <%= (membership_card.valid_end- Date.today).floor %>天
           <% elsif membership_card.course? %>
               <%= membership_card.supply_value %>节
           <% end %>
@@ -54,7 +54,7 @@
           <% if membership_card.to_be_activated?||membership_card.disable? %>
               <%= form_tag(active_membership_card_path(membership_card)) do %>
                   <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
-                  |<%= link_to('转卡', transfer_members_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
+                  |<%= link_to('转让', transfer_members_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
                   <% if membership_card.physical_card.blank? %>
                       |<%= link_to('绑实体卡', binding_request_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
                   <% end %>
@@ -65,7 +65,7 @@
           <% if membership_card.normal? %>
               <%= form_tag(disable_membership_card_path(membership_card)) do %>
                   <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
-                  |<%= link_to('转卡', transfer_members_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
+                  |<%= link_to('转让', transfer_members_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
                   <% if membership_card.physical_card.blank? %>
                       |<%= link_to('绑实体卡', binding_request_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
                   <% end %>

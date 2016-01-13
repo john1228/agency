@@ -19,15 +19,15 @@ module Api
                  code: 1,
                  data: {
                      ver: (MembershipCard.where(service: service).where('updated_at > ?', time).order(updated_at: :desc).first.updated_at.strftime('%Y%m%d%H%M%S') rescue Time.now.strftime('%Y%m%d%H%M%S')),
-                     mxing: ['http://h.hiphotos.baidu.com/image/pic/item/00e93901213fb80e7c4a24ce31d12f2eb938940b.jpg',
-                             'http://e.hiphotos.baidu.com/image/pic/item/f2deb48f8c5494eeecd34b002af5e0fe99257e31.jpg'],
+                     mxing: ['http://7xnvtv.com2.z0.glb.qiniucdn.com/a1.png',
+                             'http://7xnvtv.com2.z0.glb.qiniucdn.com/a2.png'],
                      venue: {
-                         first: ['http://f.hiphotos.baidu.com/image/pic/item/7dd98d1001e939012499c8277cec54e736d1960b.jpg',
-                                 'http://c.hiphotos.baidu.com/image/pic/item/7aec54e736d12f2eb3f4ea7948c2d56285356831.jpg'],
-                         second: ['http://e.hiphotos.baidu.com/image/pic/item/37d12f2eb9389b50430ea44b8235e5dde7116e31.jpg',
-                                  'http://a.hiphotos.baidu.com/image/pic/item/77094b36acaf2edda36a0cf08a1001e93901930b.jpg'],
-                         third: ['http://h.hiphotos.baidu.com/image/pic/item/3801213fb80e7bec532b47f8282eb9389b506b31.jpg',
-                                 'http://f.hiphotos.baidu.com/image/pic/item/8c1001e93901213fbdc20ac553e736d12f2e9531.jpg']
+                         first: ['http://7xnvtv.com2.z0.glb.qiniucdn.com/b1-1.png',
+                                 'http://7xnvtv.com2.z0.glb.qiniucdn.com/b1-2.png'],
+                         second: ['http://7xnvtv.com2.z0.glb.qiniucdn.com/b2-1.png',
+                                  'http://7xnvtv.com2.z0.glb.qiniucdn.com/b2-2.png'],
+                         third: ['http://7xnvtv.com2.z0.glb.qiniucdn.com/b3-1.png',
+                                 'http://7xnvtv.com2.z0.glb.qiniucdn.com/b3-2.png']
                      },
                      time: Time.now.strftime('%Y-%m-%d %H:%M:%S'),
                      name: service.profile.name,

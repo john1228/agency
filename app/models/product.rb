@@ -8,6 +8,7 @@ class Product < ActiveRecord::Base
   validates_presence_of :card_type_id, message: '请选择卡'
   validates_presence_of :name, message: '请输入出售卡的卡名'
   validates_presence_of :description, message: '请输入对卡的说明'
+  validates_length_of :name, maximum: 12, message: '输入到名字过长'
 
   mount_uploaders :image, ProductImagesUploader
   accepts_nested_attributes_for :prop

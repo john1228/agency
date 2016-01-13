@@ -8,11 +8,9 @@ class ProfileUploader < CarrierWave::Uploader::Base
     "images/#{model.class.to_s.underscore}"
   end
 
-
   def default_url
-    "#{$host}/images/default/user.png"
+    'http://7xnvtv.com2.z0.glb.qiniucdn.com/default.png'
   end
-
 
   version :thumb do
     process :resize_to_fit => [180, 180]

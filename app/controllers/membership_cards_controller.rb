@@ -72,9 +72,9 @@ class MembershipCardsController < ApplicationController
   def binding_confirm
     membership_card = MembershipCard.find_by(id: params[:id])
     if membership_card.update(binding_params)
-      redirect_to action: :index, success: "绑定实体卡成功"
+      redirect_to action: :index, success: '绑定实体卡成功'
     else
-      redirect_to action: :index, error: "绑定实体卡失败"
+      redirect_to action: :index, error: '绑定实体卡失败'
     end
   end
 
@@ -93,9 +93,9 @@ class MembershipCardsController < ApplicationController
       membership_card.value = membership_card.value.to_i + params[:change_amount].to_i
     end
     if membership_card.save
-      redirect_to action: :index, success: "充值成功"
+      redirect_to action: :index, success: '充值成功'
     else
-      redirect_to action: :index, error: "充值失败"
+      redirect_to action: :index, error: '充值失败'
     end
   end
 
