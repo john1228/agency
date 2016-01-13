@@ -2,6 +2,8 @@ class MembershipCardsController < ApplicationController
   layout 'admin'
 
   def index
+    flash[:success] = params[:success]
+    flash[:danger] = params[:error]
     members = Member.ransack(name_or_mobile_cont: params[:name_or_mobile])
     @query = MembershipCard.ransack(card_type_eq: params[:card_type], service_id_eq: params[:service])
     @membership_cards = @query.result.includes(:member)
@@ -29,7 +31,7 @@ class MembershipCardsController < ApplicationController
     membership_card = MembershipCard.find_by(id: params[:id])
     membership_card.open = Date.today
     if membership_card.active!
-      redirect_to action: :index, flash: "激活成功"
+      redirect_to action: :index, success: "激活成功"
     else
       redirect_to action: :index, error: "激活失败"
     end
@@ -38,7 +40,7 @@ class MembershipCardsController < ApplicationController
   def disable
     membership_card = MembershipCard.find_by(id: params[:id])
     if membership_card.disable!
-      redirect_to action: :index, flash: "停用成功"
+      redirect_to action: :index, success: "停用成功"
     else
       redirect_to action: :index, error: "停用失败"
     end
@@ -47,9 +49,9 @@ class MembershipCardsController < ApplicationController
   def transfer
     membership_card = MembershipCard.find_by(id: params[:id])
     if membership_card.update(transfer_params)
-      redirect_to action: :index, flash: "转卡成功"
+      redirect_to action: :index, success: "转卡成功"
     else
-      redirect_to action: :index, error: "转卡失败"
+      redirect_to action: :index, error: "转卡失败:#{membership_card.errors.messages.values.joins(';')}"
     end
   end
 
@@ -70,7 +72,7 @@ class MembershipCardsController < ApplicationController
   def binding_confirm
     membership_card = MembershipCard.find_by(id: params[:id])
     if membership_card.update(binding_params)
-      redirect_to action: :index, flash: "绑定实体卡成功"
+      redirect_to action: :index, success: "绑定实体卡成功"
     else
       redirect_to action: :index, error: "绑定实体卡失败"
     end
@@ -91,7 +93,7 @@ class MembershipCardsController < ApplicationController
       membership_card.value = membership_card.value.to_i + params[:change_amount].to_i
     end
     if membership_card.save
-      redirect_to action: :index, flash: "充值成功"
+      redirect_to action: :index, success: "充值成功"
     else
       redirect_to action: :index, error: "充值失败"
     end
