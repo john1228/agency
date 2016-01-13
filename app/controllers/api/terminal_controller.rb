@@ -18,7 +18,7 @@ module Api
       render json: {
                  code: 1,
                  data: {
-                     ver: MembershipCard.where(service: service).where('updated_at > ?', time).order(updated_at: :desc).first.updated_at.strftime('%Y%m%d%H%M%S'),
+                     ver: (MembershipCard.where(service: service).where('updated_at > ?', time).order(updated_at: :desc).first.updated_at.strftime('%Y%m%d%H%M%S') rescue Time.now.strftime('%Y%m%d%H%M%S')),
                      mxing: ['http://h.hiphotos.baidu.com/image/pic/item/00e93901213fb80e7c4a24ce31d12f2eb938940b.jpg',
                              'http://e.hiphotos.baidu.com/image/pic/item/f2deb48f8c5494eeecd34b002af5e0fe99257e31.jpg'],
                      venue: {
