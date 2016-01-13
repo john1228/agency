@@ -69,7 +69,8 @@ class CheckinController < ApplicationController
     if @checkin.membership_card.present?
       @cards = [@checkin.membership_card]
     else
-      @cards = MembershipCard.where(physical_card: @checkin.entity_number, service_id: current_user.all_services.pluck(:id))
+      @cards = MembershipCard.where.not(status: MembershipCard.statuses['disable'])
+                   .where(physical_card: @checkin.entity_number, service_id: current_user.all_services.pluck(:id))
     end
     render layout: false
   end
