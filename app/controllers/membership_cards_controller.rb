@@ -110,7 +110,10 @@ class MembershipCardsController < ApplicationController
   end
 
   def transfer_params
-    params.permit(:member_id, :physical_card)
+    {
+        member_id: params[:member],
+        physical_card: params[:physical_card]
+    }
   end
 
   def binding_params
