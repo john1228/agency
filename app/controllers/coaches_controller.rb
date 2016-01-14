@@ -42,9 +42,10 @@ class CoachesController < InheritedResources::Base
   def update
     coach = Coach.find(params[:id])
     if coach.update(coach_params)
-
+      flash[:success] = "成功创建私教"
+      redirect_to coaches_path
     else
-      render
+      render action: :new
     end
   end
 
@@ -59,6 +60,6 @@ class CoachesController < InheritedResources::Base
     params[:coach][:profile_attributes][:province] = params[:province]
     params[:coach][:profile_attributes][:city] = params[:city]
     params.require(:coach).permit(:mobile, :password, :service_id, profile_attributes:
-                                             [:avatar, :name, :mobile, :gender, :birthday, :signature, :province, :city, :identity, hobby: []])
+                                             [:id, :name, :avatar, :mobile, :gender, :birthday, :signature, :province, :city, :identity, hobby: []])
   end
 end

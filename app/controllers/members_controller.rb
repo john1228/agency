@@ -15,7 +15,7 @@ class MembersController < InheritedResources::Base
     if @member.save
       redirect_to members_path, success: '成功创建会员'
     else
-      flash[:danger] = "创建会员失败:" + exp.message
+      flash[:danger] = "创建会员失败:" + @member.errors.messages.values.join(';')
       render :new
     end
   end
@@ -25,7 +25,7 @@ class MembersController < InheritedResources::Base
     @member.update(user_registration_params)
     if @member.update(member_params)
       flash[:success] = "修改会员成功"
-      redirect_to user_registrations_path
+      redirect_to members_path
     else
       flash[:danger] = "修改会员失败"
       render :edit

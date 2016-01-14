@@ -13,7 +13,7 @@
         <% end %>
 
         <%= f.semantic_fields_for :profile do |p| %>
-
+            <%= p.hidden_field :id %>
             <div class="new-portrait pull-right">
               <samp class="default_icon">
                 <i class=" icon"></i>
@@ -51,7 +51,7 @@
 
               <div class="input-group  top20">
                 <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">健身服务</samp></span>
-                <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_blank: "请选择健身服务"}, class: 'form-control selectpicker', multiple: true) %>
+                <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_blank: false}, class: 'form-control selectpicker', multiple: true) %>
               </div>
 
               <div class="input-group  top20">
