@@ -38,7 +38,7 @@ module Api
                          if membership_card.valid_end.eql?('已过期')
                            remain_value = 0
                          else
-                           remain_value = membership_card.valid_end - Date.today
+                           remain_value = (membership_card.valid_end - Date.today).floor
                          end
                        elsif membership_card.course?
                          remain_value = membership_card.supply_value
@@ -107,7 +107,7 @@ module Api
                            if membership_card.valid_end.eql?('已过期')
                              remain_value = 0
                            else
-                             remain_value = membership_card.valid_end - Date.today
+                             remain_value = (membership_card.valid_end - Date.today).floor
                            end
                          elsif membership_card.course?
                            remain_value = membership_card.supply_value
