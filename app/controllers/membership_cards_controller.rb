@@ -90,11 +90,11 @@ class MembershipCardsController < ApplicationController
     if membership_card.course?
       membership_card.supply_value = membership_card.supply_value.to_i + params[:change_amount].to_i
       membership_card.open = Date.today
-      membership_card.valid_date = params[:valid_days].to_i
+      membership_card.valid_days = params[:valid_days].to_i
     elsif membership_card.stored? || membership_card.measured?
       membership_card.value = membership_card.value.to_i + params[:change_amount].to_i
       membership_card.open = Date.today
-      membership_card.valid_date = params[:valid_days].to_i
+      membership_card.valid_days = params[:valid_days].to_i
     elsif membership_card.clocked?
       if membership_card.valid_end.eql?('已过期')
         membership_card.value = params[:change_amount]
