@@ -36,7 +36,12 @@
           <% elsif membership_card.measured? %>
               <%= membership_card.value %>次
           <% elsif membership_card.clocked? %>
-              <%= (membership_card.valid_end- Date.today).floor %>天
+              <% if membership_card.valid_end.eql?('已过期') %>
+                  <%= membership_card.valid_end %>天
+              <% else %>
+                  <%= (membership_card.valid_end- Date.today).floor %>天
+              <% end %>
+
           <% elsif membership_card.course? %>
               <%= membership_card.supply_value %>节
           <% end %>

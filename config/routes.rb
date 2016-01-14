@@ -28,7 +28,6 @@ Rails.application.routes.draw do
   resources :skus
   resources :products
 
-  
   namespace :api do
     post 'terminal' => 'terminal#active'
     get 'terminal' => 'terminal#show'

@@ -36,8 +36,11 @@
                 <%= truncate(product.sku.service.profile.name, length: 10) %>
               </div>
               <div class="member-operation pull-right">
-
-                <a href="#"><i class="icon" title="一键下架">&#xe62f;</i></a>
+                <% if product.sku.online? %>
+                    <a href="#"><i class="icon" title="一键下架">&#xe62f;</i></a>
+                <% else %>
+                    <a href="#"><i class="icon" title="一键上架">&#xe62b;</i></a>
+                <% end %>
                 <a href="#" title="编辑"><i class="icon">&#xe615;</i></a>
                 <a href="#"><i class="icon">&#xe616;</i></a>
               </div>

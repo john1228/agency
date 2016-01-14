@@ -1,9 +1,15 @@
 <div class="page-header  clearfix">
   <div class="pull-left mx-tabs">
-    <a href="#" class="pull-left  page-header-text"><samp class="mx-tab-active">
-      <div id="triangle-down"></div>
-      在售商品</samp></a>
-    <a href="#" class="pull-left  page-header-text">下架商品</a>
+    <% if @list.eql?('online') %>
+        <%= link_to('<samp class="mx-tab-active"><div id="triangle-down"></div>在售商品</samp>'.html_safe,
+                    products_path + '?list=online', class: "pull-left  page-header-text") %>
+        <%= link_to('下架商品', products_path + '?list=offline', class: "pull-left  page-header-text") %>
+    <% else %>
+        <%= link_to('在售商品', products_path + '?list=online', class: "pull-left  page-header-text") %>
+        <%= link_to('<samp class="mx-tab-active"><div id="triangle-down"></div>下架商品</samp>'.html_safe,
+                    products_path + '?list=offline', class: "pull-left  page-header-text") %>
+
+    <% end %>
   </div>
   <%= link_to '<i class="icon">&#xe613;</i>新增出售会员卡'.html_safe, new_product_path, class: "new-btn pull-right" %>
   <div class="member-search pull-right">

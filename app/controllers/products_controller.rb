@@ -3,7 +3,16 @@ class ProductsController < ApplicationController
 
   def index
     @query = Product.ransack(name_cont: params[:name])
-    @products = @query.result.joins(:sku).where(skus: {service_id: current_user.all_services.pluck(:id)}).paginate(page: params[:page]||1, per_page: 10).order("created_at desc")
+    @list = params[:list]||'online'
+    case params[:list]
+      when 'online'
+        @products = @query.result.joins(:sku).where(skus: {service_id: current_user.all_services.pluck(:id), status: 1}).paginate(page: params[:page]||1, per_page: 10).order("created_at desc")
+      when 'offline'
+        @products = @query.result.joins(:sku).where(skus: {service_id: current_user.all_services.pluck(:id), status: 0}).paginate(page: params[:page]||1, per_page: 10).order("created_at desc")
+      else
+        @products = @query.result.joins(:sku).where(skus: {service_id: current_user.all_services.pluck(:id), status: 1}).paginate(page: params[:page]||1, per_page: 10).order("created_at desc")
+    end
+
   end
 
   def new
