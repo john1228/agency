@@ -11,7 +11,7 @@
             </div>
         <% end %>
         <div class="form-main">
-          <%= f.hidden_field :card_type, value: 'clocked' %>
+          <%= f.hidden_field :card_type, value: 'course' %>
           <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店</samp></span>
             <%= f.collection_select :service_id, current_user.all_services, :id, :name, {}, class: "form-control selectpicker" %>

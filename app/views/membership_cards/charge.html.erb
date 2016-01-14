@@ -27,6 +27,13 @@
               <span class="input-group-addon">节</span>
           <% end %>
         </div>
+        <% unless @membership_card.clocked? %>
+            <div class="input-group  pull-left top20">
+              <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down"> 有效期</samp></span>
+              <%= text_field_tag(:valid_days, '', class: "form-control", placeholder: "请填写该卡的有效期") %>
+              <span class="input-group-addon">天</span>
+            </div>
+        <% end %>
         <div class="input-group  pull-left top20">
           <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应付金额</samp></span>
           <%= text_field_tag(:selling_price, '', class: "form-control", placeholder: "请输入应支付到金额") %>

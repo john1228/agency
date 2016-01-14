@@ -1,0 +1,2 @@
+module STBannersHelper
+end

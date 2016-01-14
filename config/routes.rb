@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :members
   resources :skus
   resources :products
+  resources :banners
 
   namespace :api do
     post 'terminal' => 'terminal#active'

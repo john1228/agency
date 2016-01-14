@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113101227) do
+ActiveRecord::Schema.define(version: 20160114124148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -794,6 +794,15 @@ ActiveRecord::Schema.define(version: 20160113101227) do
     t.decimal "day_one"
     t.decimal "day_three"
     t.decimal "day_seven"
+  end
+
+  create_table "s_t_banners", force: :cascade do |t|
+    t.integer  "service_id"
+    t.string   "pos_first",               array: true
+    t.string   "pos_second",              array: true
+    t.string   "pos_third",               array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "schedules", force: :cascade do |t|

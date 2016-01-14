@@ -18,7 +18,7 @@
         market: "market"
         operator: "operator"
         superadmin: "管理员"
-        sales: "销售"
+        sale: "销售"
         front_desk: "前台"
         finance: "财务"
         store_manager: "店长"
