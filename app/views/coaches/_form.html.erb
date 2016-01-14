@@ -53,17 +53,18 @@
                 <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">健身服务</samp></span>
                 <%= p.select(:hobby, INTERESTS['items'].map { |item| [item['name'], item['id']] }, {include_blank: false}, class: 'form-control selectpicker', multiple: true) %>
               </div>
+              <% if f.object.new_record? %>
+                  <div class="input-group  top20">
+                    <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">登录名</samp></span>
+                    <%= f.text_field :mobile, class: "form-control", placeholder: "请输入登录美型APP的手机号码" %>
+                  </div>
 
-              <div class="input-group  top20">
-                <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">登录名</samp></span>
-                <%= f.text_field :mobile, class: "form-control", placeholder: "请输入登录美型APP的手机号码" %>
-              </div>
-
-              <div class="input-group  top20">
-                <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">登录密码</samp></span>
-                <%= f.password_field :password, class: "form-control" %>
-              </div>
-            </div>
+                  <div class="input-group  top20">
+                    <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">登录密码</samp></span>
+                    <%= f.password_field :password, class: "form-control" %>
+                  </div>
+                  </div>
+              <% end %>
         <% end %>
         <div class="fygroup top20">
           <button type="submit" class="submit ">确认</button>
