@@ -33,7 +33,7 @@ class AdminUser < ActiveRecord::Base
   end
 
   def all_services
-    if store_manager?||sales?||front_desk?||finance?||store_admin?
+    if store_manager?||sale?||front_desk?||finance?||store_admin?
       Service.where(id: service_id)
     elsif super?||cms?||market?||operator?
       Service.all
