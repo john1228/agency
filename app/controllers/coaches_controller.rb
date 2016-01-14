@@ -45,7 +45,7 @@ class CoachesController < InheritedResources::Base
       flash[:success] = "成功创建私教"
       redirect_to coaches_path
     else
-      render action: :new
+      render action: :edit
     end
   end
 
