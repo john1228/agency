@@ -80,7 +80,7 @@ class MembershipCardsController < ApplicationController
 
   def charge_request
     @membership_card = MembershipCard.find_by(id: params[:id])
-    @seller = AdminUser.where(service_id: @membership_card.service_id).sales.map { |user| [user.name, user.name] }
+    @seller = AdminUser.where(service_id: @membership_card.service_id).sale.map { |user| [user.name, user.name] }
     render action: :charge, layout: false
   end
 
@@ -89,8 +89,18 @@ class MembershipCardsController < ApplicationController
     membership_card.logs.build(charge_log_params)
     if membership_card.course?
       membership_card.supply_value = membership_card.supply_value.to_i + params[:change_amount].to_i
-    else
+      membership_card.open = Date.today
+    elsif membership_card.stored? && membership_card.measured?
       membership_card.value = membership_card.value.to_i + params[:change_amount].to_i
+      membership_card.open = Date.today
+    elsif membership_card.clocked?
+      if membership_card.valid_end.eql?('已过期')
+        membership_card.value = params[:change_amount]
+        membership_card.open = Date.today
+      else
+        membership_card.value = (membership_card.valid_end - Date.today).floor + params[:change_amount].to_i
+        membership_card.open = Date.today
+      end
     end
     if membership_card.save
       redirect_to action: :index, success: '充值成功'
