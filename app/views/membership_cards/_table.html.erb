@@ -37,7 +37,7 @@
               <%= membership_card.value %>次
           <% elsif membership_card.clocked? %>
               <% if membership_card.valid_end.eql?('已过期') %>
-                  <%= membership_card.valid_end %>天
+                  <span style="color: red"><%= membership_card.valid_end %></span>
               <% else %>
                   <%= (membership_card.valid_end- Date.today).floor %>天
               <% end %>

@@ -9,7 +9,7 @@
 </div>
 <div class="panel top20">
   <div class="panel-header clearfix header-selector">
-    <span class="pull-left">全部会员卡(<%= @query.result.count %>)</span>
+    <span class="pull-left">全部会员卡(<%= @products.total_entries %>)</span>
 
     <div style="margin-top:6px;">
       <%= select_tag :service, options_for_select(current_admin_user.all_services.pluck('profiles.name', :id)), {include_blank: "全部门店", class: "pull-right selectpicker search-item"} %>

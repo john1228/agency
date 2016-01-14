@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
         @products = @query.result.joins(:sku).where(skus: {service_id: current_user.all_services.pluck(:id), status: 1}).paginate(page: params[:page]||1, per_page: 10).order("created_at desc")
     end
 
+    logger.info "========#{@products.total_entries}"
   end
 
   def new
