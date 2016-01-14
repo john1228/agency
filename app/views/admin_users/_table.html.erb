@@ -22,7 +22,7 @@
     <tbody>
     <% @admin_users.each do |admin_user| %>
         <tr>
-          <td><%= image_tag(admin_user.avatar.url + '-avatar' rescue '', class: "img-responsive img-circle") %></td>
+          <td><%= image_tag((admin_user.avatar.url + '-avatar' rescue ''), class: "img-responsive img-circle") %></td>
           <td><%= admin_user.name %></td>
           <td><%= I18n.t("activerecord.attributes.gender.#{admin_user.gender}") %></td>
           <td><%= admin_user.service.profile.name rescue nil %></td>
