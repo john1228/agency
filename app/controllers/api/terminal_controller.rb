@@ -15,6 +15,10 @@ module Api
     def show
       service = @terminal.service
       time = Time.parse(params[:ver]) rescue Time.parse('2015-01-01')
+      membership_cards = MembershipCard.where(service: service).where('updated_at > ?', time).find_all { |membership_card|
+        !membership_card.valid_end.eql?('已过期') && (membership_card.to_be_activated? || membership_card.normal?)
+      }
+
       render json: {
                  code: 1,
                  data: {
@@ -32,7 +36,7 @@ module Api
                      time: Time.now.strftime('%Y-%m-%d %H:%M:%S'),
                      name: service.profile.name,
                      avatar: service.profile.avatar.url,
-                     card: MembershipCard.where(service: service).where('updated_at > ?', time).map { |membership_card|
+                     card: membership_cards.map { |membership_card|
                        physical_card = PhysicalCard.find_by(virtual_number: membership_card.physical_card)
                        {
                            id: membership_card.id,
