@@ -12,28 +12,9 @@ class MembersController < InheritedResources::Base
 
   def create
     @member = Member.input.new(member_params)
-    begin
-      Member.transaction do
-        user = User.find_by(mobile: @member.mobile)
-        if user.blank?
-          @member.build_user(mobile: @member.mobile, password: '12345678',
-                             profile_attribtues: {
-                                 name: @member.name,
-                                 avatar: @member.avatar,
-                                 gender: @member.gender,
-                                 birthday: @member.birthday,
-                                 province: @member.province,
-                                 city: @member.city,
-                                 area: @member.area,
-                                 address: @member.address
-                             })
-        else
-          @member.user_id = user.id
-        end
-        @member.save
-      end
+    if @member.save
       redirect_to members_path, success: '成功创建会员'
-    rescue Exception => exp
+    else
       flash[:danger] = "创建会员失败:" + exp.message
       render :new
     end

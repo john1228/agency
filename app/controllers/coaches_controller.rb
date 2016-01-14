@@ -34,10 +34,18 @@ class CoachesController < InheritedResources::Base
       redirect_to coaches_path
       return
     else
-      @failure = coach.errors
-      @coach = coach
+      flash[:danger] = "创建私教失败"
     end
     render action: :new
+  end
+
+  def update
+    coach = Coach.find(params[:id])
+    if coach.update(coach_params)
+
+    else
+      render
+    end
   end
 
   def destroy

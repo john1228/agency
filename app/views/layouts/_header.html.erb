@@ -9,7 +9,7 @@
       <li class="media">
         <div class="badge-left pull-left">
 
-          <%= image_tag((current_user.avatar.url + '-avatar'), class: "media-object") %>
+          <%= image_tag(((current_user.avatar.url + '-avatar') rescue ''), class: "media-object") %>
 
         </div>
         <div class="pull-left">

@@ -23,7 +23,16 @@ class Member < ActiveRecord::Base
       if user.present?
         self.user_id = user.id
       else
-        build_user(mobile: mobile, password: '12345678', profile_attributes: {name: name})
+        build_user(mobile: mobile, password: '12345678', profile_attributes: {
+                                     name: name,
+                                     avatar: avatar,
+                                     gender: gender,
+                                     birthday: birthday,
+                                     province: province,
+                                     city: city,
+                                     area: area,
+                                     address: address
+                                 })
       end
     end
   end
