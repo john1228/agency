@@ -51,6 +51,10 @@ Rails.application.routes.draw do
   get 'membership_cards/:id/charge' => 'membership_cards#charge_request', as: :charge_request
   patch 'membership_cards/:id/charge' => 'membership_cards#charge_confirm', as: :charge_confirm
 
+  post 'products/:id/online' => 'products#online', as: :online_product
+  post 'products/:id/offline' => 'products#offline', as: :offline_product
+  delete 'products/:id' => 'products#delete', as: :delete_product
+
 
   get ':service_id/membership_card_types/:type/cards' => 'json#card_types'
   get ':service_id/coaches' => 'json#coaches'

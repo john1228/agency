@@ -11,3 +11,21 @@
 // about supported directives.
 //= require_self
 //= require avatar
+
+$.each(["put", "patch", "delete"], function (i, method) {
+    $[method] = function (url, data, callback, type) {
+        // Shift arguments if data argument was omitted
+        if ($.isFunction(data)) {
+            type = type || callback;
+            callback = data;
+            data = undefined;
+        }
+        return $.ajax({
+            url: url,
+            type: method,
+            dataType: type,
+            data: data,
+            success: callback
+        });
+    };
+});

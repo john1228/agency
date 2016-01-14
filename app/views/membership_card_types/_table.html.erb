@@ -6,8 +6,8 @@
           <span class="pull-right"><%= membership_card_type.card_type_i18n %></span>
         </h1>
 
-        <div class="pull-Content">
-          <h3><%= membership_card_type.price.floor %>元</h3>
+        <div style="margin: 10px 16px">
+          <h3 class><%= membership_card_type.price.floor %>元</h3>
           <ul class="top20">
             <% if membership_card_type.course? %>
                 <li>面值：<%= membership_card_type.price.floor %>元</li>

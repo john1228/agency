@@ -10,24 +10,42 @@ class MembersController < InheritedResources::Base
 
   def create
     @member = Member.input.new(member_params)
-    if @member.save
-      @success = true
+    begin
+      Member.transaction do
+        user = User.find_by(mobile: @member.mobile)
+        if user.blank?
+          @member.build_user(mobile: @member.mobile, password: '12345678',
+                             profile_attribtues: {
+                                 name: @member.name,
+                                 avatar: @member.avatar,
+                                 gender: @member.gender,
+                                 birthday: @member.birthday,
+                                 province: @member.province,
+                                 city: @member.city,
+                                 area: @member.area,
+                                 address: @member.address
+                             })
+        else
+          @member.user_id = user.id
+        end
+        @member.save
+      end
       flash[:success] = "成功创建会员"
       redirect_to members_path
-    else
+    rescue Exception => exp
+      flash[:danger] = ""
       render :new
     end
   end
 
   def update
-    @user_registration = UserRegistration.find(params[:id])
-    @user_registration.assign_attributes(user_registration_params)
-    if @user_registration.save
-      @success = true
-      flash[:success] = "成功修改会员"
+    @member = Member.find(params[:id])
+    @member.update(user_registration_params)
+    if @member.update(member_params)
+      flash[:success] = "修改会员成功"
       redirect_to user_registrations_path
     else
-      #flash[:error] = "xxx"
+      flash[:danger] = "修改会员失败"
       render :edit
     end
   end

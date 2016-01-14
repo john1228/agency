@@ -12,8 +12,6 @@ class ProductsController < ApplicationController
       else
         @products = @query.result.joins(:sku).where(skus: {service_id: current_user.all_services.pluck(:id), status: 1}).paginate(page: params[:page]||1, per_page: 10).order("created_at desc")
     end
-
-    logger.info "========#{@products.total_entries}"
   end
 
   def new
@@ -38,7 +36,22 @@ class ProductsController < ApplicationController
     @sku = Sku.find(params[:id])
   end
 
-  def update
+  def online
+    product = Product.find_by(id: params[:id])
+    if product.sku.online!
+      render json: {code: 1}
+    else
+      render json: {code: 0}
+    end
+  end
+
+  def offline
+    product = Product.find_by(id: params[:id])
+    if product.sku.offline!
+      render json: {code: 1}
+    else
+      render json: {code: 0}
+    end
   end
 
 

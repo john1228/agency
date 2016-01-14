@@ -37,12 +37,12 @@
               </div>
               <div class="member-operation pull-right">
                 <% if product.sku.online? %>
-                    <a href="#"><i class="icon" title="一键下架">&#xe62f;</i></a>
+                    <a class="online" href="#" data-url="<%= offline_product_path(product) %>"><i class="icon" title="一键下架">&#xe62f;</i></a>
                 <% else %>
-                    <a href="#"><i class="icon" title="一键上架">&#xe62b;</i></a>
+                    <a class="offline" href="#" data-url="<%= online_product_path(product) %>"><i class="icon" title="一键上架">&#xe62b;</i></a>
                 <% end %>
                 <a href="#" title="编辑"><i class="icon">&#xe615;</i></a>
-                <a href="#"><i class="icon">&#xe616;</i></a>
+                <a class="delete" href="#" data-url="<%= delete_product_path(product) %>"><i class="icon">&#xe616;</i></a>
               </div>
             </div>
           </div>
@@ -53,3 +53,19 @@
     <%= will_paginate @products, renderer: BootstrapPagination::Rails, class: 'product_pagination', inner_window: 2 %>
   </div>
 </div>
+
+<script>
+    $(function () {
+        $('.online').on('click', function () {
+            $.post($(this).data('url'));
+            location.reload();
+        });
+        $('.offline').on('click', function () {
+            $.post($(this).data('url'));
+            location.reload();
+        });
+        $('.delete').on('click', function () {
+            $.delete($(this).data('url'));
+        });
+    })
+</script>
