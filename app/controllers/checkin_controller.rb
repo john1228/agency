@@ -81,16 +81,21 @@ class CheckinController < ApplicationController
   end
 
   def update
-    checkin = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
-    checkin.membership_card_id = params[:membership_card_id]
-    checkin.change_amount = params["value_#{params[:membership_card_id]}".to_sym]
-    checkin.operator = current_user.name
-    if checkin.may_confirm?
-      checkin.confirm!
-      redirect_to action: :pending, success: '确认成功'
+    if params[:membership_card_id].present?
+      checkin = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+      checkin.membership_card_id = params[:membership_card_id]
+      checkin.change_amount = params["value_#{params[:membership_card_id]}".to_sym]
+      checkin.operator = current_user.name
+      if checkin.may_confirm?
+        checkin.confirm!
+        redirect_to action: :pending, success: '确认成功'
+      else
+        redirect_to action: :pending, error: '确认失败: 卡余额不足或者消课数量为0'
+      end
     else
-      redirect_to action: :pending, error: '确认失败: 卡余额不足或者消课数量为0'
+      redirect_to action: :pending, error: '确认失败: 请选择要确认的会员卡'
     end
+
   end
 
   def ignore
