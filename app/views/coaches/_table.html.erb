@@ -22,7 +22,7 @@
     <tbody>
     <% @coaches.each { |coach| %>
         <tr>
-          <td><%= image_tag coach.profile.avatar.url(:thumb), class: "img-responsive img-circle" %></td>
+          <td><%= image_tag(coach.profile.avatar.url + '-avatar', class: "img-responsive img-circle") %></td>
           <td><%= coach.profile.name %></td>
           <td><%= coach.profile.gender_i18n %></td>
           <td><%= coach.service.profile.name rescue nil %></td>
