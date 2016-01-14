@@ -24,19 +24,17 @@ class CoachesController < InheritedResources::Base
   end
 
   def create
-    coach = Coach.new(coach_params)
-    coach.client_id = current_user.client_id
-    coach.profile.identity = 1
-    if coach.save
-      ServiceMember.create(service_id: coach.service_id, coach: coach)
-      @success = true
+    @coach = Coach.new(coach_params)
+    @coach.client_id = current_user.client_id
+    @coach.profile.identity = 1
+    if @coach.save
+      ServiceMember.create(service_id: @coach.service_id, coach: @coach)
       flash[:success] = "成功创建私教"
       redirect_to coaches_path
-      return
     else
-      flash[:danger] = "创建私教失败"
+      render action: :new
     end
-    render action: :new
+
   end
 
   def update
