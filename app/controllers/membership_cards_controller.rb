@@ -91,7 +91,7 @@ class MembershipCardsController < ApplicationController
       membership_card.supply_value = membership_card.supply_value.to_i + params[:change_amount].to_i
       membership_card.open = Date.today
       membership_card.valid_date = params[:valid_days].to_i
-    elsif membership_card.stored? && membership_card.measured?
+    elsif membership_card.stored? || membership_card.measured?
       membership_card.value = membership_card.value.to_i + params[:change_amount].to_i
       membership_card.open = Date.today
       membership_card.valid_date = params[:valid_days].to_i
