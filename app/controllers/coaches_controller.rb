@@ -40,8 +40,8 @@ class CoachesController < InheritedResources::Base
   end
 
   def update
-    coach = Coach.find(params[:id])
-    if coach.update(coach_params)
+    @coach = Coach.find(params[:id])
+    if @coach.update(coach_params)
       flash[:success] = "成功创建私教"
       redirect_to coaches_path
     else
@@ -50,8 +50,6 @@ class CoachesController < InheritedResources::Base
   end
 
   def destroy
-    # @coach
-
     render json: {result: true}
   end
 
