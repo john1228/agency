@@ -21,7 +21,7 @@
                 borderWidth: 1,
                 backgroundColor: '#FFFFFF'
             },
-            xAxis: {categories: <%=raw @day%>},
+            xAxis: {categories: <%=raw @day%>, tickmarkPlacement: 'on'},
             yAxis: {title: {text: '元'}},
             tooltip: {shared: true, valueSuffix: '元'},
             credits: {enabled: false},
