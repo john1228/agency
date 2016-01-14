@@ -34,11 +34,22 @@ module Api
                      avatar: service.profile.avatar.url,
                      card: MembershipCard.where(service: service).where('updated_at > ?', time).map { |membership_card|
                        physical_card = PhysicalCard.find_by(virtual_number: membership_card.physical_card)
+                       if membership_card.clocked?
+                         if membership_card.valid_end.eql?('已过期')
+                           remain_value = 0
+                         else
+                           remain_value = membership_card.valid_end - Date.today
+                         end
+                       elsif membership_card.course?
+                         remain_value = membership_card.supply_value
+                       else
+                         remain_value = membership_card.value
+                       end
                        {
                            id: membership_card.id,
                            name: membership_card.name,
                            card_type: membership_card.card_type,
-                           value: membership_card.value,
+                           value: remain_value,
                            valid_end: membership_card.valid_end,
                            member_name: membership_card.member.name,
                            member_avatar: (membership_card.member.avatar.url rescue ''),
@@ -82,13 +93,40 @@ module Api
                                  valid_end: membership_card.valid_end,
                                  member_name: membership_card.member.name,
                                  member_avatar: (membership_card.member.avatar.url rescue ''),
-                                 physical_card: physical_card.entity_number
+                                 physical_card: (physical_card.entity_number rescue ''),
+                                 status: membership_card.status
                              }
                            }
                        }
                    }
           else
-            render json: {code: 0, message: '会员卡已过期或者余额不足'}
+            render json: {code: 1, data: {
+                       card: membership_cards.map { |membership_card|
+                         physical_card = PhysicalCard.find_by(virtual_number: membership_card.physical_card)
+                         if membership_card.clocked?
+                           if membership_card.valid_end.eql?('已过期')
+                             remain_value = 0
+                           else
+                             remain_value = membership_card.valid_end - Date.today
+                           end
+                         elsif membership_card.course?
+                           remain_value = membership_card.supply_value
+                         else
+                           remain_value = membership_card.value
+                         end
+                         {
+                             id: membership_card.id,
+                             name: membership_card.name,
+                             card_type: membership_card.card_type,
+                             value: remain_value,
+                             valid_end: membership_card.valid_end,
+                             member_name: membership_card.member.name,
+                             member_avatar: (membership_card.member.avatar.url rescue ''),
+                             physical_card: (physical_card.entity_number rescue ''),
+                             status: membership_card.status
+                         }
+                       }
+                   }}
           end
         end
       end
