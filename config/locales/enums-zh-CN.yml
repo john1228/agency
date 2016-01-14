@@ -61,6 +61,9 @@
       member_type:
         associate: '准会员'
         full: '会员'
+      gender:
+        male: '男'
+        female: '女'
     order:
       pay_type:
         alipay: '支付宝'

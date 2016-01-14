@@ -2,6 +2,8 @@ class MembersController < InheritedResources::Base
   layout "admin"
 
   def index
+    flash[:success] = params[:success]
+    flash[:danger] = params[:error]
     @query = Member.ransack(params[:q])
     @members = @query.result.where(service_id: current_user.all_services.pluck(:id)).where.not(member_type: Member.member_types['coach']).paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
     @member = [['准会员', Member.associate.where(service_id: current_user.all_services.pluck(:id)).count],
@@ -30,10 +32,9 @@ class MembersController < InheritedResources::Base
         end
         @member.save
       end
-      flash[:success] = "成功创建会员"
-      redirect_to members_path
+      redirect_to members_path, success: '成功创建会员'
     rescue Exception => exp
-      flash[:danger] = ""
+      flash[:danger] = "创建会员失败:" + exp.message
       render :new
     end
   end

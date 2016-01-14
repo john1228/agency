@@ -26,7 +26,7 @@
   <% @orders.each { |order| %>
       <tr>
         <td><%= order.no %></td>
-        <td><%= order.order_item.name %></td>
+        <td><%= truncate(order.order_item.name, lenght: 8) %></td>
         <td><%= order.contact_name %>/<%= order.contact_phone %></td>
         <td><%= order.service.profile.name rescue '' %></td>
         <td><%= order.total %></td>
