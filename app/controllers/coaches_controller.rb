@@ -27,6 +27,7 @@ class CoachesController < InheritedResources::Base
     @coach = Coach.new(coach_params)
     @coach.client_id = current_user.client_id
     @coach.profile.identity = 1
+    @coach.build_wallet
     if @coach.save
       ServiceMember.create(service_id: @coach.service_id, coach: @coach)
       flash[:success] = "成功创建私教"
