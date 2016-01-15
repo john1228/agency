@@ -14,7 +14,7 @@
 
         <%= f.semantic_fields_for :profile do |p| %>
             <%= p.hidden_field :id %>
-            <div class="new-portrait pull-right">
+            <div class="new-portrait pull-right" data-url="<%= p.object.avatar.url %>">
               <samp class="default_icon">
                 <i class=" icon"></i>
               </samp>
@@ -75,21 +75,12 @@
 <% end %>
 
 <script>
-    new PCAS("coach[province]", "coach[city]", '<%=@coach.profile.province%>', '<%=@coach.profile.city%>');
     $(function () {
-                $("#coach_birthday").datepicker({
+                $("#coach_profile_birthday").datepicker({
                     language: 'zh-CN',
                     format: 'yyyy-mm-dd'
                 });
-                $(".portrait").image_preview();
-                $('#coach_profile_attributes_hobby').multiselect({
-                    inheritClass: true,
-                    numberDisplayed: 8,
-                    nonSelectedText: '请选择提供的健身服务',
-                    maxHeight: 100,
-                    dropUp: true
-                });
-
+                $(".new-portrait").image_preview();
             }
     );
 

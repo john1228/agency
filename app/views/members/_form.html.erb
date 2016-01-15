@@ -12,7 +12,7 @@
             </div>
         <% end %>
         <%= f.hidden_field :client_id, value: current_user.client_id %>
-        <div class="portrait pull-right">
+        <div class="new-portrait pull-right" data-url="<%= f.object.avatar.url %>">
           <samp class="default_icon">
             <i class=" icon">&#xe619;</i>
           </samp>
@@ -84,7 +84,7 @@
                     language: 'zh-CN',
                     format: 'yyyy-mm-dd'
                 });
-                $(".portrait").image_preview();
+                $(".new-portrait").image_preview();
             }
     );
 </script>
