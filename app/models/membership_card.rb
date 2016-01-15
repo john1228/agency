@@ -4,7 +4,7 @@ class MembershipCard < ActiveRecord::Base
   belongs_to :member
   belongs_to :service
   has_many :logs, class: MembershipCardLog, dependent: :destroy
-  validates_presence_of :service_id,message: '请选择会员卡所属的门店'
+  validates :service_id, :member_id, :card_type, :name, :value, presence: true
   validate :valid_physical_card
 
 
