@@ -3,7 +3,7 @@ module Api
     before_filter :auth, only: [:show, :checkin]
 
     def active
-      terminal = Terminal.new(active_params)
+      terminal = Terminal.new(active_params.merge(last_sign_in_ip: request.remote_ip))
       if terminal.save
         Rails.cache.write(terminal.token, terminal)
         render json: {code: 1, data: {token: terminal.token}}
@@ -15,6 +15,7 @@ module Api
     def show
       service = @terminal.service
       time = Time.parse(params[:ver]) rescue Time.parse('2015-01-01')
+      @terminal.update(last_sign_in_ip: request.remote_ip)
       render json: {
                  code: 1,
                  data: {
@@ -134,7 +135,7 @@ module Api
 
     protected
     def active_params
-      params.permit(:terminal, :mxid)
+      params.permit(:terminal, :mxid).merge(terminal: params[:tid])
     end
 
     def auth

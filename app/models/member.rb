@@ -8,7 +8,7 @@ class Member < ActiveRecord::Base
   belongs_to :service
   belongs_to :user
 
-  has_many :cards, class: MembershipCard
+  has_many :cards, class: MembershipCard, dependent: :destroy
   has_many :logs, class: MemberLog, dependent: :destroy
 
   validates_presence_of :name, message: '姓名必须输入'
