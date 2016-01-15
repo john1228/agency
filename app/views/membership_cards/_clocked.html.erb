@@ -21,7 +21,7 @@
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">卡名称</samp></span>
-            <%= f.select :name, options_for_select(MembershipCard.card_type_for_select), {}, class: "form-control selectpicker" %>
+            <%= f.select :name, options_for_select([]), {}, class: "form-control selectpicker" %>
           </div>
 
           <div class="input-group top20">

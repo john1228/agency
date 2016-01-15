@@ -37,10 +37,10 @@
 
     </div>
     <div class="text-muted"><%= @service.profile.signature %></div>
-    
+
     <div id="gallery">
       <% @service.photos.each do |photo| %>
-          <a href="<%= photo.photo.url %>"><img src="<%= photo.photo.url(:thumb) %>" alt="photo"/></a>
+          <a href="<%= photo.photo.url %>"><img src="<%= photo.photo.url + '-avatar' %>" alt="photo"/></a>
       <% end %>
     </div>
   </div>
