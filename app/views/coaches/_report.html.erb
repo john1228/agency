@@ -2,7 +2,7 @@
     $(function () {
         $('#coach').highcharts({
             chart: {plotBackgroundColor: null, plotBorderWidth: null, plotShadow: false},
-            title: {text: '店铺流水'},
+            title: {text: '私教情况'},
             tooltip: {pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'},
             plotOptions: {
                 pie: {
@@ -19,7 +19,8 @@
             series: [{
                 type: 'pie',
                 name: '占比',
-                data: [['男私教', <%=@query.result.where(profiles: {gender: 0}).count%>], ['女私教', <%=@query.result.where(profiles: {gender: 1}).count%>]]
+                data: [['男私教', <%=@query.result.includes(:service).where(service_members: {service_id: current_user.all_services.pluck(:id)}).where(profiles: {gender: 0}).count%>],
+                    ['女私教', <%=@query.result.includes(:service).where(service_members: {service_id: current_user.all_services.pluck(:id)}).where(profiles: {gender: 1}).count%>]]
             }]
         });
     });
