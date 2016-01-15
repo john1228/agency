@@ -17,7 +17,7 @@
         <td><%= image_tag member.avatar.url + '-avatar', class: "img-responsive img-circle" %></td>
         <td><%= member.name %></td>
         <td><%= member.gender_i18n %></td>
-        <td><%= member.service.profile.name %></td>
+        <td><%= truncate(member.service.profile.name, length: 8) %></td>
         <td><%= member.mobile %></td>
         <td><%= member.member_type_i18n %></td>
         <td><%= member.origin_i18n %></td>

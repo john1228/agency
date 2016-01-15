@@ -19,7 +19,7 @@
         <% @cards.each do |card| %>
             <tr>
               <td><%= radio_button_tag(:membership_card_id, card.id) %></td>
-              <td><%= card.name %></td>
+              <td><%= truncate(card.name, length: 8) %></td>
               <td><%= card.card_type_i18n %></td>
               <td>
                 <% if card.course? %>
