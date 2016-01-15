@@ -22,7 +22,6 @@ class MembersController < InheritedResources::Base
 
   def update
     @member = Member.find(params[:id])
-    @member.update(user_registration_params)
     if @member.update(member_params)
       flash[:success] = "修改会员成功"
       redirect_to members_path
