@@ -14,7 +14,13 @@
   <div class="col-md-4"><span>到期时间</span><%= @membership_card.valid_end %></div>
   <div class="col-md-4"><span>状态</span><%= @membership_card.status_i18n %></div>
   <div class="col-md-12"><span>类型</span><%= @membership_card.card_type_i18n %></div>
-  <div class="col-md-12"><span>余额</span><%= @membership_card.value %></div>
+  <div class="col-md-12"><span>余额</span>
+    <% if @membership_card.course? %>
+        <%= @membership_card.supply_value %>
+    <% else %>
+        <%= @membership_card.value %>
+    <% end %>
+  </div>
 </div>
 <div class="row card-details-text top20">
   <div class="col-md-12"><span>备注</span> TODO-备注

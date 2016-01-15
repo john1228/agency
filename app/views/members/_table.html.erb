@@ -23,7 +23,6 @@
         <td><%= member.origin_i18n %></td>
         <td class="list-card-1f">
           <%= link_to('编辑', edit_member_path(member)) %>
-          |<%= link_to('删除', member, method: :delete, confirm: '你确定要删除该会员吗？') %>
           | <%= link_to "详情", member %>
         </td>
       </tr>
