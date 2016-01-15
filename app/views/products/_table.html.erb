@@ -65,7 +65,10 @@
             location.reload();
         });
         $('.delete').on('click', function () {
-            $.delete($(this).data('url'));
+            $.delete($(this).data('url'),function(){
+
+            });
+            location.reload();
         });
     })
 </script>

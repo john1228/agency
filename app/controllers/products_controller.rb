@@ -55,6 +55,15 @@ class ProductsController < ApplicationController
   end
 
 
+  def destroy
+    product = Product.find(params[:id])
+    if product.sku.deleted!
+      redirect_to products_path
+    else
+      redirect_to products_path
+    end
+  end
+
   private
   def create_params
     params.require(:product).permit(:service_id, :card_type_id, :name, :description, :special, :market_price, :selling_price, :store, :limit, image: [])

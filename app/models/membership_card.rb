@@ -4,6 +4,7 @@ class MembershipCard < ActiveRecord::Base
   belongs_to :member
   belongs_to :service
   has_many :logs, class: MembershipCardLog, dependent: :destroy
+  validates_presence_of :service_id,message: '请选择会员卡所属的门店'
   validate :valid_physical_card
 
 
@@ -72,37 +73,29 @@ class MembershipCard < ActiveRecord::Base
   end
 
   def valid_end
-    if valid_days.present?
+    if clocked?
       if to_be_activated?
         #开卡日期
         created_date = Date.new(created_at.year, created_at.month, created_at.day)
         #最晚开卡日
         last_delay_date = created_date.next_day(delay_days||0)
-        #最晚的有效期
-        last_valid_date = last_delay_date.next_day(valid_days) rescue nil
+        last_valid_date = last_delay_date.next_day(value)
       else
-        last_valid_date = open.next_day(valid_days) rescue nil
+        last_valid_date = open.next_day(value)
       end
-      if last_valid_date.present?
-        if last_valid_date >= Date.today
-          last_valid_date
-        else
-          '已过期'
-        end
+      if last_valid_date > Date.today
+        last_valid_date
       else
-        '永久'
+        '已过期'
       end
     else
-      #期限卡以卡值计算
-      if clocked?
+      if valid_days.present?
         if to_be_activated?
-          #开卡日期
           created_date = Date.new(created_at.year, created_at.month, created_at.day)
-          #最晚开卡日
           last_delay_date = created_date.next_day(delay_days||0)
-          last_valid_date = last_delay_date.next_day(value||0)
+          last_valid_date = last_delay_date.next_day(valid_days)
         else
-          last_valid_date = open.next_day(value||0)
+          last_valid_date = open.next_day(valid_days)
         end
         if last_valid_date > Date.today
           last_valid_date
