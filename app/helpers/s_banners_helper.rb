@@ -1,0 +1,2 @@
+module SBannersHelper
+end

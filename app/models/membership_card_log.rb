@@ -31,10 +31,7 @@ class MembershipCardLog < ActiveRecord::Base
     state :confirm
     state :ignore
     state :cancel
-
     event :confirm do
-
-
       after do
         if membership_card.stored? || membership_card.measured?
           if membership_card.to_be_activated?

@@ -60,14 +60,25 @@
             value:
               blank: '面值不能为空'
         membership_card:
-           attributes:
-             name:
-               blank: '名字不能为空'
-             service_id:
-               blank: '门店不能为空'
-             member_id:
-               blank: '会员不能为空'
-             card_type:
-               blank: '类型不能为空'
-             value:
-               blank: '面值不能为空'
+          attributes:
+            name:
+              blank: '名字不能为空'
+            service_id:
+              blank: '门店不能为空'
+            member_id:
+              blank: '会员不能为空'
+            card_type:
+              blank: '类型不能为空'
+            value:
+              blank: '面值不能为空'
+        s_banner:
+          attributes:
+            service_id:
+              blank: '门店必须选择'
+            pos_1:
+              blank: '第一栏的图片不能为空'
+            pos_2:
+              blank: '第二栏的图片不能为空'
+            pos_3:
+              blank: '第三栏的图片不能为空'
+

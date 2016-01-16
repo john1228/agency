@@ -1492,6 +1492,46 @@
     padding: 0 0 0 20px
 }
 
+.card-list tbody > tr > td a {
+    color: #1fbba6;
+}
+
+.card-list tbody > tr > td > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: block;
+}
+
+.table-list thead > tr > th {
+    background-color: #dbe4ef;
+    padding: 0;
+    border-bottom: none;
+    font-weight: normal;
+    font-size: 14px;
+    color: #a1aab7;
+    line-height: 55px;
+    padding-left: 20px;
+}
+
+.table-list tbody > tr > td {
+    font-size: 14px;
+    line-height: 80px;
+    border-top: none;
+    padding: 0 0 0 20px
+}
+
+.table-list tbody > tr > td a {
+    color: #1fbba6;
+}
+
+.table-list tbody > tr > td > img {
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin: 5px;
+}
+
 .img-circle {
     margin-top: 13px;
 }
@@ -1506,17 +1546,6 @@
 
 .group .side-menu > li:nth-of-type(even) {
     background-color: #f3f7fc;
-}
-
-.card-list tbody > tr > td a {
-    color: #1fbba6;
-}
-
-.card-list tbody > tr > td > img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: block;
 }
 
 .list-card {

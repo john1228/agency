@@ -14,7 +14,7 @@
     <span class="pull-left">商品总数(<%= @membership_card_types.count %>)</span>
 
     <p class="top10">
-      <%= select_tag(:cart_type, options_for_select(I18n.t("enums.membership_card_type.card_type").to_a), class: 'pull-right selectpicker', include_blank: "全部类型") %>
+      <%= select_tag(:cart_type, options_for_select(MembershipCardType.card_type_for_select), class: 'pull-right selectpicker', include_blank: "全部类型") %>
       <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'pull-right selectpicker', include_blank: "全部门店") %>
     </p>
   </div>

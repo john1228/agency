@@ -16,6 +16,7 @@ module Api
       service = @terminal.service
       time = Time.parse(params[:ver]) rescue Time.parse('2015-01-01')
       @terminal.update(last_sign_in_ip: request.remote_ip)
+      banner = SBanner.find_by(service: service)
       render json: {
                  code: 1,
                  data: {
@@ -23,12 +24,12 @@ module Api
                      mxing: ['http://7xnvtv.com2.z0.glb.qiniucdn.com/a1.png',
                              'http://7xnvtv.com2.z0.glb.qiniucdn.com/a2.png'],
                      venue: {
-                         first: ['http://7xnvtv.com2.z0.glb.qiniucdn.com/b1-1.png',
-                                 'http://7xnvtv.com2.z0.glb.qiniucdn.com/b1-2.png'],
-                         second: ['http://7xnvtv.com2.z0.glb.qiniucdn.com/b2-1.png',
-                                  'http://7xnvtv.com2.z0.glb.qiniucdn.com/b2-2.png'],
-                         third: ['http://7xnvtv.com2.z0.glb.qiniucdn.com/b3-1.png',
-                                 'http://7xnvtv.com2.z0.glb.qiniucdn.com/b3-2.png']
+                         first: banner.blank? ? ['http://7xnvtv.com2.z0.glb.qiniucdn.com/b1-1.png',
+                                                 'http://7xnvtv.com2.z0.glb.qiniucdn.com/b1-2.png'] : banner.pos_1.map { |image| image.url },
+                         second: banner.blank? ? ['http://7xnvtv.com2.z0.glb.qiniucdn.com/b2-1.png',
+                                                  'http://7xnvtv.com2.z0.glb.qiniucdn.com/b2-2.png'] : banner.pos_2.map { |image| image.url },
+                         third: banner.blank? ? ['http://7xnvtv.com2.z0.glb.qiniucdn.com/b3-1.png',
+                                                 'http://7xnvtv.com2.z0.glb.qiniucdn.com/b3-2.png'] : banner.pos_3.map { |image| image.url }
                      },
                      time: Time.now.strftime('%Y-%m-%d %H:%M:%S'),
                      name: service.profile.name,
@@ -105,11 +106,7 @@ module Api
                        card: membership_cards.map { |membership_card|
                          physical_card = PhysicalCard.find_by(virtual_number: membership_card.physical_card)
                          if membership_card.clocked?
-                           if membership_card.valid_end.eql?('已过期')
-                             remain_value = 0
-                           else
-                             remain_value = (membership_card.valid_end - Date.today).floor
-                           end
+                           remain_value = 0
                          elsif membership_card.course?
                            remain_value = membership_card.supply_value
                          else
