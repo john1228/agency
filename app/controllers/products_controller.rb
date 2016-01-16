@@ -39,18 +39,18 @@ class ProductsController < ApplicationController
   def online
     product = Product.find_by(id: params[:id])
     if product.sku.online!
-      render json: {code: 1}
+      redirect_to products_path, flash: {success: "上架成功"}
     else
-      render json: {code: 0}
+      redirect_to products_path, flash: {danger: "上架失败"}
     end
   end
 
   def offline
     product = Product.find_by(id: params[:id])
     if product.sku.offline!
-      render json: {code: 1}
+      redirect_to products_path, flash: {success: "下架成功"}
     else
-      render json: {code: 0}
+      redirect_to products_path, flash: {danger: "下架成功"}
     end
   end
 
@@ -58,9 +58,9 @@ class ProductsController < ApplicationController
   def destroy
     product = Product.find(params[:id])
     if product.sku.deleted!
-      redirect_to products_path
+      redirect_to products_path, flash: {success: "删除成功"}
     else
-      redirect_to products_path
+      redirect_to products_path, flash: {danger: "删除失败"}
     end
   end
 
