@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     if user.super?
       can :manage, :all
-    elsif user.store_manager?
+    elsif user.store_manager?||user.superadmin?
       can :manage, :all
     elsif user.front_desk?
       can :read, Member

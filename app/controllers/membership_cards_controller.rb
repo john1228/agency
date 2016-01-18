@@ -5,7 +5,7 @@ class MembershipCardsController < ApplicationController
     flash[:success] = params[:success]
     flash[:danger] = params[:error]
     members = Member.ransack(name_or_mobile_cont: params[:name_or_mobile])
-    @query = MembershipCard.ransack(card_type_eq: params[:card_type], service_id_eq: params[:service])
+    @query = MembershipCard.ransack(card_type_eq: params[:card_type], service_id_eq: params[:service], physical_card_cont: params[:name_or_mobile])
     @membership_cards = @query.result.includes(:member)
                             .where(member_id: members.result.where(service_id: current_user.all_services.pluck(:id)))
                             .order("updated_at desc")
