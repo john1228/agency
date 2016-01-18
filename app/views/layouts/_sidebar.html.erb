@@ -9,20 +9,29 @@
             <% if can?(:read, Service) %>
                 <li class="nav-li-a"> <%= link_to '门店信息', services_path %></li>
             <% end %>
-            <% if can?(:read, Service) %>
+            <% if can?(:read, Dynamice) %>
                 <li class="nav-li-a"> <%= link_to '动态', dynamics_path %> </li>
             <% end %>
-            <li class="nav-li-a"> <%= link_to('信息', message_index_path) %></li>
-            <li class="nav-li-a"> <%= link_to('群组', mass_message_groups_path) %></li>
+            <% if can?(:read, Message) %>
+                <li class="nav-li-a"> <%= link_to('信息', message_index_path) %></li>
+            <% end %>
+            <% if can?(:read, MassMessageGroup) %>
+                <li class="nav-li-a"> <%= link_to('群组', mass_message_groups_path) %></li>
+            <% end %>
           </ul>
           <!-- /.nav-second-level -->
         </li>
         <li><a href="#"><i class="iconfont icon">&#xe603;</i>用户管理<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li class="nav-li-a"> <%= link_to "会员", members_path %> </li>
-            <li class="nav-li-a"> <%= link_to "私教", coaches_path %> </li>
-            <li class="nav-li-a"> <%= link_to "工作人员", admin_users_path %> </li>
-
+            <% if can?(:read, Member) %>
+                <li class="nav-li-a"> <%= link_to "会员", members_path %> </li>
+            <% end %>
+            <% if can?(:read, Coach) %>
+                <li class="nav-li-a"> <%= link_to "私教", coaches_path %> </li>
+            <% end %>
+            <% if can?(:read, AdminUser) %>
+                <li class="nav-li-a"> <%= link_to "工作人员", admin_users_path %> </li>
+            <% end %>
           </ul>
         </li>
         <li><a href="#"><i class="iconfont icon">&#xe607;</i>会员卡管理<span class="fa arrow"></span></a>

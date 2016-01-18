@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :profile
   accepts_nested_attributes_for :photos, allow_destroy: true
 
-  #validates :mobile, :uniqueness => true
+  validates :mobile, :uniqueness => true
 
   TYPE=[['健身爱好者', 0], ['私教', 1], ['商家', 2]]
   before_save :encrypted_password
@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   def mxid
     profile.id + 10000
   end
+
   class<<self
     def find_by_mxid(mxid)
       includes(:profile).where('profiles.id' => ((mxid.to_i - 10000))).first

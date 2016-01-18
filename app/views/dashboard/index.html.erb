@@ -1,90 +1,99 @@
-<div class="row home-side">
-  <div class="col-md-3">
-    <a href="<%= services_path %>" class="store-management">
-      <h3 class="text-right">门店管理</h3>
-      <h4 class="text-right"><%= current_user.all_services.count %></h4>
-
-      <div class="iconfont-dianpu text-center"><i class="icon">&#xe609;</i></div>
-      <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
-    </a>
-  </div>
-  <div class="col-md-9">
-    <div class="row left-side">
+<% if current_user.sale? || current_user.front_desk? %>
+    <div class="panel">
+      <div class="panel-header">欢迎登录</div>
+      <div class="panel-body" style="min-height: 400px">
+        <h3 style="text-align: center;vertical-align: middle">欢迎使用美型管理平台</h3>
+      </div>
+    </div>
+<% else %>
+    <div class="row home-side">
       <div class="col-md-3">
-        <a href="<%= members_path %>" class="user-management home-general">
-          <h3 class="text-right">用户管理</h3>
+        <a href="<%= services_path %>" class="store-management">
+          <h3 class="text-right">门店管理</h3>
+          <h4 class="text-right"><%= current_user.all_services.count %></h4>
 
-          <div class="iconfont-dianpu text-center"><i class="icon">&#xe603;</i></div>
+          <div class="iconfont-dianpu text-center"><i class="icon">&#xe609;</i></div>
           <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
         </a>
       </div>
-      <div class="col-md-3">
-        <a href="<%= membership_cards_path %>" class="member-management home-general">
-          <h3 class="text-right">会员卡管理</h3>
+      <div class="col-md-9">
+        <div class="row left-side">
+          <div class="col-md-3">
+            <a href="<%= members_path %>" class="user-management home-general">
+              <h3 class="text-right">用户管理</h3>
 
-          <div class="iconfont-dianpu text-center"><i class="icon">&#xe607;</i></div>
-          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
-        </a>
+              <div class="iconfont-dianpu text-center"><i class="icon">&#xe603;</i></div>
+              <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+            </a>
+          </div>
+          <div class="col-md-3">
+            <a href="<%= membership_cards_path %>" class="member-management home-general">
+              <h3 class="text-right">会员卡管理</h3>
+
+              <div class="iconfont-dianpu text-center"><i class="icon">&#xe607;</i></div>
+              <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+            </a>
+          </div>
+          <div class="col-md-6">
+            <a href="<%= transfers_path %>" class="financial-management home-general">
+              <h3 class="text-right">财务管理</h3>
+
+              <div class="iconfont-dianpu text-center"><i class="icon">&#xe60a;</i></div>
+              <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+            </a>
+          </div>
+          <div class="col-md-3">
+            <a href="<%= checkin_path %>" class="sign-in-management home-general">
+              <h3 class="text-right">签到管理</h3>
+
+              <div class="iconfont-dianpu text-center"><i class="icon">&#xe60b;</i></div>
+              <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+            </a>
+          </div>
+          <div class="col-md-6">
+            <a href="#" class="american-College home-general">
+              <h3 class="text-right">美型学院</h3>
+
+              <div class="iconfont-dianpu text-center"><i class="icon icon-ftt80">&#xe601;</i></div>
+              <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+            </a>
+          </div>
+          <div class="col-md-3">
+            <a href="<%= orders_path %>" class="report-management home-general">
+              <h3 class="text-right">报表管理</h3>
+
+              <div class="iconfont-dianpu text-center"><i class="icon">&#xe60c;</i></div>
+              <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row top10 inex-tl">
+      <div class="col-md-6">
+        <div class="panel">
+          <div class="panel-header">今日每家店铺流水</div>
+          <div class="panel-body">
+            <%= render 'transaction' %>
+          </div>
+        </div>
       </div>
       <div class="col-md-6">
-        <a href="<%= transfers_path %>" class="financial-management home-general">
-          <h3 class="text-right">财务管理</h3>
+        <div class="panel">
+          <div class="panel-header">今日每家店铺新增会员</div>
+          <div class="panel-body">
+            <%= render 'member' %>
 
-          <div class="iconfont-dianpu text-center"><i class="icon">&#xe60a;</i></div>
-          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
-        </a>
-      </div>
-      <div class="col-md-3">
-        <a href="<%= checkin_path %>" class="sign-in-management home-general">
-          <h3 class="text-right">签到管理</h3>
-
-          <div class="iconfont-dianpu text-center"><i class="icon">&#xe60b;</i></div>
-          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
-        </a>
-      </div>
-      <div class="col-md-6">
-        <a href="#" class="american-College home-general">
-          <h3 class="text-right">美型学院</h3>
-
-          <div class="iconfont-dianpu text-center"><i class="icon icon-ftt80">&#xe601;</i></div>
-          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
-        </a>
-      </div>
-      <div class="col-md-3">
-        <a href="<%= orders_path %>" class="report-management home-general">
-          <h3 class="text-right">报表管理</h3>
-
-          <div class="iconfont-dianpu text-center"><i class="icon">&#xe60c;</i></div>
-          <div class="store-panel-end"><%= image_tag('c_arrow.png') %></div>
-        </a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="row top10 inex-tl">
-  <div class="col-md-6">
     <div class="panel">
-      <div class="panel-header">今日每家店铺流水</div>
+      <div class="panel-header header-selector">
+        <span class="pull-left">门店收入排行榜</span>
+      </div>
       <div class="panel-body">
-        <%= render 'transaction' %>
+        <%= render 'incoming' %>
       </div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel">
-      <div class="panel-header">今日每家店铺新增会员</div>
-      <div class="panel-body">
-        <%= render 'member' %>
-
-      </div>
-    </div>
-  </div>
-</div>
-<div class="panel">
-  <div class="panel-header header-selector">
-    <span class="pull-left">门店收入排行榜</span>
-  </div>
-  <div class="panel-body">
-    <%= render 'incoming' %>
-  </div>
-</div>
+<% end %>

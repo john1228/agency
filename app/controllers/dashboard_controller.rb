@@ -2,8 +2,7 @@ class DashboardController < ApplicationController
   layout 'admin'
 
   def index
-    #TODO: 引入真实數據
-    authorize! :read, current_user
+    # authorize! :read, current_user
     @service = current_user.all_services.includes(:profile).pluck('profiles.name')
     @member = current_user.all_services.includes(:profile).map { |service|
       [service.profile.name, service.members.count] }

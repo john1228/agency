@@ -91,18 +91,20 @@ class MembershipCardsController < ApplicationController
       membership_card.supply_value = membership_card.supply_value.to_i + params[:change_amount].to_i
       membership_card.open = Date.today
       membership_card.valid_days = params[:valid_days].to_i
+      membership_card.status = 'normal'
     elsif membership_card.stored? || membership_card.measured?
       membership_card.value = membership_card.value.to_i + params[:change_amount].to_i
       membership_card.open = Date.today
       membership_card.valid_days = params[:valid_days].to_i
+      membership_card.status = 'normal'
     elsif membership_card.clocked?
       if membership_card.valid_end.eql?('已过期')
         membership_card.value = params[:change_amount]
-        membership_card.open = Date.today
       else
         membership_card.value = (membership_card.valid_end - Date.today).floor + params[:change_amount].to_i
-        membership_card.open = Date.today
       end
+      membership_card.open = Date.today
+      membership_card.status = 'normal'
     end
     if membership_card.save
       redirect_to action: :index, success: '充值成功'

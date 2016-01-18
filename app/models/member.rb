@@ -10,11 +10,8 @@ class Member < ActiveRecord::Base
 
   has_many :cards, class: MembershipCard, dependent: :destroy
   has_many :logs, class: MemberLog, dependent: :destroy
-
-  validates_presence_of :name, message: '姓名必须输入'
-  validates_presence_of :mobile, message: '手机号必须输入'
-
   validates :name, :mobile, presence: true
+  validates :mobile, scope: :service_id, uniqueness: true
 
   before_create :valid_user
 
