@@ -12,7 +12,7 @@
             <% if can?(:read, Dynamic) %>
                 <li class="nav-li-a"> <%= link_to '动态', dynamics_path %> </li>
             <% end %>
-            <% if can?(:read, Message) %>
+            <% if can?(:read, MassMessage) %>
                 <li class="nav-li-a"> <%= link_to('信息', message_index_path) %></li>
             <% end %>
             <% if can?(:read, MassMessageGroup) %>
