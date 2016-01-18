@@ -93,11 +93,18 @@ module Api
                        data: {
                            card: valid_cards.map { |membership_card|
                              physical_card = PhysicalCard.find_by(virtual_number: membership_card.physical_card)
+                             if membership_card.clocked?
+                               remain_value = (membership_card.valid_end - Date.today).floor
+                             elsif membership_card.course?
+                               remain_value = membership_card.supply_value
+                             else
+                               remain_value = membership_card.value
+                             end
                              {
                                  id: membership_card.id,
                                  name: membership_card.name,
                                  card_type: membership_card.card_type,
-                                 value: membership_card.value,
+                                 value: remain_value,
                                  valid_end: membership_card.valid_end,
                                  member_name: membership_card.member.name,
                                  member_avatar: (membership_card.member.avatar.url rescue ''),
