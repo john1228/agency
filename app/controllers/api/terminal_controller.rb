@@ -74,7 +74,13 @@ module Api
           render json: {code: 0, message: '无效的会员卡'}
         else
           valid_cards = membership_cards.find_all { |membership_card|
-            (membership_card.value||0) > 0 && !membership_card.valid_end.eql?('已过期')
+            if membership_card.course?
+              membership_card.supply_value > 0 && !membership_card.valid_end.eql?('已过期')
+            elsif membership_card.clocked?
+              !membership_card.valid_end.eql?('已过期')
+            else
+              membership_card.value > 0 && !membership_card.valid_end.eql?('已过期')
+            end
           }
           if valid_cards.present?
             MembershipCardLog.checkin.create(
