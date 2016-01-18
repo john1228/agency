@@ -31,6 +31,15 @@ class SBannersController < ApplicationController
     end
   end
 
+  def destroy
+    banner = SBanner.find(params[:id])
+    if banner.destroy
+      redirect_to s_banners_path, flash: {success: '删除成功'}
+    else
+      redirect_to s_banners_path, flash: {dangers: '删除失败'}
+    end
+  end
+
 
   protected
   def banner_params

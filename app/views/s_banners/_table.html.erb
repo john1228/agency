@@ -28,7 +28,8 @@
           <%= image_tag(banner.pos_3.first.url + '-avatar') %>
         </td>
         <td class="sign-in">
-          <%= link_to('编辑', edit_s_banner_path(banner)) %>|<%= link_to('删除', '', method: '') %>
+          <%= link_to('编辑', edit_s_banner_path(banner)) %>
+          |<%= link_to('删除', banner, method: :delete, data: {confirm: '您确定要删除吗？'}) %>
         </td>
       </tr>
   <% } %>
