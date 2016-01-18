@@ -14,6 +14,8 @@ class Member < ActiveRecord::Base
   validates_presence_of :name, message: '姓名必须输入'
   validates_presence_of :mobile, message: '手机号必须输入'
 
+  validates :name, :mobile, presence: true
+
   before_create :valid_user
 
   protected

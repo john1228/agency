@@ -81,4 +81,10 @@
               blank: '第二栏的图片不能为空'
             pos_3:
               blank: '第三栏的图片不能为空'
+        member:
+          attributes:
+            name:
+              blank: '名字不能为空'
+            mobile:
+              blank: '手机号码不能为空'
 
