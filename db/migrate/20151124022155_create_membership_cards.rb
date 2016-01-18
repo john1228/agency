@@ -15,6 +15,7 @@ class CreateMembershipCards < ActiveRecord::Migration
       t.integer :status, default: 0
       t.string :physical_card
       t.string :option_code, array: true, default: [] #课程卡时，存储消课码
+      t.text :remark
       t.timestamps null: false
     end
     add_index :membership_cards, :service_id
