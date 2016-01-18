@@ -91,10 +91,14 @@ module Api
             render json: {
                        code: 1,
                        data: {
-                           card: valid_cards.map { |membership_card|
+                           card: membership_cards.map { |membership_card|
                              physical_card = PhysicalCard.find_by(virtual_number: membership_card.physical_card)
                              if membership_card.clocked?
-                               remain_value = (membership_card.valid_end - Date.today).floor
+                               if membership_card.valid_end.eql?('已过期')
+                                 remain_value = 0
+                               else
+                                 remain_value = (membership_card.valid_end - Date.today).floor
+                               end
                              elsif membership_card.course?
                                remain_value = membership_card.supply_value
                              else
