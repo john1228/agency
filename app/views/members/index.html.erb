@@ -7,7 +7,9 @@
           <%= f.search_field :name_or_mobile_cont, placeholder: "会员姓名／手机号码／实体卡号", class: "form-control" %>
         </div>
       </div>
-      <%= link_to '新建会员', new_member_path, class: "new-btn pull-right" %>
+      <% if can?(:create, Dynamic) %>
+          <%= link_to '新建会员', new_member_path, class: "new-btn pull-right" %>
+      <% end %>
       <%= link_to '搜索', '#', class: "detailed-Search pull-right", onclick: "return $(this).closest('form').submit()" %>
     </div>
 <% end %>

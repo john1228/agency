@@ -11,7 +11,9 @@
 
     <% end %>
   </div>
-  <%= link_to '<i class="icon">&#xe613;</i>新增出售会员卡'.html_safe, new_product_path, class: "new-btn pull-right" %>
+  <% if can?(:create, Product) %>
+      <%= link_to '<i class="icon">&#xe613;</i>新增出售会员卡'.html_safe, new_product_path, class: "new-btn pull-right" %>
+  <% end %>
   <div class="member-search pull-right">
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>

@@ -8,7 +8,7 @@
     <%= link_to "消息", message_index_path, class: "pull-left  page-header-text " %>
     <%= link_to "群组", dynamics_path, class: "pull-left  page-header-text " %>
   </div>
-  <% if current_user.super? && current_user.superadmin? %>
+  <% if can?(:create, Service) %>
       <%= link_to '<i class="icon">&#xe613;</i>新增门店'.html_safe, new_service_path, class: "new-btn pull-right" %>
   <% end %>
 </div>

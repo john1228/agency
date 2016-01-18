@@ -8,7 +8,9 @@
     <a href="#" class="pull-left  page-header-text">消息</a>
     <a href="#" class="pull-left  page-header-text">群组</a>
   </div>
-  <%= link_to '<i class="icon">&#xe613;</i>新增动态'.html_safe, new_dynamic_path, class: "new-btn pull-right" %>
+  <% if can?(:create, Dynamic) %>
+      <%= link_to '<i class="icon">&#xe613;</i>新增动态'.html_safe, new_dynamic_path, class: "new-btn pull-right" %>
+  <% end %>
 </div>
 <div class="panel  top20">
   <div class="panel-header">历史动态(<%= @dynamics.count %>)</div>
