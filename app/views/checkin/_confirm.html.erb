@@ -28,7 +28,7 @@
           <%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M') %>
         </td>
         <td width="10%">
-          <%= log.membership_card.name %>
+          <%= trancate(log.membership_card.name, length: 8) %>
         </td>
         <td width="10%">
           <%= log.membership_card.card_type_i18n %>
