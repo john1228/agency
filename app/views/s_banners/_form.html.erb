@@ -2,6 +2,15 @@
   <div class="panel-header">终端机展示图</div>
   <div class="panel-body">
     <%= form_for(@banner) do |f| %>
+        <!--错误提示-->
+        <% if f.object.errors.present? %>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <% f.object.errors.messages.values.each { |v| %>
+                  <%= v %><br/>
+              <% } %>
+            </div>
+        <% end %>
         <div class="form-main">
           <div class="input-group  top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">门店</samp></span>
@@ -17,8 +26,8 @@
           <h4 class="top20" style="color: #21486a;font-size: 14px; ">第一栏</h4>
 
           <div class="top20 clearfix">
-            <% (1..3).each do %>
-                <div class="photowall-item pull-left">
+            <% (1..3).each do |index| %>
+                <div class="photowall-item pull-left" data-url="<%= f.object.pos_1[index-1].url rescue '' %>">
                   <div class="place">
                     <samp class="default_icon">
                       <i class="photowall-font icon"></i>
@@ -35,8 +44,8 @@
           <h4 class="top20" style="color: #21486a;font-size: 14px; ">第二栏</h4>
 
           <div class="top20 clearfix">
-            <% (1..3).each do %>
-                <div class="photowall-item pull-left">
+            <% (1..3).each do |index| %>
+                <div class="photowall-item pull-left" data-url="<%= f.object.pos_2[index-1].url rescue '' %>">
                   <div class="place">
                     <samp class="default_icon">
                       <i class="photowall-font icon"></i>
@@ -44,7 +53,7 @@
 
                     <p class="default_title">添加图片</p>
                   </div>
-                  <%= f.file_field :pos_1, class: 'image-uploader', name: 's_banner[pos_2][]' %>
+                  <%= f.file_field :pos_2, class: 'image-uploader', name: 's_banner[pos_2][]' %>
                 </div>
             <% end %>
           </div>
@@ -54,8 +63,8 @@
 
 
           <div class="top20 clearfix">
-            <% (1..3).each do %>
-                <div class="photowall-item pull-left">
+            <% (1..3).each do |index| %>
+                <div class="photowall-item pull-left" data-url="<%= f.object.pos_3[index-1].url rescue '' %>">
                   <div class="place">
                     <samp class="default_icon">
                       <i class="photowall-font icon"></i>
@@ -63,7 +72,7 @@
 
                     <p class="default_title">添加图片</p>
                   </div>
-                  <%= f.file_field :pos_1, class: 'image-uploader', name: 's_banner[pos_3][]' %>
+                  <%= f.file_field :pos_3, class: 'image-uploader', name: 's_banner[pos_3][]' %>
                 </div>
             <% end %>
           </div>
@@ -74,3 +83,10 @@
     <% end %>
   </div>
 </div>
+<script>
+    $(function () {
+        $(".photowall-item").each(function () {
+            $(this).image_preview();
+        })
+    });
+</script>

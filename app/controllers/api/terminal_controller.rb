@@ -16,7 +16,7 @@ module Api
       service = @terminal.service
       time = Time.parse(params[:ver]) rescue Time.parse('2015-01-01')
       @terminal.update(last_sign_in_ip: request.remote_ip)
-      banner = SBanner.find_by(service: service)
+      banner = SBanner.where(service: service).last
       render json: {
                  code: 1,
                  data: {

@@ -14,9 +14,23 @@ class SBannersController < ApplicationController
     if @banner.save
       redirect_to s_banners_path, flash: {success: '添加终端机展示图成功'}
     else
-      render action: :new,flash: {danger: '添加终端机图失败'}
+      render action: :new
     end
   end
+
+  def edit
+    @banner = SBanner.find(params[:id])
+  end
+
+  def update
+    @banner = SBanner.find(params[:id])
+    if @banner.update(banner_params)
+      redirect_to s_banners_path, flash: {success: '更新终端机展示图成功'}
+    else
+      render action: :edit
+    end
+  end
+
 
   protected
   def banner_params

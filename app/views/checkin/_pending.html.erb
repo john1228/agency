@@ -45,8 +45,10 @@
         </td>
         <td class="sign-in">
           <%= form_tag(ignore_checkin_path(log), method: :post) do %>
-              <%= link_to "签到", card_list_path(log), 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
-              |<%= link_to "忽略", '#', onclick: "return $(this).closest('form').submit()" %>
+              <% if can? :update, Checkin %>
+                  <%= link_to "签到", card_list_path(log), 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
+                  |<%= link_to "忽略", '#', onclick: "return $(this).closest('form').submit()" %>
+              <% end %>
           <% end %>
         </td>
       </tr>

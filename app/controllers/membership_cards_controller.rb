@@ -2,8 +2,6 @@ class MembershipCardsController < ApplicationController
   layout 'admin'
 
   def index
-    flash[:success] = params[:success]
-    flash[:danger] = params[:error]
     members = Member.ransack(name_or_mobile_cont: params[:name_or_mobile])
     @query = MembershipCard.ransack(card_type_eq: params[:card_type], service_id_eq: params[:service], physical_card_cont: params[:name_or_mobile])
     @membership_cards = @query.result.includes(:member)
@@ -31,27 +29,31 @@ class MembershipCardsController < ApplicationController
     membership_card = MembershipCard.find_by(id: params[:id])
     membership_card.open = Date.today
     if membership_card.active!
-      redirect_to action: :index, success: "激活成功"
+      redirect_to action: :index, flash: {success: "激活成功"}
     else
-      redirect_to action: :index, error: "激活失败"
+      redirect_to action: :index, flash: {danger: "激活失败:"+ membership_card.errors.messages.values.join(';')}
     end
   end
 
   def disable
     membership_card = MembershipCard.find_by(id: params[:id])
     if membership_card.disable!
-      redirect_to action: :index, success: "停用成功"
+      redirect_to action: :index, flash: {success: "停用成功"}
     else
-      redirect_to action: :index, error: "停用失败"
+      redirect_to action: :index, flash: {danger: "停用失败:"+ membership_card.errors.messages.values.join(';')}
     end
   end
 
   def transfer
     membership_card = MembershipCard.find_by(id: params[:id])
-    if membership_card.update(transfer_params)
-      redirect_to action: :index, success: "转卡成功"
+    if membership_card.logs.checkin.pending.present?
+      redirect_to action: :index, flash: {danger: "转卡失败:该卡还有未处理的簽到记录"}
     else
-      redirect_to action: :index, error: "转卡失败:#{membership_card.errors.messages.values.joins(';')}"
+      if membership_card.update(transfer_params)
+        redirect_to action: :index, flash: {success: "转卡成功"}
+      else
+        redirect_to action: :index, flash: {danger: "转卡失败:"+ membership_card.errors.messages.values.join(';')}
+      end
     end
   end
 
@@ -72,9 +74,9 @@ class MembershipCardsController < ApplicationController
   def binding_confirm
     membership_card = MembershipCard.find_by(id: params[:id])
     if membership_card.update(binding_params)
-      redirect_to action: :index, success: '绑定实体卡成功'
+      redirect_to action: :index, flash: {success: '绑定实体卡成功'}
     else
-      redirect_to action: :index, error: '绑定实体卡失败'
+      redirect_to action: :index, flash: {danger: '绑定实体卡失败:' + membership_card.errors.messages.values.join(';')}
     end
   end
 
@@ -107,9 +109,9 @@ class MembershipCardsController < ApplicationController
       membership_card.status = 'normal'
     end
     if membership_card.save
-      redirect_to action: :index, success: '充值成功'
+      redirect_to action: :index, flash: {success: '充值成功'}
     else
-      redirect_to action: :index, error: '充值失败'
+      redirect_to action: :index, flash: {dange: '充值失败'}
     end
   end
 
