@@ -11,7 +11,7 @@ class Member < ActiveRecord::Base
   has_many :cards, class: MembershipCard, dependent: :destroy
   has_many :logs, class: MemberLog, dependent: :destroy
   validates :name, :mobile, presence: true
-  validates :mobile, scope: :service_id, uniqueness: true
+  validates_uniqueness_of :mobile, scope: :service_id
 
   before_create :valid_user
 
