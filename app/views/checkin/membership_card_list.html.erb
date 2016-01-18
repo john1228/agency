@@ -8,11 +8,11 @@
       <table class="table table-striped" id="datatable-editable">
         <thead>
         <tr class="table-header">
-          <th></th>
-          <th>会员卡名称</th>
-          <th>卡类</th>
-          <th>余额(元/次/有效期)</th>
-          <th>扣费</th>
+          <th width="10%"></th>
+          <th width="35%">会员卡名称</th>
+          <th width="10%">卡类</th>
+          <th width="25%">余额(元/次/有效期)</th>
+          <th width="20%">扣费</th>
         </tr>
         </thead>
         <tbody>
@@ -22,10 +22,14 @@
               <td><%= truncate(card.name, length: 8) %></td>
               <td><%= card.card_type_i18n %></td>
               <td>
-                <% if card.course? %>
-                    <%= card.supply_value %>
-                <% else %>
-                    <%= card.value %>
+                <% if card.stored? %>
+                    <%= card.value %>元
+                <% elsif card.measured? %>
+                    <%= card.value %>次
+                <% elsif card.clocked? %>
+                    <%= (card.valid_end- Date.today).floor %>天
+                <% elsif card.course? %>
+                    <%= card.supply_value %>节
                 <% end %>
               </td>
               <td>
