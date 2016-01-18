@@ -15,7 +15,21 @@
         <td><%= card.name %></td>
         <td><%= card.service.profile.name %></td>
         <td><%= card.card_type_i18n %></td>
-        <td><%= card.value %></td>
+        <td>
+          <% if card.stored? %>
+              <%= card.value %>元
+          <% elsif card.measured? %>
+              <%= card.value %>次
+          <% elsif card.clocked? %>
+              <% if card.valid_end.eql?('已过期') %>
+                  <span style="color: red"><%= membership_card.valid_end %></span>
+              <% else %>
+                  <%= (card.valid_end- Date.today).floor %>天
+              <% end %>
+          <% elsif card.course? %>
+              <%= card.supply_value %>节
+          <% end %>
+        </td>
       </tr>
   <% end %>
   </tbody>
