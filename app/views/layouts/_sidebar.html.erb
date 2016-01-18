@@ -9,7 +9,7 @@
             <% if can?(:read, Service) %>
                 <li class="nav-li-a"> <%= link_to '门店信息', services_path %></li>
             <% end %>
-            <% if can?(:read, Dynamice) %>
+            <% if can?(:read, Dynamic) %>
                 <li class="nav-li-a"> <%= link_to '动态', dynamics_path %> </li>
             <% end %>
             <% if can?(:read, Message) %>
