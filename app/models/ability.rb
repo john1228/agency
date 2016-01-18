@@ -11,7 +11,7 @@ class Ability
       can :read, MembershipCardType
       can :read, Product
       can :read, MembershipCard
-      can :manager, Checkin
+      can :read, Checkin
       can :read, :update, Profile
     end
   end
