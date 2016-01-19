@@ -10,7 +10,7 @@
   <div class="col-md-4">
     <span>累计实收</span><i><%= @membership_card.logs.buy.sum(:pay_amount) + @membership_card.logs.charge.sum(:pay_amount) %>
     元</i></div>
-  <div class="col-md-4"><span>建卡时间</span><%= @membership_card.created_at.localtime.strftime('%Y-%m-%d %H:%M') %></div>
+  <div class="col-md-4"><span>建卡时间</span><%= @membership_card.created_at.localtime.strftime('%Y-%m-%d') %></div>
   <div class="col-md-4"><span>到期时间</span><%= @membership_card.valid_end %></div>
   <div class="col-md-4"><span>状态</span><%= @membership_card.status_i18n %></div>
   <div class="col-md-12"><span>类型</span><%= @membership_card.card_type_i18n %></div>
