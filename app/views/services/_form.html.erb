@@ -102,6 +102,7 @@
                     for (var i = 0; i < (remain > this.files.length ? this.files.length : remain); i++) {
                         var objUrl = getObjectURL(this.files[i]);
                         $(this).parent().children('.place').remove();
+                        $(this).parent().children('.close').remove();
                         $(this).parent().css('background-image', "url(" + objUrl + ")");
                         $(this).parent().css('background-size', "cover");
                         $(this).parent().append('<a class="close close_label " aria-label="Close" onclick="return $(this).parent().remove();"><span aria-hidden="true">&times;</span></a>');
