@@ -3,9 +3,9 @@ class MembershipCardsController < ApplicationController
 
   def index
     members = Member.ransack(name_or_mobile_cont: params[:name_or_mobile])
-    @query = MembershipCard.ransack(card_type_eq: params[:card_type], service_id_eq: params[:service], physical_card_cont: params[:name_or_mobile])
+    @query = MembershipCard.ransack(card_type_eq: params[:card_type])
     @membership_cards = @query.result.includes(:member)
-                            .where(member_id: members.result.where(service_id: current_user.all_services.pluck(:id)))
+                            .where(member_id: members.result.where(service_id: params[:service]||current_user.all_services.pluck(:id)))
                             .order("updated_at desc")
                             .paginate(page: params[:page]||1, per_page: 10)
   end
