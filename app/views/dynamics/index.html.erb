@@ -16,10 +16,7 @@
   <div class="panel-header">历史动态(<%= @dynamics.count %>)</div>
   <div class="panel-body">
     <div class="clearfix">
-      <%= render 'data' %>
-    </div>
-    <div class="clearfix">
-      <%= will_paginate @dynamics, renderer: BootstrapPagination::Rails %>
+      <%= render 'table' %>
     </div>
   </div>
 </div>

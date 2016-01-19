@@ -1,48 +1,41 @@
-<div class="row">
-  <div class="col-xs-12">
-    <div class="Content-tpli">
-      <div class="panel-body">
-        <div class="media-lmiddle">
-          <ul class="middle-top clearfix">
-            <div class=" pull-right">2015年11月3日</div>
-            <li class="middle-witp img-circle pull-left" style="background: url(<%=@dynamic.user.profile.avatar.url%>); background-size: cover;"></li>
-            <li class="pull-left col8d"><%= @dynamic.user.profile.name %></li>
-          </ul>
-        </div>
-        <div class="media-Picture" style=" background: url(<%=@dynamic.images.first.image.url rescue ''%>); background-size: cover;">
-          <a href="#" data-toggle="modal" data-target="#myModal" class="Picture-Content pull-right"><i class="icon">&#xe623;</i>
-            <%= @dynamic.images.count %>
-          </a>
-        </div>
-        <div class="media-text">
-          <%= @dynamic.content %>
-        </div>
-      </div>
-
+<div class="panel">
+  <div class="panel-header">
+    <ul class="middle-top clearfix">
+      <li class=" pull-right"><%= @dynamic.created_at.strftime('%Y-%m-%d %H:%M:%S') %></li>
+      <li class="middle-witp img-circle pull-left" style="background: url(<%=@dynamic.user.profile.avatar.url%>); background-size: cover;"></li>
+      <li class="pull-left col8d"><%= @dynamic.user.profile.name %></li>
+    </ul>
+  </div>
+  <div class="panel-body">
+    <div class="media-Picture" style=" background: url(<%=@dynamic.images.first.image.url rescue ''%>); background-size: cover;">
+      <a href="#" data-toggle="modal" data-target="#myModal" class="Picture-Content pull-right"><i class="icon">&#xe623;</i>
+        <%= @dynamic.images.count %>
+      </a>
     </div>
-    <div class="panel panel-default top20">
-      <div class="panel-heading">用户评论(<%= @dynamic.comments.count %>)</div>
-      <div class="panel-body">
-        <% @dynamic.comments do |comment| %>
-            <ul class="media-Underline">
-              <li class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <%= image_tag(comment.user.profile.avatar.url, class: 'media-tobject') %>
-                  </a>
-                </div>
-                <div class="media-body ">
-                  <samp class="pull-right"><%= comment.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></samp>
-                  <h4 class="media-heading "><%= comment.user.profile.name %></h4>
-
-                  <p><%= comment.content %></p>
-                </div>
-              </li>
-            </ul>
-        <% end %>
-      </div>
+    <div class="media-text">
+      <%= @dynamic.content %>
     </div>
   </div>
 </div>
+<div class="panel">
+  <div class="panel-header">用户评论(<%= @dynamic.comments.count %>)</div>
+  <div class="panel-body">
+    <% @dynamic.comments do |comment| %>
+        <ul class="media-Underline">
+          <li class="media">
+            <div class="media-left">
+              <a href="#">
+                <%= image_tag(comment.user.profile.avatar.url, class: 'media-tobject') %>
+              </a>
+            </div>
+            <div class="media-body ">
+              <samp class="pull-right"><%= comment.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></samp>
+              <h4 class="media-heading "><%= comment.user.profile.name %></h4>
 
-<
+              <p><%= comment.content %></p>
+            </div>
+          </li>
+        </ul>
+    <% end %>
+  </div>
+</div>
