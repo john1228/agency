@@ -34,17 +34,17 @@
               </td>
               <td>
                 <% if card.stored? %>
-                    <div class="input-group">
+                    <div class="input-group top20">
                       <%= text_field_tag "value_#{card.id}", '', class: 'form-control', style: 'border-left: 1px solid #ccc' %>
                       <span class="input-group-addon">元</span>
                     </div>
                 <% elsif card.measured? %>
-                    <div class="input-group">
+                    <div class="input-group top20">
                       <%= text_field_tag "value_#{card.id}", '', class: 'form-control', style: 'border-left: 1px solid #ccc' %>
                       <span class="input-group-addon">次</span>
                     </div>
                 <% elsif card.course? %>
-                    <div class="input-group">
+                    <div class="input-group top20">
                       <%= text_field_tag "value_#{card.id}", '', class: 'form-control', style: 'border-left: 1px solid #ccc' %>
                       <span class="input-group-addon">节</span>
                     </div>
