@@ -15,7 +15,6 @@ class AdminUsersController < InheritedResources::Base
       flash[:success] = "成功创建工作人员"
       redirect_to admin_users_path
     else
-      #flash[:error] = "xxx"
       render :new
     end
   end
@@ -28,7 +27,6 @@ class AdminUsersController < InheritedResources::Base
       flash[:success] = "成功创建工作人员"
       redirect_to admin_users_path
     else
-      #flash[:error] = "xxx"
       render :edit
     end
   end

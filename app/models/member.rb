@@ -20,9 +20,11 @@ class Member < ActiveRecord::Base
     if user.blank?
       user = User.find_by(mobile: mobile)
       if user.present?
+        puts '22222'
         self.user_id = user.id
       else
-        build_user(mobile: mobile, password: '12345678', profile_attributes: {
+        puts '1111'
+        build_user(mobile: mobile, sns: SecureRandom.uuid, password: '12345678', profile_attributes: {
                                      name: name,
                                      avatar: avatar,
                                      gender: gender,

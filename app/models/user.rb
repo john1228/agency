@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   #v3
   has_one :wallet, dependent: :destroy
   has_many :orders, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :lessons, dependent: :destroy
+
+  has_many :members, inverse_of: :user
 
   accepts_nested_attributes_for :profile
   accepts_nested_attributes_for :photos, allow_destroy: true

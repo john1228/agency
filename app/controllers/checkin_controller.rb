@@ -11,8 +11,6 @@ class CheckinController < ApplicationController
   end
 
   def pending
-    flash[:success] = params[:success]
-    flash[:danger] = params[:error]
     @members = Member.where.not(member_type: Member.member_types['coach'])
                    .where(service_id: current_user.all_services.pluck(:id)).map { |member|
       ["#{member.name}(#{member.mobile})", member.id]
@@ -89,15 +87,19 @@ class CheckinController < ApplicationController
         checkin.operator = current_user.name
         if checkin.may_confirm?
           checkin.confirm!
-          redirect_to action: :pending, success: '确认成功'
+          flash[:success] = "确认成功"
+          redirect_to action: :pending
         else
-          redirect_to action: :pending, error: '确认失败: 卡余额不足或者消课数量为0'
+          flash[:danger] = "确认失败: 卡余额不足或者消课数量为0"
+          redirect_to action: :pending
         end
       else
-        redirect_to action: :pending, error: '确认失败: 该信息已经处理'
+        flash[:danger] = "确认失败: 该信息已经处理"
+        redirect_to action: :pending
       end
     else
-      redirect_to action: :pending, error: '确认失败: 请选择要确认的会员卡'
+      flash[:danger] = "确认失败: 请选择要确认的会员卡"
+      redirect_to action: :pending
     end
 
   end
@@ -105,18 +107,22 @@ class CheckinController < ApplicationController
   def ignore
     checkin = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
     if checkin.ignore!
-      redirect_to action: :pending, success: '忽略成功'
+      flash[:success] = "忽略成功"
+      redirect_to action: :pending
     else
-      redirect_to action: :pending, error: '忽略失败'
+      flash[:danger] = "忽略失败"
+      redirect_to action: :pending
     end
   end
 
   def cancel
     checkin = MembershipCardLog.checkin.confirm.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
     if checkin.cancel!
-      redirect_to action: :confirm, success: '取消成功'
+      flash[:success] = "取消成功"
+      redirect_to action: :confirm
     else
-      redirect_to action: :confirm, error: '取消失败'
+      flash[:danger] = "取消失败"
+      redirect_to action: :confirm
     end
   end
 end

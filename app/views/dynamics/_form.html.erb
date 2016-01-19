@@ -2,6 +2,14 @@
   <div class="panel-header">发布动态</div>
   <%= form_for(@dynamic, html: {multipart: true}) do |f| %>
       <div class="panel-body">
+        <% if f.object.errors.present? %>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <% f.object.errors.messages.values.each { |v| %>
+                  <%= v %><br/>
+              <% } %>
+            </div>
+        <% end %>
         <div class="input-group top10 stor-default">
           <span class="input-group-addon"><samp class="alert-down">选择门店</samp></span>
           <%= f.collection_select :user_id, current_admin_user.all_services, :id, :name, {}, {class: 'form-control selectpicker'} %>

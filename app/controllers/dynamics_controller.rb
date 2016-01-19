@@ -3,12 +3,7 @@ class DynamicsController < ApplicationController
   before_filter :load_services
 
   def index
-
-    @dynamics = Dynamic.where(:user_id=>@services.map(&:id)).order(id: :desc).paginate(page: params[:page]||1, per_page: 24)
-    respond_to do |format|
-      format.html #default : index.html.erb
-      format.js # default : index.js.erb
-    end
+    @dynamics = Dynamic.where(:user_id => current_user.all_services.pluck(:id)).order(id: :desc).paginate(page: params[:page]||1, per_page: 24)
   end
 
   def new
@@ -16,19 +11,16 @@ class DynamicsController < ApplicationController
   end
 
   def create
-    dynamic = Dynamic.new(dynamic_params)
-    if dynamic.save
-      @success = true
-      @dynamic = Dynamic.new
+    @dynamic = Dynamic.new(dynamic_params)
+    if @dynamic.save
+      flash[:success] = "发布成功"
     else
-      @errors = dynamic.errors
-      @dynamic = dynamic
+      render action: :new
     end
-    render action: :new
   end
 
   def show
-    @dynamic = Dynamic.where(:user_id=>@services.map(&:id)).find_by(id: params[:id])
+    @dynamic = Dynamic.where(:user_id => @services.map(&:id)).find_by(id: params[:id])
   end
 
   def destroy
@@ -48,7 +40,7 @@ class DynamicsController < ApplicationController
           cover: params[:cover]
       }
     end
-    params.require(:dynamic).permit(:user_id,:content, images_attributes: [:image], film_attributes: [:film, :cover])
+    params.require(:dynamic).permit(:user_id, :content, images_attributes: [:image], film_attributes: [:film, :cover])
   end
 
   def load_services
