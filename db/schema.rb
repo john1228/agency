@@ -628,6 +628,7 @@ ActiveRecord::Schema.define(version: 20160116071814) do
     t.integer  "status",        default: 0
     t.integer  "supply_value"
     t.string   "option_code",   default: [],              array: true
+    t.text     "remark"
   end
 
   create_table "news", force: :cascade do |t|

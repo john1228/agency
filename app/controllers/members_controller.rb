@@ -4,7 +4,7 @@ class MembersController < InheritedResources::Base
   def index
     @query = Member.ransack(
         name_or_mobile_cont: params[:name_or_mobile_or_physical_card],
-        id_in: MembershipCard.ransack(physical_card_cont: params[:name_or_mobile_or_physical_card]).result.pluck(:id),
+        id_in: MembershipCard.ransack(physical_card_cont: params[:name_or_mobile_or_physical_card]).result.pluck(:member_id).uniq,
         combinator: 'or'
     )
     @members = @query.result
