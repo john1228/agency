@@ -2,8 +2,15 @@ class MembersController < InheritedResources::Base
   layout "admin"
 
   def index
-    @query = Member.ransack(params[:q])
-    @members = @query.result.where(service_id: current_user.all_services.pluck(:id)).where.not(member_type: Member.member_types['coach']).paginate(page: params[:page]||1, per_page: 5).order("updated_at desc")
+    @query = Member.ransack(
+        name_or_mobile_cont: params[:name_or_mobile_or_physical_card],
+        id_in: MembershipCard.ransack(physical_card_cont: params[:name_or_mobile_or_physical_card]).result.pluck(:id),
+        combinator: 'or'
+    )
+    @members = @query.result
+                   .where(service_id: current_user.all_services.pluck(:id), member_type: [Member.member_types['associate'], Member.member_types['full']])
+                   .order("updated_at desc")
+                   .paginate(page: params[:page]||1, per_page: 5)
     @member = [['准会员', Member.associate.where(service_id: current_user.all_services.pluck(:id)).count],
                ['会员', Member.full.where(service_id: current_user.all_services.pluck(:id)).count]]
   end

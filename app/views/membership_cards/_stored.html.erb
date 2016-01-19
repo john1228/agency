@@ -43,13 +43,14 @@
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">开始时间</samp></span>
-            <%= text_field_tag :valid_start, '', readonly: true, class: 'form-control' %>
+            <%= f.text_field :created_at, class: 'form-control datepicker' %>
           </div>
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">结束时间</samp></span>
             <%= text_field_tag :valid_end, '', readonly: true, class: 'form-control' %>
           </div>
+
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">应收金额</samp></span>
             <%= text_field_tag :market_price, '', class: 'form-control', readonly: true %>
@@ -86,6 +87,10 @@
 <% end %>
 <script>
     $(function () {
+        $(".datepicker").datepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd'
+        });
         $('#membership_card_service_id').on('change', function () {
             var service_id = $(this).val();
             if (service_id != '') {
@@ -116,7 +121,7 @@
             var market_price = ($(this).find("option:selected").attr("data-price"));
             var value = ($(this).find("option:selected").attr("data-value"));
             var today = new Date();
-            $('#valid_start').val(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
+            $('#membership_card_created_at').datepicker('update', today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
             if (valid_days == 'null') {
                 $('#valid_end').val('永久');
             } else {
@@ -126,8 +131,16 @@
             }
             $('#market_price').val(market_price);
             $('#membership_card_value').val(value);
-
-        })
+        });
+        $('#membership_card_created_at').on('change', function () {
+            var valid_days = ($(this).find("option:selected").attr("data-valid-days"));
+            var created_at = new Date($(this).val());
+            if (valid_days != 'null') {
+                created_at.setTime(created_at.getTime() + valid_days * 24 * 60 * 60 * 1000);
+                alert(created_at);
+                $('#valid_end').val(created_at.getFullYear() + '-' + (created_at.getMonth() + 1) + '-' + created_at.getDate());
+            }
+        });
     })
 </script>
 

@@ -48,7 +48,7 @@
 
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">开始时间</samp></span>
-            <%= text_field_tag :valid_start, '', readonly: true, class: 'form-control' %>
+            <%= f.text_field :created_at, class: 'form-control datepicker' %>
           </div>
 
           <div class="input-group top20">
@@ -93,6 +93,10 @@
 <% end %>
 <script>
     $(function () {
+        $("#membership_card_created_at").datepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd'
+        });
         $('#membership_card_service_id').on('change', function () {
             var service_id = $(this).val();
             if (service_id != '') {
@@ -124,7 +128,7 @@
             var market_price = ($(this).find("option:selected").attr("data-price"));
             var value = ($(this).find("option:selected").attr("data-value"));
             var today = new Date();
-            $('#valid_start').val(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
+            $('#membership_card_created_at').datepicker('update', today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
             if (valid_days == 'null') {
                 $('#valid_end').val('永久');
             } else {
