@@ -3,6 +3,7 @@ class Wallet < ActiveRecord::Base
   has_many :wallet_logs
   attr_accessor :action, :source, :operator
 
+  validates :balance, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 200000}
   after_update :create_wallet_log
 
   private

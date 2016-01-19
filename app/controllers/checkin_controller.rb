@@ -69,9 +69,9 @@ class CheckinController < ApplicationController
     else
       @cards = MembershipCard.where(physical_card: @checkin.entity_number, service_id: current_user.all_services.pluck(:id)).find_all { |membership_card|
         if membership_card.course?
-          membership_card.supply_value > 0 && (membership_card.to_be_activated? || membership_card.normal?)
+          membership_card.supply_value > 0 && (membership_card.to_be_activated? || membership_card.normal?)&& !membership_card.value_end.eql?('已过期')
         else
-          membership_card.value > 0 && (membership_card.to_be_activated? || membership_card.normal?)
+          membership_card.value > 0 && (membership_card.to_be_activated? || membership_card.normal?) && !membership_card.value_end.eql?('已过期')
         end
       }
     end

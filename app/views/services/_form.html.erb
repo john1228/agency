@@ -77,8 +77,10 @@
 
         <div class="top20 clearfix" id="photowall">
           <div class="photowall-item pull-left">
-            <i class="photowall-font icon">&#xe619;</i>
-            <samp>添加照片</samp>
+            <div class="place">
+              <i class="photowall-font icon">&#xe619;</i>
+              <samp>添加照片</samp>
+            </div>
             <input type="file" class="image-uploader" name="photo[]">
           </div>
         </div>
@@ -99,23 +101,24 @@
                     var remain = 8 - file_count;
                     for (var i = 0; i < (remain > this.files.length ? this.files.length : remain); i++) {
                         var objUrl = getObjectURL(this.files[i]);
-                        $(this).parent().children('i').remove();
-                        $(this).parent().children('samp').remove();
+                        $(this).parent().children('.place').remove();
                         $(this).parent().css('background-image', "url(" + objUrl + ")");
                         $(this).parent().css('background-size', "cover");
-                        $(this).parent().append('<button type="button" class="close close_label " aria-label="Close"><span aria-hidden="true">&times;</span></button>');
+                        $(this).parent().append('<a class="close close_label " aria-label="Close" onclick="return $(this).parent().remove();"><span aria-hidden="true">&times;</span></a>');
                     }
                     file_count = file_count + this.files.length;
                     if (file_count < 8) {
                         var image_div = '<div class="photowall-item pull-left">' +
+                                '<div class="place">' +
                                 '<i class="photowall-font icon">&#xe619;</i>' +
                                 '<samp>添加照片</samp>' +
+                                '</div>' +
                                 '<input type="file" class="image-uploader" name="photo[]">' +
                                 '</div>';
                         $(this).parent().parent().append(image_div);
                     }
                 });
-
             }
     );
+
 </script>

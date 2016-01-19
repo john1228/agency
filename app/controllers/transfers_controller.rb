@@ -2,14 +2,8 @@ class TransfersController < ApplicationController
   layout 'admin'
 
   def index
-    filter = {}
-    if params[:service].present?
-      service = Service.find(params[:service])
-      filter[:wallet_id] = service.wallet.id
-    end
     @logs = WalletLog.transfer.joins(:wallet)
-                .where(wallets: {user_id: current_user.all_services.pluck(:id)})
-                .where(filter)
+                .where(wallets: {user_id: params[:service]||current_user.all_services.pluck(:id)})
                 .order(id: :desc)
                 .paginate(page: params[:page]||1, per_page: 5)
     @type = params[:type]||'signal'
@@ -20,19 +14,24 @@ class TransfersController < ApplicationController
     coach = service.coaches.find(params[:coach])
     coach_wallet = Wallet.find_or_create_by(user: coach)
     service_wallet = Wallet.find_or_create_by(user: service)
-    Wallet.transaction do
-      coach_wallet.update_attributes(
-          action: WalletLog.actions['transfer'],
-          balance: coach_wallet.balance + BigDecimal(params[:amount]),
-          source: service.id,
-          operator: current_user.name
-      )
-      service_wallet.update_attributes(
-          action: WalletLog.actions['transfer'],
-          balance: service_wallet.balance - BigDecimal(params[:amount]),
-          source: coach.id,
-          operator: current_user.name
-      )
+    begin
+      Wallet.transaction do
+        raise coach_wallet.errors.messages.values.join(';') unless coach_wallet.update_attributes(
+            action: WalletLog.actions['transfer'],
+            balance: coach_wallet.balance + BigDecimal(params[:amount]),
+            source: service.id,
+            operator: current_user.name
+        )
+        raise service_wallet.errors.messages.values.join(';') unless service_wallet.update_attributes(
+            action: WalletLog.actions['transfer'],
+            balance: service_wallet.balance - BigDecimal(params[:amount]),
+            source: coach.id,
+            operator: current_user.name
+        )
+      end
+      flash[:success] = "转账成功"
+    rescue Exception => exp
+      flash[:danger] = "转账失败：" + exp.message
     end
     redirect_to action: :index
   end

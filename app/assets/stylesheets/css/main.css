@@ -284,6 +284,7 @@
 .close_label {
     opacity: 1;
     color: #fff;
+    z-index: -1;
 }
 
 .photowall-item samp {

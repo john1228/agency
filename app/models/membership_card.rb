@@ -49,13 +49,13 @@ class MembershipCard < ActiveRecord::Base
       last_valid_date = last_delay_date.next_day(valid_days) rescue nil
       if last_delay_date >= Date.today
         update(open: Date.today, status: 'normal')
-        logs.checkin.new.save
+        logs.checkin.new(service_id: service_id).save
         return true
       else
         if last_valid_date.present?
           if last_valid_date >= Date.today
             update(open: last_delay_date, status: 'normal')
-            logs.checkin.new.save
+            logs.checkin.new(service_id: service_id).save
             return true
           else
             errors.add(expired: '该卡已过期')
@@ -64,7 +64,7 @@ class MembershipCard < ActiveRecord::Base
         end
       end
     elsif normal?
-      logs.checkin.new.save
+      logs.checkin.new(service_id: service_id).save
       return true
     elsif disable?
       errors.add(expired: '该卡已过期')

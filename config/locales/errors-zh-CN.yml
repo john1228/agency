@@ -88,4 +88,9 @@
             mobile:
               blank: '手机号码不能为空'
               taken: '该手机号码已经成为您的会员'
+        wallet:
+          attributes:
+            balance:
+              greater_than_or_equal_to: '账户余额不足'
+              less_than_or_equal_to: '金额过大'
 
