@@ -129,7 +129,7 @@ class MembershipCardsController < ApplicationController
 
   protected
   def membership_card_params
-    params.require(:membership_card).permit(:card_type, :service_id, :member_id, :name, :value, :valid_days, :delay_days, :physical_card)
+    params.require(:membership_card).permit(:card_type, :service_id, :member_id, :name, :value, :valid_days, :delay_days, :physical_card, :created_at)
   end
 
   def membership_card_log_params
