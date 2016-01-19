@@ -88,7 +88,7 @@
 <% end %>
 <script>
     $(function () {
-        $("#membership_card_created_at").datepicker({
+        $(".datepicker").datepicker({
             language: 'zh-CN',
             format: 'yyyy-mm-dd'
         });
@@ -138,8 +138,15 @@
             }
             $('#market_price').val(market_price);
             $('#membership_card_value').val(value);
-
-        })
+        });
+        $('#membership_card_created_at').on('change', function () {
+            var valid_days = ($("#membership_card_name").find("option:selected").attr("data-valid-days"));
+            var created_day = new Date($(this).val());
+            if (valid_days != 'null') {
+                created_day.setTime(created_day.getTime() + valid_days * 24 * 60 * 60 * 1000);
+                $('#valid_end').val(created_day.getFullYear() + '-' + (created_day.getMonth() + 1) + '-' + created_day.getDate());
+            }
+        });
     })
 </script>
 

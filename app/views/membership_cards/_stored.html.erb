@@ -131,12 +131,11 @@
             $('#membership_card_value').val(value);
         });
         $('#membership_card_created_at').on('change', function () {
-            var valid_days = ($(this).find("option:selected").attr("data-valid-days"));
-            var created_at = new Date($(this).val());
+            var valid_days = ($("#membership_card_name").find("option:selected").attr("data-valid-days"));
+            var created_day = new Date($(this).val());
             if (valid_days != 'null') {
-                created_at.setTime(created_at.getTime() + valid_days * 24 * 60 * 60 * 1000);
-                alert(created_at);
-                $('#valid_end').val(created_at.getFullYear() + '-' + (created_at.getMonth() + 1) + '-' + created_at.getDate());
+                created_day.setTime(created_day.getTime() + valid_days * 24 * 60 * 60 * 1000);
+                $('#valid_end').val(created_day.getFullYear() + '-' + (created_day.getMonth() + 1) + '-' + created_day.getDate());
             }
         });
     })
