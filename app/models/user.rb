@@ -6,19 +6,14 @@ class User < ActiveRecord::Base
   has_many :dynamic_comments, dependent: :destroy
   has_many :appointments, dependent: :destroy
   has_one :place, dependent: :destroy
-  has_one :showtime
-  has_many :applies
-  has_many :likes, -> { where(like_type: Like::PERSON) }, foreign_key: :liked_id, dependent: :destroy
   #v3
   has_one :wallet, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :lessons, dependent: :destroy
-  has_many :concerns, class_name: Concerned, dependent: :destroy
 
   accepts_nested_attributes_for :profile
   accepts_nested_attributes_for :photos, allow_destroy: true
-
   validates :mobile, :uniqueness => true
 
   TYPE=[['健身爱好者', 0], ['私教', 1], ['商家', 2]]

@@ -44,7 +44,7 @@ class Service<User
       json_string = JSON.parse(result.body)
       bd_lng = json_string['result']['location']['lng']
       bd_lat = json_string['result']['location']['lat']
-      if place.nil?
+      if new_record?
         build_place(lonlat: "POINT(#{bd_lng} #{bd_lat})")
       else
         place.update(lonlat: "POINT(#{bd_lng} #{bd_lat})")

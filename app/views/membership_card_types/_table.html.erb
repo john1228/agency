@@ -29,8 +29,12 @@
               <%= membership_card_type.service.profile.name %>
             </div>
             <div class="member-operation pull-right">
-              <a href="<%= edit_membership_card_type_path(membership_card_type) %>"><i class="icon">&#xe615;</i></a>
-              <a href="#" data-method="delete" data-id="<%= membership_card_type.id %>"><i class="icon">&#xe616;</i></a>
+              <% if can?(:update, MembershipCardType) %>
+                  <a href="<%= edit_membership_card_type_path(membership_card_type) %>"><i class="icon">&#xe615;</i></a>
+              <% end %>
+              <% if can?(:delete, MembershipCardType) %>
+                  <a href="#" data-method="delete" data-id="<%= membership_card_type.id %>"><i class="icon">&#xe616;</i></a>
+              <% end %>
             </div>
           </div>
         </div>

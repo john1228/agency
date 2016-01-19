@@ -37,12 +37,20 @@
               </div>
               <div class="member-operation pull-right">
                 <% if product.sku.online? %>
-                    <%= link_to('<i class="icon">&#xe62f;</i>'.html_safe, offline_product_path(product), method: :post) %>
+                    <% if can?(:offline, Product) %>
+                        <%= link_to('<i class="icon">&#xe62f;</i>'.html_safe, offline_product_path(product), method: :post) %>
+                    <% end %>
                 <% else %>
-                    <%= link_to('<i class="icon">&#xe62b;</i>'.html_safe, online_product_path(product), method: :post) %>
+                    <% if can?(:online, Product) %>
+                        <%= link_to('<i class="icon">&#xe62b;</i>'.html_safe, online_product_path(product), method: :post) %>
+                    <% end %>
                 <% end %>
-                <a href="#" title="编辑"><i class="icon">&#xe615;</i></a>
-                <%= link_to('<i class="icon">&#xe616;</i>'.html_safe, delete_product_path(product), method: :delete) %>
+                <% if can?(:update, Product) %>
+                    <a href="#" title="编辑"><i class="icon">&#xe615;</i></a>
+                <% end %>
+                <% if can?(:delete, Product) %>
+                    <%= link_to('<i class="icon">&#xe616;</i>'.html_safe, product, method: :delete, data: {confirm: '您确定要删除吗？'}) %>
+                <% end %>
               </div>
             </div>
           </div>

@@ -57,24 +57,36 @@
         </td>
         <td class="list-card-1f">
           <% if membership_card.to_be_activated?||membership_card.disable? %>
-              <%= form_tag(active_membership_card_path(membership_card)) do %>
-                  <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
+              <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
+              <% if can?(:transfer, MembershipCard) %>
                   |<%= link_to('转让', transfer_members_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
+              <% end %>
+              <% if can?(:binding, MembershipCard) %>
                   <% if membership_card.physical_card.blank? %>
                       |<%= link_to('绑实体卡', binding_request_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
                   <% end %>
-                  |<%= link_to('激活', '#', onclick: "return $(this).closest('form').submit()") %>
+              <% end %>
+              <% if can?(:active, MembershipCard) %>
+                  |<%= link_to('激活', active_membership_card_path(membership_card), method: :post) %>
+              <% end %>
+              <% if can?(:charge, MembershipCard) %>
                   |<%= link_to('充值', charge_request_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
               <% end %>
           <% end %>
           <% if membership_card.normal? %>
-              <%= form_tag(disable_membership_card_path(membership_card)) do %>
-                  <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
+              <%= link_to('消费记录', membership_card_membership_card_logs_path(membership_card)) %>
+              <% if can?(:transfer, MembershipCard) %>
                   |<%= link_to('转让', transfer_members_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
+              <% end %>
+              <% if can?(:binding, MembershipCard) %>
                   <% if membership_card.physical_card.blank? %>
                       |<%= link_to('绑实体卡', binding_request_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
                   <% end %>
-                  |<%= link_to('停卡', '#', onclick: "return $(this).closest('form').submit()") %>
+              <% end %>
+              <% if can?(:disable, MembershipCard) %>
+                  |<%= link_to('停卡', disable_membership_card_path(membership_card), method: :post) %>
+              <% end %>
+              <% if can?(:charge, MembershipCard) %>
                   |<%= link_to('充值', charge_request_path(membership_card), 'data-toggle' => 'modal', 'data-target' => '#myModal') %>
               <% end %>
           <% end %>

@@ -4,17 +4,6 @@
             $.get(this.href, null, null, 'script');
             return false;
         });
-        $('.delete_icon').on('click', function (event) {
-            $.delete(this.href, function (data) {
-                if (data.result) {
-                    $(location).attr("href", '/dynamics');
-                } else {
-                    alert("删除失败，请重试");
-                }
-
-            });
-            return false;
-        })
     });
 </script>
 <div class="clearfix">

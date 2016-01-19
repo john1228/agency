@@ -29,7 +29,9 @@
           <td><%= coach.mobile %></td>
           <td><%= coach.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
           <td class="list-card-1f">
-            <%= link_to "编辑", edit_coach_path(coach) %>｜<%= link_to "详情", coach %>
+            <% if can?(:update, Coach) %>
+                <%= link_to "编辑", edit_coach_path(coach) %>｜<%= link_to "详情", coach %>
+            <% end %>
           </td>
         </tr>
     <% } %>

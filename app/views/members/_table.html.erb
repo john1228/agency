@@ -22,8 +22,10 @@
         <td><%= member.member_type_i18n %></td>
         <td><%= member.origin_i18n %></td>
         <td class="list-card-1f">
-          <%= link_to('编辑', edit_member_path(member)) %>
-          | <%= link_to "详情", member %>
+          <% if can?(:update, Member) %>
+              <%= link_to('编辑', edit_member_path(member)) %>|
+          <% end %>
+          <%= link_to "详情", member %>
         </td>
       </tr>
   <% end %>
