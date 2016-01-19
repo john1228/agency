@@ -34,7 +34,6 @@
                                  'data-live-search' => 'true'
                          } %>
           </div>
-
           <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">实体卡号</samp></span>
             <%= f.text_field :physical_card, readonly: f.object.physical_card.present?, class: 'form-control' %>
@@ -107,7 +106,6 @@
                     });
                     $("#membership_card_name").selectpicker('refresh');
                 });
-
                 $.getJSON('/' + service_id + '/salesman', function (data) {
                     $.each(data, function (i, value) {
                         $("<option value='" + value.id + "'>" + value.name + "</option>").appendTo('#seller');
