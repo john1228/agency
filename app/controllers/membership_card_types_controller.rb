@@ -2,8 +2,10 @@ class MembershipCardTypesController < InheritedResources::Base
   layout "admin"
 
   def index
-    @query_result = MembershipCardType.where(service_id: current_user.all_services.pluck(:id)).ransack(params[:q])
-    @membership_card_types = @query_result.result.paginate(page: params[:page]||1, per_page: 8).order("updated_at desc")
+    @query = MembershipCardType.ransack(name_cont: params[:name], card_type_eq: params[:card_type])
+    @membership_card_types = @query.result.where(service_id: params[:service].blank? ? current_user.all_services.pluck(:id) : params[:service])
+                                 .order("updated_at desc")
+                                 .paginate(page: params[:page]||1, per_page: 8)
   end
 
   def new
@@ -18,7 +20,6 @@ class MembershipCardTypesController < InheritedResources::Base
       flash[:success] = "成功创建会员卡种类"
       redirect_to membership_card_types_path
     else
-      #flash[:error] = "xxx"
       render :new
     end
   end

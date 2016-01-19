@@ -1,29 +1,35 @@
-<%= search_form_for @query_result do |f| %>
-    <div class="page-header  clearfix">
-      <div class="member-search pull-left member-type">
-        <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>
-          <%= f.search_field :name_cont, placeholder: "会员卡名称", class: "form-control" %>
-        </div>
-      </div>
-      <% if can?(:create, MembershipCardType) %>
-          <%= link_to '<i class="icon">&#xe613;</i> 添加会员卡'.html_safe, new_membership_card_type_path, class: "new-btn pull-right" %>
-      <% end %>
+<div class="page-header  clearfix">
+  <div class="member-search pull-left member-type">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1"><i class="icon">&#xe61b;</i></span>
+      <%= search_field_tag :name_cont, '', placeholder: "会员卡名称", class: "form-control search-item" %>
     </div>
-<% end %>
+  </div>
+  <% if can?(:create, MembershipCardType) %>
+      <%= link_to '<i class="icon">&#xe613;</i> 添加会员卡'.html_safe, new_membership_card_type_path, class: "new-btn pull-right" %>
+  <% end %>
+</div>
 <div class="panel  top20">
   <div class="panel-header clearfix header-selector">
     <span class="pull-left">商品总数(<%= @membership_card_types.count %>)</span>
 
     <p class="top10">
-      <%= select_tag(:cart_type, options_for_select(MembershipCardType.card_type_for_select), class: 'pull-right selectpicker', include_blank: "全部类型") %>
-      <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'pull-right selectpicker', include_blank: "全部门店") %>
+      <%= select_tag(:type, options_for_select(MembershipCardType.card_type_for_select), class: 'pull-right selectpicker search-item', include_blank: "全部类型") %>
+      <%= select_tag(:service, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'pull-right selectpicker search-item', include_blank: "全部门店") %>
     </p>
   </div>
-  <div class="panel-body ">
+  <div class="panel-body" id="list">
     <%= render 'table' %>
-    <div class="dataTables_paginate">
-      <%= will_paginate @membership_card_types, renderer: BootstrapPagination::Rails %>
-    </div>
   </div>
 </div>
+<script>
+    $(function () {
+        $('.search-item').on('change', function () {
+            var name = $('#name').val();
+            var service = $('#service').val();
+            var type = $('#type').val();
+            $.get(this.href, {name: name, service: service, card_type: type}, null, "script");
+            return false;
+        })
+    })
+</script>

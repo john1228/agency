@@ -26,14 +26,12 @@
     <span class="pull-left">商品总数(<%= @products.total_entries %>)</span>
 
     <div style="margin-top: 6px">
-      <%= select_tag(:cart_type, options_for_select(MembershipCardType.card_type_for_select), class: 'pull-right selectpicker search-item', include_blank: "全部类型") %>
-      <%= select_tag(:service_id, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'pull-right selectpicker search-item', include_blank: "全部门店") %>
+      <%= select_tag(:type, options_for_select(MembershipCardType.card_type_for_select), class: 'pull-right selectpicker search-item', include_blank: "全部类型") %>
+      <%= select_tag(:service, options_for_select(current_admin_user.all_services.pluck(:name, :id)), class: 'pull-right selectpicker search-item', include_blank: "全部门店") %>
     </div>
   </div>
-  <div class="panel-body ">
-    <div>
-      <%= render 'table' %>
-    </div>
+  <div class="panel-body" id="list">
+    <%= render 'table' %>
   </div>
 </div>
 <script>
@@ -41,8 +39,8 @@
         $('.search-item').on('change', function () {
             var name = $('#name').val();
             var service = $('#service').val();
-            var card_type = $('#card_type').val();
-            $.get(this.href, {name: name, service: service, card_type: card_type}, null, "script");
+            var type = $('#type').val();
+            $.get(this.href, {name: name, service: service, card_type: type}, null, "script");
             return false;
         })
     })

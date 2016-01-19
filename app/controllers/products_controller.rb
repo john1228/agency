@@ -6,11 +6,29 @@ class ProductsController < ApplicationController
     @list = params[:list]||'online'
     case params[:list]
       when 'online'
-        @products = @query.result.joins(:sku).where(skus: {service_id: current_user.all_services.pluck(:id), status: 1}).paginate(page: params[:page]||1, per_page: 10).order("created_at desc")
+        @products = @query.result.joins(:sku).where(skus: {
+                                                        service_id: params[:service].blank? ? current_user.all_services.pluck(:id) : params[:service],
+                                                        status: 1,
+                                                        course_type: params[:card_type].blank? ? Sku.course_types.values : params[:card_type]
+                                                    })
+                        .order("created_at desc")
+                        .paginate(page: params[:page]||1, per_page: 10)
       when 'offline'
-        @products = @query.result.joins(:sku).where(skus: {service_id: current_user.all_services.pluck(:id), status: 0}).paginate(page: params[:page]||1, per_page: 10).order("created_at desc")
+        @products = @query.result.joins(:sku).where(skus: {
+                                                        service_id: params[:service].blank? ? current_user.all_services.pluck(:id) : params[:service],
+                                                        status: 0,
+                                                        course_type: params[:card_type].blank? ? Sku.course_types.values : params[:card_type]
+                                                    })
+                        .order("created_at desc")
+                        .paginate(page: params[:page]||1, per_page: 10)
       else
-        @products = @query.result.joins(:sku).where(skus: {service_id: current_user.all_services.pluck(:id), status: 1}).paginate(page: params[:page]||1, per_page: 10).order("created_at desc")
+        @products = @query.result.joins(:sku).where(skus: {
+                                                        service_id: params[:service].blank? ? current_user.all_services.pluck(:id) : params[:service],
+                                                        status: 1,
+                                                        course_type: params[:card_type].blank? ? Sku.course_types.values : params[:card_type]
+                                                    })
+                        .order("created_at desc")
+                        .paginate(page: params[:page]||1, per_page: 10)
     end
   end
 
