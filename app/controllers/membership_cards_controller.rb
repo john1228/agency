@@ -29,18 +29,22 @@ class MembershipCardsController < ApplicationController
     membership_card = MembershipCard.find_by(id: params[:id])
     membership_card.open = Date.today
     if membership_card.active!
-      redirect_to action: :index, flash: {success: "激活成功"}
+      flash[:success] = "激活成功"
+      redirect_to action: :index
     else
-      redirect_to action: :index, flash: {danger: "激活失败:"+ membership_card.errors.messages.values.join(';')}
+      flash[:danger] = "激活失败:"+ membership_card.errors.messages.values.join(';')
+      redirect_to action: :index
     end
   end
 
   def disable
     membership_card = MembershipCard.find_by(id: params[:id])
     if membership_card.disable!
-      redirect_to action: :index, flash: {success: "停用成功"}
+      flash[:success] = "停用成功"
+      redirect_to action: :index
     else
-      redirect_to action: :index, flash: {danger: "停用失败:"+ membership_card.errors.messages.values.join(';')}
+      flash[:danger] = "停用失败:"+ membership_card.errors.messages.values.join(';')
+      redirect_to action: :index
     end
   end
 
