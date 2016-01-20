@@ -1,0 +1,27 @@
+<%= form_tag(checkin_card_create_path(@membership_card), method: :post) do %>
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">[<span style="color: #1fbba6"><%= @membership_card.name %></span>]签到收费
+      </h4>
+    </div>
+    <div class="modal-body">
+      <div class="input-group top20">
+        <span class="input-group-addon">收费</span>
+        <%= text_field_tag :change_amount, '', class: 'form-control', style: 'border-left: 1px solid #ccc' %>
+        <% if @membership_card.stored? %>
+            <span class="input-group-addon">元</span>
+        <% elsif @membership_card.measured? %>
+            <span class="input-group-addon">次</span>
+        <% elsif @membership_card.course? %>
+            <span class="input-group-addon">节</span>
+        <% end %>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="submit"
+              data-dismiss="modal">关闭
+      </button>
+      <button type="submit" class="submit">
+        提交
+      </button>
+    </div>
+<% end %>

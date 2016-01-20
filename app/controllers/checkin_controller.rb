@@ -78,6 +78,71 @@ class CheckinController < ApplicationController
     render layout: false
   end
 
+
+  def checkin_new
+    @membership_card = MembershipCard.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    if @membership_card.present?
+      if @membership_card.valid_end.eql?('已过期')
+        flash[:danger] = "该会员卡已经过期"
+        redirect_to checkin_path
+      else
+        if @membership_card.course?
+          remain_value = @membership_card.supply_value
+        else
+          remain_value = @membership_card.value
+        end
+        if remain_value > 0
+          render layout: false
+        else
+          flash[:danger] = "该会员卡内余额不足"
+          redirect_to checkin_path
+        end
+      end
+    else
+      flash[:danger] = "无效的会员卡签到"
+      redirect_to checkin_path
+    end
+  end
+
+  def checkin_create
+    membership_card = MembershipCard.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
+    if membership_card.present?
+      if membership_card.valid_end.eql?('已过期')
+        flash[:danger] = "该会员卡已经过期"
+        redirect_to checkin_path
+      else
+        if membership_card.course?
+          remain_value = membership_card.supply_value
+        else
+          remain_value = membership_card.value
+        end
+        if remain_value > 0
+          checkin = membership_card.logs.checkin.create(
+              service_id: membership_card.service_id,
+              change_amount: params[:change_amount],
+              operator: current_user.name,
+              remark: 'SAAS后台手动签到'
+          )
+          if checkin.may_confirm?
+            checkin.confirm!
+            flash[:success] = "签到成功"
+            redirect_to checkin_path
+          else
+            flash[:danger] = "签到确认失败"
+            redirect_to checkin_path
+          end
+        else
+          flash[:danger] = "该会员卡内余额不足"
+          redirect_to checkin_path
+        end
+      end
+    else
+      flash[:danger] = "无效的会员卡签到"
+      redirect_to checkin_path
+    end
+  end
+
+
   def update
     if params[:membership_card_id].present?
       checkin = MembershipCardLog.checkin.pending.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])

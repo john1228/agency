@@ -42,6 +42,9 @@ Rails.application.routes.draw do
   patch 'checkin/:id' => 'checkin#update', as: :confirm_checkin
   post 'checkin/:id/ignore' => 'checkin#ignore', as: :ignore_checkin
   post 'checkin/:id/cancel' => 'checkin#cancel', as: :cancel_checkin
+  get 'checkin/:id/card' => 'checkin#checkin_new', as: :checkin_card_new
+  post 'checkin/:id/card' => 'checkin#checkin_create', as: :checkin_card_create
+
 
   post 'membership_cards/:id/active' => 'membership_cards#active', as: :active_membership_card
   post 'membership_cards/:id/disable' => 'membership_cards#disable', as: :disable_membership_card
