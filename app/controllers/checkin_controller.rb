@@ -84,6 +84,8 @@ class CheckinController < ApplicationController
     if @membership_card.present?
       if @membership_card.valid_end.eql?('已过期')
         render text: "该会员卡已经过期"
+      elsif @membership_card.disable?
+        render text: "该会员卡已经停用"
       else
         if @membership_card.course?
           remain_value = @membership_card.supply_value
@@ -108,29 +110,34 @@ class CheckinController < ApplicationController
         flash[:danger] = "该会员卡已经过期"
         redirect_to checkin_path
       else
-        if membership_card.course?
-          remain_value = membership_card.supply_value
+        if membership_card.disable?
+          flash[:danger] = "该卡已停用"
+          redirect_to checkin_path
         else
-          remain_value = membership_card.value
-        end
-        if remain_value > 0
-          checkin = membership_card.logs.checkin.create(
-              service_id: membership_card.service_id,
-              change_amount: params[:change_amount],
-              operator: current_user.name,
-              remark: 'SAAS后台手动签到'
-          )
-          if checkin.may_confirm?
-            checkin.confirm!
-            flash[:success] = "签到成功"
-            redirect_to checkin_path
+          if membership_card.course?
+            remain_value = membership_card.supply_value
           else
-            flash[:danger] = "签到确认失败"
+            remain_value = membership_card.value
+          end
+          if remain_value > 0
+            checkin = membership_card.logs.checkin.create(
+                service_id: membership_card.service_id,
+                change_amount: params[:change_amount],
+                operator: current_user.name,
+                remark: 'SAAS后台手动签到'
+            )
+            if checkin.may_confirm?
+              checkin.confirm!
+              flash[:success] = "签到成功"
+              redirect_to checkin_path
+            else
+              flash[:danger] = "签到确认失败"
+              redirect_to checkin_path
+            end
+          else
+            flash[:danger] = "该会员卡内余额不足"
             redirect_to checkin_path
           end
-        else
-          flash[:danger] = "该会员卡内余额不足"
-          redirect_to checkin_path
         end
       end
     else

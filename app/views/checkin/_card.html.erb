@@ -33,7 +33,7 @@
 
         </td>
         <td class="sign-in">
-          <% unless card.valid_end.eql?('已过期') %>
+          <% unless card.valid_end.eql?('已过期')||card.disable? %>
               <% if card.course? %>
                   <% if card.supply_value >0 %>
                       <%= link_to "签到", checkin_card_new_path(card), 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
