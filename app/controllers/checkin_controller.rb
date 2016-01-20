@@ -83,8 +83,7 @@ class CheckinController < ApplicationController
     @membership_card = MembershipCard.where(service_id: current_user.all_services.pluck(:id)).find_by(id: params[:id])
     if @membership_card.present?
       if @membership_card.valid_end.eql?('已过期')
-        flash[:danger] = "该会员卡已经过期"
-        redirect_to checkin_path
+        render text: "该会员卡已经过期"
       else
         if @membership_card.course?
           remain_value = @membership_card.supply_value
@@ -94,13 +93,11 @@ class CheckinController < ApplicationController
         if remain_value > 0
           render layout: false
         else
-          flash[:danger] = "该会员卡内余额不足"
-          redirect_to checkin_path
+          render text: "该会员卡内余额不足"
         end
       end
     else
-      flash[:danger] = "无效的会员卡签到"
-      redirect_to checkin_path
+      render text: "无效的会员卡签到"
     end
   end
 

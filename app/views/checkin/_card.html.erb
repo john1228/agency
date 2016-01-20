@@ -16,14 +16,36 @@
         <td><%= card.name %></td>
         <td><%= card.service.profile.name %></td>
         <td><%= card.card_type_i18n %></td>
-        <td><%= card.value %></td>
-        <td class="sign-in">
-          <% if card.clocked? %>
-              <%= link_to "签到", checkin_card_create_path(card), method: :post %>
-          <% else %>
-              <%= link_to "签到", checkin_card_new_path(card), 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
+        <td>
+          <% if card.stored? %>
+              <%= card.value %>元
+          <% elsif card.measured? %>
+              <%= card.value %>次
+          <% elsif card.clocked? %>
+              <% if card.valid_end.eql?('已过期') %>
+                  <span style="color: red"><%= membership_card.valid_end %></span>
+              <% else %>
+                  <%= (card.valid_end- Date.today).floor %>天
+              <% end %>
+          <% elsif card.course? %>
+              <%= card.supply_value %>节
           <% end %>
 
+        </td>
+        <td class="sign-in">
+          <% unless card.valid_end.eql?('已过期') %>
+              <% if card.course? %>
+                  <% if card.supply_value >0 %>
+                      <%= link_to "签到", checkin_card_new_path(card), 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
+                  <% end %>
+              <% elsif card.stored? || card.measured? %>
+                  <% if card.value >0 %>
+                      <%= link_to "签到", checkin_card_new_path(card), 'data-toggle' => 'modal', 'data-target' => '#myModal' %>
+                  <% end %>
+              <% else %>
+                  <%= link_to "签到", checkin_card_create_path(card), method: :post %>
+              <% end %>
+          <% end %>
         </td>
       </tr>
   <% end %>
@@ -35,3 +57,8 @@
     </div>
   </div>
 </div>
+<script>
+    $("#myModal").on("hidden.bs.modal", function () {
+        $(this).removeData("bs.modal");
+    });
+</script>
