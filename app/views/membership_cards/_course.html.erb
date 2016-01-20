@@ -42,6 +42,13 @@
           <h5 class="top20">充值会员卡</h5>
 
           <div class="input-group top20">
+            <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">节数</samp></span>
+            <%= f.text_field :supply_value, class: 'form-control datepicker' %>
+            <span class="input-group-addon">节</span>
+          </div>
+
+
+          <div class="input-group top20">
             <span class="input-group-addon" id="sizing-addon2"><samp class="alert-down">开始时间</samp></span>
             <%= f.text_field :created_at, class: 'form-control datepicker' %>
           </div>

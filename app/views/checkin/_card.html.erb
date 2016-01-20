@@ -30,7 +30,7 @@
         <td><%= card.card_type_i18n %></td>
         <td><%= card.value %></td>
         <td class="sign-in">
-          <%= link_to "签到", "#", 'data-toggle' => 'modal', 'data-target' => '#modal', 'data-type' => card.card_type_i18n, 'data-name' => card.name %>
+          <%= link_to "签到", "#", 'data-toggle' => 'modal', 'data-target' => '#modal', 'data-type' => card.card_type_i18n, 'data-name' => card.name, 'data-id' => card.id %>
         </td>
       </tr>
   <% end %>

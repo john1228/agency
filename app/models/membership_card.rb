@@ -4,7 +4,8 @@ class MembershipCard < ActiveRecord::Base
   belongs_to :member
   belongs_to :service
   has_many :logs, class: MembershipCardLog, dependent: :destroy
-  validates :service_id, :member_id, :card_type, :name, :value, presence: true
+  validates :service_id, :member_id, :card_type, :name, :value, :created_at, presence: true
+  validates :supply_value, presence: true, if: Proc.new { |membership_card| membership_card.course? }
   validate :valid_physical_card
 
 
